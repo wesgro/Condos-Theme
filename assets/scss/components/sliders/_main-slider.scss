@@ -1,0 +1,50 @@
+.owl-theme{
+  .owl-controls{
+    .owl-nav{
+      position: absolute;
+      width: 100%;
+      top:31%;
+      @include rem(margin-top, (75px / 2) * -1);
+      @include rem(height, 75px);
+      @include from(pt){
+        top:26%;
+      }
+      @include from(lt){
+        top:31%;
+      }
+      @include from(d, $noquery){
+        top:34%;
+      }
+      @include from(ld, $noquery){
+        top:37%;
+      }
+    }
+    div{
+      @include rem(width, 75px);
+      @include rem(height, 75px);
+      &:before{
+        @extend %ico-moon;
+        position: absolute;
+        text-align: center;
+        @include rem(font-size, 72px);
+        z-index: 10;
+        top: 0;
+        @include rem(right, -3px);
+        bottom: 0;
+        color: #FFF;
+        line-height: .91;
+      }
+    }
+    .owl-prev{
+      &:before{
+        @extend %icon-arrow-left;
+      }
+    }
+    .owl-next{
+      &:before{
+        @extend %icon-arrow-right;
+        @include rem(right, -7px);
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.l-region--content-header{
+  background-color: #ebebeb;
+  color: #666666;
+  a{
+    color:#666666;
+  }
+  .page-title{
+    @include font-size(25px);
+    margin: 0;
+    @include to(pt){
+      @include font-size(36px);
+      @include vertical-align;
+    }
+  }
+}

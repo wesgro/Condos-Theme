@@ -1,0 +1,148 @@
+/**
+ * $FONT-FACE
+ */
+
+
+/**
+ * $BASE-TYPOGRAPHY
+ */
+html {
+  font-family: $bodyFont;
+  color: $bodyCopy;
+  /* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	line-height: 1.5;
+	font-weight: $bodyFontWeight;
+  @include to(lp){
+    font-size: 14px;
+	}
+	@include from(pt){
+  	font-size: 15px;
+	}
+	@include from(d){
+	  font-size: $base-font-size;
+	}
+	&.lt-ie9{
+  	font-size: $base-font-size;
+	}
+}
+
+/**
+ * $LINKS
+ */
+a{
+  color: $blue;
+  text-decoration: none;
+  @include transition(all .8s ease);
+  &:hover{
+    color:$darkBlue;
+    text-decoration: none;
+  }
+}
+
+/**
+ * $HEADINGS
+ */
+h1, .alpha,
+h2, .beta,
+h3, .gamma,
+h4, .delta,
+h5, .epsilon,
+h6, .zeta {
+  font-family: $headerFont;
+  font-weight: $headerFontWeight;
+}
+
+h1, .alpha {
+
+  line-height: 1;
+  @include rem(font-size, 52px);
+  
+}
+h2, .beta {
+  @include font-size(24px);
+  line-height: 1.2;
+  &.region-title{
+      @include font-size(30px);
+      @include rem(margin-bottom, 25px);
+  }
+}
+h3, .gamma {
+  @include font-size(20px);
+  line-height: 1.1;
+}
+h4, .delta {
+  @include font-size(18px);
+}
+h5, .epsilon{
+  @include font-size(16px);
+}
+h6, .zeta {
+  @include font-size(16px);
+}
+hr{
+  border: 0;
+  height: 1px;
+  margin: 25px 0;
+}
+h1,h2,h3,h4,h5,h6,p,%p{
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern";
+  -webkit-font-feature-settings: "kern";
+  -moz-font-feature-settings: "kern";
+  -moz-font-feature-settings: "kern=1";
+}
+/**
+ * $PARAGRAPHS
+ */
+p,
+%p {
+  @include rem(margin-top, 15px);
+  @include rem(margin-bottom, 15px);
+  -ms-word-break: normal;
+  -ms-word-wrap: normal;
+  word-break: normal;
+}
+strong{
+  font-weight: 700;
+}
+pre{
+  font-size: 11px;
+}
+/**
+ * $QUOTES
+ */
+blockquote {
+  @extend %p;
+  padding: 0 1.5em;
+}
+
+q {
+  font-style: italic;
+}
+
+/**
+ * $MARKS
+ */
+mark,
+.marker {
+  padding: 0.1em 0.5em;
+
+  background: $darkGreen;
+
+  color: #fff;
+  @include font-size(12px);
+  text-transform: capitalize;
+
+  @include border-radius(10px);
+}
+
+.inline{
+  .field-label{
+    @include inline-block;
+  }
+  .field-item,
+  .field-items{
+    @include inline-block;
+  }
+}

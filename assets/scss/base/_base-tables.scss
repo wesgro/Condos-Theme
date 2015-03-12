@@ -1,0 +1,45 @@
+table{
+  width: 100%;
+  thead{
+    border-top:1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    th{
+      background-color: #FFF;
+      font-weight: 700;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      color: #666666;
+      @include rem(font-size, 18px);
+      margin-bottom: 15px;
+      a{
+        color: #666666;
+      }
+    }
+  }
+  tbody{
+    margin-top: 15px;
+    color: #666666;
+    tr{
+      border-bottom: 1px solid #cccccc;
+      background-color: #FFF;
+    }
+    .views-row-first{
+      td{
+        @include from(lt, $noquery){
+          padding-top: 25px;
+        }
+      }
+    }
+    td{
+      background-color: #FFF;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-right:10px;
+      
+      vertical-align: middle;
+    }
+    a{
+      color: #666666;
+    }
+  }
+}

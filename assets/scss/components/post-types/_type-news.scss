@@ -1,0 +1,18 @@
+.node--news--teaser{
+  h3{
+    color: $darkGrey;
+    max-width: 330px;
+    @include rem(font-size, 26px);
+    a{
+      color: $darkGrey;
+      &:hover{
+        
+      }
+    }
+  }
+  .field--body{
+    @include from(lt, $noquery){
+      max-width: 85%;
+    }
+  }
+}

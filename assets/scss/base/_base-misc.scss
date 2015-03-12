@@ -1,0 +1,28 @@
+html,body{
+  min-width: 100%;
+}
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body.admin-menu{
+  @include breakpoint(800px, $noquery){
+    margin-top:29px !important;
+  }
+}
+body{
+  @include content-fade-in(.4s);
+  background-color: #FFF;
+}
+.l-page{
+  z-index: 1;
+  position: relative;
+}
+#admin-menu{
+  display: none;
+  @include breakpoint(800px, $noquery){
+    display: block;
+  }
+}

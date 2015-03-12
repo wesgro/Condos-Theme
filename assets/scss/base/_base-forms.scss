@@ -1,0 +1,146 @@
+%submit-button{
+  input[type=submit]{
+    @include appearance(none);
+    border: none;
+  }
+  .form-submit{
+    background-color: $green;
+    color: #FFF;
+    text-transform: uppercase;
+    padding:10px 25px;
+    font-weight: 700;
+    margin-right: 10px;
+    &#edit-delete{
+      background-color: transparent;
+      float: right;
+      color:$red;
+    }
+    &#edit-workflow-5{
+      background-color: $blue;
+    }
+  }
+}
+fieldset{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+input{
+  @include input-placeholder {
+    color: $lightGrey;
+    font-style: italic;
+    @include rem(font-size, 14px);
+    text-transform: uppercase;
+  }
+}
+.gform_validation_container{
+  display: none; 
+}
+input[type=file]{
+  @include appearance(none);
+  @include rem(padding, 8px, 0px);
+  @include inline-block;
+  font-weight: 700;
+  font-family: $headerFont;
+  //border: 1px solid #000;
+  @include rem(font-size, 13px);
+}
+
+
+.webform-client-form{
+  .form-item{
+    margin-bottom: 10px;
+  }
+  div{
+    ul{
+      padding: 0;
+      margin: 0;
+    }
+    li{
+     list-style-type: none;
+     margin: 0;
+     padding: 0;
+    } 
+    input[type=tel],
+    input[type=text],
+    input[type=email],
+    textarea{
+      @include appearance(none);
+      border: 0px solid #000;
+      @include border-radius(0px);
+      background-color: #FFF;
+      width: 100%;
+      resize: none;
+    }
+    input[type=tel],
+    input[type=text],
+    input[type=email],
+    textarea,
+    select{
+      @include rem(padding, 10px, 15px);
+      vertical-align: middle;
+      color: #000;
+      font-family: $headerFont;
+      font-weight: 300;
+      height: 57px;
+      @include rem(font-size, 14px);
+      &.error{
+        outline: 1px dashed red;
+      }
+    }
+    .ginput_card_security_code{
+      margin-top: 10px !important;
+    }
+    textarea{
+      height:50px;
+    }
+    select {
+      @include appearance(none);
+      background: url("data:image/svg+xml;base64, PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI2cHgiIGhlaWdodD0iM3B4IiB2aWV3Qm94PSIwIDAgNiAzIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA2IDMiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwb2x5Z29uIHBvaW50cz0iNS45OTIsMCAyLjk5MiwzIC0wLjAwOCwwICIvPjwvc3ZnPg==") no-repeat calc(100% - 10px) center #FFF;
+      margin: 0;
+      outline: medium none;
+      overflow: hidden;
+      text-indent: 0.01px;
+      text-overflow: "";
+      z-index: 1;
+      border-radius: 0;
+      @include border-radius(0px);
+      width: 100%;
+      
+      &:hover{
+        background-color: #FFF;
+      }
+      option{
+        text-align: left;
+      }
+    }
+  }
+  input[type=submit]{
+    @include appearance(none);
+    background-color: #333333;
+    color: #FFF;
+    @include rem(padding, 15px, 25px);
+    text-align: center;
+    border: 0;
+    @include inline-block;
+    border: 0px solid #000;
+    @include rem(font-size, 14px);
+    @include border-radius(8px);
+    width: 100%;
+    font-weight: 400;
+    max-width: 300px;
+    &:hover{
+      
+    } 
+  }
+}
+.l-content{
+  .form-actions,
+  .image-widget-data
+  {
+    @extend %submit-button;
+  }
+  label{
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+}

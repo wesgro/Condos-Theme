@@ -1,0 +1,59 @@
+
+.owl-theme {
+	// controls container
+	.owl-controls {
+		margin-top: 10px;
+		text-align: center;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	// Styling Next and Prev buttons
+	.owl-controls {
+		.owl-nav{
+      
+      >div{
+        position: absolute;
+        top:0;
+        color: #FFF;
+        @include border-radius(50%);
+        border: 5px solid #FFF;
+        background-color: rgba(#000, .25);
+        @include squish-text;
+      }
+      .owl-prev{
+        @include rem(left, 20px);
+      }
+      .owl-next{
+        @include rem(right, 20px);
+      }
+    }
+	}
+
+	// Styling dots
+	.owl-dots {
+		.owl-dot {
+			display: inline-block;
+			zoom: 1;
+			*display: inline;
+      
+			span {
+				width: $dot-width;
+				height: $dot-height;
+				margin: $dot-margin;
+				background: $dot-background;
+				display: block;
+				border: 1px solid #000;
+				-webkit-backface-visibility: visible;
+				@include transition(opacity, 200ms, ease);
+				@include rounded($dot-rounded);
+			}
+
+			&.active,
+			&:hover {
+				span {
+					background: $dot-background-active;
+				}
+			}
+		}
+	}
+}

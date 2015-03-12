@@ -1,0 +1,41 @@
+.l-branding{
+  h1{
+    @include rem(font-size, 20px);
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-family: $otherFont;
+    word-spacing: -4px;
+    color: $darkGrey;
+    a{
+      color: $darkGrey;
+      &:hover{
+        text-decoration: none;
+      }
+    }
+  }
+}
+.l-region--header{
+  background-color: $colourHighlight;
+  text-align: center;
+  position: relative;
+  z-index: 5;
+  h2{
+    margin-top: 0;
+  }
+  .selector{
+    margin-bottom: 20px;
+    @include from(pt, $noquery){
+      @include inline-block;
+      margin-bottom: 0;
+      margin-right: 25px;
+      max-width: 320px;
+    }
+    @include from(lt, $noquery){
+      max-width: 360px;
+    }
+  }
+  .page-user &{
+    display: none;
+  }
+}

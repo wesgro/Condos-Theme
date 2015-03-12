@@ -1,0 +1,98 @@
+@import "abstract-typography";
+$debug-grid: false !default;
+
+%cf{
+  @include clearfix;
+}
+%pcf{
+  @include pie-clearfix;
+}
+@mixin grid-background {
+  @if $debug-grid == true {
+    @include background-grid;
+  }
+}
+%vertical-spacing{
+  @include rem(padding-top, $vert-spacing-unit / 3);
+  @include rem(padding-bottom, $vert-spacing-unit / 3);
+  @include breakpoint($tab){
+    @include rem(padding-top, $vert-spacing-unit / 2);
+    @include rem(padding-bottom, $vert-spacing-unit / 2);
+  }
+  @include breakpoint($desk, $noquery){
+    @include rem(padding-top, $vert-spacing-unit);
+    @include rem(padding-bottom, 58px);
+  }
+}
+%add-padding{
+  @include rem(padding-left, 15px);
+  @include rem(padding-right, 15px);
+  @include breakpoint($tab){
+    @include rem(padding-left, 30px);
+    @include rem(padding-right, 30px);
+  }
+  @include breakpoint($desk, $noquery){
+    @include rem(padding-left, 16px);
+    @include rem(padding-right, 16px);
+  }
+}
+%small-vertical-padding{
+  @include rem(padding-top, 10px);
+  @include rem(padding-bottom, 15px);
+  @include from(lt, $noquery){
+    @include rem(padding-top, 20px);
+    @include rem(padding-bottom, 25px);
+  }
+}
+%big-vertical-padding{
+  @include rem(padding-top, 30px);
+  @include rem(padding-bottom, 35px);
+  @include from(lt, $noquery){
+    @include rem(padding-top, 60px);
+    @include rem(padding-bottom, 65px);
+  }
+}
+%small-vertical-margin{
+  @include rem(padding-top, 10px);
+  @include rem(padding-bottom, 15px);
+  @include from(lt, $noquery){
+    @include rem(padding-top, 20px);
+    @include rem(padding-bottom, 25px);
+  }
+}
+%big-vertical-margin{
+  @include rem(padding-top, 30px);
+  @include rem(padding-bottom, 35px);
+  @include from(lt, $noquery){
+    @include rem(padding-top, 60px);
+    @include rem(padding-bottom, 65px);
+  }
+}
+%three-column{
+  >div{
+    @include from(lt, $noquery){
+      @include float-span(1, $grid: 3, $gutter: .10);
+      &:last-of-type{
+        @include float-span(1,'last', $grid: 3, $gutter: .10);
+      }
+    }
+  }
+}
+%two-column{
+  >div{
+    @include from(lt, $noquery){
+      @include float-span(1, $grid: 2, $gutter: .25);
+      &:last-of-type{
+        @include float-span(1,'last', $grid: 2, $gutter: .25);
+      }
+    }
+  }
+}
+@mixin vertical-align{
+  position: relative;
+  top: 50%;
+  @include translateY(-50%);
+}
+%vertical-align{
+  @include vertical-align;
+}

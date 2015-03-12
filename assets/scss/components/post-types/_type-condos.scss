@@ -1,0 +1,510 @@
+.view-id-condos{
+  .view-content{
+    @extend %cf;
+  }
+  .views-row{
+    @include rem(margin-bottom, 25px);
+    @include at(pt){
+      float: left;
+      width: 49%;
+      margin-right: 1%;
+      
+      &.views-row-even{
+        margin-right: 0;
+        float: right;
+      }
+    }
+    @include between(lt, sd, $noquery){
+      float: left;
+      width: 32%;
+      margin-right: 2%;
+      margin-bottom: 25px;
+      &:nth-child(3n){
+        margin-right: 0;
+        float: right;
+      }
+    }
+    @include from(d){
+      float: left;
+      width: 23%;
+      margin-right: 2.6%;
+      margin-bottom: 25px;
+      &:nth-child(4n){
+        margin-right: 0;
+        float: right;
+      }
+    }
+  }
+}
+.node--condo-project--comparison{
+  
+}
+.node--condo-project--teaser,
+.node--condo-project--comparison{
+  .field-label{
+    font-weight: 700;
+    padding-bottom: 5px;
+  }
+  .field-item{
+    padding-bottom: 5px;    
+  }
+  .ds-region{
+    @include rem(padding-left, 35px);
+    @include rem(padding-right, 35px);
+    @include rem(padding-top, 20px);
+    @include rem(padding-bottom, 20px);
+  }
+  figure{
+    line-height: 0;
+  }
+  .ds-hero{
+    padding: 0;
+  }
+  .ds-title{
+    background-color: $colourHighlight;
+    height: 81px;
+    padding-top: 0;
+    padding-bottom: 0;
+    .field-container{
+      @extend %vertical-align;
+    }
+    h3{
+      text-transform: uppercase;
+      font-weight: 700;
+      margin: 0;
+      @include rem(font-size, 23px);
+      @include to(lp){
+        @include rem(font-size, 18px);
+      }
+    }
+    a{
+      color: #333333;
+    }
+  }
+  .ds-price{
+    background-color: #333333;
+    color: #FFF;
+    @include rem(font-size, 20px);
+    @include rem(height, 53px);
+    padding-top: 0;
+    padding-bottom: 0;
+    .field-container{
+      @extend %vertical-align;
+    }
+  }
+  .ds-details{
+    background-color: #f7f7f7;
+  }
+  address{
+    font-style: normal;
+    >div,span{
+      display: none;
+    }
+    .street-block{
+      @include inline-block;
+    }
+  }
+  .ds-meta{
+    padding: 0;
+    @extend %pcf;
+    background-color: #dcdcdc;
+    a{
+      color: #666666;
+    }
+    .field-label{
+      font-weight: 400;
+      margin: 0;
+      text-align: center;
+      @include rem(font-size, 15px);
+    }
+    .field-items{
+      @include rem(font-size, 36px);
+      line-height: 1;
+    }
+    .inner{
+      @extend %vertical-align;
+    }
+    .flag-outer-condo-flag{
+      a{
+        @include translateZ(0px);
+      }
+      .inner{
+        height: 61px;
+      }
+      .ico-moon:before{
+        @include rem(font-size, 36px);
+        display: block;
+      }
+    }
+    .field-container{
+      @include rem(height, 94px);
+      border-right: 4px solid #d2d2d2;
+      @include float-span(1, $grid: 3, $gutter: 0);
+      text-align: center;
+      &:last-child{
+        border-right: 0;
+        @include float-span(1,'last',$grid: 3, $gutter: 0);
+      }
+    }
+  }
+}
+
+
+.node--condo-project--full{
+  .ds-hero{
+    text-align: center;
+  }
+  .ds-navigation{
+    ul{
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    li{
+      padding: 0 42px;
+      @include inline-block;
+      position: relative;
+      @include to(pt){
+        padding: 0 10px;
+      }
+      &:after{
+        content: "|";
+        position: absolute;
+        top:0;
+        right: 0;
+      }
+      &:first-child{
+        padding-left: 0;
+      }
+      &:last-child{
+        padding-right: 0;
+        &:after{
+          content: "";
+        }
+      }
+    }
+    a{
+      color:#828282;
+      font-family: $otherFont;
+    }
+  }
+  .ds-gallery{
+    $gutters: .05;
+    $guttersBottom:1.6129%;
+    .field--gallery{
+      padding: 0;
+      margin: 0;
+      @extend %cf;
+      li{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        @include float-span(1, $grid:3, $gutter: $gutters);
+        margin-bottom: $guttersBottom;
+        a,img{
+          display: block;
+          width: 100%;
+        }
+        &:nth-child(3n){
+          @include float-span(1,'last', $grid:3, $gutter: $gutters);
+        }
+      }
+    }
+    @include from(lt, $noquery){
+      .field--building-image{
+        @include grid-span(1, 1, 2, $gutter: $gutters);
+      }
+      .field--gallery{
+        @include grid-span(1, 2, 2, $gutter: $gutters);
+      }
+    }
+  }
+  .ds-meta{
+    background-color: #e5e5e5;
+    .flag-message{
+      left: 50%;
+      margin-left: -110px;
+    }
+    h3,
+    .field-label,
+    .field-item{
+      @include rem(font-size, 30px);
+      margin: 0;
+      line-height: 1.1;
+    }
+    .flag-wrapper{
+      @include button-builder('a', '%icon-heart');
+      a.unflag-action{
+        &:after{
+          @extend %icon-empty-heart;
+        }
+      }
+      i{
+        display: none;
+      }
+    }
+    .field-container{
+      text-align: center;
+      position: relative;
+      @include to(pt){
+        padding-top: 15px;
+        padding-bottom: 15px;
+      }
+      @include from(lt, $noquery){
+        @include float-span(1, $grid:3,$gutter:0);
+        border-right: 1px solid #adadad;
+        padding-left: 31px;
+        padding-right: 31px;
+        > .inner{
+          @include vertical-align;
+        }
+        &:last-child{
+          @include float-span(1, 'last', $grid:3,$gutter:0);
+          border-right: 0;
+          padding-right: 0;
+        }
+      }
+      
+    }
+  }
+  .ds-sales{
+    background-color:#f0f0f0;
+    .stat{
+      position: relative;
+    }
+    .field-label{
+      @include rem(font-size, 22px);
+    }
+    .description{
+      position: absolute;
+      top:50%;
+      height: 40px;
+      margin-top: -20px;
+      left: 0;
+      right: 0;
+      text-transform: uppercase;
+      @include rem(font-size, 22px);
+    }
+    .field-container{
+      text-align: center;
+    }
+  }
+  .ds-project-info{
+    h4.field-label{
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #dadada;
+    }
+    img{
+      position: absolute;
+      display: block;
+      left: 0;
+      top:50%;
+      margin-top: -13.5px;
+      opacity: .5;
+      @include backface-visibility;
+      .svg &{
+        height: 27px;
+        width: 27px;
+      }
+    }
+    address{
+      .locality-block{
+        display: none;
+      }
+      >div{
+        @include inline-block;
+      }
+    }
+    .col-1,
+    .col-2{
+      .field-label{
+        font-weight: 700;
+        @include rem(padding-left, 45px);
+        position: relative;
+        
+      }
+      .field-container{
+        //margin-bottom: 5px;
+        //padding-bottom: 5px;
+        @include rem(margin-bottom, 10);
+        @include rem(padding-bottom, 10);
+        border-bottom: 1px solid #e9e9e9;
+        position: relative;
+      }
+    }
+  }
+  .ds-why{
+    background-color: #f7f6f6;
+    @include from(lt, $noquery){
+      .field-container{
+        max-width: 800px;
+      }
+    }
+  }
+  .ds-contact-info{
+    background-color: #666666;
+    color: #FFF;
+    .col-1{
+      ul,li{
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+      }
+      a{
+        display: block;
+        color: #FFF;
+        background-color: #333333;
+        text-align: center;
+        @include border-radius(5px);
+        margin-bottom: 5px;
+        padding:10px 15px;
+      }
+    }
+    .col-2{
+      background-color: #FFF;
+      padding:25px 15px;
+      @include border-radius(5px); 
+      color: #666666;
+      overflow: hidden;
+      @include rem(max-height, 142px);
+      line-height: 1.2;
+      p{
+        margin-top: 3px;
+      }
+    }
+    @include from(lt, $noquery){
+      .form-actions{
+        @include float-span(1, 'last',$grid:2,$gutter:.05);
+      }
+      .webform-component{
+        @include float-span(1, $grid:2, $gutter:.05);
+        &:nth-child(odd){
+          @include float-span(1, 'last',$grid:2,$gutter:.05);
+        }
+      }
+      .webform-component-markup{
+        float: none !important;
+        width: 100% !important;
+        clear: both;
+      }
+    }
+  }
+  .ds-floorplans{
+    .flag-wrapper{
+      @include button-builder('a', '%icon-heart');
+      a.unflag-action{
+        &:after{
+          @extend %icon-empty-heart;
+        }
+      }
+      i{
+        display: none;
+      }
+    }
+    .flag-throbber{
+      display: none;
+    }
+    .views-field-field-floorplan{
+      @include button-builder('a');
+    }
+    tbody{
+      .file-icon,
+      .file-size{
+        display: none;
+      }
+      a{
+        font-size: 17px !important;
+        min-width:116px;
+        @include to(pt){  
+          font-size: 14px !important;  
+        }
+        &:after{
+          background-color: $colourHighlight !important;
+        }
+      }
+    }
+    @include to(pt){    
+    /* Force table to not be like tables anymore */
+    	table, thead, tbody, th, td, tr { 
+    		display: block; 
+    	}
+    	
+    	/* Hide table headers (but not display: none;, for accessibility) */
+    	thead tr { 
+    		position: absolute;
+    		top: -9999px;
+    		left: -9999px;
+    	}
+    	
+    	tr { border: 1px solid #ccc; margin-bottom: 25px;}
+    	
+    	td { 
+    		/* Behave  like a "row" */
+    		border: none;
+    		border-bottom: 1px solid #eee; 
+    		position: relative;
+    		padding-left: 38%; 
+    	}
+    	
+    	td:before { 
+    		/* Now like a table header */
+    		position: absolute;
+    		/* Top/left values mimic padding */
+    		top: 50%;
+    		left: 6px;
+    		width: 33%; 
+    		padding-right: 10px; 
+    		white-space: nowrap;
+    	}
+    	
+    	/*
+    	Label the data
+    	*/
+    	td:before{
+      	font-weight: 700;
+    	}
+    	td:nth-of-type(1):before { content: "Floor"; }
+    	td:nth-of-type(2):before { content: "Suite Number"; }
+    	td:nth-of-type(3):before { content: "Size"; }
+    	td:nth-of-type(4):before { content: "Parking"; }
+    	td:nth-of-type(5):before { content: "Pricing"; }
+    	td:nth-of-type(6):before { content: "Floor Plans"; }
+    	td:nth-of-type(7):before { content: "Save"; }
+    }
+  }
+}
+.map-container{
+  @include vertical-align;
+  height: 500px;
+  padding: 0 35px;
+  @include to(lp){
+    padding: 0 10px;
+  }
+  #map-canvas{
+    height: 500px;
+  }
+  @include to(lp){
+    height: 320px;
+    #map-canvas{
+      height: 320px;
+    }
+  }
+}
+.entity-floorplans{
+  &.view-mode-comparison{
+    padding: 10px 15px;
+    @extend %pcf;
+    background-color: #f7f7f7;
+    .field-container,
+    .flag-outer{
+      @include button-builder('a');
+    }
+    .field-label{
+      font-weight: 700;
+    }
+  }
+}

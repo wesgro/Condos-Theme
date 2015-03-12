@@ -1,0 +1,5238 @@
+@charset "UTF-8";
+/*! normalize.css v3.0.0 | MIT License | git.io/normalize */
+/*! normalize.css v3.0.0 | HTML5 Display Definitions | MIT License | git.io/normalize */
+/* line 9, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_html5.scss */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/* line 29, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_html5.scss */
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+/* line 40, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_html5.scss */
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/* line 47, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_html5.scss */
+[hidden],
+template {
+  display: none;
+}
+
+/*! normalize.css v3.0.0 | Base | MIT License | git.io/normalize */
+/* line 11, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_base.scss */
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* line 19, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_base.scss */
+body {
+  margin: 0;
+}
+
+/*! normalize.css v3.0.0 | Links | MIT License | git.io/normalize */
+/* line 9, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_links.scss */
+a {
+  background: transparent;
+}
+
+/* line 15, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_links.scss */
+a:active,
+a:hover {
+  outline: 0;
+}
+
+/*! normalize.css v3.0.0 | Typography | MIT License | git.io/normalize */
+/* line 9, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_typography.scss */
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/* line 15, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_typography.scss */
+b,
+strong {
+  font-weight: bold;
+}
+
+/* line 22, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_typography.scss */
+dfn {
+  font-style: italic;
+}
+
+/* line 29, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_typography.scss */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* line 36, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_typography.scss */
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/* line 43, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_typography.scss */
+small {
+  font-size: 80%;
+}
+
+/* line 49, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_typography.scss */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+/* line 57, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_typography.scss */
+sup {
+  top: -0.5em;
+}
+
+/* line 61, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_typography.scss */
+sub {
+  bottom: -0.25em;
+}
+
+/*! normalize.css v3.0.0 | Embedded Content | MIT License | git.io/normalize */
+/* line 9, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_embeds.scss */
+img {
+  border: 0;
+}
+
+/* line 15, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_embeds.scss */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/*! normalize.css v3.0.0 | Figures | MIT License | git.io/normalize */
+/* line 9, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_groups.scss */
+figure {
+  margin: 1em 40px;
+}
+
+/* line 15, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_groups.scss */
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+/* line 23, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_groups.scss */
+pre {
+  overflow: auto;
+}
+
+/* line 29, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_groups.scss */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+/*! normalize.css v3.0.0 | Forms | MIT License | git.io/normalize */
+/* line 15, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_forms.scss */
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+/* line 27, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_forms.scss */
+button {
+  overflow: visible;
+}
+
+/* line 36, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_forms.scss */
+button,
+select {
+  text-transform: none;
+}
+
+/* line 47, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_forms.scss */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+/* line 57, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_forms.scss */
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/* line 64, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_forms.scss */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/* line 73, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_forms.scss */
+input {
+  line-height: normal;
+}
+
+/* line 83, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_forms.scss */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/* line 93, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_forms.scss */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/* line 102, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_forms.scss */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+/* line 113, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_forms.scss */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/* line 120, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_forms.scss */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/* line 129, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_forms.scss */
+legend {
+  border: 0;
+  padding: 0;
+}
+
+/* line 136, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_forms.scss */
+textarea {
+  overflow: auto;
+}
+
+/* line 143, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_forms.scss */
+optgroup {
+  font-weight: bold;
+}
+
+/*! normalize.css v3.0.0 | Tables | MIT License | git.io/normalize */
+/* line 9, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_tables.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 14, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-normalize-1.5/stylesheets/normalize/_tables.scss */
+td,
+th {
+  padding: 0;
+}
+
+/* line 1, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/toolkit-2.7.0/stylesheets/toolkit/_kickstart.scss */
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 11, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/toolkit-2.7.0/stylesheets/toolkit/_kickstart.scss */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/**
+* layout vars
+*/
+/* line 10, ../scss/libraries/icomoon/_ico-mixins.scss */
+.view .pager-load-more a:after, .selected-edit-sort-bef-combine-count-asc--3 a:after,
+.selected-edit-sort-bef-combine-count-desc--3 a:after, .node--condo-project--full .ds-meta .flag-wrapper a:after, .node--condo-project--full .ds-floorplans .flag-wrapper a:after, .node--condo-project--full .ds-floorplans .views-field-field-floorplan a:after, .entity-floorplans.view-mode-comparison .field-container a:after,
+.entity-floorplans.view-mode-comparison .flag-outer a:after, .owl-theme .owl-controls div:before,
+.ico-moon {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src: url("../fonts/icomoon.eot?-2fb7yx");
+  src: url("../fonts/icomoon.eot?#iefix-2fb7yx") format("embedded-opentype"), url("../fonts/icomoon.woff?-2fb7yx") format("woff"), url("../fonts/icomoon.ttf?-2fb7yx") format("truetype"), url("../fonts/icomoon.svg?-2fb7yx#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 14, ../scss/libraries/icomoon/_icons.scss */
+.icon-flag:before {
+  content: "\e600";
+}
+
+/* line 18, ../scss/libraries/icomoon/_icons.scss */
+.selected-edit-sort-bef-combine-count-asc--3 a:after,
+.selected-edit-sort-bef-combine-count-desc--3 a:after, .node--condo-project--full .ds-meta .flag-wrapper a:after, .node--condo-project--full .ds-floorplans .flag-wrapper a:after,
+.icon-heart:before {
+  content: "\e601";
+}
+
+/* line 22, ../scss/libraries/icomoon/_icons.scss */
+.node--condo-project--full .ds-meta .flag-wrapper a.unflag-action:after, .node--condo-project--full .ds-floorplans .flag-wrapper a.unflag-action:after,
+.icon-empty-heart:before {
+  content: "\e602";
+}
+
+/* line 26, ../scss/libraries/icomoon/_icons.scss */
+.icon-square:before {
+  content: "\e603";
+}
+
+/* line 30, ../scss/libraries/icomoon/_icons.scss */
+.icon-circle:before {
+  content: "\e604";
+}
+
+/* line 34, ../scss/libraries/icomoon/_icons.scss */
+.icon-search:before {
+  content: "\e605";
+}
+
+/* line 38, ../scss/libraries/icomoon/_icons.scss */
+.icon-location:before {
+  content: "\e606";
+}
+
+/* line 42, ../scss/libraries/icomoon/_icons.scss */
+.icon-truck:before {
+  content: "\e607";
+}
+
+/* line 46, ../scss/libraries/icomoon/_icons.scss */
+.owl-theme .owl-controls .owl-prev:before,
+.icon-arrow-left:before {
+  content: "\e608";
+}
+
+/* line 50, ../scss/libraries/icomoon/_icons.scss */
+.owl-theme .owl-controls .owl-next:before,
+.icon-arrow-right:before {
+  content: "\e60a";
+}
+
+/* line 54, ../scss/libraries/icomoon/_icons.scss */
+.view .pager-load-more a:after, .node--condo-project--full .ds-floorplans .views-field-field-floorplan a:after, .entity-floorplans.view-mode-comparison .field-container a:after,
+.entity-floorplans.view-mode-comparison .flag-outer a:after,
+.icon-arrow-down:before {
+  content: "\e609";
+}
+
+/**
+* Variables
+*/
+/**
+* from http://tympanus.net/Development/CreativeLinkEffects
+* Apply effects directly to <a> tags either with the mixin or extend the % placeholder
+*/
+/**
+* @TODO move all transforms and css3 calls to compass mixins
+*/
+/* Effect 1: Brackets */
+/* Effect 2: 3D rolling links, idea from http://hakim.se/thoughts/rolling-links */
+/* Effect 3: bottom line slides/fades in */
+/* Effect 4: bottom border enlarge */
+/* Effect 5: same word slide in */
+/* Effect 5: same word slide in and border bottom */
+/* Effect 7: second border slides up */
+/* Effect 8: border slight translate */
+/* Effect 9: second text and borders */
+/* Effect 10: reveal, push out */
+/* Effect 11: text fill based on Lea Verou's animation http://dabblet.com/gist/6046779 */
+/* Effect 13: three circles */
+/* Effect 14: border switch */
+/* Effect 15: scale down, reveal */
+/* Effect 16: fall down */
+/* Effect 17: move up fade out, push border */
+/* Effect 18: cross */
+/* Effect 21: borders slight translate */
+/* Generated by Font Squirrel (http://www.fontsquirrel.com) on April 14, 2014 */
+@font-face {
+  font-family: "leap-font-set";
+  src: url("../fonts/leap-font-set.eot");
+  src: url("../fonts/leap-font-set.eot?#iefix") format("embedded-opentype"), url("../fonts/leap-font-set.woff") format("woff"), url("../fonts/leap-font-set.ttf") format("truetype"), url("../fonts/leap-font-set.svg#leap-font-set") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 18, ../scss/libraries/leap_plugins/_fonts.scss */
+[data-icon]:before {
+  font-family: "leap-font-set" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* line 31, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon:before,
+#nav-open,
+.search-feature .search:after,
+.search-feature .close:after,
+.form-item-edit-sort-bef-combine-field-price-value-asc--3 a:after,
+.form-item-edit-sort-bef-combine-field-price-value-desc--3 a:after,
+#mobile-navigation .close:before,
+.menu-toggle:before {
+  font-family: "leap-font-set" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* line 45, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-bus:before {
+  content: "\e000";
+}
+
+/* line 49, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-clock:before {
+  content: "\e001";
+}
+
+/* line 53, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-microphone:before {
+  content: "\e002";
+}
+
+/* line 57, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont:before {
+  content: "\e003";
+}
+
+/* line 61, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-1:before,
+.search-feature .search:after {
+  content: "\e004";
+}
+
+/* line 65, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-2:before,
+.form-item-edit-sort-bef-combine-field-price-value-desc--3 a:after {
+  content: "\e005";
+}
+
+/* line 69, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-3:before,
+.form-item-edit-sort-bef-combine-field-price-value-asc--3 a:after {
+  content: "\e006";
+}
+
+/* line 73, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-4:before {
+  content: "\e007";
+}
+
+/* line 77, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-5:before {
+  content: "\e008";
+}
+
+/* line 81, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-6:before {
+  content: "\e009";
+}
+
+/* line 85, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-7:before {
+  content: "\e00a";
+}
+
+/* line 89, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-8:before {
+  content: "\e00b";
+}
+
+/* line 93, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-9:before {
+  content: "\e00c";
+}
+
+/* line 97, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-10:before {
+  content: "\e00d";
+}
+
+/* line 101, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-11:before {
+  content: "\e00e";
+}
+
+/* line 105, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-12:before {
+  content: "\e00f";
+}
+
+/* line 109, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-13:before {
+  content: "\e010";
+}
+
+/* line 113, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-14:before {
+  content: "\e011";
+}
+
+/* line 117, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-15:before {
+  content: "\e012";
+}
+
+/* line 121, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-16:before {
+  content: "\e013";
+}
+
+/* line 125, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-17:before {
+  content: "\e014";
+}
+
+/* line 129, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-18:before {
+  content: "\e015";
+}
+
+/* line 133, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-19:before {
+  content: "\e016";
+}
+
+/* line 137, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-20:before {
+  content: "\e017";
+}
+
+/* line 142, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-circle-minus:before {
+  content: "\e018";
+}
+
+/* line 146, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-circle-plus:before {
+  content: "\e019";
+}
+
+/* line 150, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-21:before {
+  content: "\e01a";
+}
+
+/* line 154, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-22:before {
+  content: "\e01b";
+}
+
+/* line 158, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-square-minus:before {
+  content: "\e01c";
+}
+
+/* line 162, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-square-plus:before {
+  content: "\e01d";
+}
+
+/* line 166, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-23:before {
+  content: "\e01e";
+}
+
+/* line 170, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-square-delete:before {
+  content: "\e01f";
+}
+
+/* line 174, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-24:before {
+  content: "\e020";
+}
+
+/* line 178, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-25:before {
+  content: "\e021";
+}
+
+/* line 183, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-iphone:before {
+  content: "\e022";
+}
+
+/* line 187, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-pin2:before {
+  content: "\e023";
+}
+
+/* line 191, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-user:before {
+  content: "\e024";
+}
+
+/* line 195, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-26:before {
+  content: "\e025";
+}
+
+/* line 199, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-27:before {
+  content: "\e026";
+}
+
+/* line 203, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-28:before {
+  content: "\e027";
+}
+
+/* line 207, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-29:before {
+  content: "\e028";
+}
+
+/* line 211, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-plus:before {
+  content: "\e029";
+}
+
+/* line 215, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-plus-circled:before {
+  content: "\e02a";
+}
+
+/* line 219, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-30:before {
+  content: "\e02b";
+}
+
+/* line 223, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-31:before {
+  content: "\e02c";
+}
+
+/* line 228, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-32:before {
+  content: "\e02d";
+}
+
+/* line 232, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-cancel-circled:before {
+  content: "\e02f";
+}
+
+/* line 236, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-33:before {
+  content: "\e030";
+}
+
+/* line 240, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-34:before {
+  content: "\e02e";
+}
+
+/* line 244, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-35:before {
+  content: "\e02f";
+}
+
+/* line 247, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-36:before {
+  content: "\e031";
+}
+
+/* line 251, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-37:before {
+  content: "\e032";
+}
+
+/* line 255, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fax:before {
+  content: "\e033";
+}
+
+/* line 259, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-office:before {
+  content: "\e034";
+}
+
+/* line 263, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-mail:before {
+  content: "\e035";
+}
+
+/* line 267, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-38:before {
+  content: "\e036";
+}
+
+/* line 271, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-39:before {
+  content: "\e037";
+}
+
+/* line 275, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-40:before {
+  content: "\e038";
+}
+
+/* line 279, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-41:before {
+  content: "\e039";
+}
+
+/* line 283, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-42:before {
+  content: "\e03a";
+}
+
+/* line 287, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-43:before {
+  content: "\e03b";
+}
+
+/* line 291, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-44:before {
+  content: "\e03c";
+}
+
+/* line 295, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-fontawesome-webfont-45:before {
+  content: "\e03d";
+}
+
+/* line 299, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-laptop:before {
+  content: "\e03e";
+}
+
+/* line 303, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-monitor:before {
+  content: "\e03f";
+}
+
+/* line 307, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-marker:before {
+  content: "\e040";
+}
+
+/* line 311, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-check:before {
+  content: "\e041";
+}
+
+/* line 315, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-close:before,
+.search-feature .close:after,
+#mobile-navigation .close:before {
+  content: "\e042";
+}
+
+/* line 320, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-menu:before,
+#nav-open,
+.menu-toggle:before {
+  content: "\e043";
+}
+
+/* line 325, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-arrow-left-and-right:before {
+  content: "\e044";
+}
+
+/* line 329, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-bulls-eye:before {
+  content: "\e045";
+}
+
+/* line 333, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-line-graph:before {
+  content: "\e046";
+}
+
+/* line 337, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-piggy-bank:before {
+  content: "\e047";
+}
+
+/* line 341, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-pin-love:before {
+  content: "\e048";
+}
+
+/* line 345, ../scss/libraries/leap_plugins/_fonts.scss */
+.icon-user-network:before {
+  content: "\e049";
+}
+
+/* line 2, ../scss/libraries/leap_plugins/_login.scss */
+#login-modal .mfp-close {
+  z-index: 10;
+  position: absolute;
+  right: 20px;
+  top: -25px;
+}
+/* line 8, ../scss/libraries/leap_plugins/_login.scss */
+#login-modal .wrap, #login-modal ul.tabs {
+  text-align: center;
+}
+/* line 11, ../scss/libraries/leap_plugins/_login.scss */
+#login-modal .logo {
+  width: 300px;
+}
+/* line 14, ../scss/libraries/leap_plugins/_login.scss */
+#login-modal form {
+  margin-top: 16px;
+  margin-top: 1rem;
+}
+/* line 16, ../scss/libraries/leap_plugins/_login.scss */
+#login-modal form p {
+  margin-bottom: 15px;
+}
+/* line 19, ../scss/libraries/leap_plugins/_login.scss */
+#login-modal form label {
+  display: none;
+}
+/* line 23, ../scss/libraries/leap_plugins/_login.scss */
+.lt-ie9 #login-modal form label {
+  display: block !important;
+}
+/* line 27, ../scss/libraries/leap_plugins/_login.scss */
+#login-modal form input[type=text],
+#login-modal form input[type=password] {
+  border: 1px solid #CCC;
+  padding: 5px 10px;
+  font-size: 18px;
+  width: 80%;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  margin: 0;
+  background-color: #FFF;
+}
+
+/* Magnific Popup CSS */
+/* line 78, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-bg {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1042;
+  overflow: hidden;
+  position: fixed;
+  background: #ffcc33;
+  opacity: 0.6;
+}
+
+/* line 95, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-wrap {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1043;
+  position: fixed;
+  outline: none !important;
+  -webkit-backface-visibility: hidden;
+}
+
+/* line 107, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-container {
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  padding: 0 8px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 122, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-container:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+/* line 133, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-align-top .mfp-container:before {
+  display: none;
+}
+
+/* line 140, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-content {
+  position: absolute;
+  top: 36px;
+  margin: 0 auto;
+  text-align: left;
+  z-index: 1045;
+}
+
+/* line 149, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-inline-holder .mfp-content,
+.mfp-ajax-holder .mfp-content {
+  width: 100%;
+  cursor: auto;
+}
+
+/* line 156, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-ajax-cur {
+  cursor: progress;
+}
+
+/* line 160, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-zoom-out-cur, .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
+  cursor: -moz-zoom-out;
+  cursor: -webkit-zoom-out;
+  cursor: zoom-out;
+}
+
+/* line 166, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-zoom {
+  cursor: pointer;
+  cursor: -webkit-zoom-in;
+  cursor: -moz-zoom-in;
+  cursor: zoom-in;
+}
+
+/* line 173, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-auto-cursor .mfp-content {
+  cursor: auto;
+}
+
+/* line 178, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-close,
+.mfp-arrow,
+.mfp-preloader,
+.mfp-counter {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+/* line 189, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-loading.mfp-figure {
+  display: none;
+}
+
+/* line 208, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-hide {
+  display: none !important;
+}
+
+/* line 219, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-preloader {
+  color: #CCC;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  text-align: center;
+  margin-top: -0.8em;
+  left: 8px;
+  right: 8px;
+  z-index: 1044;
+}
+/* line 229, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-preloader a {
+  color: #CCC;
+}
+/* line 231, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-preloader a:hover {
+  color: #CCC;
+}
+
+/* line 239, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-s-ready .mfp-preloader {
+  display: none;
+}
+
+/* line 246, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-s-error .mfp-content {
+  display: none;
+}
+
+/* line 253, ../scss/libraries/magnificent/_magnificent.scss */
+button.mfp-close, button.mfp-arrow {
+  overflow: visible;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  display: block;
+  outline: none;
+  padding: 0;
+  z-index: 1046;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+/* line 267, ../scss/libraries/magnificent/_magnificent.scss */
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+/* line 275, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-close {
+  line-height: 67px;
+  font-size: 55px;
+  font-weight: 700;
+  position: absolute;
+  right: 51px;
+  top: -18px;
+  text-decoration: none;
+  text-align: center;
+  opacity: 1;
+  padding: 0 0 18px 10px;
+  color: #CCC;
+  font-style: normal;
+}
+/* line 291, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-close:hover, .mfp-close:focus {
+  opacity: 1;
+}
+
+/* line 300, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-close-btn-in .mfp-close {
+  color: #333;
+}
+
+/* line 306, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-image-holder .mfp-close,
+.mfp-iframe-holder .mfp-close {
+  color: #CCC;
+  right: -6px;
+  text-align: right;
+  padding-right: 6px;
+  width: 100%;
+}
+
+/* line 316, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-counter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #CCC;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+/* line 416, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-iframe-holder {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+/* line 419, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-iframe-holder .mfp-content {
+  line-height: 0;
+  width: 100%;
+  max-width: 900px;
+  height: auto !important;
+  max-height: 480px;
+  position: relative;
+  top: 50% !important;
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+/* line 429, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-iframe-holder .mfp-close {
+  top: -53px;
+  color: #000 !important;
+}
+
+/* line 434, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-iframe-scaler {
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  padding-top: 56.25%;
+}
+/* line 439, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-iframe-scaler iframe {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  background: #000;
+}
+
+@media all and (max-width: 900px) {
+  /* line 595, ../scss/libraries/magnificent/_magnificent.scss */
+  .mfp-arrow {
+    -webkit-transform: scale(0.75);
+    transform: scale(0.75);
+  }
+
+  /* line 599, ../scss/libraries/magnificent/_magnificent.scss */
+  .mfp-arrow-left {
+    -webkit-transform-origin: 0;
+    transform-origin: 0;
+  }
+
+  /* line 603, ../scss/libraries/magnificent/_magnificent.scss */
+  .mfp-arrow-right {
+    -webkit-transform-origin: 100%;
+    transform-origin: 100%;
+  }
+
+  /* line 607, ../scss/libraries/magnificent/_magnificent.scss */
+  .mfp-container {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+}
+/* overlay at start */
+/* line 614, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-fade.mfp-bg {
+  opacity: 0;
+  -webkit-transition: all 0.15s ease-out;
+  -moz-transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out;
+}
+
+/* overlay animate in */
+/* line 622, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-fade.mfp-bg.mfp-ready {
+  opacity: .6;
+}
+
+/* overlay animate out */
+/* line 626, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-fade.mfp-bg.mfp-removing {
+  opacity: 0;
+}
+
+/* content at start */
+/* line 631, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-fade.mfp-wrap .mfp-content {
+  opacity: 0;
+  -webkit-transition: all 0.15s ease-out;
+  -moz-transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out;
+}
+
+/* content animate it */
+/* line 639, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-fade.mfp-wrap.mfp-ready .mfp-content {
+  opacity: 1;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* content animate out */
+/* line 649, ../scss/libraries/magnificent/_magnificent.scss */
+.mfp-fade.mfp-wrap.mfp-removing .mfp-content {
+  opacity: 0;
+}
+
+/* line 3, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+#mobile-navigation {
+  position: absolute;
+  left: auto;
+  right: 0;
+  top: 0;
+  bottom: auto;
+  min-height: 100%;
+  z-index: 1000;
+}
+
+/* line 14, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w > .levelHolderClass {
+  border-left: 1px solid #ccc;
+  right: -1px !important;
+}
+@media (max-width: 767px) {
+  /* line 14, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+  .mlpm_w > .levelHolderClass {
+    overflow-y: auto !important;
+    height: 90vh;
+  }
+  /* line 20, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+  .mlpm_w > .levelHolderClass .levelHolderClass {
+    overflow-y: auto !important;
+    height: 90vh;
+  }
+}
+
+/* line 27, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.levelHolderClass ul {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* line 31, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+#nav-open {
+  position: absolute;
+  right: 1.5em;
+  top: 1.5em;
+}
+
+/* line 44, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w {
+  position: absolute;
+  overflow: hidden;
+  min-width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 55, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w .levelHolderClass {
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  background: #FFF;
+  width: auto;
+  min-height: 100%;
+  font-family: "lato", helvetica, arial, sans-serif;
+  font-size: 16px;
+  zoom: 1;
+  -moz-transition: background-color 0.125s ease-in;
+  -o-transition: background-color 0.125s ease-in;
+  -webkit-transition: background-color 0.125s ease-in;
+  transition: background-color 0.125s ease-in;
+}
+/* line 66, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w .levelHolderClass form {
+  background-color: #3d6ea9;
+}
+/* line 69, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w .levelHolderClass h2 {
+  background-color: #3d6ea9;
+  color: #FFF;
+  height: 30px;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  height: 77px;
+  margin: 0;
+  border-bottom: 1px solid #366296;
+}
+/* line 78, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w .levelHolderClass h2 i {
+  font-size: 30px;
+  margin-left: 15px;
+}
+/* line 82, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w .levelHolderClass h2 span {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  margin-right: 15px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+/* line 90, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w .levelHolderClass .levelHolderClass h2 {
+  padding-top: 32px;
+  padding-left: 15px;
+  text-align: left !important;
+}
+
+/* line 99, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w .ltr {
+  margin-left: -100%;
+  left: 0;
+  -moz-box-shadow: 5px 0 5px -5px #cccccc;
+  -webkit-box-shadow: 5px 0 5px -5px #cccccc;
+  box-shadow: 5px 0 5px -5px #cccccc;
+}
+
+/* line 108, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w .rtl {
+  margin-right: -100%;
+  right: 0;
+  -moz-box-shadow: 5px 0 5px 5px #cccccc;
+  -webkit-box-shadow: 5px 0 5px 5px #cccccc;
+  box-shadow: 5px 0 5px 5px #cccccc;
+}
+
+/* line 117, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w .mlpm_inactive {
+  background: #f2f2f2;
+}
+
+/* line 121, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w h2 {
+  font-size: 16px;
+  line-height: 1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #4176b4;
+  padding: 0 0.4em 0 0.4em;
+}
+
+/* line 130, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* line 136, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w li {
+  cursor: pointer;
+  border-bottom: 1px solid #e1e5e7;
+  text-align: left !important;
+}
+
+/* line 142, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w li:first-child {
+  border-top: 1px solid #e1e5e7;
+}
+
+/* line 146, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w li a:hover {
+  background-color: #4176b4;
+  color: #FFF;
+}
+
+/* line 151, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w a {
+  display: block;
+  outline: none;
+  overflow: hidden;
+  font-size: 24px;
+  line-height: 1em;
+  padding: 0.2em;
+  text-decoration: none;
+  color: #999999;
+}
+/* line 161, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w a:hover {
+  text-decoration: none;
+}
+
+/* line 169, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w .backItemClass {
+  display: block;
+  padding: 0.4em;
+  background: #FFF;
+  border-top: 1px solid #cccccc;
+}
+/* line 175, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w .backItemClass a:hover {
+  color: #FFF;
+}
+
+/* line 181, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w .floatRight {
+  float: right;
+}
+
+/* line 185, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w .floatLeft {
+  float: left;
+}
+
+/* line 189, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w .cursorPointer {
+  cursor: pointer;
+}
+
+/* line 193, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w .iconSpacing_ltr {
+  padding: 0 0.4em 0 0;
+}
+
+/* line 197, ../scss/libraries/mobile_nav/_mobile_nav.scss */
+.mlpm_w .iconSpacing_rtl {
+  padding: 0 0 0 0.4em;
+}
+
+/* 
+ *  Owl Carousel - Animate Plugin
+ */
+/* line 5, ../scss/libraries/owlCarousel/_owl.animate.scss */
+.owl-carousel .animated {
+  -webkit-animation-duration: 1000ms;
+  animation-duration: 1000ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+/* line 11, ../scss/libraries/owlCarousel/_owl.animate.scss */
+.owl-carousel .owl-animated-in {
+  z-index: 0;
+}
+/* line 14, ../scss/libraries/owlCarousel/_owl.animate.scss */
+.owl-carousel .owl-animated-out {
+  z-index: 1;
+}
+/* line 17, ../scss/libraries/owlCarousel/_owl.animate.scss */
+.owl-carousel .fadeOut {
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* 
+ * 	Owl Carousel - Auto Height Plugin
+ */
+/* line 7, ../scss/libraries/owlCarousel/_owl.autoheight.scss */
+.owl-height {
+  -moz-transition: height, 500ms, ease-in-out;
+  -o-transition: height, 500ms, ease-in-out;
+  -webkit-transition: height, 500ms, ease-in-out;
+  transition: height, 500ms, ease-in-out;
+}
+
+/* 
+ *  Core Owl Carousel CSS File
+ */
+/* line 4, ../scss/libraries/owlCarousel/_owl.carousel.scss */
+.owl-carousel {
+  display: none;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+  /* position relative and z-index fix webkit rendering fonts issue */
+  position: relative;
+  z-index: 1;
+}
+/* line 12, ../scss/libraries/owlCarousel/_owl.carousel.scss */
+.owl-carousel .owl-stage {
+  position: relative;
+  -ms-touch-action: pan-Y;
+}
+/* line 17, ../scss/libraries/owlCarousel/_owl.carousel.scss */
+.owl-carousel .owl-stage:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+/* line 26, ../scss/libraries/owlCarousel/_owl.carousel.scss */
+.owl-carousel .owl-stage-outer {
+  position: relative;
+  overflow: hidden;
+  /* fix for flashing background */
+  -webkit-transform: translate3d(0px, 0px, 0px);
+}
+/* line 33, ../scss/libraries/owlCarousel/_owl.carousel.scss */
+.owl-carousel .owl-controls .owl-nav .owl-prev,
+.owl-carousel .owl-controls .owl-nav .owl-next,
+.owl-carousel .owl-controls .owl-dot {
+  cursor: pointer;
+  cursor: hand;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* line 45, ../scss/libraries/owlCarousel/_owl.carousel.scss */
+.owl-carousel.owl-loaded {
+  display: block;
+}
+/* line 49, ../scss/libraries/owlCarousel/_owl.carousel.scss */
+.owl-carousel.owl-loading {
+  opacity: 0;
+  display: block;
+}
+/* line 54, ../scss/libraries/owlCarousel/_owl.carousel.scss */
+.owl-carousel.owl-hidden {
+  opacity: 0;
+}
+/* line 58, ../scss/libraries/owlCarousel/_owl.carousel.scss */
+.owl-carousel .owl-refresh .owl-item {
+  display: none;
+}
+/* line 62, ../scss/libraries/owlCarousel/_owl.carousel.scss */
+.owl-carousel .owl-item {
+  position: relative;
+  min-height: 1px;
+  float: left;
+  -webkit-backface-visibility: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* line 74, ../scss/libraries/owlCarousel/_owl.carousel.scss */
+.owl-carousel .owl-item img {
+  display: block;
+  width: 100%;
+  -webkit-transform-style: preserve-3d;
+}
+/* line 79, ../scss/libraries/owlCarousel/_owl.carousel.scss */
+.owl-carousel.owl-text-select-on .owl-item {
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
+}
+/* line 86, ../scss/libraries/owlCarousel/_owl.carousel.scss */
+.owl-carousel .owl-grab {
+  cursor: move;
+  cursor: -webkit-grab;
+  cursor: -o-grab;
+  cursor: -ms-grab;
+  cursor: grab;
+}
+/* line 94, ../scss/libraries/owlCarousel/_owl.carousel.scss */
+.owl-carousel .owl-rtl {
+  direction: rtl;
+}
+/* line 98, ../scss/libraries/owlCarousel/_owl.carousel.scss */
+.owl-carousel .owl-rtl .owl-item {
+  float: right;
+}
+
+/* No Js */
+/* line 105, ../scss/libraries/owlCarousel/_owl.carousel.scss */
+.no-js .owl-carousel {
+  display: block;
+}
+
+/* 
+ * 	Owl Carousel - Lazy Load Plugin
+ */
+/* line 9, ../scss/libraries/owlCarousel/_owl.lazyload.scss */
+.owl-carousel .owl-item .owl-lazy {
+  opacity: 0;
+  -moz-transition: opacity, 400ms, ease;
+  -o-transition: opacity, 400ms, ease;
+  -webkit-transition: opacity, 400ms, ease;
+  transition: opacity, 400ms, ease;
+}
+/* line 13, ../scss/libraries/owlCarousel/_owl.lazyload.scss */
+.owl-carousel .owl-item img {
+  transform-style: preserve-3d;
+}
+
+/* 
+ * 	Default theme - Owl Carousel CSS File
+ */
+/* line 4, ../scss/libraries/owlCarousel/_theme.scss */
+.owl-theme .owl-controls {
+  margin-top: 10px;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+}
+/* line 14, ../scss/libraries/owlCarousel/_theme.scss */
+.owl-theme .owl-controls .owl-nav > div {
+  position: absolute;
+  top: 0;
+  color: #FFF;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  border: 5px solid #FFF;
+  background-color: rgba(0, 0, 0, 0.25);
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+/* line 23, ../scss/libraries/owlCarousel/_theme.scss */
+.owl-theme .owl-controls .owl-nav .owl-prev {
+  left: 20px;
+  left: 1.25rem;
+}
+/* line 26, ../scss/libraries/owlCarousel/_theme.scss */
+.owl-theme .owl-controls .owl-nav .owl-next {
+  right: 20px;
+  right: 1.25rem;
+}
+/* line 34, ../scss/libraries/owlCarousel/_theme.scss */
+.owl-theme .owl-dots .owl-dot {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+/* line 39, ../scss/libraries/owlCarousel/_theme.scss */
+.owl-theme .owl-dots .owl-dot span {
+  width: 16px;
+  height: 16px;
+  margin: 5px 7px;
+  background: #FFF;
+  display: block;
+  border: 1px solid #000;
+  -webkit-backface-visibility: visible;
+  -moz-transition: opacity, 200ms, ease;
+  -o-transition: opacity, 200ms, ease;
+  -webkit-transition: opacity, 200ms, ease;
+  transition: opacity, 200ms, ease;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+/* line 53, ../scss/libraries/owlCarousel/_theme.scss */
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+  background: #000;
+}
+
+/* 
+ * 	Owl Carousel - Video Plugin
+ */
+/* line 8, ../scss/libraries/owlCarousel/_owl.video.scss */
+.owl-carousel .owl-video-wrapper {
+  position: relative;
+  height: 100%;
+  background: #000;
+}
+/* line 13, ../scss/libraries/owlCarousel/_owl.video.scss */
+.owl-carousel .owl-video-play-icon {
+  position: absolute;
+  height: 80px;
+  width: 80px;
+  left: 50%;
+  top: 50%;
+  margin-left: -40px;
+  margin-top: -40px;
+  background: url("owl.video.play.png") no-repeat;
+  cursor: pointer;
+  z-index: 1;
+  -webkit-backface-visibility: hidden;
+  -moz-transition: scale, 100ms, ease;
+  -o-transition: scale, 100ms, ease;
+  -webkit-transition: scale, 100ms, ease;
+  transition: scale, 100ms, ease;
+}
+/* line 27, ../scss/libraries/owlCarousel/_owl.video.scss */
+.owl-carousel .owl-video-play-icon:hover {
+  -moz-transform: scale(1.3, 1.3);
+  -ms-transform: scale(1.3, 1.3);
+  -webkit-transform: scale(1.3, 1.3);
+  transform: scale(1.3, 1.3);
+}
+/* line 30, ../scss/libraries/owlCarousel/_owl.video.scss */
+.owl-carousel .owl-video-playing .owl-video-tn,
+.owl-carousel .owl-video-playing .owl-video-play-icon {
+  display: none;
+}
+/* line 34, ../scss/libraries/owlCarousel/_owl.video.scss */
+.owl-carousel .owl-video-tn {
+  opacity: 0;
+  height: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+  -moz-transition: opacity, 400ms, ease;
+  -o-transition: opacity, 400ms, ease;
+  -webkit-transition: opacity, 400ms, ease;
+  transition: opacity, 400ms, ease;
+}
+/* line 45, ../scss/libraries/owlCarousel/_owl.video.scss */
+.owl-carousel .owl-video-frame {
+  position: relative;
+  z-index: 1;
+}
+
+/* line 4, ../scss/libraries/owlCarousel/_theme.scss */
+.owl-theme .owl-controls {
+  margin-top: 10px;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+}
+/* line 14, ../scss/libraries/owlCarousel/_theme.scss */
+.owl-theme .owl-controls .owl-nav > div {
+  position: absolute;
+  top: 0;
+  color: #FFF;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  border: 5px solid #FFF;
+  background-color: rgba(0, 0, 0, 0.25);
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+/* line 23, ../scss/libraries/owlCarousel/_theme.scss */
+.owl-theme .owl-controls .owl-nav .owl-prev {
+  left: 20px;
+  left: 1.25rem;
+}
+/* line 26, ../scss/libraries/owlCarousel/_theme.scss */
+.owl-theme .owl-controls .owl-nav .owl-next {
+  right: 20px;
+  right: 1.25rem;
+}
+/* line 34, ../scss/libraries/owlCarousel/_theme.scss */
+.owl-theme .owl-dots .owl-dot {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+/* line 39, ../scss/libraries/owlCarousel/_theme.scss */
+.owl-theme .owl-dots .owl-dot span {
+  width: 16px;
+  height: 16px;
+  margin: 5px 7px;
+  background: #FFF;
+  display: block;
+  border: 1px solid #000;
+  -webkit-backface-visibility: visible;
+  -moz-transition: opacity, 200ms, ease;
+  -o-transition: opacity, 200ms, ease;
+  -webkit-transition: opacity, 200ms, ease;
+  transition: opacity, 200ms, ease;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+/* line 53, ../scss/libraries/owlCarousel/_theme.scss */
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+  background: #000;
+}
+
+/*! Swipebox v1.2.8 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
+/* line 19, ../scss/libraries/swipebox/_swipebox.scss */
+html.swipebox-html.swipebox-touch {
+  overflow: hidden !important;
+}
+
+/* line 23, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-overlay img {
+  border: none !important;
+}
+
+/* line 27, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999 !important;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* line 38, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-slider {
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  white-space: nowrap;
+  position: absolute;
+  display: none;
+}
+/* line 47, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-slider .slide {
+  background: url(../img/loader.gif) no-repeat center center;
+  height: 100%;
+  width: 100%;
+  line-height: 1px;
+  text-align: center;
+  display: inline-block;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+/* line 56, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-slider .slide:before {
+  content: "";
+  display: inline-block;
+  height: 50%;
+  width: 1px;
+  margin-right: -1px;
+}
+/* line 64, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-slider .slide img, #swipebox-slider .slide .swipebox-video-container {
+  display: inline-block;
+  max-height: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  height: auto;
+  vertical-align: middle;
+  padding-bottom: 100px;
+}
+/* line 76, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-slider .slide .swipebox-video-container {
+  background: none;
+  max-width: 1140px;
+  max-height: 100%;
+  width: 100%;
+  padding: 5%;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+/* line 86, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-slider .slide .swipebox-video-container .swipebox-video {
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  position: relative;
+}
+/* line 92, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-slider .slide .swipebox-video-container .swipebox-video iframe {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* line 104, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-action,
+#swipebox-caption {
+  position: absolute;
+  left: 0;
+  z-index: 999;
+  height: 50px;
+  width: 100%;
+}
+
+/* line 113, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-action {
+  bottom: 0px;
+}
+/* line 120, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-action #swipebox-prev,
+#swipebox-action #swipebox-next,
+#swipebox-action #swipebox-close {
+  background-image: url(../img/icons.png);
+  background-repeat: no-repeat;
+  border: none !important;
+  text-decoration: none !important;
+  cursor: pointer;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 0;
+}
+/* line 134, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-action #swipebox-prev {
+  background-position: -32px 13px;
+  right: 100px;
+}
+/* line 139, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-action #swipebox-next {
+  background-position: -78px 13px;
+  right: 40px;
+}
+/* line 144, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-action #swipebox-close {
+  background-position: 15px 12px;
+  left: 40px;
+}
+/* line 151, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-action #swipebox-prev.disabled,
+#swipebox-action #swipebox-next.disabled {
+  opacity: 0.3;
+}
+
+/* line 157, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-caption {
+  top: 0px;
+  text-align: center;
+}
+
+/* line 166, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-slider.rightSpring {
+  animation: rightSpring 0.3s;
+}
+
+/* line 170, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-slider.leftSpring {
+  animation: leftSpring 0.3s;
+}
+
+@keyframes rightSpring {
+  0% {
+    margin-left: 0px;
+  }
+  50% {
+    margin-left: -30px;
+  }
+  100% {
+    margin-left: 0px;
+  }
+}
+@keyframes leftSpring {
+  0% {
+    margin-left: 0px;
+  }
+  50% {
+    margin-left: 30px;
+  }
+  100% {
+    margin-left: 0px;
+  }
+}
+@media screen and (max-width: 800px) {
+  /* line 203, ../scss/libraries/swipebox/_swipebox.scss */
+  #swipebox-action #swipebox-close {
+    left: 0;
+  }
+
+  /* line 207, ../scss/libraries/swipebox/_swipebox.scss */
+  #swipebox-action #swipebox-prev {
+    right: 60px;
+  }
+
+  /* line 211, ../scss/libraries/swipebox/_swipebox.scss */
+  #swipebox-action #swipebox-next {
+    right: 0;
+  }
+}
+/* Skin 
+--------------------------*/
+/* line 218, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-overlay {
+  background: #0d0d0d;
+}
+
+/* line 222, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-action,
+#swipebox-caption {
+  text-shadow: 1px 1px 1px black;
+  background-color: #0d0d0d;
+  background-color: #0d0d0d;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#0d0d0d), to(black));
+  background-image: -webkit-linear-gradient(top, #0d0d0d, black);
+  background-image: -moz-linear-gradient(top, #0d0d0d, black);
+  background-image: -o-linear-gradient(top, #0d0d0d, black);
+  background-image: linear-gradient(to bottom, #0d0d0d, #000000);
+  opacity: 0.95;
+}
+
+/* line 229, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-action {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* line 233, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-caption {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: white !important;
+  font-size: 15px;
+  line-height: 43px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+/* line 60, ../scss/abstractions/_abstract-typography.scss */
+.button {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  color: #000;
+  text-transform: uppercase;
+  font-family: "lato", helvetica, arial, sans-serif;
+  border: none;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding: 31px 44px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+}
+/* line 50, ../scss/abstractions/_abstract-typography.scss */
+.button:hover {
+  color: #000;
+  background-color: #FFF;
+}
+@media (max-width: 480px) {
+  /* line 60, ../scss/abstractions/_abstract-typography.scss */
+  .button {
+    padding: 10px 21px 14px;
+    font-size: 14px;
+  }
+}
+
+/* line 63, ../scss/abstractions/_abstract-typography.scss */
+.button.rev {
+  border-color: #000;
+  color: #000;
+}
+
+/* line 68, ../scss/abstractions/_abstract-typography.scss */
+.float-list {
+  white-space: nowrap;
+  margin-top: 75px;
+  padding: 0;
+}
+/* line 72, ../scss/abstractions/_abstract-typography.scss */
+.float-list li {
+  list-style-type: none;
+  margin-bottom: 15px;
+}
+@media (min-width: 768px) {
+  /* line 77, ../scss/abstractions/_abstract-typography.scss */
+  .float-list li {
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    *zoom: 1;
+    *display: inline;
+    margin-right: 20px;
+    margin-bottom: 0;
+  }
+  /* line 81, ../scss/abstractions/_abstract-typography.scss */
+  .float-list li:last-child {
+    margin-right: 0;
+  }
+}
+@media (min-width: 1025px) {
+  /* line 87, ../scss/abstractions/_abstract-typography.scss */
+  .float-list li {
+    margin-right: 86px;
+    margin-right: 5.375rem;
+  }
+}
+
+/* line 4, ../scss/abstractions/_abstract-grid.scss */
+.view-id-condos .view-content, .node--condo-project--full .ds-gallery .field--gallery, .node--trends .field--trends {
+  overflow: hidden;
+  *zoom: 1;
+}
+
+/* line 7, ../scss/abstractions/_abstract-grid.scss */
+.l-region--meta ul, .selector .container, .node--condo-project--teaser .ds-meta,
+.node--condo-project--comparison .ds-meta, .entity-floorplans.view-mode-comparison, .view-trends .view-content, .l-header > .wrap, .l-header > ul.tabs, .node--condo-project--full .wrap, .node--condo-project--full ul.tabs {
+  *zoom: 1;
+}
+/* line 38, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/general/_clearfix.scss */
+.l-region--meta ul:after, .selector .container:after, .node--condo-project--teaser .ds-meta:after,
+.node--condo-project--comparison .ds-meta:after, .entity-floorplans.view-mode-comparison:after, .view-trends .view-content:after, .l-header > .wrap:after, .l-header > ul.tabs:after, .node--condo-project--full .wrap:after, .node--condo-project--full ul.tabs:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* line 27, ../scss/abstractions/_abstract-grid.scss */
+.wrap, ul.tabs,
+.l-region--hero .block__content,
+#condo-project-node-form,
+.page-node-workflow .l-content, .l-region--content-header .page-title {
+  padding-left: 15px;
+  padding-left: 0.9375rem;
+  padding-right: 15px;
+  padding-right: 0.9375rem;
+}
+@media (min-width: 768px) {
+  /* line 27, ../scss/abstractions/_abstract-grid.scss */
+  .wrap, ul.tabs,
+  .l-region--hero .block__content,
+  #condo-project-node-form,
+  .page-node-workflow .l-content, .l-region--content-header .page-title {
+    padding-left: 30px;
+    padding-left: 1.875rem;
+    padding-right: 30px;
+    padding-right: 1.875rem;
+  }
+}
+@media (min-width: 1025px) {
+  /* line 27, ../scss/abstractions/_abstract-grid.scss */
+  .wrap, ul.tabs,
+  .l-region--hero .block__content,
+  #condo-project-node-form,
+  .page-node-workflow .l-content, .l-region--content-header .page-title {
+    padding-left: 16px;
+    padding-left: 1rem;
+    padding-right: 16px;
+    padding-right: 1rem;
+  }
+}
+
+/* line 39, ../scss/abstractions/_abstract-grid.scss */
+.node--condo-project--full .ds-project-info {
+  padding-top: 10px;
+  padding-top: 0.625rem;
+  padding-bottom: 15px;
+  padding-bottom: 0.9375rem;
+}
+@media (min-width: 1024px) {
+  /* line 39, ../scss/abstractions/_abstract-grid.scss */
+  .node--condo-project--full .ds-project-info {
+    padding-top: 20px;
+    padding-top: 1.25rem;
+    padding-bottom: 25px;
+    padding-bottom: 1.5625rem;
+  }
+}
+
+/* line 47, ../scss/abstractions/_abstract-grid.scss */
+.node--condo-project--full .ds-hero, .node--condo-project--full .ds-sales, .node--condo-project--full .ds-why, .node--condo-project--full .ds-contact-info, .node--condo-project--full .ds-floorplans {
+  padding-top: 30px;
+  padding-top: 1.875rem;
+  padding-bottom: 35px;
+  padding-bottom: 2.1875rem;
+}
+@media (min-width: 1024px) {
+  /* line 47, ../scss/abstractions/_abstract-grid.scss */
+  .node--condo-project--full .ds-hero, .node--condo-project--full .ds-sales, .node--condo-project--full .ds-why, .node--condo-project--full .ds-contact-info, .node--condo-project--full .ds-floorplans {
+    padding-top: 60px;
+    padding-top: 3.75rem;
+    padding-bottom: 65px;
+    padding-bottom: 4.0625rem;
+  }
+}
+
+/* line 55, ../scss/abstractions/_abstract-grid.scss */
+.node--condo-project--full .ds-navigation, .node--condo-project--full .ds-gallery, .node--condo-project--full .ds-walkscore {
+  padding-top: 10px;
+  padding-top: 0.625rem;
+  padding-bottom: 15px;
+  padding-bottom: 0.9375rem;
+}
+@media (min-width: 1024px) {
+  /* line 55, ../scss/abstractions/_abstract-grid.scss */
+  .node--condo-project--full .ds-navigation, .node--condo-project--full .ds-gallery, .node--condo-project--full .ds-walkscore {
+    padding-top: 20px;
+    padding-top: 1.25rem;
+    padding-bottom: 25px;
+    padding-bottom: 1.5625rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* line 72, ../scss/abstractions/_abstract-grid.scss */
+  .node--condo-project--full .ds-sales .wrap > div, .node--condo-project--full .ds-sales ul.tabs > div, .node--condo-project--full .ds-project-info .wrap > div, .node--condo-project--full .ds-project-info ul.tabs > div {
+    width: 31.25%;
+    clear: right;
+    float: left;
+    margin-left: 0;
+    margin-right: 3.125%;
+  }
+  /* line 75, ../scss/abstractions/_abstract-grid.scss */
+  .node--condo-project--full .ds-sales .wrap > div:last-of-type, .node--condo-project--full .ds-sales ul.tabs > div:last-of-type, .node--condo-project--full .ds-project-info .wrap > div:last-of-type, .node--condo-project--full .ds-project-info ul.tabs > div:last-of-type {
+    width: 31.25%;
+    clear: right;
+    float: right;
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* line 82, ../scss/abstractions/_abstract-grid.scss */
+  .node--condo-project--full .ds-contact-info .wrap > div, .node--condo-project--full .ds-contact-info ul.tabs > div {
+    width: 44.44444%;
+    clear: right;
+    float: left;
+    margin-left: 0;
+    margin-right: 11.11111%;
+  }
+  /* line 85, ../scss/abstractions/_abstract-grid.scss */
+  .node--condo-project--full .ds-contact-info .wrap > div:last-of-type, .node--condo-project--full .ds-contact-info ul.tabs > div:last-of-type {
+    width: 44.44444%;
+    clear: right;
+    float: right;
+    margin-right: 0;
+  }
+}
+
+/* line 96, ../scss/abstractions/_abstract-grid.scss */
+.node--condo-project--teaser .ds-title .field-container,
+.node--condo-project--comparison .ds-title .field-container, .node--condo-project--teaser .ds-price .field-container,
+.node--condo-project--comparison .ds-price .field-container, .node--condo-project--teaser .ds-meta .inner,
+.node--condo-project--comparison .ds-meta .inner {
+  position: relative;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+/**
+ * "Modern" menu type
+ */
+/**
+* "Standard" menu type
+*/
+/* line 60, ../scss/abstractions/_abstract-typography.scss */
+.button {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  color: #000;
+  text-transform: uppercase;
+  font-family: "lato", helvetica, arial, sans-serif;
+  border: none;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding: 31px 44px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+}
+/* line 50, ../scss/abstractions/_abstract-typography.scss */
+.button:hover {
+  color: #000;
+  background-color: #FFF;
+}
+@media (max-width: 480px) {
+  /* line 60, ../scss/abstractions/_abstract-typography.scss */
+  .button {
+    padding: 10px 21px 14px;
+    font-size: 14px;
+  }
+}
+
+/* line 63, ../scss/abstractions/_abstract-typography.scss */
+.button.rev {
+  border-color: #000;
+  color: #000;
+}
+
+/* line 68, ../scss/abstractions/_abstract-typography.scss */
+.float-list {
+  white-space: nowrap;
+  margin-top: 75px;
+  padding: 0;
+}
+/* line 72, ../scss/abstractions/_abstract-typography.scss */
+.float-list li {
+  list-style-type: none;
+  margin-bottom: 15px;
+}
+@media (min-width: 768px) {
+  /* line 77, ../scss/abstractions/_abstract-typography.scss */
+  .float-list li {
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    *zoom: 1;
+    *display: inline;
+    margin-right: 20px;
+    margin-bottom: 0;
+  }
+  /* line 81, ../scss/abstractions/_abstract-typography.scss */
+  .float-list li:last-child {
+    margin-right: 0;
+  }
+}
+@media (min-width: 1025px) {
+  /* line 87, ../scss/abstractions/_abstract-typography.scss */
+  .float-list li {
+    margin-right: 86px;
+    margin-right: 5.375rem;
+  }
+}
+
+/* line 2, ../scss/base/_base-forms.scss */
+.l-content .form-actions input[type=submit],
+.l-content .image-widget-data input[type=submit] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border: none;
+}
+/* line 6, ../scss/base/_base-forms.scss */
+.l-content .form-actions .form-submit,
+.l-content .image-widget-data .form-submit {
+  background-color: #75cd7a;
+  color: #FFF;
+  text-transform: uppercase;
+  padding: 10px 25px;
+  font-weight: 700;
+  margin-right: 10px;
+}
+/* line 13, ../scss/base/_base-forms.scss */
+.l-content .form-actions .form-submit#edit-delete,
+.l-content .image-widget-data .form-submit#edit-delete {
+  background-color: transparent;
+  float: right;
+  color: #cc0000;
+}
+/* line 18, ../scss/base/_base-forms.scss */
+.l-content .form-actions .form-submit#edit-workflow-5,
+.l-content .image-widget-data .form-submit#edit-workflow-5 {
+  background-color: #759dcd;
+}
+
+/* line 23, ../scss/base/_base-forms.scss */
+fieldset {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* line 61, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/css3/_user-interface.scss */
+input:-moz-placeholder {
+  color: #e0e0e0;
+  font-style: italic;
+  font-size: 14px;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+}
+/* line 64, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/css3/_user-interface.scss */
+input::-moz-placeholder {
+  color: #e0e0e0;
+  font-style: italic;
+  font-size: 14px;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+}
+/* line 67, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/css3/_user-interface.scss */
+input:-ms-input-placeholder {
+  color: #e0e0e0;
+  font-style: italic;
+  font-size: 14px;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+}
+/* line 56, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/css3/_user-interface.scss */
+input::-webkit-input-placeholder {
+  color: #e0e0e0;
+  font-style: italic;
+  font-size: 14px;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+}
+
+/* line 35, ../scss/base/_base-forms.scss */
+.gform_validation_container {
+  display: none;
+}
+
+/* line 38, ../scss/base/_base-forms.scss */
+input[type=file] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  padding: 8px 0px;
+  padding: 0.5rem 0rem;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  font-weight: 700;
+  font-family: "lato", helvetica, arial, sans-serif;
+  font-size: 13px;
+  font-size: 0.8125rem;
+}
+
+/* line 50, ../scss/base/_base-forms.scss */
+.webform-client-form .form-item {
+  margin-bottom: 10px;
+}
+/* line 54, ../scss/base/_base-forms.scss */
+.webform-client-form div ul {
+  padding: 0;
+  margin: 0;
+}
+/* line 58, ../scss/base/_base-forms.scss */
+.webform-client-form div li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+/* line 63, ../scss/base/_base-forms.scss */
+.webform-client-form div input[type=tel],
+.webform-client-form div input[type=text],
+.webform-client-form div input[type=email],
+.webform-client-form div textarea {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border: 0px solid #000;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  background-color: #FFF;
+  width: 100%;
+  resize: none;
+}
+/* line 74, ../scss/base/_base-forms.scss */
+.webform-client-form div input[type=tel],
+.webform-client-form div input[type=text],
+.webform-client-form div input[type=email],
+.webform-client-form div textarea,
+.webform-client-form div select {
+  padding: 10px 15px;
+  padding: 0.625rem 0.9375rem;
+  vertical-align: middle;
+  color: #000;
+  font-family: "lato", helvetica, arial, sans-serif;
+  font-weight: 300;
+  height: 57px;
+  font-size: 14px;
+  font-size: 0.875rem;
+}
+/* line 86, ../scss/base/_base-forms.scss */
+.webform-client-form div input[type=tel].error,
+.webform-client-form div input[type=text].error,
+.webform-client-form div input[type=email].error,
+.webform-client-form div textarea.error,
+.webform-client-form div select.error {
+  outline: 1px dashed red;
+}
+/* line 90, ../scss/base/_base-forms.scss */
+.webform-client-form div .ginput_card_security_code {
+  margin-top: 10px !important;
+}
+/* line 93, ../scss/base/_base-forms.scss */
+.webform-client-form div textarea {
+  height: 50px;
+}
+/* line 96, ../scss/base/_base-forms.scss */
+.webform-client-form div select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: url("data:image/svg+xml;base64, PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI2cHgiIGhlaWdodD0iM3B4IiB2aWV3Qm94PSIwIDAgNiAzIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA2IDMiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwb2x5Z29uIHBvaW50cz0iNS45OTIsMCAyLjk5MiwzIC0wLjAwOCwwICIvPjwvc3ZnPg==") no-repeat calc(100% - 10px) center #FFF;
+  margin: 0;
+  outline: medium none;
+  overflow: hidden;
+  text-indent: 0.01px;
+  text-overflow: "";
+  z-index: 1;
+  border-radius: 0;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  width: 100%;
+}
+/* line 109, ../scss/base/_base-forms.scss */
+.webform-client-form div select:hover {
+  background-color: #FFF;
+}
+/* line 112, ../scss/base/_base-forms.scss */
+.webform-client-form div select option {
+  text-align: left;
+}
+/* line 117, ../scss/base/_base-forms.scss */
+.webform-client-form input[type=submit] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-color: #333333;
+  color: #FFF;
+  padding: 15px 25px;
+  padding: 0.9375rem 1.5625rem;
+  text-align: center;
+  border: 0;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  border: 0px solid #000;
+  font-size: 14px;
+  font-size: 0.875rem;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  width: 100%;
+  font-weight: 400;
+  max-width: 300px;
+}
+
+/* line 142, ../scss/base/_base-forms.scss */
+.l-content label {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+/* line 1, ../scss/base/_base-media.scss */
+img, media {
+  max-width: 100%;
+}
+
+/* line 4, ../scss/base/_base-media.scss */
+figure {
+  margin: 0;
+}
+/* line 6, ../scss/base/_base-media.scss */
+figure img {
+  display: block;
+}
+
+/* line 10, ../scss/base/_base-media.scss */
+.file-icon,
+.file-size {
+  display: none;
+}
+
+/* line 1, ../scss/base/_base-misc.scss */
+html, body {
+  min-width: 100%;
+}
+
+/* line 4, ../scss/base/_base-misc.scss */
+html {
+  box-sizing: border-box;
+}
+
+/* line 7, ../scss/base/_base-misc.scss */
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+@media (min-width: 800px) {
+  /* line 10, ../scss/base/_base-misc.scss */
+  body.admin-menu {
+    margin-top: 29px !important;
+  }
+}
+
+/* line 15, ../scss/base/_base-misc.scss */
+body {
+  opacity: 1;
+  -moz-transition: opacity, 0.4s 1s;
+  -o-transition: opacity, 0.4s 1s;
+  -webkit-transition: opacity, 0.4s 1s;
+  transition: opacity 0.4s 1s;
+  background-color: #FFF;
+}
+/* line 132, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/toolkit-2.7.0/stylesheets/toolkit/_fonts.scss */
+.wf-loading body {
+  opacity: 0;
+}
+
+/* line 19, ../scss/base/_base-misc.scss */
+.l-page {
+  z-index: 1;
+  position: relative;
+}
+
+/* line 23, ../scss/base/_base-misc.scss */
+#admin-menu {
+  display: none;
+}
+@media (min-width: 800px) {
+  /* line 23, ../scss/base/_base-misc.scss */
+  #admin-menu {
+    display: block;
+  }
+}
+
+/* line 1, ../scss/base/_base-tables.scss */
+table {
+  width: 100%;
+}
+/* line 3, ../scss/base/_base-tables.scss */
+table thead {
+  border-top: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+}
+/* line 6, ../scss/base/_base-tables.scss */
+table thead th {
+  background-color: #FFF;
+  font-weight: 700;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #666666;
+  font-size: 18px;
+  font-size: 1.125rem;
+  margin-bottom: 15px;
+}
+/* line 14, ../scss/base/_base-tables.scss */
+table thead th a {
+  color: #666666;
+}
+/* line 19, ../scss/base/_base-tables.scss */
+table tbody {
+  margin-top: 15px;
+  color: #666666;
+}
+/* line 22, ../scss/base/_base-tables.scss */
+table tbody tr {
+  border-bottom: 1px solid #cccccc;
+  background-color: #FFF;
+}
+@media (min-width: 1024px) {
+  /* line 27, ../scss/base/_base-tables.scss */
+  table tbody .views-row-first td {
+    padding-top: 25px;
+  }
+}
+/* line 33, ../scss/base/_base-tables.scss */
+table tbody td {
+  background-color: #FFF;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  vertical-align: middle;
+}
+/* line 41, ../scss/base/_base-tables.scss */
+table tbody a {
+  color: #666666;
+}
+
+/**
+ * $FONT-FACE
+ */
+/**
+ * $BASE-TYPOGRAPHY
+ */
+/* line 9, ../scss/base/_base-typography.scss */
+html {
+  font-family: "lato", helvetica, arial, sans-serif;
+  color: #666666;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  font-weight: 400;
+}
+@media (max-width: 767px) {
+  /* line 9, ../scss/base/_base-typography.scss */
+  html {
+    font-size: 14px;
+  }
+}
+@media (min-width: 768px) {
+  /* line 9, ../scss/base/_base-typography.scss */
+  html {
+    font-size: 15px;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 9, ../scss/base/_base-typography.scss */
+  html {
+    font-size: 16px;
+  }
+}
+/* line 25, ../scss/base/_base-typography.scss */
+html.lt-ie9 {
+  font-size: 16px;
+}
+
+/**
+ * $LINKS
+ */
+/* line 33, ../scss/base/_base-typography.scss */
+a {
+  color: #759dcd;
+  text-decoration: none;
+  -moz-transition: all 0.8s ease;
+  -o-transition: all 0.8s ease;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+}
+/* line 37, ../scss/base/_base-typography.scss */
+a:hover {
+  color: #4176b4;
+  text-decoration: none;
+}
+
+/**
+ * $HEADINGS
+ */
+/* line 46, ../scss/base/_base-typography.scss */
+h1, .alpha,
+h2, .beta,
+h3, .gamma,
+h4, .delta,
+h5, .epsilon,
+h6, .zeta {
+  font-family: "lato", helvetica, arial, sans-serif;
+  font-weight: 400;
+}
+
+/* line 56, ../scss/base/_base-typography.scss */
+h1, .alpha {
+  line-height: 1;
+  font-size: 52px;
+  font-size: 3.25rem;
+}
+
+/* line 62, ../scss/base/_base-typography.scss */
+h2, .beta {
+  font-size: 24px;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+/* line 65, ../scss/base/_base-typography.scss */
+h2.region-title, .beta.region-title {
+  font-size: 30px;
+  font-size: 1.875rem;
+  margin-bottom: 25px;
+  margin-bottom: 1.5625rem;
+}
+
+/* line 70, ../scss/base/_base-typography.scss */
+h3, .gamma {
+  font-size: 20px;
+  font-size: 1.25rem;
+  line-height: 1.1;
+}
+
+/* line 74, ../scss/base/_base-typography.scss */
+h4, .delta {
+  font-size: 18px;
+  font-size: 1.125rem;
+}
+
+/* line 77, ../scss/base/_base-typography.scss */
+h5, .epsilon {
+  font-size: 16px;
+  font-size: 1rem;
+}
+
+/* line 80, ../scss/base/_base-typography.scss */
+h6, .zeta {
+  font-size: 16px;
+  font-size: 1rem;
+}
+
+/* line 83, ../scss/base/_base-typography.scss */
+hr {
+  border: 0;
+  height: 1px;
+  margin: 25px 0;
+}
+
+/* line 88, ../scss/base/_base-typography.scss */
+h1, h2, h3, h4, h5, h6, p, blockquote {
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern";
+  -webkit-font-feature-settings: "kern";
+  -moz-font-feature-settings: "kern";
+  -moz-font-feature-settings: "kern=1";
+}
+
+/**
+ * $PARAGRAPHS
+ */
+/* line 98, ../scss/base/_base-typography.scss */
+p,
+blockquote {
+  margin-top: 15px;
+  margin-top: 0.9375rem;
+  margin-bottom: 15px;
+  margin-bottom: 0.9375rem;
+  -ms-word-break: normal;
+  -ms-word-wrap: normal;
+  word-break: normal;
+}
+
+/* line 106, ../scss/base/_base-typography.scss */
+strong {
+  font-weight: 700;
+}
+
+/* line 109, ../scss/base/_base-typography.scss */
+pre {
+  font-size: 11px;
+}
+
+/**
+ * $QUOTES
+ */
+/* line 115, ../scss/base/_base-typography.scss */
+blockquote {
+  padding: 0 1.5em;
+}
+
+/* line 120, ../scss/base/_base-typography.scss */
+q {
+  font-style: italic;
+}
+
+/**
+ * $MARKS
+ */
+/* line 127, ../scss/base/_base-typography.scss */
+mark,
+.marker {
+  padding: 0.1em 0.5em;
+  background: #3ba140;
+  color: #fff;
+  font-size: 12px;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* line 141, ../scss/base/_base-typography.scss */
+.inline .field-label {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+}
+/* line 144, ../scss/base/_base-typography.scss */
+.inline .field-item,
+.inline .field-items {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+}
+
+/* line 1, ../scss/components/forms/_search.scss */
+.search-block-form {
+  position: relative;
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+}
+/* line 6, ../scss/components/forms/_search.scss */
+.search-block-form input[type='text'] {
+  height: 166px;
+}
+
+/* line 10, ../scss/components/forms/_search.scss */
+.search-feature {
+  position: fixed;
+  width: 100%;
+  height: 212px;
+  background: #fff;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 300;
+  top: 0px;
+  left: 200%;
+  right: 0px;
+  padding: 22.5px 2%;
+}
+/* line 21, ../scss/components/forms/_search.scss */
+.search-feature form {
+  position: relative;
+}
+
+/* line 26, ../scss/components/forms/_search.scss */
+.search-feature input {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  display: inline-block;
+  margin: 0;
+}
+/* line 31, ../scss/components/forms/_search.scss */
+.search-feature input[type="text"] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 72px;
+  width: 100%;
+  border: 1px solid #000;
+}
+/* line 61, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/css3/_user-interface.scss */
+.search-feature input[type="text"]:-moz-placeholder {
+  color: #bfbfbf;
+  font-style: italic;
+  font-size: 72px;
+}
+/* line 64, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/css3/_user-interface.scss */
+.search-feature input[type="text"]::-moz-placeholder {
+  color: #bfbfbf;
+  font-style: italic;
+  font-size: 72px;
+}
+/* line 67, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/css3/_user-interface.scss */
+.search-feature input[type="text"]:-ms-input-placeholder {
+  color: #bfbfbf;
+  font-style: italic;
+  font-size: 72px;
+}
+/* line 56, ../../../../../../../../../../Users/devinedwards/.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/css3/_user-interface.scss */
+.search-feature input[type="text"]::-webkit-input-placeholder {
+  color: #bfbfbf;
+  font-style: italic;
+  font-size: 72px;
+}
+/* line 49, ../scss/components/forms/_search.scss */
+.search-feature .form-submit {
+  display: none;
+}
+/* line 52, ../scss/components/forms/_search.scss */
+.search-feature .search,
+.search-feature .close {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none;
+  margin: 0;
+  display: inline-block;
+  padding: 18.5px 42px;
+  float: right;
+  position: absolute;
+  right: 0px;
+  height: 83px;
+}
+/* line 64, ../scss/components/forms/_search.scss */
+.search-feature .search:after,
+.search-feature .close:after {
+  font-size: 36px;
+  font-size: 2.25rem;
+  position: absolute;
+  top: 50%;
+  margin-top: -19px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 2;
+  color: #FFF;
+}
+/* line 83, ../scss/components/forms/_search.scss */
+.search-feature .search {
+  background: #000;
+  top: 83.5px;
+}
+/* line 90, ../scss/components/forms/_search.scss */
+.search-feature .close {
+  background: #666;
+  top: 0px;
+}
+/* line 93, ../scss/components/forms/_search.scss */
+.search-feature .close span {
+  display: none;
+}
+
+/* line 102, ../scss/components/forms/_search.scss */
+.page-content .searchform {
+  width: 100%;
+}
+/* line 104, ../scss/components/forms/_search.scss */
+.page-content .searchform button[type="button"] {
+  display: none;
+}
+/* line 107, ../scss/components/forms/_search.scss */
+.page-content .searchform button[type="submit"] {
+  vertical-align: bottom;
+  padding: 60px 6%;
+  top: 0px;
+}
+
+/* line 115, ../scss/components/forms/_search.scss */
+.button.secondary.small {
+  display: none;
+}
+
+/* line 118, ../scss/components/forms/_search.scss */
+.search-results {
+  color: #000;
+}
+
+/* line 121, ../scss/components/forms/_search.scss */
+.autocomplete-suggestions {
+  background-color: #FFF;
+  padding-top: 5px;
+  padding-top: 0.3125rem;
+  padding-bottom: 5px;
+  padding-bottom: 0.3125rem;
+  -moz-border-radius: 0 0 5px 5px;
+  -webkit-border-radius: 0;
+  border-radius: 0 0 5px 5px;
+}
+/* line 126, ../scss/components/forms/_search.scss */
+.autocomplete-suggestions .autocomplete-suggestion {
+  padding-right: 15px;
+  padding-right: 0.9375rem;
+  padding-left: 15px;
+  padding-left: 0.9375rem;
+  padding-top: 10px;
+  padding-top: 0.625rem;
+  padding-bottom: 10px;
+  padding-bottom: 0.625rem;
+  border-bottom: 1px solid #e0e0e0;
+  cursor: pointer;
+  -moz-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+/* line 134, ../scss/components/forms/_search.scss */
+.autocomplete-suggestions .autocomplete-suggestion:hover {
+  background-color: #000;
+  color: #FFF;
+}
+/* line 138, ../scss/components/forms/_search.scss */
+.autocomplete-suggestions .autocomplete-suggestion:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* line 2, ../scss/components/forms/_views.scss */
+.view .pager {
+  margin-top: 25px;
+}
+/* line 5, ../scss/components/forms/_views.scss */
+.view .pager-load-more {
+  padding: 0;
+}
+/* line 7, ../scss/components/forms/_views.scss */
+.view .pager-load-more li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+/* line 2, ../scss/abstractions/_abstract-graphics.scss */
+.view .pager-load-more a {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  font-size: 20px;
+  font-size: 1.25rem;
+  background-color: #ffcc33;
+  padding-top: 15px;
+  padding-top: 0.9375rem;
+  padding-bottom: 15px;
+  padding-bottom: 0.9375rem;
+  text-align: center;
+  max-width: 360px;
+  width: 100%;
+  position: relative;
+  color: #666666;
+}
+/* line 15, ../scss/abstractions/_abstract-graphics.scss */
+.view .pager-load-more a:after {
+  padding-top: 20px;
+  color: #FFF;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 53px;
+  background-color: #666666;
+}
+
+/* line 16, ../scss/components/forms/_views.scss */
+.views-exposed-form .views-exposed-widget {
+  margin: 0;
+  float: none;
+  padding: 0;
+}
+
+@media (min-width: 1024px) {
+  /* line 23, ../scss/components/forms/_views.scss */
+  .views-exposed-widgets .bef-select-as-links .form-item > div, .block--block-3 .filter,
+  .block--block-3 form {
+    float: left;
+  }
+  /* line 27, ../scss/components/forms/_views.scss */
+  .views-exposed-widgets .bef-select-as-links .form-item > div a:before, .block--block-3 .filter a:before,
+  .block--block-3 form a:before {
+    content: " ";
+    border-right: 1px solid #959595;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 1px;
+    top: 0;
+  }
+}
+/* line 38, ../scss/components/forms/_views.scss */
+.views-exposed-widgets .bef-select-as-links .form-item > div:last-of-type, .block--block-3 .filter:last-of-type,
+.block--block-3 form:last-of-type {
+  margin-right: 0;
+}
+/* line 42, ../scss/components/forms/_views.scss */
+.views-exposed-widgets .bef-select-as-links .form-item > div a, .block--block-3 .filter a,
+.block--block-3 form a {
+  display: block;
+  padding: 20px 20px;
+  text-transform: uppercase;
+  font-size: 14px;
+  position: relative;
+  font-weight: 700;
+}
+/* line 49, ../scss/components/forms/_views.scss */
+.views-exposed-widgets .bef-select-as-links .form-item > div a.remove, .block--block-3 .filter a.remove,
+.block--block-3 form a.remove {
+  background-color: #DDD;
+}
+/* line 52, ../scss/components/forms/_views.scss */
+.views-exposed-widgets .bef-select-as-links .form-item > div a:after, .block--block-3 .filter a:after,
+.block--block-3 form a:after {
+  font-size: 16px;
+  font-size: 1rem;
+  color: #666666;
+  margin-left: 14px;
+  margin-left: 0.875rem;
+}
+
+/* line 60, ../scss/components/forms/_views.scss */
+.views-exposed-widgets {
+  margin-bottom: 0;
+}
+/* line 62, ../scss/components/forms/_views.scss */
+.views-exposed-widgets label,
+.views-exposed-widgets .views-submit-button {
+  display: none;
+}
+
+/* line 79, ../scss/components/forms/_views.scss */
+.block--block-3 .bef-select-as-links .form-item div:first-child a:before {
+  display: none;
+}
+@media (max-width: 1023px) {
+  /* line 74, ../scss/components/forms/_views.scss */
+  .block--block-3 {
+    display: none;
+  }
+}
+
+/**
+* Specific filters
+*/
+/* line 2, ../scss/components/navigation/_main-nav.scss */
+#block-system-main-menu .menu, #block-system-main-menu .menu li {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+/* line 7, ../scss/components/navigation/_main-nav.scss */
+#block-system-main-menu .menu li {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+}
+/* line 10, ../scss/components/navigation/_main-nav.scss */
+#block-system-main-menu a {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 21px;
+  padding-bottom: 21px;
+  display: block;
+  color: #666666;
+  font-family: "proxima-nova", helvetica, arial, sans-serif;
+}
+@media (min-width: 1400px) {
+  /* line 10, ../scss/components/navigation/_main-nav.scss */
+  #block-system-main-menu a {
+    padding: 21px 19px;
+  }
+}
+
+/* line 27, ../scss/components/navigation/_main-nav.scss */
+.l-region--meta ul, .l-region--meta li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  list-style-image: none;
+}
+/* line 33, ../scss/components/navigation/_main-nav.scss */
+.l-region--meta > ul > li {
+  float: left;
+  width: 25%;
+  text-align: center;
+  position: relative;
+  background-color: #e0e0e0;
+}
+/* line 39, ../scss/components/navigation/_main-nav.scss */
+.l-region--meta > ul > li > a {
+  height: 67px;
+}
+/* line 43, ../scss/components/navigation/_main-nav.scss */
+.l-region--meta .search {
+  background-color: #c4c4c4;
+}
+/* line 46, ../scss/components/navigation/_main-nav.scss */
+.l-region--meta .condos,
+.l-region--meta .user-menu {
+  width: 50%;
+  background-color: #666666;
+  color: #FFF;
+  float: right;
+  z-index: 10;
+}
+
+/* line 1, ../scss/components/navigation/_mobile-nav.scss */
+body.mobile-menu-visible {
+  overflow: hidden;
+}
+
+/* line 4, ../scss/components/navigation/_mobile-nav.scss */
+#mobile-navigation {
+  right: 0;
+  position: fixed;
+  top: 0;
+  background-color: #FFF;
+  z-index: 0;
+  z-index: 0;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 0;
+}
+/* line 16, ../scss/components/navigation/_mobile-nav.scss */
+#mobile-navigation a {
+  color: #000;
+}
+/* line 19, ../scss/components/navigation/_mobile-nav.scss */
+#mobile-navigation.mobile-menu-visible {
+  display: block;
+}
+/* line 22, ../scss/components/navigation/_mobile-nav.scss */
+#mobile-navigation ul, #mobile-navigation li {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  list-style-image: none;
+}
+/* line 28, ../scss/components/navigation/_mobile-nav.scss */
+#mobile-navigation .inner {
+  padding: 55px 20px 0px;
+  padding: 3.4375rem 1.25rem 0rem;
+}
+/* line 31, ../scss/components/navigation/_mobile-nav.scss */
+.admin-bar #mobile-navigation {
+  top: 46px;
+}
+/* line 34, ../scss/components/navigation/_mobile-nav.scss */
+#mobile-navigation .caret {
+  width: 22px !important;
+  height: 22px !important;
+}
+/* line 41, ../scss/components/navigation/_mobile-nav.scss */
+#mobile-navigation .close {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+  position: absolute;
+  right: 15px;
+  top: 7px;
+  width: 35px;
+  height: 35px;
+  z-index: 20;
+}
+/* line 49, ../scss/components/navigation/_mobile-nav.scss */
+#mobile-navigation .close:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 35px;
+  color: #000;
+}
+/* line 63, ../scss/components/navigation/_mobile-nav.scss */
+#mobile-navigation .user li {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+}
+/* line 65, ../scss/components/navigation/_mobile-nav.scss */
+#mobile-navigation .user li a {
+  display: block;
+  background-color: #ffcc33;
+  color: #FFF;
+  margin-right: 10px;
+  margin-right: 0.625rem;
+  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
+  padding: 10px;
+  padding: 0.625rem;
+}
+/* line 76, ../scss/components/navigation/_mobile-nav.scss */
+#mobile-navigation .main li a {
+  font-size: 22px;
+  display: block;
+  padding: 20px 0 20px 0;
+  font-family: "lato", helvetica, arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-bottom: 1px solid #DDD;
+  white-space: nowrap;
+}
+/* line 86, ../scss/components/navigation/_mobile-nav.scss */
+#mobile-navigation .main li ul a {
+  padding-left: 35px;
+}
+/* line 90, ../scss/components/navigation/_mobile-nav.scss */
+#mobile-navigation .main li ul li.active a {
+  color: #759dcd;
+}
+/* line 93, ../scss/components/navigation/_mobile-nav.scss */
+#mobile-navigation .main li ul li.active a:before {
+  left: 5px;
+  top: 22px;
+}
+/* line 99, ../scss/components/navigation/_mobile-nav.scss */
+.csstransforms #mobile-navigation {
+  -moz-transform: translateX(0%);
+  -ms-transform: translateX(0%);
+  -webkit-transform: translateX(0%);
+  transform: translateX(0%);
+}
+/* line 103, ../scss/components/navigation/_mobile-nav.scss */
+.no-csstransforms #mobile-navigation {
+  right: 100%;
+}
+@media (min-width: 1025px) {
+  /* line 107, ../scss/components/navigation/_mobile-nav.scss */
+  .no-touch #mobile-navigation {
+    display: none !important;
+  }
+}
+
+/* line 116, ../scss/components/navigation/_mobile-nav.scss */
+.csstransforms3d .l-page {
+  -moz-transition: -moz-transform 0.85s ease;
+  -o-transition: -o-transform 0.85s ease;
+  -webkit-transition: -webkit-transform 0.85s ease;
+  transition: transform 0.85s ease;
+}
+/* line 118, ../scss/components/navigation/_mobile-nav.scss */
+.csstransforms3d .l-page.mobile-menu-visible {
+  -moz-transform: translate3d(-100%, 0, 0);
+  -webkit-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
+}
+@media (min-width: 768px) {
+  /* line 118, ../scss/components/navigation/_mobile-nav.scss */
+  .csstransforms3d .l-page.mobile-menu-visible {
+    -moz-transform: translate3d(-50%, 0, 0);
+    -webkit-transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+@media (min-width: 1025px) {
+  /* line 118, ../scss/components/navigation/_mobile-nav.scss */
+  .csstransforms3d .l-page.mobile-menu-visible {
+    -moz-transform: none;
+    -ms-transform: none;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+/* line 129, ../scss/components/navigation/_mobile-nav.scss */
+.no-csstransforms3d .l-page.mobile-menu-visible {
+  right: -50%;
+}
+@media (min-width: 768px) {
+  /* line 129, ../scss/components/navigation/_mobile-nav.scss */
+  .no-csstransforms3d .l-page.mobile-menu-visible {
+    right: 100%;
+  }
+}
+@media (min-width: 1025px) {
+  /* line 129, ../scss/components/navigation/_mobile-nav.scss */
+  .no-csstransforms3d .l-page.mobile-menu-visible {
+    right: 0;
+  }
+}
+
+/* line 141, ../scss/components/navigation/_mobile-nav.scss */
+.csstransforms3d #mobile-navigation {
+  -moz-transition: all 0.98s ease;
+  -o-transition: all 0.98s ease;
+  -webkit-transition: all 0.98s ease;
+  transition: all 0.98s ease;
+  -moz-transform: translate3d(100%, 0, 0) scale(0.9, 0.9);
+  -webkit-transform: translate3d(100%, 0, 0) scale(0.9, 0.9);
+  transform: translate3d(100%, 0, 0) scale(0.9, 0.9);
+  opacity: 0;
+}
+/* line 145, ../scss/components/navigation/_mobile-nav.scss */
+.csstransforms3d #mobile-navigation.mobile-menu-visible {
+  width: 100%;
+  opacity: 1;
+  -moz-transform: translate3d(0%, 0, 0) scale(1, 1);
+  -webkit-transform: translate3d(0%, 0, 0) scale(1, 1);
+  transform: translate3d(0%, 0, 0) scale(1, 1);
+}
+@media (min-width: 768px) {
+  /* line 145, ../scss/components/navigation/_mobile-nav.scss */
+  .csstransforms3d #mobile-navigation.mobile-menu-visible {
+    border-left: 2px solid rgba(50, 50, 50, 0.2);
+    width: 50% !important;
+  }
+}
+@media (min-width: 1025px) {
+  /* line 145, ../scss/components/navigation/_mobile-nav.scss */
+  .csstransforms3d #mobile-navigation.mobile-menu-visible {
+    -moz-transform: none;
+    -ms-transform: none;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+/* line 158, ../scss/components/navigation/_mobile-nav.scss */
+#mobile-navigation .inner {
+  width: 100%;
+  position: relative;
+  min-width: 320px;
+}
+@media (min-width: 768px) {
+  /* line 158, ../scss/components/navigation/_mobile-nav.scss */
+  #mobile-navigation .inner {
+    min-width: 393px;
+    width: 50% !important;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 158, ../scss/components/navigation/_mobile-nav.scss */
+  #mobile-navigation .inner {
+    min-width: 490px;
+  }
+}
+
+/* line 177, ../scss/components/navigation/_mobile-nav.scss */
+.menu-toggle {
+  top: 50%;
+  margin-top: -20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  background-color: #ffcc33;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+/* line 187, ../scss/components/navigation/_mobile-nav.scss */
+.menu-toggle:before {
+  color: #000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+}
+/* line 200, ../scss/components/navigation/_mobile-nav.scss */
+.menu-toggle:hover:before {
+  color: #FFF;
+}
+
+/* line 1, ../scss/components/navigation/_selectors.scss */
+.selector {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  margin: 0 auto;
+  width: 95%;
+  max-width: 427px;
+  background-color: #FFF;
+  color: #333333;
+  -moz-transition: border-radius 0.25s ease-in;
+  -o-transition: border-radius 0.25s ease-in;
+  -webkit-transition: border-radius 0.25s ease-in;
+  transition: border-radius 0.25s ease-in;
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* line 1, ../scss/components/navigation/_selectors.scss */
+  .selector {
+    max-width: 395px;
+  }
+}
+/* line 15, ../scss/components/navigation/_selectors.scss */
+.selector a {
+  color: #333333;
+}
+/* line 18, ../scss/components/navigation/_selectors.scss */
+.selector ul, .selector li {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+/* line 23, ../scss/components/navigation/_selectors.scss */
+.selector .container {
+  cursor: pointer;
+  height: 55px;
+}
+/* line 27, ../scss/components/navigation/_selectors.scss */
+.selector .container a {
+  height: 55px;
+  display: block;
+}
+/* line 31, ../scss/components/navigation/_selectors.scss */
+.selector .container .ico-moon {
+  -moz-transition: border-radius 0.25s ease-in;
+  -o-transition: border-radius 0.25s ease-in;
+  -webkit-transition: border-radius 0.25s ease-in;
+  transition: border-radius 0.25s ease-in;
+  background-color: #666666;
+  height: 100%;
+  padding: 17px 11px;
+  width: 17.5644%;
+  text-align: center;
+  float: right;
+  position: relative;
+}
+/* line 40, ../scss/components/navigation/_selectors.scss */
+.selector .container .ico-moon:before {
+  position: absolute;
+  height: 33px;
+  width: 100%;
+  text-align: center;
+  font-size: 33px;
+  left: 0;
+  top: 50%;
+  margin-top: -16.5px;
+  z-index: 2;
+  color: #FFF;
+  line-height: 1;
+}
+/* line 53, ../scss/components/navigation/_selectors.scss */
+.selector .container .ico-moon img {
+  position: relative;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+/* line 55, ../scss/components/navigation/_selectors.scss */
+.lt-ie9 .selector .container .ico-moon img {
+  top: auto;
+}
+/* line 60, ../scss/components/navigation/_selectors.scss */
+.selector .container b {
+  position: relative;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  text-align: center;
+  float: left;
+  font-family: "lato", helvetica, arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 20px;
+  font-size: 1.25rem;
+  width: 82.435597189696%;
+}
+@media (max-width: 767px) {
+  /* line 60, ../scss/components/navigation/_selectors.scss */
+  .selector .container b {
+    font-size: 13px;
+  }
+}
+
+/* line 77, ../scss/components/navigation/_selectors.scss */
+.selections {
+  left: -999em;
+  position: absolute;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  clear: left;
+  z-index: 1;
+  -moz-border-radius: 0 0 8px 8px;
+  -webkit-border-radius: 0;
+  border-radius: 0 0 8px 8px;
+  -moz-transition: height 0.3s ease-out, -moz-transform 0.4s ease-out;
+  -o-transition: height 0.3s ease-out, -o-transform 0.4s ease-out;
+  -webkit-transition: height 0.3s ease-out, -webkit-transform 0.4s ease-out;
+  transition: height 0.3s ease-out, transform 0.4s ease-out;
+  background-color: #FFF;
+}
+/* line 79, ../scss/components/navigation/_selectors.scss */
+.selections.ready {
+  left: 0;
+  height: 0;
+}
+/* line 93, ../scss/components/navigation/_selectors.scss */
+.selections li {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+/* line 98, ../scss/components/navigation/_selectors.scss */
+.selections a {
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  padding: 15px 10px;
+  border-bottom: 1px solid #e1e5e7;
+}
+
+@media (max-width: 767px) {
+  /* line 107, ../scss/components/navigation/_selectors.scss */
+  .content-header .city-selector {
+    width: 100%;
+  }
+  /* line 110, ../scss/components/navigation/_selectors.scss */
+  .content-header .city-selector b {
+    font-size: 13px !important;
+  }
+}
+
+/* line 1, ../scss/components/navigation/_tabs.scss */
+ul.tabs {
+  margin-top: 20px;
+  margin-bottom: 25px;
+  border-bottom: 0;
+}
+
+/* line 5, ../scss/components/post-types/_type-condos.scss */
+.view-id-condos .views-row {
+  margin-bottom: 25px;
+  margin-bottom: 1.5625rem;
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* line 5, ../scss/components/post-types/_type-condos.scss */
+  .view-id-condos .views-row {
+    float: left;
+    width: 49%;
+    margin-right: 1%;
+  }
+  /* line 12, ../scss/components/post-types/_type-condos.scss */
+  .view-id-condos .views-row.views-row-even {
+    margin-right: 0;
+    float: right;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1199px) {
+  /* line 5, ../scss/components/post-types/_type-condos.scss */
+  .view-id-condos .views-row {
+    float: left;
+    width: 32%;
+    margin-right: 2%;
+    margin-bottom: 25px;
+  }
+  /* line 22, ../scss/components/post-types/_type-condos.scss */
+  .view-id-condos .views-row:nth-child(3n) {
+    margin-right: 0;
+    float: right;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 5, ../scss/components/post-types/_type-condos.scss */
+  .view-id-condos .views-row {
+    float: left;
+    width: 23%;
+    margin-right: 2.6%;
+    margin-bottom: 25px;
+  }
+  /* line 32, ../scss/components/post-types/_type-condos.scss */
+  .view-id-condos .views-row:nth-child(4n) {
+    margin-right: 0;
+    float: right;
+  }
+}
+
+/* line 44, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .field-label,
+.node--condo-project--comparison .field-label {
+  font-weight: 700;
+  padding-bottom: 5px;
+}
+/* line 48, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .field-item,
+.node--condo-project--comparison .field-item {
+  padding-bottom: 5px;
+}
+/* line 51, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .ds-region,
+.node--condo-project--comparison .ds-region {
+  padding-left: 35px;
+  padding-left: 2.1875rem;
+  padding-right: 35px;
+  padding-right: 2.1875rem;
+  padding-top: 20px;
+  padding-top: 1.25rem;
+  padding-bottom: 20px;
+  padding-bottom: 1.25rem;
+}
+/* line 57, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser figure,
+.node--condo-project--comparison figure {
+  line-height: 0;
+}
+/* line 60, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .ds-hero,
+.node--condo-project--comparison .ds-hero {
+  padding: 0;
+}
+/* line 63, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .ds-title,
+.node--condo-project--comparison .ds-title {
+  background-color: #ffcc33;
+  height: 81px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+/* line 71, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .ds-title h3,
+.node--condo-project--comparison .ds-title h3 {
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 0;
+  font-size: 23px;
+  font-size: 1.4375rem;
+}
+@media (max-width: 767px) {
+  /* line 71, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--teaser .ds-title h3,
+  .node--condo-project--comparison .ds-title h3 {
+    font-size: 18px;
+    font-size: 1.125rem;
+  }
+}
+/* line 80, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .ds-title a,
+.node--condo-project--comparison .ds-title a {
+  color: #333333;
+}
+/* line 84, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .ds-price,
+.node--condo-project--comparison .ds-price {
+  background-color: #333333;
+  color: #FFF;
+  font-size: 20px;
+  font-size: 1.25rem;
+  height: 53px;
+  height: 3.3125rem;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+/* line 95, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .ds-details,
+.node--condo-project--comparison .ds-details {
+  background-color: #f7f7f7;
+}
+/* line 98, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser address,
+.node--condo-project--comparison address {
+  font-style: normal;
+}
+/* line 100, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser address > div, .node--condo-project--teaser address span,
+.node--condo-project--comparison address > div,
+.node--condo-project--comparison address span {
+  display: none;
+}
+/* line 103, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser address .street-block,
+.node--condo-project--comparison address .street-block {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+}
+/* line 107, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .ds-meta,
+.node--condo-project--comparison .ds-meta {
+  padding: 0;
+  background-color: #dcdcdc;
+}
+/* line 111, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .ds-meta a,
+.node--condo-project--comparison .ds-meta a {
+  color: #666666;
+}
+/* line 114, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .ds-meta .field-label,
+.node--condo-project--comparison .ds-meta .field-label {
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
+  font-size: 15px;
+  font-size: 0.9375rem;
+}
+/* line 120, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .ds-meta .field-items,
+.node--condo-project--comparison .ds-meta .field-items {
+  font-size: 36px;
+  font-size: 2.25rem;
+  line-height: 1;
+}
+/* line 128, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .ds-meta .flag-outer-condo-flag a,
+.node--condo-project--comparison .ds-meta .flag-outer-condo-flag a {
+  -moz-transform: translateZ(0px);
+  -webkit-transform: translateZ(0px);
+  transform: translateZ(0px);
+}
+/* line 131, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .ds-meta .flag-outer-condo-flag .inner,
+.node--condo-project--comparison .ds-meta .flag-outer-condo-flag .inner {
+  height: 61px;
+}
+/* line 134, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .ds-meta .flag-outer-condo-flag .ico-moon:before,
+.node--condo-project--comparison .ds-meta .flag-outer-condo-flag .ico-moon:before {
+  font-size: 36px;
+  font-size: 2.25rem;
+  display: block;
+}
+/* line 139, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .ds-meta .field-container,
+.node--condo-project--comparison .ds-meta .field-container {
+  height: 94px;
+  height: 5.875rem;
+  border-right: 4px solid #d2d2d2;
+  width: 33.33333%;
+  clear: right;
+  float: left;
+  margin-left: 0;
+  margin-right: 0%;
+  text-align: center;
+}
+/* line 144, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .ds-meta .field-container:last-child,
+.node--condo-project--comparison .ds-meta .field-container:last-child {
+  border-right: 0;
+  width: 33.33333%;
+  clear: right;
+  float: right;
+  margin-right: 0;
+}
+
+/* line 154, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-hero {
+  text-align: center;
+}
+/* line 158, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-navigation ul {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+/* line 163, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-navigation li {
+  padding: 0 42px;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  position: relative;
+}
+@media (max-width: 1023px) {
+  /* line 163, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-navigation li {
+    padding: 0 10px;
+  }
+}
+/* line 170, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-navigation li:after {
+  content: "|";
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+/* line 176, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-navigation li:first-child {
+  padding-left: 0;
+}
+/* line 179, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-navigation li:last-child {
+  padding-right: 0;
+}
+/* line 181, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-navigation li:last-child:after {
+  content: "";
+}
+/* line 186, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-navigation a {
+  color: #828282;
+  font-family: "proxima-nova", helvetica, arial, sans-serif;
+}
+/* line 194, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-gallery .field--gallery {
+  padding: 0;
+  margin: 0;
+}
+/* line 198, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-gallery .field--gallery li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 32.25806%;
+  clear: right;
+  float: left;
+  margin-left: 0;
+  margin-right: 1.6129%;
+  margin-bottom: 1.6129%;
+}
+/* line 204, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-gallery .field--gallery li a, .node--condo-project--full .ds-gallery .field--gallery li img {
+  display: block;
+  width: 100%;
+}
+/* line 208, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-gallery .field--gallery li:nth-child(3n) {
+  width: 32.25806%;
+  clear: right;
+  float: right;
+  margin-right: 0;
+}
+@media (min-width: 1024px) {
+  /* line 214, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-gallery .field--building-image {
+    width: 48.78049%;
+    float: left;
+    margin-right: -100%;
+    margin-left: 0;
+    clear: none;
+  }
+  /* line 217, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-gallery .field--gallery {
+    width: 48.78049%;
+    float: right;
+    margin-left: 0;
+    margin-right: 0;
+    clear: none;
+  }
+}
+/* line 222, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-meta {
+  background-color: #e5e5e5;
+}
+/* line 224, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-meta .flag-message {
+  left: 50%;
+  margin-left: -110px;
+}
+/* line 228, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-meta h3,
+.node--condo-project--full .ds-meta .field-label,
+.node--condo-project--full .ds-meta .field-item {
+  font-size: 30px;
+  font-size: 1.875rem;
+  margin: 0;
+  line-height: 1.1;
+}
+/* line 2, ../scss/abstractions/_abstract-graphics.scss */
+.node--condo-project--full .ds-meta .flag-wrapper a {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  font-size: 20px;
+  font-size: 1.25rem;
+  background-color: #ffcc33;
+  padding-top: 15px;
+  padding-top: 0.9375rem;
+  padding-bottom: 15px;
+  padding-bottom: 0.9375rem;
+  text-align: center;
+  max-width: 360px;
+  width: 100%;
+  position: relative;
+  color: #666666;
+}
+/* line 15, ../scss/abstractions/_abstract-graphics.scss */
+.node--condo-project--full .ds-meta .flag-wrapper a:after {
+  padding-top: 20px;
+  color: #FFF;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 53px;
+  background-color: #666666;
+}
+/* line 242, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-meta .flag-wrapper i {
+  display: none;
+}
+/* line 246, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-meta .field-container {
+  text-align: center;
+  position: relative;
+}
+@media (max-width: 1023px) {
+  /* line 246, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-meta .field-container {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 246, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-meta .field-container {
+    width: 33.33333%;
+    clear: right;
+    float: left;
+    margin-left: 0;
+    margin-right: 0%;
+    border-right: 1px solid #adadad;
+    padding-left: 31px;
+    padding-right: 31px;
+  }
+  /* line 258, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-meta .field-container > .inner {
+    position: relative;
+    top: 50%;
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  /* line 261, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-meta .field-container:last-child {
+    width: 33.33333%;
+    clear: right;
+    float: right;
+    margin-right: 0;
+    border-right: 0;
+    padding-right: 0;
+  }
+}
+/* line 270, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-sales {
+  background-color: #f0f0f0;
+}
+/* line 272, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-sales .stat {
+  position: relative;
+}
+/* line 275, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-sales .field-label {
+  font-size: 22px;
+  font-size: 1.375rem;
+}
+/* line 278, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-sales .description {
+  position: absolute;
+  top: 50%;
+  height: 40px;
+  margin-top: -20px;
+  left: 0;
+  right: 0;
+  text-transform: uppercase;
+  font-size: 22px;
+  font-size: 1.375rem;
+}
+/* line 288, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-sales .field-container {
+  text-align: center;
+}
+/* line 293, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-project-info h4.field-label {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #dadada;
+}
+/* line 301, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-project-info img {
+  position: absolute;
+  display: block;
+  left: 0;
+  top: 50%;
+  margin-top: -13.5px;
+  opacity: .5;
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+/* line 309, ../scss/components/post-types/_type-condos.scss */
+.svg .node--condo-project--full .ds-project-info img {
+  height: 27px;
+  width: 27px;
+}
+/* line 315, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-project-info address .locality-block {
+  display: none;
+}
+/* line 318, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-project-info address > div {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+}
+/* line 324, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-project-info .col-1 .field-label,
+.node--condo-project--full .ds-project-info .col-2 .field-label {
+  font-weight: 700;
+  padding-left: 45px;
+  padding-left: 2.8125rem;
+  position: relative;
+}
+/* line 330, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-project-info .col-1 .field-container,
+.node--condo-project--full .ds-project-info .col-2 .field-container {
+  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
+  padding-bottom: 10px;
+  padding-bottom: 0.625rem;
+  border-bottom: 1px solid #e9e9e9;
+  position: relative;
+}
+/* line 340, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-why {
+  background-color: #f7f6f6;
+}
+@media (min-width: 1024px) {
+  /* line 343, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-why .field-container {
+    max-width: 800px;
+  }
+}
+/* line 348, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-contact-info {
+  background-color: #666666;
+  color: #FFF;
+}
+/* line 352, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-contact-info .col-1 ul, .node--condo-project--full .ds-contact-info .col-1 li {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+/* line 357, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-contact-info .col-1 a {
+  display: block;
+  color: #FFF;
+  background-color: #333333;
+  text-align: center;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 10px 15px;
+}
+/* line 367, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-contact-info .col-2 {
+  background-color: #FFF;
+  padding: 25px 15px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  color: #666666;
+  overflow: hidden;
+  max-height: 142px;
+  max-height: 8.875rem;
+  line-height: 1.2;
+}
+/* line 375, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-contact-info .col-2 p {
+  margin-top: 3px;
+}
+@media (min-width: 1024px) {
+  /* line 380, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-contact-info .form-actions {
+    width: 48.78049%;
+    clear: right;
+    float: right;
+    margin-right: 0;
+  }
+  /* line 383, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-contact-info .webform-component {
+    width: 48.78049%;
+    clear: right;
+    float: left;
+    margin-left: 0;
+    margin-right: 2.43902%;
+  }
+  /* line 385, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-contact-info .webform-component:nth-child(odd) {
+    width: 48.78049%;
+    clear: right;
+    float: right;
+    margin-right: 0;
+  }
+  /* line 389, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-contact-info .webform-component-markup {
+    float: none !important;
+    width: 100% !important;
+    clear: both;
+  }
+}
+/* line 2, ../scss/abstractions/_abstract-graphics.scss */
+.node--condo-project--full .ds-floorplans .flag-wrapper a {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  font-size: 20px;
+  font-size: 1.25rem;
+  background-color: #ffcc33;
+  padding-top: 15px;
+  padding-top: 0.9375rem;
+  padding-bottom: 15px;
+  padding-bottom: 0.9375rem;
+  text-align: center;
+  max-width: 360px;
+  width: 100%;
+  position: relative;
+  color: #666666;
+}
+/* line 15, ../scss/abstractions/_abstract-graphics.scss */
+.node--condo-project--full .ds-floorplans .flag-wrapper a:after {
+  padding-top: 20px;
+  color: #FFF;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 53px;
+  background-color: #666666;
+}
+/* line 404, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-floorplans .flag-wrapper i {
+  display: none;
+}
+/* line 408, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-floorplans .flag-throbber {
+  display: none;
+}
+/* line 2, ../scss/abstractions/_abstract-graphics.scss */
+.node--condo-project--full .ds-floorplans .views-field-field-floorplan a {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  font-size: 20px;
+  font-size: 1.25rem;
+  background-color: #ffcc33;
+  padding-top: 15px;
+  padding-top: 0.9375rem;
+  padding-bottom: 15px;
+  padding-bottom: 0.9375rem;
+  text-align: center;
+  max-width: 360px;
+  width: 100%;
+  position: relative;
+  color: #666666;
+}
+/* line 15, ../scss/abstractions/_abstract-graphics.scss */
+.node--condo-project--full .ds-floorplans .views-field-field-floorplan a:after {
+  padding-top: 20px;
+  color: #FFF;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 53px;
+  background-color: #666666;
+}
+/* line 415, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-floorplans tbody .file-icon,
+.node--condo-project--full .ds-floorplans tbody .file-size {
+  display: none;
+}
+/* line 419, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-floorplans tbody a {
+  font-size: 17px !important;
+  min-width: 116px;
+}
+@media (max-width: 1023px) {
+  /* line 419, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-floorplans tbody a {
+    font-size: 14px !important;
+  }
+}
+/* line 425, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--full .ds-floorplans tbody a:after {
+  background-color: #ffcc33 !important;
+}
+@media (max-width: 1023px) {
+  /* line 396, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-floorplans {
+    /* Force table to not be like tables anymore */
+    /* Hide table headers (but not display: none;, for accessibility) */
+    /*
+    Label the data
+    */
+  }
+  /* line 432, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-floorplans table, .node--condo-project--full .ds-floorplans thead, .node--condo-project--full .ds-floorplans tbody, .node--condo-project--full .ds-floorplans th, .node--condo-project--full .ds-floorplans td, .node--condo-project--full .ds-floorplans tr {
+    display: block;
+  }
+  /* line 437, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-floorplans thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  /* line 443, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-floorplans tr {
+    border: 1px solid #ccc;
+    margin-bottom: 25px;
+  }
+  /* line 445, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-floorplans td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 38%;
+  }
+  /* line 453, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-floorplans td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 50%;
+    left: 6px;
+    width: 33%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+  /* line 467, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-floorplans td:before {
+    font-weight: 700;
+  }
+  /* line 470, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-floorplans td:nth-of-type(1):before {
+    content: "Floor";
+  }
+  /* line 471, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-floorplans td:nth-of-type(2):before {
+    content: "Suite Number";
+  }
+  /* line 472, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-floorplans td:nth-of-type(3):before {
+    content: "Size";
+  }
+  /* line 473, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-floorplans td:nth-of-type(4):before {
+    content: "Parking";
+  }
+  /* line 474, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-floorplans td:nth-of-type(5):before {
+    content: "Pricing";
+  }
+  /* line 475, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-floorplans td:nth-of-type(6):before {
+    content: "Floor Plans";
+  }
+  /* line 476, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-floorplans td:nth-of-type(7):before {
+    content: "Save";
+  }
+}
+
+/* line 480, ../scss/components/post-types/_type-condos.scss */
+.map-container {
+  position: relative;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  height: 500px;
+  padding: 0 35px;
+}
+@media (max-width: 767px) {
+  /* line 480, ../scss/components/post-types/_type-condos.scss */
+  .map-container {
+    padding: 0 10px;
+  }
+}
+/* line 487, ../scss/components/post-types/_type-condos.scss */
+.map-container #map-canvas {
+  height: 500px;
+}
+@media (max-width: 767px) {
+  /* line 480, ../scss/components/post-types/_type-condos.scss */
+  .map-container {
+    height: 320px;
+  }
+  /* line 492, ../scss/components/post-types/_type-condos.scss */
+  .map-container #map-canvas {
+    height: 320px;
+  }
+}
+
+/* line 498, ../scss/components/post-types/_type-condos.scss */
+.entity-floorplans.view-mode-comparison {
+  padding: 10px 15px;
+  background-color: #f7f7f7;
+}
+/* line 2, ../scss/abstractions/_abstract-graphics.scss */
+.entity-floorplans.view-mode-comparison .field-container a,
+.entity-floorplans.view-mode-comparison .flag-outer a {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  font-size: 20px;
+  font-size: 1.25rem;
+  background-color: #ffcc33;
+  padding-top: 15px;
+  padding-top: 0.9375rem;
+  padding-bottom: 15px;
+  padding-bottom: 0.9375rem;
+  text-align: center;
+  max-width: 360px;
+  width: 100%;
+  position: relative;
+  color: #666666;
+}
+/* line 15, ../scss/abstractions/_abstract-graphics.scss */
+.entity-floorplans.view-mode-comparison .field-container a:after,
+.entity-floorplans.view-mode-comparison .flag-outer a:after {
+  padding-top: 20px;
+  color: #FFF;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 53px;
+  background-color: #666666;
+}
+/* line 506, ../scss/components/post-types/_type-condos.scss */
+.entity-floorplans.view-mode-comparison .field-label {
+  font-weight: 700;
+}
+
+/* line 1, ../scss/components/post-types/_type-flags.scss */
+.flag-outer {
+  position: relative;
+}
+
+/* line 4, ../scss/components/post-types/_type-flags.scss */
+.flag-message {
+  display: block;
+  position: absolute;
+  background-color: #666666;
+  top: -55px;
+  text-align: center;
+  color: #FFF;
+  min-width: 100px;
+  height: 45px;
+  padding-top: 9px;
+  left: 50%;
+  margin-left: -77.5px;
+  font-size: 20px;
+  font-size: 1.25rem;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  max-width: 155px;
+}
+/* line 19, ../scss/components/post-types/_type-flags.scss */
+td .flag-message {
+  top: -79px;
+}
+/* line 22, ../scss/components/post-types/_type-flags.scss */
+.flag-message:after {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 0;
+  border: 0 solid transparent;
+  border-top-color: #666666;
+  border-width: 1.3em 0.8em 0 0.8em;
+  position: absolute;
+  margin-left: -.5em;
+  left: 50%;
+}
+
+/* line 2, ../scss/components/post-types/_type-news.scss */
+.node--news--teaser h3 {
+  color: #666666;
+  max-width: 330px;
+  font-size: 26px;
+  font-size: 1.625rem;
+}
+/* line 6, ../scss/components/post-types/_type-news.scss */
+.node--news--teaser h3 a {
+  color: #666666;
+}
+@media (min-width: 1024px) {
+  /* line 13, ../scss/components/post-types/_type-news.scss */
+  .node--news--teaser .field--body {
+    max-width: 85%;
+  }
+}
+
+/* line 1, ../scss/components/post-types/_type-trends.scss */
+.block--views-trends-block-1 {
+  background-color: #ebebeb;
+  padding-top: 66px;
+  padding-top: 4.125rem;
+  padding-bottom: 60px;
+  padding-bottom: 3.75rem;
+}
+@media (max-width: 767px) {
+  /* line 1, ../scss/components/post-types/_type-trends.scss */
+  .block--views-trends-block-1 {
+    display: none;
+  }
+}
+
+/* line 13, ../scss/components/post-types/_type-trends.scss */
+.view-trends .views-row-1 {
+  background: url('../img/icons/couch-1.svg?1414001207') 90% top no-repeat;
+}
+/* line 16, ../scss/components/post-types/_type-trends.scss */
+.view-trends .views-row-2 {
+  background: url('../img/icons/couch-2.svg?1414001255') 90% top no-repeat;
+}
+/* line 19, ../scss/components/post-types/_type-trends.scss */
+.view-trends .views-row {
+  margin-bottom: 25px;
+  background-size: 119px auto;
+}
+@media (min-width: 1024px) {
+  /* line 19, ../scss/components/post-types/_type-trends.scss */
+  .view-trends .views-row {
+    float: left;
+    width: 50%;
+    margin-right: 0%;
+  }
+  /* line 26, ../scss/components/post-types/_type-trends.scss */
+  .view-trends .views-row.views-row-last {
+    margin-right: 0;
+    float: right;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 37, ../scss/components/post-types/_type-trends.scss */
+  .view-trends .views-row-last .field--title-field > .inner,
+  .view-trends .views-row-last .field--source > .inner,
+  .view-trends .views-row-last .field--trends > .inner {
+    padding-left: 10px;
+  }
+}
+
+/* line 47, ../scss/components/post-types/_type-trends.scss */
+.node--trends {
+  color: #333333;
+}
+/* line 49, ../scss/components/post-types/_type-trends.scss */
+.node--trends .field-label,
+.node--trends h3 {
+  margin: 0;
+  font-size: 33px;
+  font-size: 2.0625rem;
+  line-height: 1.2;
+}
+/* line 55, ../scss/components/post-types/_type-trends.scss */
+.node--trends h3 {
+  color: #999999;
+}
+/* line 58, ../scss/components/post-types/_type-trends.scss */
+.node--trends .field--source {
+  font-size: 14px;
+  font-size: 0.875rem;
+}
+/* line 61, ../scss/components/post-types/_type-trends.scss */
+.node--trends .field--price {
+  font-size: 25px;
+  font-size: 1.5625rem;
+}
+@media (max-width: 767px) {
+  /* line 61, ../scss/components/post-types/_type-trends.scss */
+  .node--trends .field--price {
+    font-size: 20px;
+    font-size: 1.25rem;
+  }
+}
+@media (max-width: 767px) {
+  /* line 67, ../scss/components/post-types/_type-trends.scss */
+  .node--trends .field--general-location {
+    line-height: 1.3;
+    font-size: 14px;
+    font-size: 0.875rem;
+  }
+}
+/* line 73, ../scss/components/post-types/_type-trends.scss */
+.node--trends .field--trends {
+  border-top: 1px solid #828282;
+  margin-top: 20px;
+  margin-top: 1.25rem;
+}
+/* line 77, ../scss/components/post-types/_type-trends.scss */
+.node--trends .field--trends > .inner > .field-item {
+  width: 33.33333%;
+  clear: right;
+  float: left;
+  margin-left: 0;
+  margin-right: 0%;
+  border-right: 1px solid #828282;
+  padding-top: 15px;
+  padding-top: 0.9375rem;
+  text-align: center;
+}
+/* line 82, ../scss/components/post-types/_type-trends.scss */
+.node--trends .field--trends > .inner > .field-item:last-child {
+  width: 33.33333%;
+  clear: right;
+  float: right;
+  margin-right: 0;
+  border-right: 0;
+}
+/* line 86, ../scss/components/post-types/_type-trends.scss */
+.node--trends .field--trends > .inner > .field-item:first-child {
+  text-align: left;
+}
+
+/* line 1, ../scss/components/regions/_region-content-header.scss */
+.l-region--content-header {
+  background-color: #ebebeb;
+  color: #666666;
+}
+/* line 4, ../scss/components/regions/_region-content-header.scss */
+.l-region--content-header a {
+  color: #666666;
+}
+/* line 7, ../scss/components/regions/_region-content-header.scss */
+.l-region--content-header .page-title {
+  font-size: 25px;
+  font-size: 1.5625rem;
+  margin: 0;
+}
+@media (max-width: 1023px) {
+  /* line 7, ../scss/components/regions/_region-content-header.scss */
+  .l-region--content-header .page-title {
+    font-size: 36px;
+    font-size: 2.25rem;
+    position: relative;
+    top: 50%;
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+}
+
+/* line 4, ../scss/components/regions/_region-content.scss */
+.l-main-content {
+  margin-top: 20px;
+}
+
+/* line 2, ../scss/components/regions/_region-header.scss */
+.l-branding h1 {
+  font-size: 20px;
+  font-size: 1.25rem;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-family: "proxima-nova", helvetica, arial, sans-serif;
+  word-spacing: -4px;
+  color: #666666;
+}
+/* line 10, ../scss/components/regions/_region-header.scss */
+.l-branding h1 a {
+  color: #666666;
+}
+/* line 12, ../scss/components/regions/_region-header.scss */
+.l-branding h1 a:hover {
+  text-decoration: none;
+}
+
+/* line 18, ../scss/components/regions/_region-header.scss */
+.l-region--header {
+  background-color: #ffcc33;
+  text-align: center;
+  position: relative;
+  z-index: 5;
+}
+/* line 23, ../scss/components/regions/_region-header.scss */
+.l-region--header h2 {
+  margin-top: 0;
+}
+/* line 26, ../scss/components/regions/_region-header.scss */
+.l-region--header .selector {
+  margin-bottom: 20px;
+}
+@media (min-width: 768px) {
+  /* line 26, ../scss/components/regions/_region-header.scss */
+  .l-region--header .selector {
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    *zoom: 1;
+    *display: inline;
+    margin-bottom: 0;
+    margin-right: 25px;
+    max-width: 320px;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 26, ../scss/components/regions/_region-header.scss */
+  .l-region--header .selector {
+    max-width: 360px;
+  }
+}
+/* line 38, ../scss/components/regions/_region-header.scss */
+.page-user .l-region--header {
+  display: none;
+}
+
+/* line 4, ../scss/components/regions/_region-meta.scss */
+.l-region--meta a {
+  position: relative;
+  display: block;
+}
+/* line 9, ../scss/components/regions/_region-meta.scss */
+.l-region--meta .condos a {
+  color: #FFF;
+}
+/* line 12, ../scss/components/regions/_region-meta.scss */
+.l-region--meta .condos i {
+  position: relative;
+  top: 4px;
+  float: left;
+  left: 8px;
+}
+@media (min-width: 1024px) {
+  /* line 12, ../scss/components/regions/_region-meta.scss */
+  .l-region--meta .condos i {
+    top: 0px;
+    left: 11px;
+  }
+}
+@media (min-width: 1025px) {
+  /* line 12, ../scss/components/regions/_region-meta.scss */
+  .l-region--meta .condos i {
+    left: 24px;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 12, ../scss/components/regions/_region-meta.scss */
+  .l-region--meta .condos i {
+    top: -8px;
+    left: 31px;
+  }
+}
+/* line 31, ../scss/components/regions/_region-meta.scss */
+.l-region--meta a span {
+  display: block;
+  position: relative;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+/* line 36, ../scss/components/regions/_region-meta.scss */
+.l-region--meta .ico-moon:before,
+.l-region--meta .translate {
+  font-size: 20px;
+  font-size: 1.25rem;
+}
+/* line 38, ../scss/components/regions/_region-meta.scss */
+.l-region--meta .ico-moon:before a,
+.l-region--meta .translate a {
+  color: #666;
+}
+@media (min-width: 1200px) {
+  /* line 36, ../scss/components/regions/_region-meta.scss */
+  .l-region--meta .ico-moon:before,
+  .l-region--meta .translate {
+    font-size: 25px;
+    font-size: 1.5625rem;
+  }
+}
+@media (min-width: 1400px) {
+  /* line 36, ../scss/components/regions/_region-meta.scss */
+  .l-region--meta .ico-moon:before,
+  .l-region--meta .translate {
+    font-size: 36px;
+    font-size: 2.25rem;
+  }
+}
+/* line 50, ../scss/components/regions/_region-meta.scss */
+.l-region--meta .translate a {
+  font-size: 22px;
+  font-size: 1.375rem;
+}
+/* line 54, ../scss/components/regions/_region-meta.scss */
+.l-region--meta .search a {
+  color: #333333;
+}
+/* line 57, ../scss/components/regions/_region-meta.scss */
+.l-region--meta .user-menu {
+  position: relative;
+}
+/* line 59, ../scss/components/regions/_region-meta.scss */
+.l-region--meta .user-menu .menu {
+  position: absolute;
+  top: 67px;
+  width: 100%;
+  margin: 0;
+  background-color: #666666;
+  padding: 0;
+  overflow: hidden;
+  -moz-transition: height 0.35s ease-in;
+  -o-transition: height 0.35s ease-in;
+  -webkit-transition: height 0.35s ease-in;
+  transition: height 0.35s ease-in;
+}
+/* line 68, ../scss/components/regions/_region-meta.scss */
+.no-js .l-region--meta .user-menu .menu {
+  height: 0;
+}
+/* line 71, ../scss/components/regions/_region-meta.scss */
+.l-region--meta .user-menu .menu li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  list-style-image: none;
+}
+/* line 77, ../scss/components/regions/_region-meta.scss */
+.l-region--meta .user-menu .menu a {
+  display: block;
+  padding: 10px 15px;
+  color: #FFF;
+  line-height: 1.2;
+  -moz-transition: all 0.8s ease;
+  -o-transition: all 0.8s ease;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+}
+/* line 83, ../scss/components/regions/_region-meta.scss */
+.l-region--meta .user-menu .menu a:hover {
+  background-color: #4d4d4d;
+}
+/* line 88, ../scss/components/regions/_region-meta.scss */
+.l-region--meta .user-menu > a {
+  color: #FFF;
+}
+/* line 91, ../scss/components/regions/_region-meta.scss */
+.l-region--meta .user-menu span {
+      /*
+&:before{
+        color: #fff;
+        @extend %icon;
+        @extend %menu;
+        position: absolute;
+        top:50%;
+        margin-top:-20px;
+        left: 0;
+        font-size: 40px;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+      }
+*/
+}
+@media (max-width: 1023px) {
+  /* line 91, ../scss/components/regions/_region-meta.scss */
+  .l-region--meta .user-menu span {
+    font: 0/0 serif;
+    text-shadow: none;
+    color: transparent;
+  }
+}
+
+/* line 3, ../scss/components/sliders/_main-slider.scss */
+.owl-theme .owl-controls .owl-nav {
+  position: absolute;
+  width: 100%;
+  top: 31%;
+  margin-top: -37.5px;
+  margin-top: -2.34375rem;
+  height: 75px;
+  height: 4.6875rem;
+}
+@media (min-width: 768px) {
+  /* line 3, ../scss/components/sliders/_main-slider.scss */
+  .owl-theme .owl-controls .owl-nav {
+    top: 26%;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 3, ../scss/components/sliders/_main-slider.scss */
+  .owl-theme .owl-controls .owl-nav {
+    top: 31%;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 3, ../scss/components/sliders/_main-slider.scss */
+  .owl-theme .owl-controls .owl-nav {
+    top: 34%;
+  }
+}
+@media (min-width: 1400px) {
+  /* line 3, ../scss/components/sliders/_main-slider.scss */
+  .owl-theme .owl-controls .owl-nav {
+    top: 37%;
+  }
+}
+/* line 22, ../scss/components/sliders/_main-slider.scss */
+.owl-theme .owl-controls div {
+  width: 75px;
+  width: 4.6875rem;
+  height: 75px;
+  height: 4.6875rem;
+}
+/* line 25, ../scss/components/sliders/_main-slider.scss */
+.owl-theme .owl-controls div:before {
+  position: absolute;
+  text-align: center;
+  font-size: 72px;
+  font-size: 4.5rem;
+  z-index: 10;
+  top: 0;
+  right: -3px;
+  right: -0.1875rem;
+  bottom: 0;
+  color: #FFF;
+  line-height: .91;
+}
+/* line 44, ../scss/components/sliders/_main-slider.scss */
+.owl-theme .owl-controls .owl-next:before {
+  right: -7px;
+  right: -0.4375rem;
+}
+
+/* line 3, ../scss/layouts/_leap.layout.scss */
+.cf {
+  overflow: hidden;
+  *zoom: 1;
+}
+
+/* line 6, ../scss/layouts/_leap.layout.scss */
+html {
+  overflow-x: visible;
+}
+@media (min-width: 1024px) {
+  /* line 6, ../scss/layouts/_leap.layout.scss */
+  html {
+    overflow-x: hidden;
+  }
+}
+
+/*
+$slicer-breakpoints: 0        480px       768px       960px       1024px      1200px       1400px;
+
+//                   └────┬────┘ └────┬────┘ └────┬────┘ └────┬────┘ └────┬────┘ └────┬────┘ └────┬────
+// Slice numbers:         1           2           3           4           5           6           7
+$slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'         'd'         'ld';
+*/
+/* line 19, ../scss/layouts/_leap.layout.scss */
+.wrap, ul.tabs,
+.l-region--hero .block__content,
+#condo-project-node-form,
+.page-node-workflow .l-content {
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 320px;
+}
+@media (max-width: 479px) {
+  /* line 19, ../scss/layouts/_leap.layout.scss */
+  .wrap, ul.tabs,
+  .l-region--hero .block__content,
+  #condo-project-node-form,
+  .page-node-workflow .l-content {
+    max-width: 479px;
+  }
+}
+@media (min-width: 480px) {
+  /* line 19, ../scss/layouts/_leap.layout.scss */
+  .wrap, ul.tabs,
+  .l-region--hero .block__content,
+  #condo-project-node-form,
+  .page-node-workflow .l-content {
+    max-width: 480px;
+  }
+}
+@media (min-width: 768px) {
+  /* line 19, ../scss/layouts/_leap.layout.scss */
+  .wrap, ul.tabs,
+  .l-region--hero .block__content,
+  #condo-project-node-form,
+  .page-node-workflow .l-content {
+    max-width: 768px;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 19, ../scss/layouts/_leap.layout.scss */
+  .wrap, ul.tabs,
+  .l-region--hero .block__content,
+  #condo-project-node-form,
+  .page-node-workflow .l-content {
+    max-width: 1024px;
+  }
+}
+@media (min-width: 1025px) {
+  /* line 19, ../scss/layouts/_leap.layout.scss */
+  .wrap, ul.tabs,
+  .l-region--hero .block__content,
+  #condo-project-node-form,
+  .page-node-workflow .l-content {
+    max-width: 1025px;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 19, ../scss/layouts/_leap.layout.scss */
+  .wrap, ul.tabs,
+  .l-region--hero .block__content,
+  #condo-project-node-form,
+  .page-node-workflow .l-content {
+    max-width: 1200px;
+  }
+}
+@media (min-width: 1400px) {
+  /* line 19, ../scss/layouts/_leap.layout.scss */
+  .wrap, ul.tabs,
+  .l-region--hero .block__content,
+  #condo-project-node-form,
+  .page-node-workflow .l-content {
+    max-width: 1400px;
+  }
+}
+
+/* line 55, ../scss/layouts/_leap.layout.scss */
+.l-header > .wrap, .l-header > ul.tabs {
+  position: relative;
+  height: 67px;
+}
+@media (min-width: 1024px) {
+  /* line 55, ../scss/layouts/_leap.layout.scss */
+  .l-header > .wrap, .l-header > ul.tabs {
+    height: 67px;
+  }
+}
+
+/* line 65, ../scss/layouts/_leap.layout.scss */
+.front .l-region--header {
+  padding-top: 57px;
+  padding-top: 3.5625rem;
+  padding-bottom: 65px;
+  padding-bottom: 4.0625rem;
+}
+@media (max-width: 767px) {
+  /* line 65, ../scss/layouts/_leap.layout.scss */
+  .front .l-region--header {
+    padding-top: 35px;
+    padding-top: 2.1875rem;
+    padding-bottom: 35px;
+    padding-bottom: 2.1875rem;
+  }
+}
+/* line 73, ../scss/layouts/_leap.layout.scss */
+.not-front .l-region--header {
+  padding-top: 20px;
+  padding-top: 1.25rem;
+  padding-bottom: 25px;
+  padding-bottom: 1.5625rem;
+}
+
+/* line 78, ../scss/layouts/_leap.layout.scss */
+.l-region--branding {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  margin-top: -12px;
+}
+
+@media (min-width: 1025px) {
+  /* line 84, ../scss/layouts/_leap.layout.scss */
+  .menu-toggle {
+    display: none;
+  }
+}
+/* line 88, ../scss/layouts/_leap.layout.scss */
+.touch .menu-toggle {
+  display: block !important;
+}
+
+/* line 92, ../scss/layouts/_leap.layout.scss */
+#block-system-main-menu {
+  display: none;
+}
+/* line 94, ../scss/layouts/_leap.layout.scss */
+.touch #block-system-main-menu {
+  display: none;
+}
+@media (min-width: 1024px) {
+  /* line 92, ../scss/layouts/_leap.layout.scss */
+  #block-system-main-menu {
+    display: block;
+    -sgs-span-settings: ("span": 3, "location": 3, "grid": 6, "gutter": 0.2, "style": "opposite", "start row": false, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
+    width: 48.57143%;
+    float: left;
+    margin-right: -100%;
+    margin-left: 34.28571%;
+    clear: none;
+    margin-left: 26.28571%;
+    width: 50.57143%;
+  }
+}
+
+/* line 107, ../scss/layouts/_leap.layout.scss */
+.l-region--meta {
+  position: absolute;
+  right: 0;
+  width: 40%;
+}
+/* line 111, ../scss/layouts/_leap.layout.scss */
+.touch .l-region--meta {
+  display: none;
+}
+@media (max-width: 1023px) {
+  /* line 107, ../scss/layouts/_leap.layout.scss */
+  .l-region--meta {
+    display: none;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 107, ../scss/layouts/_leap.layout.scss */
+  .l-region--meta {
+    width: 20%;
+  }
+}
+@media (min-width: 1025px) {
+  /* line 107, ../scss/layouts/_leap.layout.scss */
+  .l-region--meta {
+    width: 25%;
+  }
+}
+@media (min-width: 1400px) {
+  /* line 107, ../scss/layouts/_leap.layout.scss */
+  .l-region--meta {
+    width: 25%;
+  }
+}
+
+/* line 129, ../scss/layouts/_leap.layout.scss */
+.l-region--hero .block {
+  margin-top: 21px;
+  margin-bottom: 21px;
+}
+
+/**
+* Full condos page
+*/
+@media (min-width: 1024px) {
+  /* line 155, ../scss/layouts/_leap.layout.scss */
+  .node--condo-project--full .ds-meta .field-container {
+    height: 122px;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 179, ../scss/layouts/_leap.layout.scss */
+  .node--condo-project--full .ds-contact-info .contact-info > div {
+    -sgs-span-settings: ("span": 1, "location": 1, "grid": 2, "gutter": 0.05, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
+    width: 48.78049%;
+    clear: right;
+    float: left;
+    margin-left: 0;
+    margin-right: 2.43902%;
+  }
+  /* line 182, ../scss/layouts/_leap.layout.scss */
+  .node--condo-project--full .ds-contact-info .contact-info > div:last-of-type {
+    -sgs-span-settings: ("span": 1, "location": 2, "grid": 2, "gutter": 0.05, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
+    width: 48.78049%;
+    clear: right;
+    float: right;
+    margin-right: 0;
+  }
+}
+
+/**
+*Page title with views
+*/
+/* line 201, ../scss/layouts/_leap.layout.scss */
+.l-region--content-header .wrap, .l-region--content-header ul.tabs {
+  position: relative;
+  height: 111px;
+  padding-top: 20px;
+  padding-top: 1.25rem;
+  padding-bottom: 20px;
+  padding-bottom: 1.25rem;
+}
+@media (min-width: 1024px) {
+  /* line 207, ../scss/layouts/_leap.layout.scss */
+  .l-region--content-header .page-title {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 25px;
+    margin-top: -14.5px;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 217, ../scss/layouts/_leap.layout.scss */
+  .l-region--content-header .block--block-3 {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    height: 62px;
+    margin-top: -31px;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

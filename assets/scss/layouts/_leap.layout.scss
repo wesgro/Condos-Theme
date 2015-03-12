@@ -1,0 +1,226 @@
+
+@include sgs-change(debug, true);
+.cf{
+  @include clearfix;
+}
+html{
+  overflow-x: visible;
+  @include from(lt){
+     overflow-x: hidden;
+  }
+}
+/*
+$slicer-breakpoints: 0        480px       768px       960px       1024px      1200px       1400px;
+
+//                   └────┬────┘ └────┬────┘ └────┬────┘ └────┬────┘ └────┬────┘ └────┬────┘ └────┬────
+// Slice numbers:         1           2           3           4           5           6           7
+$slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'         'd'         'ld';
+*/
+%l-constrained {
+  margin-left: auto;
+  margin-right: auto;
+  //@include background-grid();
+  min-width: 320px;
+  @include to(pp){
+    max-width:rbp(pp);
+  }
+  @include from(lp){
+     max-width:lbp(lp);
+  }
+  @include from(pt){
+     max-width:bp(3);
+  }
+  @include from(lt){
+     max-width:lbp(lt);
+  }
+  @include from(sd, $noquery){
+     max-width:lbp(sd);
+  }
+  @include from(d, $noquery){
+     max-width:lbp(d);
+  }
+  @include from(ld){
+     max-width:lbp(ld);
+  }
+
+}
+.wrap,
+.l-region--hero .block__content,
+#condo-project-node-form,
+.page-node-workflow .l-content{
+  @extend %l-constrained;
+  @extend %add-padding;
+}
+.l-header{
+  >.wrap{
+    @extend %pcf;
+    position: relative;
+    height: 67px;
+    @include from(lt, $noquery){
+      height: 67px;
+    }
+  }
+}
+.l-region--header{
+  .front &{
+    @include rem(padding-top, 57px);
+    @include rem(padding-bottom, 65px);
+    @include to(lp){
+      @include rem(padding-top, 35px);
+      @include rem(padding-bottom, 35px);
+    }
+  }
+  .not-front &{
+    @include rem(padding-top, 20px);
+    @include rem(padding-bottom, 25px);
+  }
+}
+.l-region--branding{
+  position: absolute;
+  left: 15px;
+  top:50%;
+  margin-top: -12px;
+}
+.menu-toggle{
+  @include from(sd, $noquery){
+    display: none;
+  }
+  .touch &{
+    display: block !important;
+  }
+}
+#block-system-main-menu{
+  display: none;
+  .touch &{
+    display: none;
+  }
+  @include from(lt, $noquery){
+    display: block;
+    @include grid-span(3,3);
+    margin-left: 26.28571%;
+    width: 50.57143%;
+  }
+  @include from(sd, $noquery){
+    
+  }
+}
+.l-region--meta{
+  position: absolute;
+  right: 0;
+  width:40%;
+  .touch &{
+    display: none;
+  }
+  @include to(pt){
+    display: none;
+  }
+  @include from(lt, $noquery){
+    width: 20%
+  }
+  @include from(sd){
+    width:25%;
+  }
+  @include from(ld){
+    width:25%;
+  }
+
+}
+.l-region--hero{
+  .block{
+    margin-top: 21px;
+    margin-bottom: 21px;
+  }
+}
+
+/**
+* Full condos page
+*/
+.node--condo-project--full{
+  .wrap{
+    @extend %pcf;
+  }
+  .ds-hero{
+    @extend %big-vertical-padding;
+  }
+  .ds-navigation{
+    @extend %small-vertical-margin;
+  }
+  .ds-gallery{
+    @extend %small-vertical-margin;
+  }
+  .ds-walkscore{
+    @extend %small-vertical-margin;
+  }
+  .ds-meta{
+    .field-container{
+      @include from(lt, $noquery){
+        height: 122px;
+      }
+    }
+  }
+  .ds-sales{
+    @extend %big-vertical-padding;
+    .wrap{
+      @extend %three-column;
+    }
+  }
+  .ds-project-info{
+    @extend %small-vertical-padding;
+    .wrap{
+      @extend %three-column;
+    }
+  }
+  .ds-why{
+    @extend %big-vertical-padding;
+  }
+  .ds-contact-info{
+    @extend %big-vertical-padding;
+    .contact-info{
+      >div{
+        @include from(lt, $noquery){
+          @include float-span(1, $grid: 2, $gutter: .05);
+          &:last-of-type{
+            @include float-span(1,'last', $grid: 2, $gutter: .05);
+          }
+        }
+      }
+    }
+    .wrap{
+      @extend %two-column;
+    }
+  }
+  .ds-floorplans{
+    @extend %big-vertical-padding;
+  }
+}
+/**
+*Page title with views
+*/
+.l-region--content-header{
+  
+  .wrap{
+    position: relative;  
+    height: 111px;  
+    @include rem(padding-top, 20px);
+    @include rem(padding-bottom, 20px);
+  }
+  .page-title{
+    @include from(lt, $noquery){
+      position: absolute;
+      left: 0;
+      top:50%;
+      height: 25px;
+      margin-top: -14.5px;
+    }
+    @extend %add-padding;
+  }
+  .block--block-3{
+    @include from(lt, $noquery){
+      position: absolute;
+      right: 0;
+      top:50%;
+      height: 62px;
+      margin-top: -31px;
+    }
+  }
+}

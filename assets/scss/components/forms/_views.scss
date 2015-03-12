@@ -1,0 +1,107 @@
+.view{
+  .pager{
+    margin-top: 25px;
+  }
+  .pager-load-more{
+    padding: 0;
+    li{
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+    @include button-builder('a');
+  }
+}
+.views-exposed-form{
+  .views-exposed-widget{
+    margin: 0;
+    float: none;
+    padding: 0;
+  }
+}
+
+%filter-buttons{
+  @include from(lt, $noquery){
+    float: left;
+    a{
+      &:before{
+        content: " ";
+        border-right: 1px solid #959595;
+        position: absolute;
+        left: 0;
+        height: 100%;
+        width: 1px;
+        top:0;
+      }
+    }
+  }
+  &:last-of-type{
+    margin-right: 0;
+  }
+  
+  a{
+    display: block;
+    padding: 20px 20px;
+    text-transform: uppercase;
+    font-size: 14px;
+    position: relative;
+    font-weight: 700;
+    &.remove{
+      background-color: #DDD;
+    }
+    &:after{
+      @include rem(font-size, 16px);
+      color: #666666;
+      @include rem(margin-left, 14px);
+    }
+  }
+  
+}
+.views-exposed-widgets{
+  margin-bottom: 0;
+  label,
+  .views-submit-button{
+    display: none;
+  }
+  .bef-select-as-links .form-item{
+    >div{
+      @extend %filter-buttons;
+    }
+  }
+  .form-radios{
+  }
+}
+.block--block-3{
+  .filter,
+  form{
+    @extend %filter-buttons;
+  }
+  .bef-select-as-links .form-item div:first-child a:before{
+    display: none;
+  }
+  @include to(pt){
+    display: none;
+  }
+}
+/**
+* Specific filters
+*/
+.selected-edit-sort-bef-combine-count-asc--3,
+.selected-edit-sort-bef-combine-count-desc--3{
+  a:after{
+    @extend %ico-moon;
+    @extend %icon-heart;
+  }
+}
+.form-item-edit-sort-bef-combine-field-price-value-asc--3{
+  a:after{
+    @extend %icon;
+    @extend %caret-down;
+  }
+}
+.form-item-edit-sort-bef-combine-field-price-value-desc--3{
+  a:after{
+    @extend %icon;
+    @extend %caret-up;
+  }
+}

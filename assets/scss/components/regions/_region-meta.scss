@@ -1,0 +1,112 @@
+.l-region--meta{
+  .ico-moon:before{
+  }
+  a{
+    position: relative;
+    display: block;
+  }
+  .condos{
+    a{
+      color: #FFF;
+    }
+    i{
+      position: relative;
+      top:4px;
+      float: left;
+      left: 8px;
+      @include from(lt, $noquery){
+        top: 0px;
+        left: 11px;
+      }
+      @include from(sd){
+        left: 24px;
+      }
+      @include from(d){
+        top: -8px;
+        left: 31px;
+      }
+    }
+  }
+  a{
+    span{
+      display: block;
+      @include vertical-align;  
+    }
+  }
+  .ico-moon:before,
+  .translate{
+    a{
+      color: #666;
+    }
+    @include rem(font-size, 20px);
+    @include from(d){
+      @include rem(font-size, 25px);
+    }
+    @include from(ld){
+      @include rem(font-size, 36px);
+    }
+  }
+  .translate{
+    a{
+      @include rem(font-size, 22px);
+    }
+  }
+  .search a{
+    color: #333333;
+  }
+  .user-menu{
+    position: relative;
+    .menu{
+      position: absolute;
+      top: 67px;
+      width: 100%;
+      margin: 0;
+      background-color: $darkGrey;
+      padding: 0;
+      overflow: hidden;
+      @include transition(height .35s ease-in);
+      .no-js &{
+        height: 0;
+      }
+      li{
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        list-style-image: none;
+      }
+      a{
+        display: block;
+        padding: 10px 15px;
+        color: #FFF;
+        line-height: 1.2;
+        @include transition(all .8s ease);
+        &:hover{
+          background-color: darken($darkGrey,10%);
+        }
+      }
+    }
+    >a{
+      color: #FFF;
+    }
+    span{
+      @include to(pt){
+        @include squish-text;
+      }
+      /*
+&:before{
+        color: #fff;
+        @extend %icon;
+        @extend %menu;
+        position: absolute;
+        top:50%;
+        margin-top:-20px;
+        left: 0;
+        font-size: 40px;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+      }
+*/
+    }
+  }
+}

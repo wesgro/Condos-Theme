@@ -1,0 +1,29 @@
+.flag-outer{
+  position: relative;
+}
+.flag-message{
+  display: block;
+  position: absolute;
+  background-color: #666666;
+  top:-55px;
+  text-align: center;
+  color: #FFF;
+  min-width: 100px;
+  height: 45px;
+  padding-top: 9px;
+  left: 50%;
+  margin-left: (155px / 2) *-1;
+  @include rem(font-size, 20px);
+  @include border-radius(10px);
+  max-width: 155px;
+  td &{
+    top:-79px;
+  }
+  &:after{
+    content: " ";
+    @include triangle(#666666, 1.3em, 1.6em, bottom);
+    position: absolute;
+    margin-left: -.5em;
+    left: 50%;
+  }
+}
