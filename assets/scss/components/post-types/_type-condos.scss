@@ -1,6 +1,6 @@
 .view-id-condos{
   .view-content{
-    @extend %cf;
+    @extend %pcf;
   }
   .views-row{
     @include rem(margin-bottom, 25px);
@@ -18,7 +18,7 @@
       float: left;
       width: 32%;
       margin-right: 2%;
-      margin-bottom: 25px;
+      margin-bottom: 31px;
       &:nth-child(3n){
         margin-right: 0;
         float: right;
@@ -28,7 +28,7 @@
       float: left;
       width: 23%;
       margin-right: 2.6%;
-      margin-bottom: 25px;
+      margin-bottom: 31px;
       &:nth-child(4n){
         margin-right: 0;
         float: right;
@@ -49,10 +49,10 @@
     padding-bottom: 5px;    
   }
   .ds-region{
-    @include rem(padding-left, 35px);
-    @include rem(padding-right, 35px);
-    @include rem(padding-top, 20px);
-    @include rem(padding-bottom, 20px);
+    @include rem(padding-left, 25px);
+    @include rem(padding-right, 25px);
+    @include rem(padding-top, 15px);
+    @include rem(padding-bottom, 15px);
   }
   figure{
     line-height: 0;
@@ -125,6 +125,9 @@
       @extend %vertical-align;
     }
     .flag-outer-condo-flag{
+      *{
+        will-change:transform;
+      }
       a{
         @include translateZ(0px);
       }
@@ -222,8 +225,9 @@
   .ds-meta{
     background-color: #e5e5e5;
     .flag-message{
-      left: 50%;
-      margin-left: -110px;
+      left:0;
+      right:0;
+      margin: 0 auto;
     }
     h3,
     .field-label,
@@ -330,8 +334,9 @@
       .field-container{
         //margin-bottom: 5px;
         //padding-bottom: 5px;
-        @include rem(margin-bottom, 10);
-        @include rem(padding-bottom, 10);
+        margin: 0;
+        @include rem(padding-top, 15);
+        @include rem(padding-bottom, 15);
         border-bottom: 1px solid #e9e9e9;
         position: relative;
       }
@@ -339,9 +344,11 @@
   }
   .ds-why{
     background-color: #f7f6f6;
+    text-align: center;
     @include from(lt, $noquery){
       .field-container{
         max-width: 800px;
+        margin: 0 auto;
       }
     }
   }
@@ -394,87 +401,7 @@
     }
   }
   .ds-floorplans{
-    .flag-wrapper{
-      @include button-builder('a', '%icon-heart');
-      a.unflag-action{
-        &:after{
-          @extend %icon-empty-heart;
-        }
-      }
-      i{
-        display: none;
-      }
-    }
-    .flag-throbber{
-      display: none;
-    }
-    .views-field-field-floorplan{
-      @include button-builder('a');
-    }
-    tbody{
-      .file-icon,
-      .file-size{
-        display: none;
-      }
-      a{
-        font-size: 17px !important;
-        min-width:116px;
-        @include to(pt){  
-          font-size: 14px !important;  
-        }
-        &:after{
-          background-color: $colourHighlight !important;
-        }
-      }
-    }
-    @include to(pt){    
-    /* Force table to not be like tables anymore */
-    	table, thead, tbody, th, td, tr { 
-    		display: block; 
-    	}
-    	
-    	/* Hide table headers (but not display: none;, for accessibility) */
-    	thead tr { 
-    		position: absolute;
-    		top: -9999px;
-    		left: -9999px;
-    	}
-    	
-    	tr { border: 1px solid #ccc; margin-bottom: 25px;}
-    	
-    	td { 
-    		/* Behave  like a "row" */
-    		border: none;
-    		border-bottom: 1px solid #eee; 
-    		position: relative;
-    		padding-left: 38%; 
-    	}
-    	
-    	td:before { 
-    		/* Now like a table header */
-    		position: absolute;
-    		/* Top/left values mimic padding */
-    		top: 50%;
-    		left: 6px;
-    		width: 33%; 
-    		padding-right: 10px; 
-    		white-space: nowrap;
-    	}
-    	
-    	/*
-    	Label the data
-    	*/
-    	td:before{
-      	font-weight: 700;
-    	}
-    	td:nth-of-type(1):before { content: "Floor"; }
-    	td:nth-of-type(2):before { content: "Suite Number"; }
-    	td:nth-of-type(3):before { content: "Size"; }
-    	td:nth-of-type(4):before { content: "Parking"; }
-    	td:nth-of-type(5):before { content: "Pricing"; }
-    	td:nth-of-type(6):before { content: "Floor Plans"; }
-    	td:nth-of-type(7):before { content: "Save"; }
-    }
+    @include floorplan-table;
   }
 }
 .map-container{

@@ -1,11 +1,13 @@
 .flag-outer{
   position: relative;
 }
-.flag-message{
+.flag-message,
+.flag-count{
   display: block;
   position: absolute;
   background-color: #666666;
-  top:-55px;
+  //top:-55px;
+  top:-63px;
   text-align: center;
   color: #FFF;
   min-width: 100px;
@@ -21,9 +23,21 @@
   }
   &:after{
     content: " ";
-    @include triangle(#666666, 1.3em, 1.6em, bottom);
+    @include triangle(#666666, 20px, 20px, bottom);
     position: absolute;
-    margin-left: -.5em;
+    margin-left: -10px;
     left: 50%;
+  }
+}
+.flag-message{
+  z-index: 10;
+}
+.flag-count{
+  margin-left: -50px;
+  background-color: $yellow;
+  color: $bodyCopy;
+  display: none;
+  &:after{
+    @include triangle($yellow, 20px, 20px, bottom);
   }
 }

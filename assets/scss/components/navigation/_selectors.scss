@@ -7,6 +7,7 @@
   background-color: #FFF;
   color: #333333;
   @include transition(border-radius .25s ease-in);
+
   @include at(pt){
     max-width: 395px;
   }
@@ -21,6 +22,7 @@
     list-style-type: none;
   }
   .container{
+    position: relative;
     cursor: pointer;
     @extend %pcf;
     height: 55px;
@@ -37,6 +39,32 @@
       text-align:center;
       float: right;
       position: relative;
+      &.icon-arrow-down{
+        &:before{
+          font-size: 22px;
+          width: 33px;
+          left:0;
+          right:0;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: -11px;          
+          
+        }
+        &:after{
+          border:2px solid #fff;
+          @include border-radius(1000px, 1000px);
+          position: absolute;
+          top:50%;
+          width: 34px;
+          height: 34px;
+          content: ' ';
+          left:0;
+          right:0;
+          margin-left: auto;
+          margin-right: auto; 
+          margin-top: -17px;         
+        } 
+      }
       &:before{
         position: absolute;
         height: 33px;

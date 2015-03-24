@@ -10,14 +10,14 @@
   .view-content{
     @extend %pcf;
   }
-  .views-row-1{
+  .views-row-odd{
     background:image-url("icons/couch-1.svg") 90% top no-repeat;
   }
-  .views-row-2{
+  .views-row-even{
     background:image-url("icons/couch-2.svg") 90% top no-repeat;
   }
   .views-row{
-    margin-bottom: 25px;
+    margin-bottom: 45px;
     background-size: 119px auto;
     @include from(lt, $noquery){
       float: left;
@@ -27,6 +27,9 @@
         margin-right: 0;
         float: right;
       }
+    }
+    @include to(lp){
+      background: none;
     }
   }
   

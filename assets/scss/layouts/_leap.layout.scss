@@ -46,7 +46,7 @@ $slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'   
 }
 .wrap,
 .l-region--hero .block__content,
-#condo-project-node-form,
+.section-node-edit .l-content,
 .page-node-workflow .l-content{
   @extend %l-constrained;
   @extend %add-padding;
@@ -129,6 +129,10 @@ $slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'   
   .block{
     margin-top: 21px;
     margin-bottom: 21px;
+
+    &.block--views-news-block-1{
+      @include rem(margin-bottom, 60);      
+    }
   }
 }
 
@@ -200,19 +204,16 @@ $slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'   
   
   .wrap{
     position: relative;  
-    height: 111px;  
+    min-height: 111px;  
     @include rem(padding-top, 20px);
     @include rem(padding-bottom, 20px);
   }
   .page-title{
     @include from(lt, $noquery){
-      position: absolute;
-      left: 0;
-      top:50%;
-      height: 25px;
-      margin-top: -14.5px;
+
     }
     @extend %add-padding;
+    padding-left: 0;
   }
   .block--block-3{
     @include from(lt, $noquery){

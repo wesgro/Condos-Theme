@@ -1,36 +1,52 @@
 .l-region--meta{
-  .ico-moon:before{
+  >ul>li{
+    display: table;
+    >a{
+      display: table-cell;
+      vertical-align: middle;
+    }
   }
   a{
     position: relative;
     display: block;
   }
   .condos{
+    float: left;
     a{
       color: #FFF;
     }
     i{
-      position: relative;
-      top:4px;
+      position: absolute;
+      top:50%;
       float: left;
-      left: 8px;
-      @include from(lt, $noquery){
-        top: 0px;
-        left: 11px;
-      }
-      @include from(sd){
-        left: 24px;
-      }
-      @include from(d){
-        top: -8px;
-        left: 31px;
+      left: 0;
+        @include rem(margin-top, -12);  
+        @include from(d){
+          @include rem(margin-top, -18);  
+        }
+      &:before{
+        @include rem(font-size, 24);    
+        @include from(d){
+          @include rem(font-size, 36);              
+        }      
+      }    
+    }
+    > a{
+      text-align: center;
+      span{
+        @include rem(padding-left, 31);
+        display: inline-block;
+        position: relative;        
+        @include from(d){
+          @include rem(padding-left, 46);            
+        }
       }
     }
   }
   a{
     span{
       display: block;
-      @include vertical-align;  
+      //@include vertical-align;  
     }
   }
   .ico-moon:before,
@@ -52,61 +68,70 @@
     }
   }
   .search a{
-    color: #333333;
+    color: #595959;
   }
-  .user-menu{
-    position: relative;
-    .menu{
-      position: absolute;
-      top: 67px;
-      width: 100%;
-      margin: 0;
-      background-color: $darkGrey;
-      padding: 0;
-      overflow: hidden;
-      @include transition(height .35s ease-in);
-      .no-js &{
-        height: 0;
-      }
-      li{
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-        list-style-image: none;
-      }
-      a{
-        display: block;
-        padding: 10px 15px;
-        color: #FFF;
-        line-height: 1.2;
-        @include transition(all .8s ease);
-        &:hover{
-          background-color: darken($darkGrey,10%);
-        }
-      }
-    }
-    >a{
-      color: #FFF;
-    }
-    span{
-      @include to(pt){
-        @include squish-text;
-      }
-      /*
-&:before{
-        color: #fff;
-        @extend %icon;
-        @extend %menu;
-        position: absolute;
-        top:50%;
-        margin-top:-20px;
-        left: 0;
-        font-size: 40px;
-        width: 40px;
-        height: 40px;
-        text-align: center;
-      }
-*/
-    }
-  }
+  // .user-menu{
+  //   position: relative;
+  //   .menu{
+  //     position: absolute;
+  //     top: 67px;
+  //     width: 100%;
+  //     margin: 0;
+  //     background-color: darken($darkGrey,10%);
+  //     padding: 0px 0;
+  //     overflow: hidden;
+  //     left: 0;
+  //     @include transition(height .35s ease-in);
+  //     .no-js &{
+  //       height: 0;
+  //     }
+  //     li{
+  //       margin: 0;
+  //       padding: 0;
+  //       list-style-type: none;
+  //       list-style-image: none;
+  //       &:first-child{
+  //         padding-top: 20px;
+  //       }
+  //       &:last-child{
+  //         padding-bottom: 10px;
+  //       }
+  //     }
+  //     a{
+  //       display: block;
+  //       padding: 10px 5px;
+  //       color: #FFF;
+  //       line-height: 1.2;
+  //       font-size: 14px;
+  //       text-transform: uppercase;
+  //       @include transition(all .8s ease);
+  //       &:hover{
+  //         background-color: darken($darkGrey,10%);
+  //       }
+  //     }
+  //   }
+//     >a{
+//       color: #FFF;
+//     }
+//     span{
+//       @include to(pt){
+//         @include squish-text;
+//       }
+//       /*
+// &:before{
+//         color: #fff;
+//         @extend %icon;
+//         @extend %menu;
+//         position: absolute;
+//         top:50%;
+//         margin-top:-20px;
+//         left: 0;
+//         font-size: 40px;
+//         width: 40px;
+//         height: 40px;
+//         text-align: center;
+//       }
+// */
+//     }
+//   }
 }

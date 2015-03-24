@@ -15242,6 +15242,17 @@ https://github.com/imakewebthings/jquery-waypoints/blob/master/licenses.txt
       $jump.velocity("scroll", { duration: 1500, easing: "easeInOutCirc" });
 
     });
+    $(".flag-wrapper").hoverIntent(function(){
+      $that = $(this);
+      $count = $that.find('.flag-count');
+      $count.velocity("transition.slideDownIn",
+          { stagger: 0, duration:950, drag:false, delay: 0 });
+    },function(){
+      $that = $(this);
+      $count = $that.find('.flag-count');
+      $count.velocity("transition.slideUpOut",
+          { stagger: 0, duration:950, drag:false, delay: 0 });
+    });
   });
 })(jQuery);;
 Drupal.flagLink = {};
@@ -15289,10 +15300,10 @@ Drupal.flagLink = function(context) {
     Drupal.attachBehaviors($newLink.get(0));
 
     //$('.flag-message', $newLink).fadeIn();
-    $('.flag-message', $newLink).velocity("transition.slideDownBigIn",
+    $('.flag-message', $newLink).velocity("transition.slideDownIn",
           { stagger: 0, duration:950, drag:false, delay: 0 });
     setTimeout(function(){ 
-      $('.flag-message', $newLink).velocity("transition.slideDownOut",
+      $('.flag-message', $newLink).velocity("transition.slideUpOut",
           { stagger: 0, duration:550, drag:false, delay: 0 });
     }, 3000);
     return $newLink.get(0);
@@ -15490,7 +15501,23 @@ Drupal.behaviors.flagLink.attach = function(context) {
 };
 
 })(jQuery);
-;/* ========================================================================
+;(function($) {
+  $(function(){
+    $('a[href*="login"]').click(function(e){
+      e.preventDefault();
+       $.magnificPopup.open({
+        items: {
+          src: $("#login"), 
+          type: 'inline'
+        },
+        removalDelay:300,
+        mainClass: 'mfp-fade',
+        closeMarkup: '<button title="%title%" class="mfp-close">close</button>'
+      });
+      return false;
+    });
+  });
+})(jQuery);;/* ========================================================================
  * DOM-based Routing
  * Based on http://goo.gl/EUTi53 by Paul Irish
  *
@@ -15525,6 +15552,7 @@ var Roots = {
       if(Modernizr.input.placeholder){
         $(".webform-component-textfield  label, .webform-component-phone label, .webform-component-email label, .webform-component-select label").hide();
       }
+      $("input.required").attr('required','required');
     }
   },
   // Home page
@@ -15567,6 +15595,11 @@ var Roots = {
   about_us: {
     init: function() {
       // JavaScript to be fired on the about us page
+    }
+  },
+  page_news: {
+    init:function(){
+      $(".view-news.view-display-id-page .views-row").matchHeight();
     }
   }
 };
@@ -15629,9 +15662,10 @@ $(document).ready(UTIL.loadEvents);
           },
           close: function() {
             // Will fire when popup is closed
-          }
+          },
           // e.t.c.
-        }
+        },
+        closeMarkup: '<button title="%title%" class="mfp-close">close</button>'
       });
       return false;
     });
@@ -15816,18 +15850,31 @@ function doGTranslate(a) {
 })(jQuery);;(function($) {
   $(function(){
     //city drop down
-    var $selections = $(".user-menu > .menu");
-    $link = $(".user-menu > a");
-    var originalHeight = $selections.height();
-    $selections.height(0);
-    $link.on('click', function(e){
+    var $selections = $("#user-menu");
+    var $link = $(".user-menu > a");
+    // var originalHeight = $selections.height();
+    // $selections.height(0);
+    // $link.on('click', function(e){
+    //   e.preventDefault();
+    //   $selections.toggleClass('open');
+    //   if($selections.hasClass('open')){
+    //     $selections.height(originalHeight+'px');
+    //   }else{
+    //     $selections.height(0);
+    //   }
+    //   return false;
+    // });
+    $link .click(function(e){
       e.preventDefault();
-      $selections.toggleClass('open');
-      if($selections.hasClass('open')){
-        $selections.height(originalHeight+'px');
-      }else{
-        $selections.height(0);
-      }
+       $.magnificPopup.open({
+        items: {
+          src: $selections, 
+          type: 'inline'
+        },
+        removalDelay:300,
+        mainClass: 'mfp-fade',
+        closeMarkup: '<button title="%title%" class="mfp-close">close</button>'
+      });
       return false;
     });
   });

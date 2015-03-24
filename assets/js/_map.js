@@ -34,9 +34,10 @@
           },
           close: function() {
             // Will fire when popup is closed
-          }
+          },
           // e.t.c.
-        }
+        },
+        closeMarkup: '<button title="%title%" class="mfp-close">close</button>'
       });
       return false;
     });

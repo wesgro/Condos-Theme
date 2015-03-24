@@ -44,37 +44,70 @@
  * @ingroup themeable
  */
  //get views filters block
-$view = views_get_view('condos');
-$display_id = 'page_1';
-$view->set_display($display_id);
-$view->init_handlers();
-$form_state = array(
-  'view' => $view,
-  'display' => $view->display_handler->display,
-  'exposed_form_plugin' => $view->display_handler->get_plugin('exposed_form'),
-  'method' => 'get',
-  'rerender' => TRUE,
-  'no_redirect' => TRUE,
-);
-$form = drupal_build_form('views_exposed_form', $form_state);
+// $view = views_get_view('condos');
+// $display_id = 'page_1';
+// $view->set_display($display_id);
+// $view->init_handlers();
+// $form_state = array(
+//   'view' => $view,
+//   'display' => $view->display_handler->display,
+//   'exposed_form_plugin' => $view->display_handler->get_plugin('exposed_form'),
+//   'method' => 'get',
+//   'rerender' => TRUE,
+//   'no_redirect' => TRUE,
+// );
+//$form = drupal_build_form('views_exposed_form', $form_state);
+$view = views_get_page_view();
+$currentDisplay = $view->current_display;
+$urlPrefix ='';
+if($currentDisplay === 'page_2'){
+  $urlPrefix = '/condo-search/';
+}
 $townClass = "";
-$townhouse = "?townhomes=true";
+$townhouse = "?townhomes=1";
 $moveInClass="";
-$moveIn = "?completed=true";
-if(isset($_GET['townhomes']) && $_GET['townhomes'] === 'true'){
-  $townhouse = "?townhomes=false";
-  $townClass = "remove";
+$moveIn = "?completed=100";
+$price = $urlPrefix."?sort_bef_combine=field_price_value%20ASC";
+$priceDir = "asc";
+$lovedText = "Least";
+$loved = $urlPrefix."?sort_bef_combine=count%20ASC";
+$lovedDir = "asc";
+if(isset($_GET['townhomes']) && $_GET['townhomes'] === '1'){
+  $townhouse = "?townhomes=0";
+  $townClass = "selected";
 }
-if(isset($_GET['completed']) && $_GET['completed'] === 'true'){
-  $moveIn = "?completed=false";
-  $moveInClass = "remove";
+if(isset($_GET['completed']) && $_GET['completed'] === '100'){
+  $moveIn = "?completed=0";
+  $moveInClass = "selected";
 }
+if(isset($_GET['sort_bef_combine']) && $_GET['sort_bef_combine'] === 'field_price_value DESC'){
+  $price = $urlPrefix."?sort_bef_combine=field_price_value%20ASC";
+  $priceDir = "asc selected";
+ 
+}
+if(isset($_GET['sort_bef_combine']) && $_GET['sort_bef_combine'] === 'field_price_value ASC'){
+  $price = $urlPrefix."?sort_bef_combine=field_price_value%20DESC";
+  $priceDir = "desc selected";
+}
+if(isset($_GET['sort_bef_combine']) && $_GET['sort_bef_combine'] === 'count DESC'){
+  $loved = $urlPrefix."?sort_bef_combine=count%20ASC";
+  $lovedDir = "asc selected";
+   $lovedText = "Least";
+}
+if(isset($_GET['sort_bef_combine']) && $_GET['sort_bef_combine'] === 'count ASC'){
+  $loved = $urlPrefix."?sort_bef_combine=count%20DESC";
+  $lovedDir = "desc selected";
+  $lovedText = "Most";
+}
+
 ?>
 <div<?php print $attributes; ?>>
   <div<?php print $content_attributes; ?>>
     <?php
-    print drupal_render($form);
+    //print drupal_render($form);
     ?>
+    <div class="filter"><a class="loved <?php echo $lovedDir;?>" href="<?php echo $loved;?>"><?php echo $lovedText;?></a></div>
+    <div class="filter"><a class="price <?php echo $priceDir;?>" href="<?php echo $price;?>">Sort Prices</a></div>
     <div class="filter"><a class="movein <?php echo $moveInClass;?>" href="<?php echo $moveIn;?>">Move In Today</a></div>
     <div class="filter"><a class="townhouse <?php echo $townClass;?>" href="<?php echo $townhouse;?>">Town Houses</a></div>
   </div>

@@ -33,6 +33,7 @@ var Roots = {
       if(Modernizr.input.placeholder){
         $(".webform-component-textfield  label, .webform-component-phone label, .webform-component-email label, .webform-component-select label").hide();
       }
+      $("input.required").attr('required','required');
     }
   },
   // Home page
@@ -75,6 +76,11 @@ var Roots = {
   about_us: {
     init: function() {
       // JavaScript to be fired on the about us page
+    }
+  },
+  page_news: {
+    init:function(){
+      $(".view-news.view-display-id-page .views-row").matchHeight();
     }
   }
 };

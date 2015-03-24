@@ -1,3 +1,74 @@
+%default-form{
+  input[type=tel],
+  input[type=text],
+  input[type=email],
+  input[type=password],
+  textarea{
+    @include appearance(none);
+    border: 1px solid #000;
+    @include border-radius(0px);
+    background-color: #FFF;
+    width: 100%;
+    resize: none;
+  }
+  input[type=tel],
+  input[type=text],
+  input[type=email],
+  input[type=password],
+  textarea,
+  select{
+    @include rem(padding, 10px, 15px);
+    vertical-align: middle;
+    color: #000;
+    font-family: $headerFont;
+    font-weight: 300;
+    height: 57px;
+    @include rem(font-size, 14px);
+    &.error{
+      outline: 1px dashed red;
+    }
+  }
+  textarea{
+    height:150px;
+  }
+  select {
+    @include appearance(none);
+    background: url("data:image/svg+xml;base64, PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI2cHgiIGhlaWdodD0iM3B4IiB2aWV3Qm94PSIwIDAgNiAzIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA2IDMiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwb2x5Z29uIHBvaW50cz0iNS45OTIsMCAyLjk5MiwzIC0wLjAwOCwwICIvPjwvc3ZnPg==") no-repeat calc(100% - 10px) center #FFF;
+    margin: 0;
+    outline: medium none;
+    overflow: hidden;
+    text-indent: 0.01px;
+    text-overflow: "";
+    z-index: 1;
+    border: 1px solid #000;
+    @include border-radius(0px);
+    width: 100%;
+    &:hover{
+      background-color: #FFF;
+    }
+    option{
+      text-align: left;
+    }
+  }
+  input[type=submit]{
+    @include appearance(none);
+    background-color: #333333;
+    color: #FFF;
+    @include rem(padding, 15px, 25px);
+    text-align: center;
+    border: 0;
+    @include inline-block;
+    border: 0px solid #000;
+    @include rem(font-size, 14px);
+    @include border-radius(5px);
+    width: 100%;
+    font-weight: 400;
+    max-width: 300px;
+    &:hover{
+      
+    } 
+  }
+}
 %submit-button{
   input[type=submit]{
     @include appearance(none);
@@ -26,8 +97,7 @@ fieldset{
 }
 input{
   @include input-placeholder {
-    color: $lightGrey;
-    font-style: italic;
+    color: darken($lightGrey,15%);
     @include rem(font-size, 14px);
     text-transform: uppercase;
   }
@@ -45,8 +115,13 @@ input[type=file]{
   @include rem(font-size, 13px);
 }
 
-
-.webform-client-form{
+.webform-client-form,
+.user-login,
+.page-user{
+  @extend %default-form;
+}
+.webform-client-form,
+.user-login{
   .form-item{
     margin-bottom: 10px;
   }
@@ -60,82 +135,14 @@ input[type=file]{
      margin: 0;
      padding: 0;
     } 
-    input[type=tel],
-    input[type=text],
-    input[type=email],
-    textarea{
-      @include appearance(none);
-      border: 0px solid #000;
-      @include border-radius(0px);
-      background-color: #FFF;
-      width: 100%;
-      resize: none;
-    }
-    input[type=tel],
-    input[type=text],
-    input[type=email],
-    textarea,
-    select{
-      @include rem(padding, 10px, 15px);
-      vertical-align: middle;
-      color: #000;
-      font-family: $headerFont;
-      font-weight: 300;
-      height: 57px;
-      @include rem(font-size, 14px);
-      &.error{
-        outline: 1px dashed red;
-      }
-    }
+    
     .ginput_card_security_code{
       margin-top: 10px !important;
     }
-    textarea{
-      height:50px;
-    }
-    select {
-      @include appearance(none);
-      background: url("data:image/svg+xml;base64, PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI2cHgiIGhlaWdodD0iM3B4IiB2aWV3Qm94PSIwIDAgNiAzIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA2IDMiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwb2x5Z29uIHBvaW50cz0iNS45OTIsMCAyLjk5MiwzIC0wLjAwOCwwICIvPjwvc3ZnPg==") no-repeat calc(100% - 10px) center #FFF;
-      margin: 0;
-      outline: medium none;
-      overflow: hidden;
-      text-indent: 0.01px;
-      text-overflow: "";
-      z-index: 1;
-      border-radius: 0;
-      @include border-radius(0px);
-      width: 100%;
-      
-      &:hover{
-        background-color: #FFF;
-      }
-      option{
-        text-align: left;
-      }
-    }
-  }
-  input[type=submit]{
-    @include appearance(none);
-    background-color: #333333;
-    color: #FFF;
-    @include rem(padding, 15px, 25px);
-    text-align: center;
-    border: 0;
-    @include inline-block;
-    border: 0px solid #000;
-    @include rem(font-size, 14px);
-    @include border-radius(8px);
-    width: 100%;
-    font-weight: 400;
-    max-width: 300px;
-    &:hover{
-      
-    } 
   }
 }
 .l-content{
-  .form-actions,
-  .image-widget-data
+  .form-actions
   {
     @extend %submit-button;
   }
@@ -143,4 +150,101 @@ input[type=file]{
     font-size: 12px;
     text-transform: uppercase;
   }
+}
+table{
+  @include to(pt){
+     /* Force table to not be like tables anymore */
+      table, thead, tbody, th, td, tr { 
+        display: block; 
+      }
+      
+      /* Hide table headers (but not display: none;, for accessibility) */
+      thead tr { 
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+      
+      tr { border: 1px solid #ccc; margin-bottom: 25px;}
+      
+      td { 
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee; 
+        position: relative;
+        padding-left: 38%; 
+      }
+      
+      td:before { 
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 28%;
+        left: 6px;
+        width: 33%; 
+        padding-right: 10px; 
+        white-space: nowrap;
+      }
+  }
+}
+
+@mixin floorplan-table-lables{
+  td:before{
+    font-weight: 700;
+  }
+  td:nth-of-type(1):before { content: "Project Name"; }
+  td:nth-of-type(2):before { content: "Floor"; }
+  td:nth-of-type(3):before { content: "Suite Number"; }
+  td:nth-of-type(4):before { content: "Size"; }
+  td:nth-of-type(5):before { content: "Parking"; }
+  td:nth-of-type(6):before { content: "Pricing"; }
+  td:nth-of-type(7):before { content: "Floor Plans"; }
+  td:nth-of-type(8):before { content: "Save"; }
+}
+@mixin floorplan-table{
+  .flag-wrapper{
+      @include button-builder('a', '%icon-heart');
+      a.unflag-action{
+        &:after{
+          @extend %icon-empty-heart;
+        }
+      }
+      i{
+        display: none;
+      }
+    }
+    .flag-throbber{
+      display: none;
+    }
+    .views-field-field-floorplan{
+      @include button-builder('a');
+    }
+    tbody{
+      .file-icon,
+      .file-size{
+        display: none;
+      }
+      a{
+        font-size: 17px !important;
+        min-width:116px;
+        @include border-radius(4px,4px);
+        @include to(pt){  
+          font-size: 14px !important;  
+        }
+        &:after{
+          background-color: transparent !important;
+        }
+      }
+      .field--floorplan{
+        a:after{
+          display: none;
+        }
+      }
+    }
+    @include to(pt){    
+      /*
+      Label the data
+      */
+      @include floorplan-table-lables;
+    }
 }

@@ -64,13 +64,14 @@
     </span>
   <?php endif; ?>
   <?php 
-  //$flags = flag_get_counts('node',arg(1));
-  //if(isset($flags['condo_flag']) && $flags['condo_flag'] > 0):
+ // var_dump($variables['entity_id']);
+  $flags = flag_get_counts('node',$variables['entity_id']);
+  if(isset($flags['condo_flag']) && $flags['condo_flag'] > 0):
   ?>
-    <!-- <div class="flag-count">
-      <?php //echo $flags['condo_flag']; ?>
-    </div> -->
-  <?php //endif; ?>
+    <div class="flag-count">
+      <?php echo $flags['condo_flag']; ?>
+    </div>
+  <?php endif; ?>
 </div>
 <?php if ($needs_wrapping_element): ?>
   </div>

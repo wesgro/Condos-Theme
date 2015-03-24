@@ -1,8 +1,17 @@
+.node--news{
+  .field--post-date{
+    font-size: 12px;
+    margin:10px 0;
+    text-transform: uppercase;
+  }
+}
 .node--news--teaser{
   h3{
     color: $darkGrey;
     max-width: 330px;
     @include rem(font-size, 26px);
+    margin: 0;
+    @include rem(padding, 40, 0, 20);
     a{
       color: $darkGrey;
       &:hover{
@@ -13,6 +22,31 @@
   .field--body{
     @include from(lt, $noquery){
       max-width: 85%;
+    }
+  }
+}
+.view-news.view-display-id-page{
+  .field--news-image{
+    img{
+      width: 100%;
+    }
+  }
+  .views-row{
+    margin-bottom: 15px;
+    @include to(lp){
+      text-align: center;
+    }
+    @include at(pt){
+      @include float-span(1,$grid:2,$gutter:.05);
+      &.views-row-even{
+        @include float-span(1,'last',$grid:2,$gutter:.05);
+      }
+    }
+    @include from(lt,$noquery){
+      @include float-span(1,$grid:4,$gutter:.05);
+      &:nth-child(4n+4){
+        @include float-span(1,'last',$grid:4,$gutter:.05);
+      }
     }
   }
 }

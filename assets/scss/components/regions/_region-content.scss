@@ -4,3 +4,9 @@
 .l-main-content{
   margin-top: 20px;
 }
+.node--basic-page.node--full,
+.node--news--full,
+.node--webform--full{
+  max-width: 680px;
+  margin: 0 auto;
+}

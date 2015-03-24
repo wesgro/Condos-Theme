@@ -44,10 +44,10 @@ Drupal.flagLink = function(context) {
     Drupal.attachBehaviors($newLink.get(0));
 
     //$('.flag-message', $newLink).fadeIn();
-    $('.flag-message', $newLink).velocity("transition.slideDownBigIn",
+    $('.flag-message', $newLink).velocity("transition.slideDownIn",
           { stagger: 0, duration:950, drag:false, delay: 0 });
     setTimeout(function(){ 
-      $('.flag-message', $newLink).velocity("transition.slideDownOut",
+      $('.flag-message', $newLink).velocity("transition.slideUpOut",
           { stagger: 0, duration:550, drag:false, delay: 0 });
     }, 3000);
     return $newLink.get(0);

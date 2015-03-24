@@ -23,5 +23,16 @@
       $jump.velocity("scroll", { duration: 1500, easing: "easeInOutCirc" });
 
     });
+    $(".flag-wrapper").hoverIntent(function(){
+      $that = $(this);
+      $count = $that.find('.flag-count');
+      $count.velocity("transition.slideDownIn",
+          { stagger: 0, duration:950, drag:false, delay: 0 });
+    },function(){
+      $that = $(this);
+      $count = $that.find('.flag-count');
+      $count.velocity("transition.slideUpOut",
+          { stagger: 0, duration:950, drag:false, delay: 0 });
+    });
   });
 })(jQuery);

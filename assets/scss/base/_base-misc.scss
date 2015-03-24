@@ -26,3 +26,7 @@ body{
     display: block;
   }
 }
+
+.l-page{
+  @include rem(padding-bottom, 40);
+}

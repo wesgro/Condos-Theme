@@ -1,15 +1,24 @@
 .l-region--content-header{
   background-color: #ebebeb;
   color: #666666;
+  .wrap{
+    display: table;
+    width: 100%;
+     >*{
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
   a{
     color:#666666;
   }
   .page-title{
-    @include font-size(25px);
+    text-transform: uppercase;
+    font-weight: 700;
+    @include font-size(40px);
     margin: 0;
-    @include to(pt){
-      @include font-size(36px);
-      @include vertical-align;
+    @include to(d){
+     width: 396px;
     }
   }
 }

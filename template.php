@@ -1,5 +1,21 @@
 <?php
+/**
+ * Helper function to find and render a block.
+ */
+function leap_render_block_content($module, $delta) {
+  $output = '';
+  if ($block = block_load($module, $delta)) {
+    if ($build = module_invoke($module, 'block_view', $delta)) {
+      $delta = str_replace('-', '_', $delta);
+      drupal_alter(array('block_view', "block_view_{$module}_{$delta}"), $build, $block);
 
+      if (!empty($build['content'])) {
+        return is_array($build['content']) ? render($build['content']) : $build['content'];
+      }
+    }
+  }
+  return $output;
+}
 /**
  * @file
  * Template overrides as well as (pre-)process and alter hooks for the
@@ -47,11 +63,12 @@ function leap_project_icons($icon, $classes, $element, $label, $items, $title_at
   ?>
   <div class="field-container <?php print $classes; ?>">
     <div class="inner">
-    <?php if($icon && $element['#view_mode'] === 'full'):?>
-      <img src="/<?php echo drupal_get_path('theme', 'condos').'/assets/img/icons/'.$icon;?>" alt="icon" height="27" />
-    <?php endif;?>
+
   <?php if ($element['#label_display'] == 'inline'): ?>
     <span class="field-label"<?php print $title_attributes; ?>>
+        <?php if($icon && $element['#view_mode'] === 'full'):?>
+          <img src="/<?php echo drupal_get_path('theme', 'condos').'/assets/img/icons/'.$icon;?>" alt="icon" height="27" />
+        <?php endif;?>
       <?php print $label; ?>:
     </span>
   <?php elseif ($element['#label_display'] == 'above'): ?>
@@ -96,5 +113,17 @@ $form['actions']['submit'] = array('#type' => 'image_button', '#src' => base_pat
     // Alternative (HTML5) placeholder attribute instead of using the javascript
     $form['search_block_form']['#attributes']['placeholder'] = t('Search');
   }
+
+  if($form_id ===  'user_login_block'){
+    //$form['#validate'][] = 'leap_custom_login_val';
+  }
 }
 
+
+function leap_custom_login_val($form, &$form_state) {
+  $form = form_get_error($form['name']) . form_get_error($form['pass']);
+  if($form != '') {
+    $_GET['destination'] = 'user/login';
+    drupal_goto('user/login');    
+  }
+}

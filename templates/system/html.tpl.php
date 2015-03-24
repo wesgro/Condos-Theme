@@ -105,21 +105,18 @@
       <a class="close" href="#">X</a>
   <?php
     global $user;
-    if(in_array('authenticated user', $user->roles)){
-      $menu = 'user-menu';
-    }
+    $menu = 'user-menu';
     if(in_array('Marketer', $user->roles)){
       $menu = 'menu-marketer-menu';
     }
     
-    if(in_array('authenticated user', $user->roles)):
     ?><div class="user"><?php
       $menu_depth = 2;
       $tree = menu_tree_all_data($menu, null, $menu_depth);
       $output = menu_tree_output($tree);
       print drupal_render($output);
       ?></div>
-    <?php endif;?>
+
     <div class="main">
       <?php
         $menu_depth = 2;
@@ -137,6 +134,34 @@
     ?>
   </div>
   <div id="overlay"></div>
+  <?php
+  global $user;
+  if(!in_array('authenticated user', $user->roles)):
+  ?>
+  <div id="login" class="mfp-hide white-popup mfp-with-anim wrap">
+    <?php 
+    $block = block_load('block', 5);
+    $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+    $output = render($render_array);
+    print $output;
+    ?>
+  </div>
+  <?php endif;?>
+  <?php
+  $menu = 'user-menu';
+  if(in_array('Marketer', $user->roles)){
+    $menu = 'menu-marketer-menu';
+  }
+  ?>
+  <div id="user-menu" class="mfp-hide white-popup mfp-with-anim wrap">
+    <?php
+        $menu_depth = 2;
+        $tree = menu_tree_all_data($menu, null, $menu_depth);
+        $output = menu_tree_output($tree);
+        //print_r($output);
+        print drupal_render($output);
+      ?>
+  </div>
   <?php print $page_bottom; ?>
 </body>
 </html>

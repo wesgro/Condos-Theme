@@ -274,11 +274,12 @@ button {
 // Close icon
 .mfp-close {
   line-height: 67px;
-  font-size: 55px;
+  font-size: 20px;
+  text-transform: uppercase;;
   font-weight: 700;
   position: absolute;
-  right: 51px;
-  top: -18px;
+  right: 0px;
+  top: -60px;
   text-decoration: none;
   text-align: center;
   opacity: 1;
@@ -294,6 +295,9 @@ button {
     @if $mfp-IE7support {
       filter: unquote("alpha(opacity=#{1*100})");
     }
+  }
+  @include to(lp){
+    right:10px
   }
 }
 .mfp-close-btn-in {

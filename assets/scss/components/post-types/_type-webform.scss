@@ -1,0 +1,20 @@
+.node--webform--full{
+  div{
+    input[type=text],
+    input[type=email],
+    input[type=tel],
+    input[type=phone],
+    textarea{
+      border: 1px solid #000;
+      &:focus{
+        outline: 0;
+      }
+
+    }
+  }
+  input{
+    &:valid{
+      border-color: #75cd7a;
+    }
+  }
+}

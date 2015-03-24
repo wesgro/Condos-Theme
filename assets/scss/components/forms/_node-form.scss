@@ -1,0 +1,11 @@
+.node-form{
+  input.form-text{
+    max-width: 100%;
+  }
+  input[type=submit]{
+    margin-right: 10px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 700;
+  }
+}

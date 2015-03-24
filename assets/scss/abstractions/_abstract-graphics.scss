@@ -11,6 +11,27 @@
     width: 100%;
     position: relative;
     color:$bodyCopy;
+    
+    & &.pager-next{
+      padding-right: 53px;      
+    }    
+    &::before{
+        content: " ";
+        border: 2px solid #fff;
+        position: absolute;
+        top:0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 2;
+        opacity: 0;
+        @include transition(all .5s ease);
+        @include scale(0,0);
+    }
+    &:hover::before{
+        opacity: 1;
+        @include scale(1,1);
+    }
     @if $icon{
       &:after{
         @extend #{$extend};
@@ -23,6 +44,7 @@
         bottom: 0;
         width: 53px;
         background-color: #666666;
+        z-index: 1;
       }
     }
   }
