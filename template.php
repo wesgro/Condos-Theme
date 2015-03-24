@@ -1,4 +1,7 @@
 <?php
+  /**
+    *Testing the auto git push
+    */
 /**
  * Helper function to find and render a block.
  */
