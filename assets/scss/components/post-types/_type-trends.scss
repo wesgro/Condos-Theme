@@ -21,14 +21,15 @@
   .views-row{
     margin-bottom: 45px;
     background-size: 96px auto;
+    .front &{
+      @include from(lt,$noquery){
+        margin-bottom: 0;
+      }
+    }
     @include from(lt, $noquery){
-      float: left;
-      width: 50%;
-      margin-right: 0%;
-      margin-bottom: 0;
+      @include float-span(1,$grid:2,$gutter:.10);
       &.views-row-last{
-        margin-right: 0;
-        float: right;
+        @include float-span(1,'last',$grid:2,$gutter:.10);
       }
     }
     @include to(lp){

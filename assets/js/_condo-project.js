@@ -1,18 +1,20 @@
 (function($) {
   $(function(){
-    $(".knob").knob({
-      'draw':function(){
-        //this.o.element = this.$;
-      }
-    });
-    $('.knob').trigger('configure', {
-      'format': function (v) {
-        //v = this.element.parent().parent().find('.description').html();
-        v='';
-        return v;
-      }
-    });
-    $('.knob').trigger('change');
+    if(Modernizr.canvas){
+      $(".knob").knob({
+        'draw':function(){
+          //this.o.element = this.$;
+        }
+      });
+      $('.knob').trigger('configure', {
+        'format': function (v) {
+          //v = this.element.parent().parent().find('.description').html();
+          v='';
+          return v;
+        }
+      });
+      $('.knob').trigger('change');
+    }
     $( '.ds-gallery a' ).swipebox({
       hideBarsDelay : 6000
     });

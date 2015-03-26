@@ -48,7 +48,9 @@
     </<?php print $price_wrapper; ?>>
 
     <<?php print $details_wrapper; ?> class="ds-region ds-details<?php print $details_classes; ?>">
-      <?php print $details; ?>
+      <div class="vertical-align">
+        <?php print $details; ?>
+      </div>
     </<?php print $details_wrapper; ?>>
 
     <<?php print $meta_wrapper; ?> class="ds-region ds-meta<?php print $meta_classes; ?>">

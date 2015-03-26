@@ -71,6 +71,9 @@ h2, .beta {
 h3, .gamma {
   @include font-size(26px);
   line-height: 1.1;
+  @include to(pt){
+     @include font-size(24px);
+  }
 }
 h4, .delta {
   @include font-size(18px);

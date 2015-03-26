@@ -90,6 +90,13 @@
 </script>
   <?php //print_r(ip_geoloc_get_visitor_location());?>
   <a href="#main-content" class="element-invisible element-focusable"><?php print t('Skip to main content'); ?></a>
+   <!--[if lt IE 9]>
+    <div class="alert alert-warning ie-alert">
+      <div class="wrap">
+        You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+      </div>
+    </div>
+  <![endif]-->
   <?php print $page_top; ?>
   <?php print $page; ?>
   <div id="google_translate_element2"></div>

@@ -15756,19 +15756,21 @@ https://github.com/imakewebthings/jquery-waypoints/blob/master/licenses.txt
 
 }).call(this);;(function($) {
   $(function(){
-    $(".knob").knob({
-      'draw':function(){
-        //this.o.element = this.$;
-      }
-    });
-    $('.knob').trigger('configure', {
-      'format': function (v) {
-        //v = this.element.parent().parent().find('.description').html();
-        v='';
-        return v;
-      }
-    });
-    $('.knob').trigger('change');
+    if(Modernizr.canvas){
+      $(".knob").knob({
+        'draw':function(){
+          //this.o.element = this.$;
+        }
+      });
+      $('.knob').trigger('configure', {
+        'format': function (v) {
+          //v = this.element.parent().parent().find('.description').html();
+          v='';
+          return v;
+        }
+      });
+      $('.knob').trigger('change');
+    }
     $( '.ds-gallery a' ).swipebox({
       hideBarsDelay : 6000
     });
@@ -16088,7 +16090,7 @@ var Roots = {
           return match ? match[1] : false;
       }
       if(!Modernizr.svgasimg || parseFloat(getAndroidVersion()) < 4.3){
-        //alert("android");
+       // alert("no svg");
         $('img').each(function() {
           var img_src = $(this).attr('src');
           var new_src = img_src.replace(/\.svg$/, '.png');
@@ -16117,14 +16119,13 @@ var Roots = {
         autoplayHoverPause: true,
         responsiveClass:true,
         dots:false,
-        touchDrag:false,
+        touchDrag:true,
         mouseDrag:false,
         responsive:{
             0:{
                 items:1,
                 nav:true,
                 margin:0,
-                touchDrag:true,
             },
             768:{
                 items:2,

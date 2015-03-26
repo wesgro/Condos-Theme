@@ -67,9 +67,10 @@
  // var_dump($variables['entity_id']);
   $flags = flag_get_counts('node',$variables['entity_id']);
   if(isset($flags['condo_flag']) && $flags['condo_flag'] > 0):
+    $person = ($flags['condo_flag'] > 1)?'people':'person';
   ?>
     <div class="flag-count">
-      <?php echo $flags['condo_flag']; ?>
+      <?php echo $flags['condo_flag']; ?> <?php echo $person;?> loved this
     </div>
   <?php endif; ?>
 </div>

@@ -117,7 +117,7 @@ body.mobile-menu-visible{
         @include translate3d(-50%,0,0);
       }
       @include from(sd, $noquery){
-        //@include transform(none);
+        @include transform(none);
       }
     }
   .no-csstransforms3d &{

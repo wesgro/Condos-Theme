@@ -10,14 +10,13 @@
   top:-63px;
   text-align: center;
   color: #FFF;
-  min-width: 100px;
+  width: 150px;
   height: 45px;
   padding-top: 9px;
   left: 50%;
-  margin-left: (155px / 2) *-1;
-  @include rem(font-size, 20px);
+  margin-left: (150px / 2) *-1;
+  @include rem(font-size, 15px);
   @include border-radius(10px);
-  max-width: 155px;
   td &{
     top:-79px;
   }
@@ -27,13 +26,13 @@
     position: absolute;
     margin-left: -10px;
     left: 50%;
+    bottom:-20px;
   }
 }
 .flag-message{
   z-index: 10;
 }
 .flag-count{
-  margin-left: -50px;
   background-color: $yellow;
   color: $bodyCopy;
   display: none;

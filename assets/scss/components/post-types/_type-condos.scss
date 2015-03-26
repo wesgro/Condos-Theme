@@ -2,9 +2,13 @@
   .view-content{
     @extend %pcf;
   }
+  .contextual-links-region{
+    position: static;
+  }
   .views-row{
-    background-color: #dcdcdc;
+    background-color: #f7f7f7;
     @include rem(margin-bottom, 25px);
+    position: relative;
     @include at(pt){
       float: left;
       width: 49%;
@@ -88,6 +92,9 @@
       @include to(lp){
         @include rem(font-size, 18px);
       }
+      &:hover{
+        color:#FFF;
+      }
     }
   }
   .ds-price{
@@ -103,6 +110,7 @@
   }
   .ds-details{
     background-color: #f7f7f7;
+    margin-bottom: 94px;
   }
   address{
     font-style: normal;
@@ -117,6 +125,10 @@
     padding: 0;
     @extend %pcf;
     background-color: #dcdcdc;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     a{
       color:#000;
     }
@@ -138,16 +150,16 @@
       *{
         will-change:transform;
       }
-      a{
-        @include translateZ(0px);
-      }
       .inner{
         height: 61px;
       }
-      .ico-moon:before{
-        @include rem(font-size, 23px);
+      .ico-moon{
         display: block;
         height: 31px;
+        width: 100%;
+      }
+      .ico-moon:before{
+        @include rem(font-size, 23px);
         position: relative;
         top:5px;
       }
@@ -245,6 +257,7 @@
   }
   .ds-meta{
     background-color: #e5e5e5;
+
     .flag-message{
       left:0;
       right:0;
@@ -399,8 +412,8 @@
       }
       a{
         display: block;
-        color: #FFF;
-        background-color: #333333;
+        color: #000;
+        background-color: $colourHighlight;
         text-align: center;
         @include border-radius(0px);
         margin-bottom: 5px;

@@ -211,46 +211,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "assets/scss/components/post-types/_type-condos.scss",
-			"settings":
-			{
-				"buffer_size": 9339,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "assets/js/_main.js",
-			"settings":
-			{
-				"buffer_size": 3838,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/Volumes/2015/trisha_lees/Web /trisha_public/bigbrightstarsthatmightbeeyes/wp-config.php",
-			"settings":
-			{
-				"buffer_size": 3351,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "assets/scss/libraries/magnificent/_settings.scss",
-			"settings":
-			{
-				"buffer_size": 2774,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "template.php",
-			"settings":
-			{
-				"buffer_size": 5241,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -307,29 +267,34 @@
 	[
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/js/plugins",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/base",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/libraries",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/libraries/magnificent",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/libraries/swipebox"
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/js",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/ds_layouts/condo_project_list"
 	],
 	"file_history":
 	[
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/post-types/_type-trends.scss",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/abstractions/_abstract-grid.scss",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/layouts/_leap.layout.scss",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/template.php",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/variables/_var-colors.scss",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/post-types/_type-flags.scss",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/templates/flag/flag--condo-flag.tpl.php",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/libraries/magnificent/_magnificent.scss",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/navigation/_mobile-nav.scss",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/condos.info",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/js/_condo-project.js",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/js/_main.js",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/post-types/_type-condos.scss",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/template.php",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/ds_layouts/condo_project_list/condo-project-list.tpl.php",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/layouts/_leap.layout.scss",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/post-types/_type-trends.scss",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/base/_base-typography.scss",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/templates/flag/flag.tpl.php",
+		"/Volumes/2015/trisha_lees/Web /trisha_public/bigbrightstarsthatmightbeeyes/wp-config.php",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/templates/search/search-result.tpl.php",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/base/_base-forms.scss",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/navigation/_mobile-nav.scss",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/.gitignore",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/libraries/magnificent/_settings.scss",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/abstractions/_abstract-grid.scss",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/variables/_var-colors.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/js/plugins/swipebox.js",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/libraries/swipebox/_swipebox.scss",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/js/_condo-project.js",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/base/_base-typography.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/abstractions/_abstract-menu-types.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/templates/system/page--condo-project.tpl.php",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/regions/_region-header.scss",
@@ -362,7 +327,6 @@
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/regions/_region-footer.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/img/icons/fitness.svg",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/config.rb",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/condos.info",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/libraries/leap_plugins/_button-effects.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/img/icons/building-type.svg",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/base/_base-misc.scss",
@@ -374,7 +338,6 @@
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/libraries/html5shiv/html5shiv.js",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/regions/_region-content.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/preprocess/README.md",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/libraries/magnificent/_magnificent.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/abstractions/_abstract-typography.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/navigation/_tabs.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/forms/_views.scss",
@@ -383,7 +346,6 @@
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/libraries/modernizr/feature-detects/vibration.js",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/variables/_var-typography.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/forms/_forms-generic.scss",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/templates/flag/flag--condo-flag.tpl.php",
 		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/assets/scss/layouts/_leap.layout.query.scss",
 		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/assets/scss/abstractions/_abstract-typography.scss",
 		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/assets/scss/components/post-types/_type-page.scss",
@@ -437,14 +399,7 @@
 		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/assets/scss/base/_base-misc.scss",
 		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/assets/vendor/modernizr/test/index.html",
 		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/assets/scss/abstractions/_abstract-grid.scss",
-		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/assets/js/_hero.js",
-		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/templates/hero-back.php",
-		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/search.php",
-		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/lib/scripts.php",
-		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/lib/config.php",
-		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/config.rb",
-		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/templates/searchform.php",
-		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/templates/package-single.php"
+		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/assets/js/_hero.js"
 	],
 	"find":
 	{
@@ -527,455 +482,8 @@
 	"groups":
 	[
 		{
-			"selected": 3,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "assets/scss/components/post-types/_type-condos.scss",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9339,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								8179,
-								8179
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"apply_syntax_touched": true,
-							"bh_regions":
-							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content"
-							],
-							"syntax": "Packages/SCSS/SCSS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 9556.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "assets/js/_main.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3838,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1493,
-								1493
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"apply_syntax_touched": true,
-							"bh_regions":
-							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content"
-							],
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 486.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/Volumes/2015/trisha_lees/Web /trisha_public/bigbrightstarsthatmightbeeyes/wp-config.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3351,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3083,
-								3083
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"apply_syntax_touched": true,
-							"bh_regions":
-							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
-							],
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1834.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "assets/scss/libraries/magnificent/_settings.scss",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2774,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								2774
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"apply_syntax_touched": true,
-							"bh_regions":
-							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
-							],
-							"syntax": "Packages/SCSS/SCSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 693.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "template.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5241,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2680,
-								2680
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"apply_syntax_touched": true,
-							"bh_regions":
-							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content"
-							],
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 1002.0,
-						"translation.y": 1499.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -1028,11 +536,7 @@
 		"selected_items":
 		[
 			[
-				"tem",
-				"template.php"
-			],
-			[
-				"typecondo",
+				"typecondos",
 				"assets/scss/components/post-types/_type-condos.scss"
 			],
 			[
@@ -1040,12 +544,12 @@
 				"assets/scss/components/navigation/_mobile-nav.scss"
 			],
 			[
-				"colors",
-				"assets/scss/variables/_var-colors.scss"
+				"magnic",
+				"assets/scss/libraries/magnificent/_magnificent.scss"
 			],
 			[
-				"grid",
-				"assets/scss/abstractions/_abstract-grid.scss"
+				"flag",
+				"assets/scss/components/post-types/_type-flags.scss"
 			],
 			[
 				"layout",
@@ -1056,16 +560,44 @@
 				"assets/scss/components/post-types/_type-trends.scss"
 			],
 			[
+				"typo",
+				"assets/scss/base/_base-typography.scss"
+			],
+			[
+				"typecond",
+				"assets/scss/components/post-types/_type-condos.scss"
+			],
+			[
+				"tren",
+				"assets/scss/components/post-types/_type-trends.scss"
+			],
+			[
+				"base",
+				"assets/scss/base/_base-forms.scss"
+			],
+			[
+				"tem",
+				"template.php"
+			],
+			[
+				"typecondo",
+				"assets/scss/components/post-types/_type-condos.scss"
+			],
+			[
+				"colors",
+				"assets/scss/variables/_var-colors.scss"
+			],
+			[
+				"grid",
+				"assets/scss/abstractions/_abstract-grid.scss"
+			],
+			[
 				"basetypo",
 				"assets/scss/base/_base-typography.scss"
 			],
 			[
 				"basetype",
 				"assets/scss/abstractions/_abstract-menu-types.scss"
-			],
-			[
-				"typecond",
-				"assets/scss/components/post-types/_type-condos.scss"
 			],
 			[
 				"typecont",
@@ -1150,10 +682,6 @@
 			[
 				"typecon",
 				"assets/scss/components/post-types/_type-condos.scss"
-			],
-			[
-				"typo",
-				"assets/scss/base/_base-typography.scss"
 			],
 			[
 				"page",
@@ -1290,10 +818,6 @@
 			[
 				"contentse",
 				"templates/content-search.php"
-			],
-			[
-				"base",
-				"assets/scss/base/_base-misc.scss"
 			],
 			[
 				"navi",
@@ -1522,22 +1046,6 @@
 			[
 				"templ",
 				"template-gallery.php"
-			],
-			[
-				"eventsin",
-				"templates/event-single.php"
-			],
-			[
-				"evensc",
-				"assets/scss/components/post-types/_type-event.scss"
-			],
-			[
-				"media",
-				"assets/scss/base/_base-media.scss"
-			],
-			[
-				"type-",
-				"assets/scss/components/post-types/_type-event.scss"
 			]
 		],
 		"width": 0.0

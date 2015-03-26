@@ -79,7 +79,7 @@ $slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'   
   position: absolute;
   left: 15px;
   top:50%;
-  margin-top: -12px;
+  margin-top: -10px;
 }
 .menu-toggle{
   @include from(sd, $noquery){
@@ -203,7 +203,8 @@ $slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'   
       >div{
         @include from(lt, $noquery){
           @include float-span(1, $grid: 2, $gutter: .05);
-          &:last-of-type{
+          &:last-of-type,
+          .col-2{
             @include float-span(1,'last', $grid: 2, $gutter: .05);
           }
         }

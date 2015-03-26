@@ -120,6 +120,8 @@
   </main>
 
   <footer class="l-footer" role="contentinfo">
-    <?php print render($page['footer']); ?>
+    <div class="wrap">
+      <?php print render($page['footer']); ?>
+    </div>
   </footer>
 </div>
