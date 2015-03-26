@@ -7,21 +7,17 @@
 }
 .node--news--teaser{
   h3{
-    color: $darkGrey;
-    max-width: 330px;
+    //max-width: 330px;
     @include rem(font-size, 26px);
     margin: 0;
     @include rem(padding, 40, 0, 20);
     a{
-      color: $darkGrey;
-      &:hover{
-        
-      }
+      color: #000;
     }
   }
   .field--body{
     @include from(lt, $noquery){
-      max-width: 85%;
+      //max-width: 85%;
     }
   }
 }

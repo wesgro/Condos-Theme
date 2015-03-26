@@ -13,9 +13,8 @@
       }
     });
     $('.knob').trigger('change');
-    $( '.ds-gallery .field--gallery a' ).swipebox({
-      hideBarsDelay : 30000,
-      hideBarsOnMobile : false
+    $( '.ds-gallery a' ).swipebox({
+      hideBarsDelay : 6000
     });
     $(".ds-navigation a").on('click', function(e){
       e.preventDefault();

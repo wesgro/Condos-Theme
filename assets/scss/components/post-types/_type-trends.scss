@@ -5,6 +5,8 @@
   @include to(lp){
     display: none;
   }
+  .views-row{
+  }
 }
 .view-trends{
   .view-content{
@@ -18,11 +20,12 @@
   }
   .views-row{
     margin-bottom: 45px;
-    background-size: 119px auto;
+    background-size: 96px auto;
     @include from(lt, $noquery){
       float: left;
       width: 50%;
       margin-right: 0%;
+      margin-bottom: 0;
       &.views-row-last{
         margin-right: 0;
         float: right;
@@ -48,15 +51,14 @@
   }
 }
 .node--trends{
-  color: #333333;
   .field-label,
   h3{
     margin: 0;
-    @include rem(font-size, 33px);
+    @include rem(font-size, 26px);
     line-height: 1.2;
   }
   h3{
-    color: #999999;
+
   }
   .field--source{
     @include rem(font-size, 14px);

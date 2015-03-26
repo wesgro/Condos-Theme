@@ -60,7 +60,6 @@
     @include inline-block;
     border: 0px solid #000;
     @include rem(font-size, 14px);
-    @include border-radius(5px);
     width: 100%;
     font-weight: 400;
     max-width: 300px;
@@ -75,12 +74,12 @@
     border: none;
   }
   .form-submit{
-    background-color: $green;
-    color: #FFF;
-    text-transform: uppercase;
+    background-color: $colourHighlight;
+    color: #000;
     padding:10px 25px;
-    font-weight: 700;
+    font-weight: 400;
     margin-right: 10px;
+    @include border-radius(0);
     &#edit-delete{
       background-color: transparent;
       float: right;
@@ -152,6 +151,14 @@ input[type=file]{
   }
 }
 table{
+  @include at(pt){
+    tbody tr{
+      @include float-span(1,$grid:2,$gutter:.10);
+      &.even{
+        @include float-span(1,'last',$grid:2,$gutter:.10);
+      }
+    }
+  }
   @include to(pt){
      /* Force table to not be like tables anymore */
       table, thead, tbody, th, td, tr { 
@@ -185,6 +192,7 @@ table{
         padding-right: 10px; 
         white-space: nowrap;
       }
+      
   }
 }
 
@@ -227,7 +235,6 @@ table{
       a{
         font-size: 17px !important;
         min-width:116px;
-        @include border-radius(4px,4px);
         @include to(pt){  
           font-size: 14px !important;  
         }

@@ -43,7 +43,12 @@
  *
  * @ingroup themeable
  */
+$node = menu_get_object();
+$title = drupal_get_title();
+if(isset($node) && $node->type === 'news'){
+  $title = 'News';
+}
 ?>
 <?php if (drupal_get_title() ): ?>
-  <h1 class="page-title"><?php print drupal_get_title() ; ?></h1>
+  <h1 class="page-title"><?php print $title ; ?></h1>
 <?php endif; ?>

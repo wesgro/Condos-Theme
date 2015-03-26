@@ -20,8 +20,11 @@
   text-align: center;
   position: relative;
   z-index: 5;
-  h2{
+  h3{
     margin-top: 0;
+    @include to(lp){
+      font-size: 17px;
+    }
   }
   .selector{
     margin-bottom: 20px;

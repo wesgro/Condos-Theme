@@ -1642,7 +1642,120 @@ if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) 
         });
     };
 }));
-;/*
+;/*!
+ * jQuery Cookie Plugin v1.4.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2006, 2014 Klaus Hartl
+ * Released under the MIT license
+ */
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD (Register as an anonymous module)
+    define(['jquery'], factory);
+  } else if (typeof exports === 'object') {
+    // Node/CommonJS
+    module.exports = factory(require('jquery'));
+  } else {
+    // Browser globals
+    factory(jQuery);
+  }
+}(function ($) {
+
+  var pluses = /\+/g;
+
+  function encode(s) {
+    return config.raw ? s : encodeURIComponent(s);
+  }
+
+  function decode(s) {
+    return config.raw ? s : decodeURIComponent(s);
+  }
+
+  function stringifyCookieValue(value) {
+    return encode(config.json ? JSON.stringify(value) : String(value));
+  }
+
+  function parseCookieValue(s) {
+    if (s.indexOf('"') === 0) {
+      // This is a quoted cookie as according to RFC2068, unescape...
+      s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+    }
+
+    try {
+      // Replace server-side written pluses with spaces.
+      // If we can't decode the cookie, ignore it, it's unusable.
+      // If we can't parse the cookie, ignore it, it's unusable.
+      s = decodeURIComponent(s.replace(pluses, ' '));
+      return config.json ? JSON.parse(s) : s;
+    } catch(e) {}
+  }
+
+  function read(s, converter) {
+    var value = config.raw ? s : parseCookieValue(s);
+    return $.isFunction(converter) ? converter(value) : value;
+  }
+
+  var config = $.cookie = function (key, value, options) {
+
+    // Write
+
+    if (arguments.length > 1 && !$.isFunction(value)) {
+      options = $.extend({}, config.defaults, options);
+
+      if (typeof options.expires === 'number') {
+        var days = options.expires, t = options.expires = new Date();
+        t.setMilliseconds(t.getMilliseconds() + days * 864e+5);
+      }
+
+      return (document.cookie = [
+        encode(key), '=', stringifyCookieValue(value),
+        options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+        options.path    ? '; path=' + options.path : '',
+        options.domain  ? '; domain=' + options.domain : '',
+        options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // Read
+
+    var result = key ? undefined : {},
+      // To prevent the for loop in the first place assign an empty array
+      // in case there are no cookies at all. Also prevents odd result when
+      // calling $.cookie().
+      cookies = document.cookie ? document.cookie.split('; ') : [],
+      i = 0,
+      l = cookies.length;
+
+    for (; i < l; i++) {
+      var parts = cookies[i].split('='),
+        name = decode(parts.shift()),
+        cookie = parts.join('=');
+
+      if (key === name) {
+        // If second argument (value) is a function it's a converter...
+        result = read(cookie, value);
+        break;
+      }
+
+      // Prevent storing a cookie that we couldn't decode.
+      if (!key && (cookie = read(cookie)) !== undefined) {
+        result[name] = cookie;
+      }
+    }
+
+    return result;
+  };
+
+  config.defaults = {};
+
+  $.removeCookie = function (key, options) {
+    // Must not alter options, thus extending a fresh object...
+    $.cookie(key, '', $.extend({}, options, { expires: -1 }));
+    return !$.cookie(key);
+  };
+
+}));;/*
  * jQuery Easing v1.3 - http://gsgd.co.uk/sandbox/jquery/easing/
  *
  * Uses the built in easing capabilities added In jQuery 1.1
@@ -9075,511 +9188,935 @@ addSwipeGesture: function() {
     // AMD requirement
     return $scrollTo;
 }));
-;(function(e, t, n, r) {
-    n.swipebox = function(i, s) {
-        var o, u = {
-                useCSS: true,
-                useSVG: true,
-                initialIndexOnArray: 0,
-                closeBySwipe: true,
-                hideBarsOnMobile: true,
-                hideBarsDelay: 3e5,
-                videoMaxWidth: 1140,
-                vimeoColor: "CCCCCC",
+;/*! Swipebox v1.3.0.2 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
+
+;( function ( window, document, $, undefined ) {
+
+    $.swipebox = function( elem, options ) {
+
+        // Default options
+        var ui,
+            defaults = {
+                useCSS : true,
+                useSVG : true,
+                initialIndexOnArray : 0,
+                removeBarsOnMobile : true,
+                hideCloseButtonOnMobile : false,
+                hideBarsDelay : 3000,
+                videoMaxWidth : 1140,
+                vimeoColor : 'cccccc',
                 beforeOpen: null,
                 afterOpen: null,
-                afterClose: null
+                afterClose: null,
+                loopAtEnd: false,
+                autoplayVideos: false,
+                queryStringData: {},
+                toggleClassOnLoad: ''
             },
-            a = this,
-            f = [],
-            l, c = i.selector,
-            h = n(c),
-            p = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(Android)|(PlayBook)|(BB10)|(BlackBerry)|(Opera Mini)|(IEMobile)|(webOS)|(MeeGo)/i),
-            d = p !== null || t.createTouch !== r || "ontouchstart" in e || "onmsgesturechange" in e || navigator.msMaxTouchPoints,
-            v = !!t.createElementNS && !!t.createElementNS("http://www.w3.org/2000/svg", "svg").createSVGRect,
-            m = e.innerWidth ? e.innerWidth : n(e).width(),
-            g = e.innerHeight ? e.innerHeight : n(e).height(),
-            y = '<div id="swipebox-overlay">					<div id="swipebox-slider"></div>					<div id="swipebox-caption"></div>					<div id="swipebox-action">						<a id="swipebox-close"></a>						<a id="swipebox-prev"></a>						<a id="swipebox-next"></a>					</div>			</div>';
-        a.settings = {};
-        a.init = function() {
-            a.settings = n.extend({}, u, s);
-            if (n.isArray(i)) {
-                f = i;
-                o.target = n(e);
-                o.init(a.settings.initialIndexOnArray)
+
+            plugin = this,
+            elements = [], // slides array [ { href:'...', title:'...' }, ...],
+            $elem,
+            selector = elem.selector,
+            $selector = $( selector ),
+            isMobile = navigator.userAgent.match( /(iPad)|(iPhone)|(iPod)|(Android)|(PlayBook)|(BB10)|(BlackBerry)|(Opera Mini)|(IEMobile)|(webOS)|(MeeGo)/i ),
+            isTouch = isMobile !== null || document.createTouch !== undefined || ( 'ontouchstart' in window ) || ( 'onmsgesturechange' in window ) || navigator.msMaxTouchPoints,
+            supportSVG = !! document.createElementNS && !! document.createElementNS( 'http://www.w3.org/2000/svg', 'svg').createSVGRect,
+            winWidth = window.innerWidth ? window.innerWidth : $( window ).width(),
+            winHeight = window.innerHeight ? window.innerHeight : $( window ).height(),
+            currentX = 0,
+            /* jshint multistr: true */
+            html = '<div id="swipebox-overlay">\
+                    <div id="swipebox-container">\
+                        <div id="swipebox-slider"></div>\
+                        <div id="swipebox-top-bar">\
+                            <div id="swipebox-title"></div>\
+                        </div>\
+                        <div id="swipebox-bottom-bar">\
+                            <div id="swipebox-arrows">\
+                                <a id="swipebox-prev"></a>\
+                                <a id="swipebox-next"></a>\
+                            </div>\
+                        </div>\
+                        <a id="swipebox-close"></a>\
+                    </div>\
+            </div>';
+
+        plugin.settings = {};
+
+        $.swipebox.close = function () {
+            ui.closeSlide();
+        };
+
+        $.swipebox.extend = function () {
+            return ui;
+        };
+
+        plugin.init = function() {
+
+            plugin.settings = $.extend( {}, defaults, options );
+
+            if ( $.isArray( elem ) ) {
+
+                elements = elem;
+                ui.target = $( window );
+                ui.init( plugin.settings.initialIndexOnArray );
+
             } else {
-                n(t).on("click", c, function(e) {
-                    if (e.target.parentNode.className === "slide current") {
-                        return false
+
+                $( document ).on( 'click', selector, function( event ) {
+
+                    // console.log( isTouch );
+
+                    if ( event.target.parentNode.className === 'slide current' ) {
+
+                        return false;
                     }
-                    if (!n.isArray(i)) {
-                        o.destroy();
-                        l = n(c);
-                        o.actions()
+
+                    if ( ! $.isArray( elem ) ) {
+                        ui.destroy();
+                        $elem = $( selector );
+                        ui.actions();
                     }
-                    f = [];
-                    var t, r, s;
-                    if (!s) {
-                        r = "data-rel";
-                        s = n(this).attr(r)
+
+                    elements = [];
+                    var index , relType, relVal;
+
+                    // Allow for HTML5 compliant attribute before legacy use of rel
+                    if ( ! relVal ) {
+                        relType = 'data-rel';
+                        relVal  = $( this ).attr( relType );
                     }
-                    if (!s) {
-                        r = "rel";
-                        s = n(this).attr(r)
+
+                    if ( ! relVal ) {
+                        relType = 'rel';
+                        relVal = $( this ).attr( relType );
                     }
-                    if (s && s !== "" && s !== "nofollow") {
-                        l = h.filter("[" + r + '="' + s + '"]')
+
+                    if ( relVal && relVal !== '' && relVal !== 'nofollow' ) {
+                        $elem = $selector.filter( '[' + relType + '="' + relVal + '"]' );
                     } else {
-                        l = n(c)
+                        $elem = $( selector );
                     }
-                    l.each(function() {
-                        var e = null,
-                            t = null;
-                        if (n(this).attr("title")) {
-                            e = n(this).attr("title")
+
+                    $elem.each( function() {
+
+                        var title = null,
+                            href = null;
+
+                        if ( $( this ).attr( 'title' ) ) {
+                            title = $( this ).attr( 'title' );
                         }
-                        if (n(this).attr("href")) {
-                            t = n(this).attr("href")
+
+
+                        if ( $( this ).attr( 'href' ) ) {
+                            href = $( this ).attr( 'href' );
                         }
-                        f.push({
-                            href: t,
-                            title: e
-                        })
-                    });
-                    t = l.index(n(this));
-                    e.preventDefault();
-                    e.stopPropagation();
-                    o.target = n(e.target);
-                    o.init(t)
-                })
+
+                        elements.push( {
+                            href: href,
+                            title: title
+                        } );
+                    } );
+
+                    index = $elem.index( $( this ) );
+                    event.preventDefault();
+                    event.stopPropagation();
+                    ui.target = $( event.target );
+                    ui.init( index );
+                } );
             }
         };
-        o = {
-            init: function(e) {
-                if (a.settings.beforeOpen) {
-                    a.settings.beforeOpen()
+
+        ui = {
+
+            /**
+             * Initiate Swipebox
+             */
+            init : function( index ) {
+                if ( plugin.settings.beforeOpen ) {
+                    plugin.settings.beforeOpen();
                 }
-                this.target.trigger("swipebox-start");
-                n.swipebox.isOpen = true;
+                this.target.trigger( 'swipebox-start' );
+                $.swipebox.isOpen = true;
                 this.build();
-                this.openSlide(e);
-                this.openMedia(e);
-                this.preloadMedia(e + 1);
-                this.preloadMedia(e - 1);
-                if (a.settings.afterOpen) {
-                    a.settings.afterOpen()
+                this.openSlide( index );
+                this.openMedia( index );
+                this.preloadMedia( index+1 );
+                this.preloadMedia( index-1 );
+                if ( plugin.settings.afterOpen ) {
+                    plugin.settings.afterOpen();
                 }
             },
-            build: function() {
-                var e = this,
-                    t;
-                n("body").append(y);
-                if (e.doCssTrans()) {
-                    n("#swipebox-slider").css({
-                        "-webkit-transition": "left 0.4s ease",
-                        "-moz-transition": "left 0.4s ease",
-                        "-o-transition": "left 0.4s ease",
-                        "-khtml-transition": "left 0.4s ease",
-                        transition: "left 0.4s ease"
-                    });
-                    n("#swipebox-overlay").css({
-                        "-webkit-transition": "opacity 1s ease",
-                        "-moz-transition": "opacity 1s ease",
-                        "-o-transition": "opacity 1s ease",
-                        "-khtml-transition": "opacity 1s ease",
-                        transition: "opacity 1s ease"
-                    });
-                    n("#swipebox-action, #swipebox-caption").css({
-                        "-webkit-transition": "0.5s",
-                        "-moz-transition": "0.5s",
-                        "-o-transition": "0.5s",
-                        "-khtml-transition": "0.5s",
-                        transition: "0.5s"
-                    })
+
+            /**
+             * Built HTML containers and fire main functions
+             */
+            build : function () {
+                var $this = this, bg;
+
+                $( 'body' ).append( html );
+
+                if ( supportSVG && plugin.settings.useSVG === true ) {
+                    bg = $( '#swipebox-close' ).css( 'background-image' );
+                    bg = bg.replace( 'png', 'svg' );
+                    $( '#swipebox-prev, #swipebox-next, #swipebox-close' ).css( {
+                        'background-image' : bg
+                    } );
                 }
-                if (v && a.settings.useSVG === true) {
-                    t = n("#swipebox-action #swipebox-close").css("background-image");
-                    t = t.replace("png", "svg");
-                    n("#swipebox-action #swipebox-prev,#swipebox-action #swipebox-next,#swipebox-action #swipebox-close").css({
-                        "background-image": t
-                    })
+
+                if ( isMobile && plugin.settings.removeBarsOnMobile ) {
+                    $( '#swipebox-bottom-bar, #swipebox-top-bar' ).remove();
                 }
-                if (p && a.settings.hideBarsOnMobile === true) {
-                    n("#swipebox-action, #swipebox-caption").hide()
+
+                $.each( elements,  function() {
+                    $( '#swipebox-slider' ).append( '<div class="slide"></div>' );
+                } );
+
+                $this.setDim();
+                $this.actions();
+
+                if ( isTouch ) {
+                    $this.gesture();
                 }
-                n.each(f, function() {
-                    n("#swipebox-slider").append('<div class="slide"></div>')
-                });
-                e.setDim();
-                e.actions();
-                if (d) {
-                    e.gesture()
-                }
-                e.keyboard();
-                e.animBars();
-                e.resize()
+
+                // Devices can have both touch and keyboard input so always allow key events
+                $this.keyboard();
+
+                $this.animBars();
+                $this.resize();
+
             },
-            setDim: function() {
-                var t, r, i = {};
-                if ("onorientationchange" in e) {
-                    e.addEventListener("orientationchange", function() {
-                        if (e.orientation === 0) {
-                            t = m;
-                            r = g
-                        } else if (e.orientation === 90 || e.orientation === -90) {
-                            t = g;
-                            r = m
+
+            /**
+             * Set dimensions depending on windows width and height
+             */
+            setDim : function () {
+
+                var width, height, sliderCss = {};
+
+                // Reset dimensions on mobile orientation change
+                if ( 'onorientationchange' in window ) {
+
+                    window.addEventListener( 'orientationchange', function() {
+                        if ( window.orientation === 0 ) {
+                            width = winWidth;
+                            height = winHeight;
+                        } else if ( window.orientation === 90 || window.orientation === -90 ) {
+                            width = winHeight;
+                            height = winWidth;
                         }
-                    }, false)
+                    }, false );
+
+
                 } else {
-                    t = e.innerWidth ? e.innerWidth : n(e).width();
-                    r = e.innerHeight ? e.innerHeight : n(e).height()
+
+                    width = window.innerWidth ? window.innerWidth : $( window ).width();
+                    height = window.innerHeight ? window.innerHeight : $( window ).height();
                 }
-                i = {
-                    width: t,
-                    height: r
+
+                sliderCss = {
+                    width : width,
+                    height : height
                 };
-                n("#swipebox-overlay").css(i)
+
+                $( '#swipebox-overlay' ).css( sliderCss );
+
             },
-            resize: function() {
-                var t = this;
-                n(e).resize(function() {
-                    t.setDim()
-                }).resize()
+
+            /**
+             * Reset dimensions on window resize envent
+             */
+            resize : function () {
+                var $this = this;
+
+                $( window ).resize( function() {
+                    $this.setDim();
+                } ).resize();
             },
-            supportTransition: function() {
-                var e = "transition WebkitTransition MozTransition OTransition msTransition KhtmlTransition".split(" "),
-                    n;
-                for (n = 0; n < e.length; n++) {
-                    if (t.createElement("div").style[e[n]] !== r) {
-                        return e[n]
+
+            /**
+             * Check if device supports CSS transitions
+             */
+            supportTransition : function () {
+
+                var prefixes = 'transition WebkitTransition MozTransition OTransition msTransition KhtmlTransition'.split( ' ' ),
+                    i;
+
+                for ( i = 0; i < prefixes.length; i++ ) {
+                    if ( document.createElement( 'div' ).style[ prefixes[i] ] !== undefined ) {
+                        return prefixes[i];
                     }
                 }
-                return false
+                return false;
             },
-            doCssTrans: function() {
-                if (a.settings.useCSS && this.supportTransition()) {
-                    return true
+
+            /**
+             * Check if CSS transitions are allowed (options + devicesupport)
+             */
+            doCssTrans : function () {
+                if ( plugin.settings.useCSS && this.supportTransition() ) {
+                    return true;
                 }
             },
-            gesture: function() {
-                var e = this,
-                    t = null,
-                    r = null,
-                    i = false,
-                    s = 10,
-                    o = 50,
-                    u = {},
-                    f = {},
-                    l = n("#swipebox-caption, #swipebox-action"),
-                    c = n("#swipebox-slider");
-                l.addClass("visible-bars");
-                e.setTimeout();
-                n("body").bind("touchstart", function(e) {
-                    n(this).addClass("touching");
-                    f = e.originalEvent.targetTouches[0];
-                    u.pageX = e.originalEvent.targetTouches[0].pageX;
-                    u.pageY = e.originalEvent.targetTouches[0].pageY;
-                    n(".touching").bind("touchmove", function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        f = e.originalEvent.targetTouches[0];
-                        if (a.settings.closeBySwipe) {
-                            r = f.pageY - u.pageY;
-                            if (Math.abs(r) >= o || i) {
-                                var t = .75 - Math.abs(r) / c.height();
-                                c.css({
-                                    top: r + "px"
-                                });
-                                c.css({
-                                    opacity: t
-                                });
-                                i = true
+
+            /**
+             * Touch navigation
+             */
+            gesture : function () {
+
+                var $this = this,
+                    index,
+                    hDistance,
+                    vDistance,
+                    hDistanceLast,
+                    vDistanceLast,
+                    hDistancePercent,
+                    vSwipe = false,
+                    hSwipe = false,
+                    hSwipMinDistance = 10,
+                    vSwipMinDistance = 50,
+                    startCoords = {},
+                    endCoords = {},
+                    bars = $( '#swipebox-top-bar, #swipebox-bottom-bar' ),
+                    slider = $( '#swipebox-slider' );
+
+                bars.addClass( 'visible-bars' );
+                $this.setTimeout();
+
+                $( 'body' ).bind( 'touchstart', function( event ) {
+
+                    $( this ).addClass( 'touching' );
+                    index = $( '#swipebox-slider .slide' ).index( $( '#swipebox-slider .slide.current' ) );
+                    endCoords = event.originalEvent.targetTouches[0];
+                    startCoords.pageX = event.originalEvent.targetTouches[0].pageX;
+                    startCoords.pageY = event.originalEvent.targetTouches[0].pageY;
+
+                    $( '#swipebox-slider' ).css( {
+                        '-webkit-transform' : 'translate3d(' + currentX +'%, 0, 0)',
+                        'transform' : 'translate3d(' + currentX + '%, 0, 0)'
+                    } );
+
+                    $( '.touching' ).bind( 'touchmove',function( event ) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        endCoords = event.originalEvent.targetTouches[0];
+
+                        if ( ! hSwipe ) {
+                            vDistanceLast = vDistance;
+                            vDistance = endCoords.pageY - startCoords.pageY;
+                            if ( Math.abs( vDistance ) >= vSwipMinDistance || vSwipe ) {
+                                var opacity = 0.75 - Math.abs(vDistance) / slider.height();
+
+                                slider.css( { 'top': vDistance + 'px' } );
+                                slider.css( { 'opacity': opacity } );
+
+                                vSwipe = true;
                             }
                         }
-                    });
-                    return false
-                }).bind("touchend", function(o) {
-                    o.preventDefault();
-                    o.stopPropagation();
-                    if (a.settings.closeBySwipe) {
-                        if (c.css("opacity") <= .5) {
-                            var h = r > 0 ? c.height() : -c.height();
-                            c.velocity({
-                                top: h + "px",
-                                opacity: 0
-                            }, 300, function() {
-                                e.closeSlide()
-                            })
+
+                        hDistanceLast = hDistance;
+                        hDistance = endCoords.pageX - startCoords.pageX;
+                        hDistancePercent = hDistance * 100 / winWidth;
+
+                        if ( ! hSwipe && ! vSwipe && Math.abs( hDistance ) >= hSwipMinDistance ) {
+                            $( '#swipebox-slider' ).css( {
+                                '-webkit-transition' : '',
+                                'transition' : ''
+                            } );
+                            hSwipe = true;
+                        }
+
+                        if ( hSwipe ) {
+
+                            // swipe left
+                            if ( 0 < hDistance ) {
+
+                                // first slide
+                                if ( 0 === index ) {
+                                    // console.log( 'first' );
+                                    $( '#swipebox-overlay' ).addClass( 'leftSpringTouch' );
+                                } else {
+                                    // Follow gesture
+                                    $( '#swipebox-overlay' ).removeClass( 'leftSpringTouch' ).removeClass( 'rightSpringTouch' );
+                                    $( '#swipebox-slider' ).css( {
+                                        '-webkit-transform' : 'translate3d(' + ( currentX + hDistancePercent ) +'%, 0, 0)',
+                                        'transform' : 'translate3d(' + ( currentX + hDistancePercent ) + '%, 0, 0)'
+                                    } );
+                                }
+
+                            // swipe rught
+                            } else if ( 0 > hDistance ) {
+
+                                // last Slide
+                                if ( elements.length === index +1 ) {
+                                    // console.log( 'last' );
+                                    $( '#swipebox-overlay' ).addClass( 'rightSpringTouch' );
+                                } else {
+                                    $( '#swipebox-overlay' ).removeClass( 'leftSpringTouch' ).removeClass( 'rightSpringTouch' );
+                                    $( '#swipebox-slider' ).css( {
+                                        '-webkit-transform' : 'translate3d(' + ( currentX + hDistancePercent ) +'%, 0, 0)',
+                                        'transform' : 'translate3d(' + ( currentX + hDistancePercent ) + '%, 0, 0)'
+                                    } );
+                                }
+
+                            }
+                        }
+                    } );
+
+                    return false;
+
+                } ).bind( 'touchend',function( event ) {
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    $( '#swipebox-slider' ).css( {
+                        '-webkit-transition' : '-webkit-transform 0.4s ease',
+                        'transition' : 'transform 0.4s ease'
+                    } );
+
+                    vDistance = endCoords.pageY - startCoords.pageY;
+                    hDistance = endCoords.pageX - startCoords.pageX;
+                    hDistancePercent = hDistance*100/winWidth;
+
+                    // Swipe to bottom to close
+                    if ( vSwipe ) {
+                        vSwipe = false;
+                        if ( Math.abs( vDistance ) >= 2 * vSwipMinDistance && Math.abs( vDistance ) > Math.abs( vDistanceLast ) ) {
+                            var vOffset = vDistance > 0 ? slider.height() : - slider.height();
+                            slider.animate( { top: vOffset + 'px', 'opacity': 0 },
+                                300,
+                                function () {
+                                    $this.closeSlide();
+                                } );
                         } else {
-                            c.velocity({
-                                top: 0,
-                                opacity: 1
-                            }, 300)
-                        } if (i) {
-                            i = false;
-                            return
+                            slider.animate( { top: 0, 'opacity': 1 }, 300 );
+                        }
+
+                    } else if ( hSwipe ) {
+
+                        hSwipe = false;
+
+                        // swipeLeft
+                        if( hDistance >= hSwipMinDistance && hDistance >= hDistanceLast) {
+
+                            $this.getPrev();
+
+                        // swipeRight
+                        } else if ( hDistance <= -hSwipMinDistance && hDistance <= hDistanceLast) {
+
+                            $this.getNext();
+                        }
+
+                    } else { // Top and bottom bars have been removed on touchable devices
+                        // tap
+                        if ( ! bars.hasClass( 'visible-bars' ) ) {
+                            $this.showBars();
+                            $this.setTimeout();
+                        } else {
+                            $this.clearTimeout();
+                            $this.hideBars();
                         }
                     }
-                    t = f.pageX - u.pageX;
-                    if (t >= s) {
-                        e.getPrev()
-                    } else if (t <= -s) {
-                        e.getNext()
-                    } else {
-                        if (!l.hasClass("visible-bars")) {
-                            e.showBars();
-                            e.setTimeout()
-                        } else {
-                            e.clearTimeout()
-                        }
+
+                    $( '#swipebox-slider' ).css( {
+                        '-webkit-transform' : 'translate3d(' + currentX + '%, 0, 0)',
+                        'transform' : 'translate3d(' + currentX + '%, 0, 0)'
+                    } );
+
+                    $( '#swipebox-overlay' ).removeClass( 'leftSpringTouch' ).removeClass( 'rightSpringTouch' );
+                    $( '.touching' ).off( 'touchmove' ).removeClass( 'touching' );
+
+                } );
+            },
+
+            /**
+             * Set timer to hide the action bars
+             */
+            setTimeout: function () {
+                if ( plugin.settings.hideBarsDelay > 0 ) {
+                    var $this = this;
+                    $this.clearTimeout();
+                    $this.timeout = window.setTimeout( function() {
+                            $this.hideBars();
+                        },
+
+                        plugin.settings.hideBarsDelay
+                    );
+                }
+            },
+
+            /**
+             * Clear timer
+             */
+            clearTimeout: function () {
+                window.clearTimeout( this.timeout );
+                this.timeout = null;
+            },
+
+            /**
+             * Show navigation and title bars
+             */
+            showBars : function () {
+                var bars = $( '#swipebox-top-bar, #swipebox-bottom-bar' );
+                if ( this.doCssTrans() ) {
+                    bars.addClass( 'visible-bars' );
+                } else {
+                    $( '#swipebox-top-bar' ).animate( { top : 0 }, 500 );
+                    $( '#swipebox-bottom-bar' ).animate( { bottom : 0 }, 500 );
+                    setTimeout( function() {
+                        bars.addClass( 'visible-bars' );
+                    }, 1000 );
+                }
+            },
+
+            /**
+             * Hide navigation and title bars
+             */
+            hideBars : function () {
+                var bars = $( '#swipebox-top-bar, #swipebox-bottom-bar' );
+                if ( this.doCssTrans() ) {
+                    bars.removeClass( 'visible-bars' );
+                } else {
+                    $( '#swipebox-top-bar' ).animate( { top : '-50px' }, 500 );
+                    $( '#swipebox-bottom-bar' ).animate( { bottom : '-50px' }, 500 );
+                    setTimeout( function() {
+                        bars.removeClass( 'visible-bars' );
+                    }, 1000 );
+                }
+            },
+
+            /**
+             * Animate navigation and top bars
+             */
+            animBars : function () {
+                var $this = this,
+                    bars = $( '#swipebox-top-bar, #swipebox-bottom-bar' );
+
+                bars.addClass( 'visible-bars' );
+                $this.setTimeout();
+
+                $( '#swipebox-slider' ).click( function() {
+                    if ( ! bars.hasClass( 'visible-bars' ) ) {
+                        $this.showBars();
+                        $this.setTimeout();
                     }
-                    n(".touching").off("touchmove").removeClass("touching")
-                })
-            },
-            setTimeout: function() {
-                if (a.settings.hideBarsDelay > 0) {
-                    var t = this;
-                    t.clearTimeout();
-                    t.timeout = e.setTimeout(function() {}, a.settings.hideBarsDelay)
-                }
-            },
-            clearTimeout: function() {
-                e.clearTimeout(this.timeout);
-                this.timeout = null
-            },
-            showBars: function() {
-                var e = n("#swipebox-caption, #swipebox-action");
-                if (this.doCssTrans()) {} else {
-                    setTimeout(function() {}, 1e3)
-                }
-            },
-            hideBars: function() {
-                var e = n("#swipebox-caption, #swipebox-action");
-                if (this.doCssTrans()) {} else {
-                    setTimeout(function() {}, 1e3)
-                }
-            },
-            animBars: function() {
-                var e = this,
-                    t = n("#swipebox-caption, #swipebox-action");
-                e.setTimeout();
-                n("#swipebox-slider").click(function() {
-                    if (!t.hasClass("visible-bars")) {
-                        e.showBars();
-                        e.setTimeout()
-                    }
-                });
-                n("#swipebox-action").hover(function() {
-                    e.showBars();
-                    e.clearTimeout()
+                } );
+
+                $( '#swipebox-bottom-bar' ).hover( function() {
+                    $this.showBars();
+                    bars.addClass( 'visible-bars' );
+                    $this.clearTimeout();
+
                 }, function() {
-                    e.setTimeout()
-                })
-            },
-            keyboard: function() {
-                var t = this;
-                n(e).bind("keyup", function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if (e.keyCode === 37) {
-                        t.getPrev()
-                    } else if (e.keyCode === 39) {
-                        t.getNext()
-                    } else if (e.keyCode === 27) {
-                        t.closeSlide()
+                    if ( plugin.settings.hideBarsDelay > 0 ) {
+                        bars.removeClass( 'visible-bars' );
+                        $this.setTimeout();
                     }
-                })
+
+                } );
             },
-            actions: function() {
-                var e = this,
-                    t = "touchend click";
-                if (f.length < 2) {
-                    n("#swipebox-prev, #swipebox-next").hide()
+
+            /**
+             * Keyboard navigation
+             */
+            keyboard : function () {
+                var $this = this;
+                $( window ).bind( 'keyup', function( event ) {
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    if ( event.keyCode === 37 ) {
+
+                        $this.getPrev();
+
+                    } else if ( event.keyCode === 39 ) {
+
+                        $this.getNext();
+
+                    } else if ( event.keyCode === 27 ) {
+
+                        $this.closeSlide();
+                    }
+                } );
+            },
+
+            /**
+             * Navigation events : go to next slide, go to prevous slide and close
+             */
+            actions : function () {
+                var $this = this,
+                    action = 'touchend click'; // Just detect for both event types to allow for multi-input
+
+                if ( elements.length < 2 ) {
+
+                    $( '#swipebox-bottom-bar' ).hide();
+
+                    if ( undefined === elements[ 1 ] ) {
+                        $( '#swipebox-top-bar' ).hide();
+                    }
+
                 } else {
-                    n("#swipebox-prev").bind(t, function(t) {
-                        t.preventDefault();
-                        t.stopPropagation();
-                        e.getPrev();
-                        e.setTimeout()
+                    $( '#swipebox-prev' ).bind( action, function( event ) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        $this.getPrev();
+                        $this.setTimeout();
+                    } );
+
+                    $( '#swipebox-next' ).bind( action, function( event ) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        $this.getNext();
+                        $this.setTimeout();
+                    } );
+                }
+
+                $( '#swipebox-close' ).bind( action, function() {
+                    $this.closeSlide();
+                } );
+            },
+
+            /**
+             * Set current slide
+             */
+            setSlide : function ( index, isFirst ) {
+
+                isFirst = isFirst || false;
+
+                var slider = $( '#swipebox-slider' );
+
+                currentX = -index*100;
+
+                if ( this.doCssTrans() ) {
+                    slider.css( {
+                        '-webkit-transform' : 'translate3d(' + (-index*100)+'%, 0, 0)',
+                        'transform' : 'translate3d(' + (-index*100)+'%, 0, 0)'
+                    } );
+                } else {
+                    slider.animate( { left : ( -index*100 )+'%' } );
+                }
+
+                $( '#swipebox-slider .slide' ).removeClass( 'current' );
+                $( '#swipebox-slider .slide' ).eq( index ).addClass( 'current' );
+                this.setTitle( index );
+
+                if ( isFirst ) {
+                    slider.fadeIn();
+                }
+
+                $( '#swipebox-prev, #swipebox-next' ).removeClass( 'disabled' );
+
+                if ( index === 0 ) {
+                    $( '#swipebox-prev' ).addClass( 'disabled' );
+                } else if ( index === elements.length - 1 && plugin.settings.loopAtEnd !== true ) {
+                    $( '#swipebox-next' ).addClass( 'disabled' );
+                }
+            },
+
+            /**
+             * Open slide
+             */
+            openSlide : function ( index ) {
+                $( 'html' ).addClass( 'swipebox-html' );
+                if ( isTouch ) {
+                    $( 'html' ).addClass( 'swipebox-touch' );
+
+                    if ( plugin.settings.hideCloseButtonOnMobile ) {
+                        $( 'html' ).addClass( 'swipebox-no-close-button' );
+                    }
+                } else {
+                    $( 'html' ).addClass( 'swipebox-no-touch' );
+                }
+                $( window ).trigger( 'resize' ); // fix scroll bar visibility on desktop
+                this.setSlide( index, true );
+            },
+
+            /**
+             * Set a time out if the media is a video
+             */
+            preloadMedia : function ( index ) {
+                var $this = this,
+                    src = null;
+
+                if ( elements[ index ] !== undefined ) {
+                    src = elements[ index ].href;
+                }
+
+                if ( ! $this.isVideo( src ) ) {
+                    setTimeout( function() {
+                        $this.openMedia( index );
+                    }, 1000);
+                } else {
+                    $this.openMedia( index );
+                }
+            },
+
+            /**
+             * Open
+             */
+            openMedia : function ( index ) {
+                var $this = this,
+                    src,
+                    slide;
+
+                if ( elements[ index ] !== undefined ) {
+                    src = elements[ index ].href;
+                }
+
+                if ( index < 0 || index >= elements.length ) {
+                    return false;
+                }
+
+                slide = $( '#swipebox-slider .slide' ).eq( index );
+
+                if ( ! $this.isVideo( src ) ) {
+                    slide.addClass( 'slide-loading' );
+                    $this.loadMedia( src, function() {
+                        slide.removeClass( 'slide-loading' );
+                        slide.html( this );
+                    } );
+                } else {
+                    slide.html( $this.getVideo( src ) );
+                }
+
+            },
+
+            /**
+             * Set link title attribute as caption
+             */
+            setTitle : function ( index ) {
+                var title = null;
+
+                $( '#swipebox-title' ).empty();
+
+                if ( elements[ index ] !== undefined ) {
+                    title = elements[ index ].title;
+                }
+
+                if ( title ) {
+                    $( '#swipebox-top-bar' ).show();
+                    $( '#swipebox-title' ).append( title );
+                } else {
+                    $( '#swipebox-top-bar' ).hide();
+                }
+            },
+
+            /**
+             * Check if the URL is a video
+             */
+            isVideo : function ( src ) {
+
+                if ( src ) {
+                    if ( src.match( /(youtube\.com|youtube-nocookie\.com)\/watch\?v=([a-zA-Z0-9\-_]+)/) || src.match( /vimeo\.com\/([0-9]*)/ ) || src.match( /youtu\.be\/([a-zA-Z0-9\-_]+)/ ) ) {
+                        return true;
+                    }
+
+                    if ( src.toLowerCase().indexOf( 'swipeboxvideo=1' ) >= 0 ) {
+
+                        return true;
+                    }
+                }
+
+            },
+
+            /**
+             * Parse URI querystring and:
+             * - overrides value provided via dictionary
+             * - rebuild it again returning a string
+             */
+            parseUri : function (uri, customData) {
+                var a = document.createElement('a'),
+                    qs = {};
+
+                // Decode the URI
+                a.href = decodeURIComponent( uri );
+
+                // QueryString to Object
+                qs = JSON.parse( '{"' + a.search.toLowerCase().replace('?','').replace(/&/g,'","').replace(/=/g,'":"') + '"}' );
+
+                // Extend with custom data
+                if ( $.isPlainObject( customData ) ) {
+                    qs = $.extend( qs, customData, plugin.settings.queryStringData ); // The dev has always the final word
+                }
+
+                // Return querystring as a string
+                return $
+                    .map( qs, function (val, key) {
+                        if ( val && val > '' ) {
+                            return encodeURIComponent( key ) + '=' + encodeURIComponent( val );
+                        }
+                    })
+                    .join('&');
+            },
+
+            /**
+             * Get video iframe code from URL
+             */
+            getVideo : function( url ) {
+                var iframe = '',
+                    youtubeUrl = url.match( /((?:www\.)?youtube\.com|(?:www\.)?youtube-nocookie\.com)\/watch\?v=([a-zA-Z0-9\-_]+)/ ),
+                    youtubeShortUrl = url.match(/(?:www\.)?youtu\.be\/([a-zA-Z0-9\-_]+)/),
+                    vimeoUrl = url.match( /(?:www\.)?vimeo\.com\/([0-9]*)/ ),
+                    qs = '';
+                if ( youtubeUrl || youtubeShortUrl) {
+                    if ( youtubeShortUrl ) {
+                        youtubeUrl = youtubeShortUrl;
+                    }
+                    qs = ui.parseUri( url, {
+                        'autoplay' : ( plugin.settings.autoplayVideos ? '1' : '0' ),
+                        'v' : ''
                     });
-                    n("#swipebox-next").bind(t, function(t) {
-                        t.preventDefault();
-                        t.stopPropagation();
-                        e.getNext();
-                        e.setTimeout()
-                    })
-                }
-                n("#swipebox-close,.slide").bind(t, function() {
-                    e.closeSlide()
-                })
-            },
-            setSlide: function(e, t) {
-                t = t || false;
-                var r = n("#swipebox-slider");
-                if (this.doCssTrans()) {
-                    r.css({
-                        left: -e * 100 + "%"
-                    })
-                } else {
-                    r.velocity({
-                        left: -e * 100 + "%"
-                    })
-                }
-                n("#swipebox-slider .slide").removeClass("current");
-                n("#swipebox-slider .slide").eq(e).addClass("current");
-                this.setTitle(e);
-                if (t) {
-                    r.fadeIn()
-                }
-                n("#swipebox-prev, #swipebox-next").removeClass("disabled");
-                if (e === 0) {
-                    n("#swipebox-prev").addClass("disabled")
-                } else if (e === f.length - 1) {
-                    n("#swipebox-next").addClass("disabled")
-                }
-            },
-            openSlide: function(t) {
-                n("html").addClass("swipebox-html");
-                if (d) {
-                    n("html").addClass("swipebox-touch")
-                }
-                n(e).trigger("resize");
-                this.setSlide(t, true)
-            },
-            preloadMedia: function(e) {
-                var t = this,
-                    n = null;
-                if (f[e] !== r) {
-                    n = f[e].href
-                }
-                if (!t.isVideo(n)) {
-                    setTimeout(function() {
-                        t.openMedia(e)
-                    }, 1e3)
-                } else {
-                    t.openMedia(e)
-                }
-            },
-            openMedia: function(e) {
-                var t = this,
-                    i = null;
-                if (f[e] !== r) {
-                    i = f[e].href
-                }
-                if (e < 0 || e >= f.length) {
-                    return false
-                }
-                if (!t.isVideo(i)) {
-                    t.loadMedia(i, function() {
-                        n("#swipebox-slider .slide").eq(e).html(this)
-                    })
-                } else {
-                    n("#swipebox-slider .slide").eq(e).html(t.getVideo(i))
-                }
-            },
-            setTitle: function(e) {
-                var t = null;
-                n("#swipebox-caption").empty();
-                if (f[e] !== r) {
-                    t = f[e].title
-                }
-                if (t) {
-                    n("#swipebox-caption").append(t)
-                }
-            },
-            isVideo: function(e) {
-                if (e) {
-                    if (e.match(/youtube\.com\/watch\?v=([a-zA-Z0-9\-_]+)/) || e.match(/vimeo\.com\/([0-9]*)/) || e.match(/youtu\.be\/([a-zA-Z0-9\-_]+)/)) {
-                        return true
-                    }
-                }
-            },
-            getVideo: function(e) {
-                var t = "",
-                    n = e.match(/watch\?v=([a-zA-Z0-9\-_]+)/),
-                    r = e.match(/youtu\.be\/([a-zA-Z0-9\-_]+)/),
-                    i = e.match(/vimeo\.com\/([0-9]*)/);
-                if (n || r) {
-                    if (r) {
-                        n = r
-                    }
-                    t = '<iframe width="560" height="315" src="//www.youtube.com/embed/' + n[1] + '" frameborder="0" allowfullscreen></iframe>'
-                } else if (i) {
-                    t = '<iframe width="560" height="315"  src="//player.vimeo.com/video/' + i[1] + "?byline=0&portrait=0&color=" + a.settings.vimeoColor + '" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>'
-                }
-                return '<div class="swipebox-video-container" style="max-width:' + a.settings.videomaxWidth + 'px"><div class="swipebox-video">' + t + "</div></div>"
-            },
-            loadMedia: function(e, t) {
-                if (!this.isVideo(e)) {
-                    var r = n("<img>").on("load", function() {
-                        t.call(r)
+                    iframe = '<iframe width="560" height="315" src="//' + youtubeUrl[1] + '/embed/' + youtubeUrl[2] + '?' + qs + '" frameborder="0" allowfullscreen></iframe>';
+
+                } else if ( vimeoUrl ) {
+                    qs = ui.parseUri( url, {
+                        'autoplay' : ( plugin.settings.autoplayVideos ? '1' : '0' ),
+                        'byline' : '0',
+                        'portrait' : '0',
+                        'color': plugin.settings.vimeoColor
                     });
-                    r.attr("src", e)
-                }
-            },
-            getNext: function() {
-                var e = this,
-                    t = n("#swipebox-slider .slide").index(n("#swipebox-slider .slide.current"));
-                if (t + 1 < f.length) {
-                    t++;
-                    e.setSlide(t);
-                    e.preloadMedia(t + 1)
+                    iframe = '<iframe width="560" height="315"  src="//player.vimeo.com/video/' + vimeoUrl[1] + '?' + qs + '" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+
                 } else {
-                    n("#swipebox-slider").addClass("rightSpring");
-                    setTimeout(function() {
-                        n("#swipebox-slider").removeClass("rightSpring")
-                    }, 500)
+                    iframe = '<iframe width="560" height="315" src="' + url + '" frameborder="0" allowfullscreen></iframe>';
+                }
+
+                return '<div class="swipebox-video-container" style="max-width:' + plugin.settings.videoMaxWidth + 'px"><div class="swipebox-video">' + iframe + '</div></div>';
+            },
+
+            /**
+             * Load image
+             */
+            loadMedia : function ( src, callback ) {
+                // Inline content
+                if ( src.trim().indexOf('#') === 0 ) {
+                    callback.call(
+                        $('<div>', {
+                            'class' : 'swipebox-inline-container'
+                        })
+                        .append(
+                            $(src)
+                            .clone()
+                            .toggleClass( plugin.settings.toggleClassOnLoad )
+                        )
+                    );
+                }
+                // Everything else
+                else {
+                    if ( ! this.isVideo( src ) ) {
+                        var img = $( '<img>' ).on( 'load', function() {
+                            callback.call( img );
+                        } );
+
+                        img.attr( 'src', src );
+                    }
                 }
             },
-            getPrev: function() {
-                var e = n("#swipebox-slider .slide").index(n("#swipebox-slider .slide.current"));
-                if (e > 0) {
-                    e--;
-                    this.setSlide(e);
-                    this.preloadMedia(e - 1)
+
+            /**
+             * Get next slide
+             */
+            getNext : function () {
+                var $this = this,
+                    src,
+                    index = $( '#swipebox-slider .slide' ).index( $( '#swipebox-slider .slide.current' ) );
+                if ( index + 1 < elements.length ) {
+
+                    src = $( '#swipebox-slider .slide' ).eq( index ).contents().find( 'iframe' ).attr( 'src' );
+                    $( '#swipebox-slider .slide' ).eq( index ).contents().find( 'iframe' ).attr( 'src', src );
+                    index++;
+                    $this.setSlide( index );
+                    $this.preloadMedia( index+1 );
                 } else {
-                    n("#swipebox-slider").addClass("leftSpring");
-                    setTimeout(function() {
-                        n("#swipebox-slider").removeClass("leftSpring")
-                    }, 500)
+
+                    if ( plugin.settings.loopAtEnd === true ) {
+                        src = $( '#swipebox-slider .slide' ).eq( index ).contents().find( 'iframe' ).attr( 'src' );
+                        $( '#swipebox-slider .slide' ).eq( index ).contents().find( 'iframe' ).attr( 'src', src );
+                        index = 0;
+                        $this.preloadMedia( index );
+                        $this.setSlide( index );
+                        $this.preloadMedia( index + 1 );
+                    } else {
+                        $( '#swipebox-overlay' ).addClass( 'rightSpring' );
+                        setTimeout( function() {
+                            $( '#swipebox-overlay' ).removeClass( 'rightSpring' );
+                        }, 500 );
+                    }
                 }
             },
-            closeSlide: function() {
-                n("html").removeClass("swipebox-html");
-                n("html").removeClass("swipebox-touch");
-                n(e).trigger("resize");
-                this.destroy()
+
+            /**
+             * Get previous slide
+             */
+            getPrev : function () {
+                var index = $( '#swipebox-slider .slide' ).index( $( '#swipebox-slider .slide.current' ) ),
+                    src;
+                if ( index > 0 ) {
+                    src = $( '#swipebox-slider .slide' ).eq( index ).contents().find( 'iframe').attr( 'src' );
+                    $( '#swipebox-slider .slide' ).eq( index ).contents().find( 'iframe' ).attr( 'src', src );
+                    index--;
+                    this.setSlide( index );
+                    this.preloadMedia( index-1 );
+                } else {
+                    $( '#swipebox-overlay' ).addClass( 'leftSpring' );
+                    setTimeout( function() {
+                        $( '#swipebox-overlay' ).removeClass( 'leftSpring' );
+                    }, 500 );
+                }
             },
-            destroy: function() {
-                n(e).unbind("keyup");
-                n("body").unbind("touchstart");
-                n("body").unbind("touchmove");
-                n("body").unbind("touchend");
-                n("#swipebox-slider").unbind();
-                n("#swipebox-overlay").remove();
-                if (!n.isArray(i)) {
-                    i.removeData("_swipebox")
+
+            /**
+             * Close
+             */
+            closeSlide : function () {
+                $( 'html' ).removeClass( 'swipebox-html' );
+                $( 'html' ).removeClass( 'swipebox-touch' );
+                $( window ).trigger( 'resize' );
+                this.destroy();
+            },
+
+            /**
+             * Destroy the whole thing
+             */
+            destroy : function () {
+                $( window ).unbind( 'keyup' );
+                $( 'body' ).unbind( 'touchstart' );
+                $( 'body' ).unbind( 'touchmove' );
+                $( 'body' ).unbind( 'touchend' );
+                $( '#swipebox-slider' ).unbind();
+                $( '#swipebox-overlay' ).remove();
+
+                if ( ! $.isArray( elem ) ) {
+                    elem.removeData( '_swipebox' );
                 }
-                if (this.target) {
-                    this.target.trigger("swipebox-destroy")
+
+                if ( this.target ) {
+                    this.target.trigger( 'swipebox-destroy' );
                 }
-                n.swipebox.isOpen = false;
-                if (a.settings.afterClose) {
-                    a.settings.afterClose()
+
+                $.swipebox.isOpen = false;
+
+                if ( plugin.settings.afterClose ) {
+                    plugin.settings.afterClose();
                 }
             }
         };
-        a.init()
+
+        plugin.init();
     };
-    n.fn.swipebox = function(e) {
-        if (!n.data(this, "_swipebox")) {
-            var t = new n.swipebox(this, e);
-            this.data("_swipebox", t)
+
+    $.fn.swipebox = function( options ) {
+
+        if ( ! $.data( this, '_swipebox' ) ) {
+            var swipebox = new $.swipebox( this, options );
+            this.data( '_swipebox', swipebox );
         }
-        return this.data("_swipebox")
-    }
-})(window, document, jQuery);
+        return this.data( '_swipebox' );
+
+    };
+
+}( window, document, jQuery ) );;
 /*
 Tendina jQuery plugin v0.10.2
 
@@ -15232,9 +15769,8 @@ https://github.com/imakewebthings/jquery-waypoints/blob/master/licenses.txt
       }
     });
     $('.knob').trigger('change');
-    $( '.ds-gallery .field--gallery a' ).swipebox({
-      hideBarsDelay : 30000,
-      hideBarsOnMobile : false
+    $( '.ds-gallery a' ).swipebox({
+      hideBarsDelay : 6000
     });
     $(".ds-navigation a").on('click', function(e){
       e.preventDefault();
@@ -15532,6 +16068,11 @@ Drupal.behaviors.flagLink.attach = function(context) {
  * To use the default WordPress version of jQuery, go to lib/config.php and
  * remove or comment out: add_theme_support('jquery-cdn');
  * ======================================================================== */
+if ('addEventListener' in document) {
+  document.addEventListener('DOMContentLoaded', function() {
+    FastClick.attach(document.body);
+  }, false);
+}
 Modernizr.addTest('svgasimg', document.implementation.hasFeature('http://www.w3.org/TR/SVG11/feature#Image', '1.1'));
 (function($) {
 
@@ -15541,8 +16082,13 @@ var Roots = {
   // All pages
   common: {
     init: function() {
-      FastClick.attach(document.body);
-      if(!Modernizr.svgasimg){
+      function getAndroidVersion(ua) {
+          ua = (ua || navigator.userAgent).toLowerCase(); 
+          var match = ua.match(/android\s([0-9\.]*)/);
+          return match ? match[1] : false;
+      }
+      if(!Modernizr.svgasimg || parseFloat(getAndroidVersion()) < 4.3){
+        //alert("android");
         $('img').each(function() {
           var img_src = $(this).attr('src');
           var new_src = img_src.replace(/\.svg$/, '.png');
@@ -15552,6 +16098,7 @@ var Roots = {
       if(Modernizr.input.placeholder){
         $(".webform-component-textfield  label, .webform-component-phone label, .webform-component-email label, .webform-component-select label").hide();
       }
+      $(".view-id-condos .views-row").matchHeight();
       $("input.required").attr('required','required');
     }
   },
@@ -15577,10 +16124,11 @@ var Roots = {
                 items:1,
                 nav:true,
                 margin:0,
+                touchDrag:true,
             },
             768:{
                 items:2,
-                nav:true
+                nav:true,
             },
             1000:{
                 items:2,
@@ -15821,14 +16369,23 @@ function doGTranslate(a) {
     }
 }
 (function($) {
-  $(function(){
-    $(".translate a").on('click', function(e){
+  $(window).load(function(){
+    var language = $(".goog-te-combo").find(":selected").text();
+    var lang = $.cookie('language');
+    var $translateLink = $(".translate a");
+    //console.log(lang);
+    if(lang === "CN"){
+      $translateLink.removeClass('chinese');
+      $translateLink.addClass('english');
+    }
+    $translateLink.on('click', function(e){
       e.preventDefault();
       var urlString=window.location.href;
       var url=urlString.split("#")[0];
      // window.location.href = url + "#mypara";
-      console.log();
-      var language = $(".goog-te-combo").find(":selected").text();
+      //console.log();
+      language = $(".goog-te-combo").find(":selected").text();
+      console.log("language is " + language);
       if(language === 'Select Language' || language === 'English'){
         //new GTranslateFireEvent('zh-CN', 'change');
        // window.location.href = url + "#googtrans(en|zh-CN)";
@@ -15837,12 +16394,14 @@ function doGTranslate(a) {
         doGTranslate('en|zh-CN');
         $(this).removeClass('chinese');
         $(this).addClass('english');
+        $.cookie('language', 'CN');
       }else{
          //window.location.href = url + "#googtrans(zh-CN|en)";
-         console.log('translate to english');
+        console.log('translate to english');
         doGTranslate('zh-CN|en');
         $(this).removeClass('english');
         $(this).addClass('chinese');
+        $.cookie('language', 'EN');
       }
      // location.reload();
     });

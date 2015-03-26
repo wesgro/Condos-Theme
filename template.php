@@ -54,7 +54,7 @@ function leap_circle_maker($element){
   $percent = (isset($field[0]['safe_value']))?'100':$field[0]['value'];
   ?>
   <div class="stat">
-    <input class="knob" data-thickness=".25" value="<?php echo $percent;?>" data-width="274" data-height="274" data-bgColor="#e3e2e2" data-inputColor="#666666" data-font="lato"  data-fgColor="#ffcc33" data-readOnly="true" data-min="0" data-max="100" data-fontWeight="400" data-angleOffset="180" data-endVal="<?php echo $percent;?>"/>
+    <input class="knob" data-thickness=".25" value="<?php echo $percent;?>" data-width="222" data-height="222" data-bgColor="#e3e2e2" data-inputColor="#666666" data-font="lato"  data-fgColor="#ffcc33" data-readOnly="true" data-min="0" data-max="100" data-fontWeight="400" data-angleOffset="180" data-endVal="<?php echo $percent;?>"/>
     <div class="description">
       <?php echo render($output);?>
     </div>

@@ -166,12 +166,32 @@ $slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'   
     @extend %big-vertical-padding;
     .wrap{
       @extend %three-column;
+      @include at(pt){
+        >div{
+          @include float-span(1, $grid: 3, $gutter: .10);
+          &:last-of-type{
+            @include float-span(1,'last', $grid: 3, $gutter: .10);
+          }
+        }
+      }
     }
   }
   .ds-project-info{
     @extend %small-vertical-padding;
     .wrap{
       @extend %three-column;
+      @include at(pt){
+        .col-1{
+          @include float-span(1,$grid:2,$gutter:.10);
+        }
+        .col-2{
+          @include float-span(1,'last',$grid:2,$gutter:.10);
+        }
+        .col-3{
+          clear: both;
+
+        }
+      }
     }
   }
   .ds-why{

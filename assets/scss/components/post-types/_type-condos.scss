@@ -3,6 +3,7 @@
     @extend %pcf;
   }
   .views-row{
+    background-color: #dcdcdc;
     @include rem(margin-bottom, 25px);
     @include at(pt){
       float: left;
@@ -60,25 +61,33 @@
   .ds-hero{
     padding: 0;
   }
-  .ds-title{
-    background-color: $colourHighlight;
-    height: 81px;
-    padding-top: 0;
+  .ds-title {
     padding-bottom: 0;
-    .field-container{
-      @extend %vertical-align;
+    padding-top: 0;
+    padding-right: 0;
+    padding-left: 0;
+    .field-item{
+      padding-bottom: 0;
     }
     h3{
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    a{
+      display: block;
+      background-color: $colourHighlight;
+      line-height: 1.1;
+      padding-top: 20px;
+      padding-bottom: 20px;
       text-transform: uppercase;
       font-weight: 700;
       margin: 0;
+      @include rem(padding-left, 25px);
+      @include rem(padding-right, 25px);
       @include rem(font-size, 23px);
       @include to(lp){
         @include rem(font-size, 18px);
       }
-    }
-    a{
-      color: #333333;
     }
   }
   .ds-price{
@@ -109,16 +118,17 @@
     @extend %pcf;
     background-color: #dcdcdc;
     a{
-      color: #666666;
+      color:#000;
     }
-    .field-label{
+    .field-label,
+    a{
       font-weight: 400;
       margin: 0;
       text-align: center;
       @include rem(font-size, 15px);
     }
     .field-items{
-      @include rem(font-size, 36px);
+      @include rem(font-size, 25px);
       line-height: 1;
     }
     .inner{
@@ -135,8 +145,11 @@
         height: 61px;
       }
       .ico-moon:before{
-        @include rem(font-size, 36px);
+        @include rem(font-size, 23px);
         display: block;
+        height: 31px;
+        position: relative;
+        top:5px;
       }
     }
     .field-container{
@@ -158,6 +171,9 @@
     text-align: center;
   }
   .ds-navigation{
+    @include to(lp){
+      display: none;
+    }
     ul{
       margin: 0;
       padding: 0;
@@ -187,13 +203,18 @@
       }
     }
     a{
-      color:#828282;
+      color:#000;
       font-family: $otherFont;
     }
   }
   .ds-gallery{
     $gutters: .05;
     $guttersBottom:1.6129%;
+    .field--building-image{
+      @include to(pt){
+        margin-bottom: 5px
+      }
+    }
     .field--gallery{
       padding: 0;
       margin: 0;
@@ -232,7 +253,7 @@
     h3,
     .field-label,
     .field-item{
-      @include rem(font-size, 30px);
+      @include rem(font-size, 26px);
       margin: 0;
       line-height: 1.1;
     }
@@ -253,6 +274,10 @@
       @include to(pt){
         padding-top: 15px;
         padding-bottom: 15px;
+        border-bottom: 1px solid #adadad;
+        &.flag-outer{
+          border-bottom: 0;
+        }
       }
       @include from(lt, $noquery){
         @include float-span(1, $grid:3,$gutter:0);
@@ -282,12 +307,13 @@
     .description{
       position: absolute;
       top:50%;
-      height: 40px;
-      margin-top: -20px;
+      height: 22px;
+      margin-top: -12px;
       left: 0;
       right: 0;
       text-transform: uppercase;
-      @include rem(font-size, 22px);
+      width: 100%;
+      @include rem(font-size, 15px);
     }
     .field-container{
       text-align: center;
@@ -341,6 +367,11 @@
         position: relative;
       }
     }
+    .col-3{
+      @include to(pt){
+        padding-top: 15px;
+      }
+    }
   }
   .ds-why{
     background-color: #f7f6f6;
@@ -355,6 +386,11 @@
   .ds-contact-info{
     background-color: #666666;
     color: #FFF;
+    .group-webform-wrapper{
+      @include to(lp){
+        margin-top: 15px;
+      }
+    }
     .col-1{
       ul,li{
         padding: 0;
@@ -366,7 +402,7 @@
         color: #FFF;
         background-color: #333333;
         text-align: center;
-        @include border-radius(5px);
+        @include border-radius(0px);
         margin-bottom: 5px;
         padding:10px 15px;
       }
@@ -374,8 +410,8 @@
     .col-2{
       background-color: #FFF;
       padding:25px 15px;
-      @include border-radius(5px); 
-      color: #666666;
+      @include border-radius(0px); 
+      color: #000;
       overflow: hidden;
       @include rem(max-height, 142px);
       line-height: 1.2;

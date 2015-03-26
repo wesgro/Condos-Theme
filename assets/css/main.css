@@ -1671,7 +1671,7 @@ a.townhouse:after {
   overflow: hidden;
   position: fixed;
   background: #ffcc33;
-  opacity: 0.6;
+  opacity: 1;
 }
 
 /* line 95, ../scss/libraries/magnificent/_magnificent.scss */
@@ -2567,18 +2567,18 @@ button::-moz-focus-inner {
   background: #000;
 }
 
-/*! Swipebox v1.2.8 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
-/* line 19, ../scss/libraries/swipebox/_swipebox.scss */
+/*! Swipebox v1.3.0 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
+/* line 2, ../scss/libraries/swipebox/_swipebox.scss */
 html.swipebox-html.swipebox-touch {
   overflow: hidden !important;
 }
 
-/* line 23, ../scss/libraries/swipebox/_swipebox.scss */
+/* line 6, ../scss/libraries/swipebox/_swipebox.scss */
 #swipebox-overlay img {
   border: none !important;
 }
 
-/* line 27, ../scss/libraries/swipebox/_swipebox.scss */
+/* line 10, ../scss/libraries/swipebox/_swipebox.scss */
 #swipebox-overlay {
   width: 100%;
   height: 100%;
@@ -2587,11 +2587,23 @@ html.swipebox-html.swipebox-touch {
   left: 0;
   z-index: 99999 !important;
   overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 
-/* line 38, ../scss/libraries/swipebox/_swipebox.scss */
+/* line 24, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 30, ../scss/libraries/swipebox/_swipebox.scss */
 #swipebox-slider {
+  -webkit-transition: -webkit-transform 0.4s ease;
+  transition: transform 0.4s ease;
   height: 100%;
   left: 0;
   top: 0;
@@ -2599,19 +2611,19 @@ html.swipebox-html.swipebox-touch {
   white-space: nowrap;
   position: absolute;
   display: none;
+  cursor: pointer;
 }
-/* line 47, ../scss/libraries/swipebox/_swipebox.scss */
+
+/* line 42, ../scss/libraries/swipebox/_swipebox.scss */
 #swipebox-slider .slide {
-  background: url(../img/loader.gif) no-repeat center center;
   height: 100%;
   width: 100%;
   line-height: 1px;
   text-align: center;
   display: inline-block;
-  margin-top: 50px;
-  margin-bottom: 50px;
 }
-/* line 56, ../scss/libraries/swipebox/_swipebox.scss */
+
+/* line 49, ../scss/libraries/swipebox/_swipebox.scss */
 #swipebox-slider .slide:before {
   content: "";
   display: inline-block;
@@ -2619,8 +2631,11 @@ html.swipebox-html.swipebox-touch {
   width: 1px;
   margin-right: -1px;
 }
-/* line 64, ../scss/libraries/swipebox/_swipebox.scss */
-#swipebox-slider .slide img, #swipebox-slider .slide .swipebox-video-container {
+
+/* line 56, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-slider .slide img,
+#swipebox-slider .slide .swipebox-video-container,
+#swipebox-slider .slide .swipebox-inline-container {
   display: inline-block;
   max-height: 100%;
   max-width: 100%;
@@ -2629,20 +2644,20 @@ html.swipebox-html.swipebox-touch {
   width: auto;
   height: auto;
   vertical-align: middle;
-  padding-bottom: 100px;
 }
-/* line 76, ../scss/libraries/swipebox/_swipebox.scss */
+
+/* line 68, ../scss/libraries/swipebox/_swipebox.scss */
 #swipebox-slider .slide .swipebox-video-container {
   background: none;
   max-width: 1140px;
   max-height: 100%;
   width: 100%;
   padding: 5%;
-  box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-/* line 86, ../scss/libraries/swipebox/_swipebox.scss */
+
+/* line 77, ../scss/libraries/swipebox/_swipebox.scss */
 #swipebox-slider .slide .swipebox-video-container .swipebox-video {
   width: 100%;
   height: 0;
@@ -2650,7 +2665,8 @@ html.swipebox-html.swipebox-touch {
   overflow: hidden;
   position: relative;
 }
-/* line 92, ../scss/libraries/swipebox/_swipebox.scss */
+
+/* line 84, ../scss/libraries/swipebox/_swipebox.scss */
 #swipebox-slider .slide .swipebox-video-container .swipebox-video iframe {
   width: 100% !important;
   height: 100% !important;
@@ -2659,9 +2675,16 @@ html.swipebox-html.swipebox-touch {
   left: 0;
 }
 
-/* line 104, ../scss/libraries/swipebox/_swipebox.scss */
-#swipebox-action,
-#swipebox-caption {
+/* line 91, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-slider .slide-loading {
+  background: url(../img/loader.gif) no-repeat center center;
+}
+
+/* line 95, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-bottom-bar,
+#swipebox-top-bar {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
   position: absolute;
   left: 0;
   z-index: 999;
@@ -2669,128 +2692,213 @@ html.swipebox-html.swipebox-touch {
   width: 100%;
 }
 
-/* line 113, ../scss/libraries/swipebox/_swipebox.scss */
-#swipebox-action {
-  bottom: 0px;
+/* line 106, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-bottom-bar {
+  bottom: -50px;
 }
-/* line 120, ../scss/libraries/swipebox/_swipebox.scss */
-#swipebox-action #swipebox-prev,
-#swipebox-action #swipebox-next,
-#swipebox-action #swipebox-close {
+
+/* line 109, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-bottom-bar.visible-bars {
+  -webkit-transform: translate3d(0, -50px, 0);
+  transform: translate3d(0, -50px, 0);
+}
+
+/* line 114, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-top-bar {
+  top: -50px;
+}
+
+/* line 117, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-top-bar.visible-bars {
+  -webkit-transform: translate3d(0, 50px, 0);
+  transform: translate3d(0, 50px, 0);
+}
+
+/* line 122, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-title {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+/* line 128, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-prev,
+#swipebox-next,
+#swipebox-close {
   background-image: url(../img/icons.png);
   background-repeat: no-repeat;
   border: none !important;
   text-decoration: none !important;
   cursor: pointer;
-  position: absolute;
   width: 50px;
   height: 50px;
   top: 0;
 }
-/* line 134, ../scss/libraries/swipebox/_swipebox.scss */
-#swipebox-action #swipebox-prev {
-  background-position: -32px 13px;
-  right: 100px;
-}
-/* line 139, ../scss/libraries/swipebox/_swipebox.scss */
-#swipebox-action #swipebox-next {
-  background-position: -78px 13px;
-  right: 40px;
-}
-/* line 144, ../scss/libraries/swipebox/_swipebox.scss */
-#swipebox-action #swipebox-close {
-  background-position: 15px 12px;
-  left: 40px;
-}
-/* line 151, ../scss/libraries/swipebox/_swipebox.scss */
-#swipebox-action #swipebox-prev.disabled,
-#swipebox-action #swipebox-next.disabled {
-  opacity: 0.3;
+
+/* line 141, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-arrows {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: 50px;
 }
 
-/* line 157, ../scss/libraries/swipebox/_swipebox.scss */
-#swipebox-caption {
-  top: 0px;
-  text-align: center;
+/* line 148, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-prev {
+  background-position: -32px 13px;
+  float: left;
+}
+
+/* line 153, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-next {
+  background-position: -78px 13px;
+  float: right;
+}
+
+/* line 158, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-close {
+  top: 0;
+  right: 0;
+  position: absolute;
+  z-index: 9999;
+  background-position: 15px 12px;
 }
 
 /* line 166, ../scss/libraries/swipebox/_swipebox.scss */
-#swipebox-slider.rightSpring {
-  animation: rightSpring 0.3s;
+.swipebox-no-close-button #swipebox-close {
+  display: none;
 }
 
 /* line 170, ../scss/libraries/swipebox/_swipebox.scss */
-#swipebox-slider.leftSpring {
+#swipebox-prev.disabled,
+#swipebox-next.disabled {
+  opacity: 0.3;
+}
+
+/* line 175, ../scss/libraries/swipebox/_swipebox.scss */
+.swipebox-no-touch #swipebox-overlay.rightSpring #swipebox-slider {
+  -webkit-animation: rightSpring 0.3s;
+  animation: rightSpring 0.3s;
+}
+
+/* line 179, ../scss/libraries/swipebox/_swipebox.scss */
+.swipebox-no-touch #swipebox-overlay.leftSpring #swipebox-slider {
+  -webkit-animation: leftSpring 0.3s;
   animation: leftSpring 0.3s;
 }
 
-@keyframes rightSpring {
+/* line 184, ../scss/libraries/swipebox/_swipebox.scss */
+.swipebox-touch #swipebox-container:before, .swipebox-touch #swipebox-container:after {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+  content: ' ';
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  height: 100%;
+  width: 20px;
+  opacity: 0;
+}
+
+/* line 197, ../scss/libraries/swipebox/_swipebox.scss */
+.swipebox-touch #swipebox-container:before {
+  left: 0;
+  -webkit-box-shadow: inset 10px 0px 10px -8px #656565;
+  box-shadow: inset 10px 0px 10px -8px #656565;
+}
+
+/* line 202, ../scss/libraries/swipebox/_swipebox.scss */
+.swipebox-touch #swipebox-container:after {
+  right: 0;
+  -webkit-box-shadow: inset -10px 0px 10px -8px #656565;
+  box-shadow: inset -10px 0px 10px -8px #656565;
+}
+
+/* line 207, ../scss/libraries/swipebox/_swipebox.scss */
+.swipebox-touch #swipebox-overlay.leftSpringTouch #swipebox-container:before {
+  opacity: 1;
+}
+
+/* line 210, ../scss/libraries/swipebox/_swipebox.scss */
+.swipebox-touch #swipebox-overlay.rightSpringTouch #swipebox-container:after {
+  opacity: 1;
+}
+
+@-webkit-keyframes rightSpring {
   0% {
-    margin-left: 0px;
+    left: 0;
   }
   50% {
-    margin-left: -30px;
+    left: -30px;
   }
   100% {
-    margin-left: 0px;
+    left: 0;
+  }
+}
+@keyframes rightSpring {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: -30px;
+  }
+  100% {
+    left: 0;
+  }
+}
+@-webkit-keyframes leftSpring {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 30px;
+  }
+  100% {
+    left: 0;
   }
 }
 @keyframes leftSpring {
   0% {
-    margin-left: 0px;
-  }
-  50% {
-    margin-left: 30px;
-  }
-  100% {
-    margin-left: 0px;
-  }
-}
-@media screen and (max-width: 800px) {
-  /* line 203, ../scss/libraries/swipebox/_swipebox.scss */
-  #swipebox-action #swipebox-close {
     left: 0;
   }
-
-  /* line 207, ../scss/libraries/swipebox/_swipebox.scss */
-  #swipebox-action #swipebox-prev {
-    right: 60px;
+  50% {
+    left: 30px;
+  }
+  100% {
+    left: 0;
+  }
+}
+@media screen and (min-width: 800px) {
+  /* line 260, ../scss/libraries/swipebox/_swipebox.scss */
+  #swipebox-close {
+    right: 10px;
   }
 
-  /* line 211, ../scss/libraries/swipebox/_swipebox.scss */
-  #swipebox-action #swipebox-next {
-    right: 0;
+  /* line 264, ../scss/libraries/swipebox/_swipebox.scss */
+  #swipebox-arrows {
+    width: 92%;
+    max-width: 800px;
   }
 }
 /* Skin 
 --------------------------*/
-/* line 218, ../scss/libraries/swipebox/_swipebox.scss */
+/* line 271, ../scss/libraries/swipebox/_swipebox.scss */
 #swipebox-overlay {
   background: #0d0d0d;
 }
 
-/* line 222, ../scss/libraries/swipebox/_swipebox.scss */
-#swipebox-action,
-#swipebox-caption {
+/* line 275, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-bottom-bar,
+#swipebox-top-bar {
   text-shadow: 1px 1px 1px black;
-  background-color: #0d0d0d;
-  background-color: #0d0d0d;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#0d0d0d), to(black));
-  background-image: -webkit-linear-gradient(top, #0d0d0d, black);
-  background-image: -moz-linear-gradient(top, #0d0d0d, black);
-  background-image: -o-linear-gradient(top, #0d0d0d, black);
-  background-image: linear-gradient(to bottom, #0d0d0d, #000000);
+  background: #000;
   opacity: 0.95;
 }
 
-/* line 229, ../scss/libraries/swipebox/_swipebox.scss */
-#swipebox-action {
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* line 233, ../scss/libraries/swipebox/_swipebox.scss */
-#swipebox-caption {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+/* line 282, ../scss/libraries/swipebox/_swipebox.scss */
+#swipebox-top-bar {
   color: white !important;
   font-size: 15px;
   line-height: 43px;
@@ -2960,18 +3068,18 @@ html.swipebox-html.swipebox-touch {
 
 /* line 55, ../scss/abstractions/_abstract-grid.scss */
 .node--condo-project--full .ds-navigation, .node--condo-project--full .ds-gallery, .node--condo-project--full .ds-walkscore {
-  padding-top: 10px;
-  padding-top: 0.625rem;
-  padding-bottom: 15px;
-  padding-bottom: 0.9375rem;
+  margin-top: 10px;
+  margin-top: 0.625rem;
+  margin-bottom: 15px;
+  margin-bottom: 0.9375rem;
 }
 @media (min-width: 1024px) {
   /* line 55, ../scss/abstractions/_abstract-grid.scss */
   .node--condo-project--full .ds-navigation, .node--condo-project--full .ds-gallery, .node--condo-project--full .ds-walkscore {
-    padding-top: 20px;
-    padding-top: 1.25rem;
-    padding-bottom: 25px;
-    padding-bottom: 1.5625rem;
+    margin-top: 20px;
+    margin-top: 1.25rem;
+    margin-bottom: 25px;
+    margin-bottom: 1.5625rem;
   }
 }
 
@@ -2993,7 +3101,7 @@ html.swipebox-html.swipebox-touch {
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   /* line 82, ../scss/abstractions/_abstract-grid.scss */
   .node--condo-project--full .ds-contact-info .wrap > div, .node--condo-project--full .ds-contact-info ul.tabs > div {
     width: 44.44444%;
@@ -3012,8 +3120,7 @@ html.swipebox-html.swipebox-touch {
 }
 
 /* line 96, ../scss/abstractions/_abstract-grid.scss */
-.node--condo-project--teaser .ds-title .field-container,
-.node--condo-project--comparison .ds-title .field-container, .node--condo-project--teaser .ds-price .field-container,
+.node--condo-project--teaser .ds-price .field-container,
 .node--condo-project--comparison .ds-price .field-container, .node--condo-project--teaser .ds-meta .inner,
 .node--condo-project--comparison .ds-meta .inner {
   position: relative;
@@ -3236,41 +3343,40 @@ html.swipebox-html.swipebox-touch {
   border: 0px solid #000;
   font-size: 14px;
   font-size: 0.875rem;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
   width: 100%;
   font-weight: 400;
   max-width: 300px;
 }
 
-/* line 73, ../scss/base/_base-forms.scss */
+/* line 72, ../scss/base/_base-forms.scss */
 .l-content .form-actions input[type=submit] {
   -moz-appearance: none;
   -webkit-appearance: none;
   border: none;
 }
-/* line 77, ../scss/base/_base-forms.scss */
+/* line 76, ../scss/base/_base-forms.scss */
 .l-content .form-actions .form-submit {
-  background-color: #75cd7a;
-  color: #FFF;
-  text-transform: uppercase;
+  background-color: #ffcc33;
+  color: #000;
   padding: 10px 25px;
-  font-weight: 700;
+  font-weight: 400;
   margin-right: 10px;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
 }
-/* line 84, ../scss/base/_base-forms.scss */
+/* line 83, ../scss/base/_base-forms.scss */
 .l-content .form-actions .form-submit#edit-delete {
   background-color: transparent;
   float: right;
   color: #cc0000;
 }
-/* line 89, ../scss/base/_base-forms.scss */
+/* line 88, ../scss/base/_base-forms.scss */
 .l-content .form-actions .form-submit#edit-workflow-5 {
   background-color: #759dcd;
 }
 
-/* line 94, ../scss/base/_base-forms.scss */
+/* line 93, ../scss/base/_base-forms.scss */
 fieldset {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -3305,12 +3411,12 @@ input::-webkit-input-placeholder {
   text-transform: uppercase;
 }
 
-/* line 105, ../scss/base/_base-forms.scss */
+/* line 104, ../scss/base/_base-forms.scss */
 .gform_validation_container {
   display: none;
 }
 
-/* line 108, ../scss/base/_base-forms.scss */
+/* line 107, ../scss/base/_base-forms.scss */
 input[type=file] {
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -3327,58 +3433,75 @@ input[type=file] {
   font-size: 0.8125rem;
 }
 
-/* line 125, ../scss/base/_base-forms.scss */
+/* line 124, ../scss/base/_base-forms.scss */
 .webform-client-form .form-item,
 .user-login .form-item {
   margin-bottom: 10px;
 }
-/* line 129, ../scss/base/_base-forms.scss */
+/* line 128, ../scss/base/_base-forms.scss */
 .webform-client-form div ul,
 .user-login div ul {
   padding: 0;
   margin: 0;
 }
-/* line 133, ../scss/base/_base-forms.scss */
+/* line 132, ../scss/base/_base-forms.scss */
 .webform-client-form div li,
 .user-login div li {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
-/* line 139, ../scss/base/_base-forms.scss */
+/* line 138, ../scss/base/_base-forms.scss */
 .webform-client-form div .ginput_card_security_code,
 .user-login div .ginput_card_security_code {
   margin-top: 10px !important;
 }
 
-/* line 149, ../scss/base/_base-forms.scss */
+/* line 148, ../scss/base/_base-forms.scss */
 .l-content label {
   font-size: 12px;
   text-transform: uppercase;
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* line 155, ../scss/base/_base-forms.scss */
+  table tbody tr {
+    width: 47.61905%;
+    clear: right;
+    float: left;
+    margin-left: 0;
+    margin-right: 4.7619%;
+  }
+  /* line 157, ../scss/base/_base-forms.scss */
+  table tbody tr.even {
+    width: 47.61905%;
+    clear: right;
+    float: right;
+    margin-right: 0;
+  }
+}
 @media (max-width: 1023px) {
-  /* line 154, ../scss/base/_base-forms.scss */
+  /* line 153, ../scss/base/_base-forms.scss */
   table {
     /* Force table to not be like tables anymore */
     /* Hide table headers (but not display: none;, for accessibility) */
   }
-  /* line 157, ../scss/base/_base-forms.scss */
+  /* line 164, ../scss/base/_base-forms.scss */
   table table, table thead, table tbody, table th, table td, table tr {
     display: block;
   }
-  /* line 162, ../scss/base/_base-forms.scss */
+  /* line 169, ../scss/base/_base-forms.scss */
   table thead tr {
     position: absolute;
     top: -9999px;
     left: -9999px;
   }
-  /* line 168, ../scss/base/_base-forms.scss */
+  /* line 175, ../scss/base/_base-forms.scss */
   table tr {
     border: 1px solid #ccc;
     margin-bottom: 25px;
   }
-  /* line 170, ../scss/base/_base-forms.scss */
+  /* line 177, ../scss/base/_base-forms.scss */
   table td {
     /* Behave  like a "row" */
     border: none;
@@ -3386,7 +3509,7 @@ input[type=file] {
     position: relative;
     padding-left: 38%;
   }
-  /* line 178, ../scss/base/_base-forms.scss */
+  /* line 185, ../scss/base/_base-forms.scss */
   table td:before {
     /* Now like a table header */
     position: absolute;
@@ -3493,7 +3616,7 @@ table thead th {
   font-weight: 700;
   padding-top: 10px;
   padding-bottom: 10px;
-  color: #666666;
+  color: #000;
   font-size: 18px;
   font-size: 1.125rem;
   margin-bottom: 15px;
@@ -3505,7 +3628,7 @@ table thead th a {
 /* line 19, ../scss/base/_base-tables.scss */
 table tbody {
   margin-top: 15px;
-  color: #666666;
+  color: #000;
 }
 /* line 22, ../scss/base/_base-tables.scss */
 table tbody tr {
@@ -3540,7 +3663,7 @@ table tbody a {
 /* line 9, ../scss/base/_base-typography.scss */
 html {
   font-family: "lato", helvetica, arial, sans-serif;
-  color: #666666;
+  color: #000;
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   line-height: 1.5;
@@ -3574,7 +3697,7 @@ html.lt-ie9 {
  */
 /* line 33, ../scss/base/_base-typography.scss */
 a {
-  color: #759dcd;
+  color: #000;
   text-decoration: none;
   -moz-transition: all 0.8s ease;
   -o-transition: all 0.8s ease;
@@ -3593,7 +3716,7 @@ a:hover {
 /* line 46, ../scss/base/_base-typography.scss */
 h1, .alpha,
 h2, .beta,
-h3, .gamma,
+h3, .gamma, .l-region--content-header .page-title,
 h4, .delta,
 h5, .epsilon,
 h6, .zeta {
@@ -3610,23 +3733,23 @@ h1, .alpha {
 
 /* line 62, ../scss/base/_base-typography.scss */
 h2, .beta {
-  font-size: 24px;
-  font-size: 1.5rem;
+  font-size: 28px;
+  font-size: 1.75rem;
   line-height: 1.2;
 }
 /* line 65, ../scss/base/_base-typography.scss */
 h2.region-title, .beta.region-title {
   margin-top: 0;
-  font-size: 30px;
-  font-size: 1.875rem;
+  font-size: 26px;
+  font-size: 1.625rem;
   margin-bottom: 25px;
   margin-bottom: 1.5625rem;
 }
 
 /* line 71, ../scss/base/_base-typography.scss */
-h3, .gamma {
-  font-size: 20px;
-  font-size: 1.25rem;
+h3, .gamma, .l-region--content-header .page-title {
+  font-size: 26px;
+  font-size: 1.625rem;
   line-height: 1.1;
 }
 
@@ -3970,7 +4093,7 @@ mark,
   max-width: 360px;
   width: 100%;
   position: relative;
-  color: #666666;
+  color: #000;
 }
 /* line 15, ../scss/abstractions/_abstract-graphics.scss */
 .view .pager-load-more a .view .pager-load-more a.pager-next {
@@ -4129,7 +4252,7 @@ mark,
   padding-top: 21px;
   padding-bottom: 21px;
   display: block;
-  color: #666666;
+  color: #000;
   font-family: "proxima-nova", helvetica, arial, sans-serif;
 }
 @media (min-width: 1400px) {
@@ -4297,10 +4420,10 @@ body.mobile-menu-visible {
 
 /* line 112, ../scss/components/navigation/_mobile-nav.scss */
 .l-page {
-  -moz-transition: -moz-transform 0.85s ease;
-  -o-transition: -o-transform 0.85s ease;
-  -webkit-transition: -webkit-transform 0.85s ease;
-  transition: transform 0.85s ease;
+  -moz-transition: -moz-transform 0.25s linear;
+  -o-transition: -o-transform 0.25s linear;
+  -webkit-transition: -webkit-transform 0.25s linear;
+  transition: transform 0.25s linear;
 }
 /* line 114, ../scss/components/navigation/_mobile-nav.scss */
 .l-page.mobile-menu-visible {
@@ -4335,10 +4458,10 @@ body.mobile-menu-visible {
 
 /* line 135, ../scss/components/navigation/_mobile-nav.scss */
 #mobile-navigation {
-  -moz-transition: all 0.98s ease;
-  -o-transition: all 0.98s ease;
-  -webkit-transition: all 0.98s ease;
-  transition: all 0.98s ease;
+  -moz-transition: -moz-transform 0.25s linear;
+  -o-transition: -o-transform 0.25s linear;
+  -webkit-transition: -webkit-transform 0.25s linear;
+  transition: transform 0.25s linear;
   -moz-transform: translate3d(100%, 0, 0);
   -webkit-transform: translate3d(100%, 0, 0);
   transform: translate3d(100%, 0, 0);
@@ -4396,7 +4519,6 @@ body.mobile-menu-visible {
   width: 40px;
   height: 40px;
   position: absolute;
-  background-color: #ffcc33;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
@@ -4404,7 +4526,7 @@ body.mobile-menu-visible {
   text-shadow: none;
   color: transparent;
 }
-/* line 175, ../scss/components/navigation/_mobile-nav.scss */
+/* line 174, ../scss/components/navigation/_mobile-nav.scss */
 .menu-toggle:before {
   color: #000;
   position: absolute;
@@ -4415,7 +4537,7 @@ body.mobile-menu-visible {
   height: 40px;
   text-align: center;
 }
-/* line 188, ../scss/components/navigation/_mobile-nav.scss */
+/* line 187, ../scss/components/navigation/_mobile-nav.scss */
 .menu-toggle:hover:before {
   color: #FFF;
 }
@@ -4429,7 +4551,7 @@ body.mobile-menu-visible {
   width: 95%;
   max-width: 427px;
   background-color: #FFF;
-  color: #333333;
+  color: #000;
   -moz-transition: border-radius 0.25s ease-in;
   -o-transition: border-radius 0.25s ease-in;
   -webkit-transition: border-radius 0.25s ease-in;
@@ -4443,7 +4565,7 @@ body.mobile-menu-visible {
 }
 /* line 16, ../scss/components/navigation/_selectors.scss */
 .selector a {
-  color: #333333;
+  color: #000;
 }
 /* line 19, ../scss/components/navigation/_selectors.scss */
 .selector ul, .selector li {
@@ -4463,7 +4585,8 @@ body.mobile-menu-visible {
   display: block;
 }
 /* line 33, ../scss/components/navigation/_selectors.scss */
-.selector .container .ico-moon {
+.selector .container .ico-moon,
+.selector .container .icon {
   -moz-transition: border-radius 0.25s ease-in;
   -o-transition: border-radius 0.25s ease-in;
   -webkit-transition: border-radius 0.25s ease-in;
@@ -4476,8 +4599,9 @@ body.mobile-menu-visible {
   float: right;
   position: relative;
 }
-/* line 43, ../scss/components/navigation/_selectors.scss */
-.selector .container .ico-moon.icon-arrow-down:before {
+/* line 44, ../scss/components/navigation/_selectors.scss */
+.selector .container .ico-moon.icon-arrow-down:before,
+.selector .container .icon.icon-arrow-down:before {
   font-size: 22px;
   width: 33px;
   left: 0;
@@ -4487,8 +4611,9 @@ body.mobile-menu-visible {
   margin-top: -11px;
 }
 /* line 53, ../scss/components/navigation/_selectors.scss */
-.selector .container .ico-moon.icon-arrow-down:after {
-  border: 2px solid #fff;
+.selector .container .ico-moon.icon-arrow-down:after,
+.selector .container .icon.icon-arrow-down:after {
+  border: 0px solid #fff;
   -moz-border-radius: 1000px / 1000px;
   -webkit-border-radius: 1000px 1000px;
   border-radius: 1000px / 1000px;
@@ -4504,7 +4629,8 @@ body.mobile-menu-visible {
   margin-top: -17px;
 }
 /* line 68, ../scss/components/navigation/_selectors.scss */
-.selector .container .ico-moon:before {
+.selector .container .ico-moon:before,
+.selector .container .icon:before {
   position: absolute;
   height: 33px;
   width: 100%;
@@ -4518,7 +4644,8 @@ body.mobile-menu-visible {
   line-height: 1;
 }
 /* line 81, ../scss/components/navigation/_selectors.scss */
-.selector .container .ico-moon img {
+.selector .container .ico-moon img,
+.selector .container .icon img {
   position: relative;
   top: 50%;
   -moz-transform: translateY(-50%);
@@ -4527,7 +4654,8 @@ body.mobile-menu-visible {
   transform: translateY(-50%);
 }
 /* line 83, ../scss/components/navigation/_selectors.scss */
-.lt-ie9 .selector .container .ico-moon img {
+.lt-ie9 .selector .container .ico-moon img, .lt-ie9
+.selector .container .icon img {
   top: auto;
 }
 /* line 88, ../scss/components/navigation/_selectors.scss */
@@ -4552,7 +4680,7 @@ body.mobile-menu-visible {
 @media (max-width: 767px) {
   /* line 88, ../scss/components/navigation/_selectors.scss */
   .selector .container b {
-    font-size: 13px;
+    font-size: 16px;
   }
 }
 
@@ -4682,7 +4810,7 @@ ul.tabs {
   max-width: 360px;
   width: 100%;
   position: relative;
-  color: #666666;
+  color: #000;
 }
 /* line 15, ../scss/abstractions/_abstract-graphics.scss */
 #user-menu .menu a #user-menu .menu a.pager-next {
@@ -4731,6 +4859,7 @@ ul.tabs {
 
 /* line 5, ../scss/components/post-types/_type-condos.scss */
 .view-id-condos .views-row {
+  background-color: #dcdcdc;
   margin-bottom: 25px;
   margin-bottom: 1.5625rem;
 }
@@ -4741,7 +4870,7 @@ ul.tabs {
     width: 49%;
     margin-right: 1%;
   }
-  /* line 12, ../scss/components/post-types/_type-condos.scss */
+  /* line 13, ../scss/components/post-types/_type-condos.scss */
   .view-id-condos .views-row.views-row-even {
     margin-right: 0;
     float: right;
@@ -4755,7 +4884,7 @@ ul.tabs {
     margin-right: 2%;
     margin-bottom: 31px;
   }
-  /* line 22, ../scss/components/post-types/_type-condos.scss */
+  /* line 23, ../scss/components/post-types/_type-condos.scss */
   .view-id-condos .views-row:nth-child(3n) {
     margin-right: 0;
     float: right;
@@ -4769,25 +4898,25 @@ ul.tabs {
     margin-right: 2.6%;
     margin-bottom: 31px;
   }
-  /* line 32, ../scss/components/post-types/_type-condos.scss */
+  /* line 33, ../scss/components/post-types/_type-condos.scss */
   .view-id-condos .views-row:nth-child(4n) {
     margin-right: 0;
     float: right;
   }
 }
 
-/* line 44, ../scss/components/post-types/_type-condos.scss */
+/* line 45, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser .field-label,
 .node--condo-project--comparison .field-label {
   font-weight: 700;
   padding-bottom: 5px;
 }
-/* line 48, ../scss/components/post-types/_type-condos.scss */
+/* line 49, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser .field-item,
 .node--condo-project--comparison .field-item {
   padding-bottom: 5px;
 }
-/* line 51, ../scss/components/post-types/_type-condos.scss */
+/* line 52, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser .ds-region,
 .node--condo-project--comparison .ds-region {
   padding-left: 25px;
@@ -4799,47 +4928,62 @@ ul.tabs {
   padding-bottom: 15px;
   padding-bottom: 0.9375rem;
 }
-/* line 57, ../scss/components/post-types/_type-condos.scss */
+/* line 58, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser figure,
 .node--condo-project--comparison figure {
   line-height: 0;
 }
-/* line 60, ../scss/components/post-types/_type-condos.scss */
+/* line 61, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser .ds-hero,
 .node--condo-project--comparison .ds-hero {
   padding: 0;
 }
-/* line 63, ../scss/components/post-types/_type-condos.scss */
+/* line 64, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser .ds-title,
 .node--condo-project--comparison .ds-title {
-  background-color: #ffcc33;
-  height: 81px;
+  padding-bottom: 0;
   padding-top: 0;
+  padding-right: 0;
+  padding-left: 0;
+}
+/* line 69, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .ds-title .field-item,
+.node--condo-project--comparison .ds-title .field-item {
   padding-bottom: 0;
 }
-/* line 71, ../scss/components/post-types/_type-condos.scss */
+/* line 72, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser .ds-title h3,
 .node--condo-project--comparison .ds-title h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+/* line 76, ../scss/components/post-types/_type-condos.scss */
+.node--condo-project--teaser .ds-title a,
+.node--condo-project--comparison .ds-title a {
+  display: block;
+  background-color: #ffcc33;
+  line-height: 1.1;
+  padding-top: 20px;
+  padding-bottom: 20px;
   text-transform: uppercase;
   font-weight: 700;
   margin: 0;
+  padding-left: 25px;
+  padding-left: 1.5625rem;
+  padding-right: 25px;
+  padding-right: 1.5625rem;
   font-size: 23px;
   font-size: 1.4375rem;
 }
 @media (max-width: 767px) {
-  /* line 71, ../scss/components/post-types/_type-condos.scss */
-  .node--condo-project--teaser .ds-title h3,
-  .node--condo-project--comparison .ds-title h3 {
+  /* line 76, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--teaser .ds-title a,
+  .node--condo-project--comparison .ds-title a {
     font-size: 18px;
     font-size: 1.125rem;
   }
 }
-/* line 80, ../scss/components/post-types/_type-condos.scss */
-.node--condo-project--teaser .ds-title a,
-.node--condo-project--comparison .ds-title a {
-  color: #333333;
-}
-/* line 84, ../scss/components/post-types/_type-condos.scss */
+/* line 93, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser .ds-price,
 .node--condo-project--comparison .ds-price {
   background-color: #333333;
@@ -4851,23 +4995,23 @@ ul.tabs {
   padding-top: 0;
   padding-bottom: 0;
 }
-/* line 95, ../scss/components/post-types/_type-condos.scss */
+/* line 104, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser .ds-details,
 .node--condo-project--comparison .ds-details {
   background-color: #f7f7f7;
 }
-/* line 98, ../scss/components/post-types/_type-condos.scss */
+/* line 107, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser address,
 .node--condo-project--comparison address {
   font-style: normal;
 }
-/* line 100, ../scss/components/post-types/_type-condos.scss */
+/* line 109, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser address > div, .node--condo-project--teaser address span,
 .node--condo-project--comparison address > div,
 .node--condo-project--comparison address span {
   display: none;
 }
-/* line 103, ../scss/components/post-types/_type-condos.scss */
+/* line 112, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser address .street-block,
 .node--condo-project--comparison address .street-block {
   display: inline-block;
@@ -4876,58 +5020,63 @@ ul.tabs {
   *zoom: 1;
   *display: inline;
 }
-/* line 107, ../scss/components/post-types/_type-condos.scss */
+/* line 116, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser .ds-meta,
 .node--condo-project--comparison .ds-meta {
   padding: 0;
   background-color: #dcdcdc;
 }
-/* line 111, ../scss/components/post-types/_type-condos.scss */
+/* line 120, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser .ds-meta a,
 .node--condo-project--comparison .ds-meta a {
-  color: #666666;
+  color: #000;
 }
-/* line 114, ../scss/components/post-types/_type-condos.scss */
+/* line 123, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser .ds-meta .field-label,
-.node--condo-project--comparison .ds-meta .field-label {
+.node--condo-project--teaser .ds-meta a,
+.node--condo-project--comparison .ds-meta .field-label,
+.node--condo-project--comparison .ds-meta a {
   font-weight: 400;
   margin: 0;
   text-align: center;
   font-size: 15px;
   font-size: 0.9375rem;
 }
-/* line 120, ../scss/components/post-types/_type-condos.scss */
+/* line 130, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser .ds-meta .field-items,
 .node--condo-project--comparison .ds-meta .field-items {
-  font-size: 36px;
-  font-size: 2.25rem;
+  font-size: 25px;
+  font-size: 1.5625rem;
   line-height: 1;
 }
-/* line 128, ../scss/components/post-types/_type-condos.scss */
+/* line 138, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser .ds-meta .flag-outer-condo-flag *,
 .node--condo-project--comparison .ds-meta .flag-outer-condo-flag * {
   will-change: transform;
 }
-/* line 131, ../scss/components/post-types/_type-condos.scss */
+/* line 141, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser .ds-meta .flag-outer-condo-flag a,
 .node--condo-project--comparison .ds-meta .flag-outer-condo-flag a {
   -moz-transform: translateZ(0px);
   -webkit-transform: translateZ(0px);
   transform: translateZ(0px);
 }
-/* line 134, ../scss/components/post-types/_type-condos.scss */
+/* line 144, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser .ds-meta .flag-outer-condo-flag .inner,
 .node--condo-project--comparison .ds-meta .flag-outer-condo-flag .inner {
   height: 61px;
 }
-/* line 137, ../scss/components/post-types/_type-condos.scss */
+/* line 147, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser .ds-meta .flag-outer-condo-flag .ico-moon:before,
 .node--condo-project--comparison .ds-meta .flag-outer-condo-flag .ico-moon:before {
-  font-size: 36px;
-  font-size: 2.25rem;
+  font-size: 23px;
+  font-size: 1.4375rem;
   display: block;
+  height: 31px;
+  position: relative;
+  top: 5px;
 }
-/* line 142, ../scss/components/post-types/_type-condos.scss */
+/* line 155, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser .ds-meta .field-container,
 .node--condo-project--comparison .ds-meta .field-container {
   height: 94px;
@@ -4940,7 +5089,7 @@ ul.tabs {
   margin-right: 0%;
   text-align: center;
 }
-/* line 147, ../scss/components/post-types/_type-condos.scss */
+/* line 160, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--teaser .ds-meta .field-container:last-child,
 .node--condo-project--comparison .ds-meta .field-container:last-child {
   border-right: 0;
@@ -4950,17 +5099,23 @@ ul.tabs {
   margin-right: 0;
 }
 
-/* line 157, ../scss/components/post-types/_type-condos.scss */
+/* line 170, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-hero {
   text-align: center;
 }
-/* line 161, ../scss/components/post-types/_type-condos.scss */
+@media (max-width: 767px) {
+  /* line 173, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-navigation {
+    display: none;
+  }
+}
+/* line 177, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-navigation ul {
   margin: 0;
   padding: 0;
   text-align: center;
 }
-/* line 166, ../scss/components/post-types/_type-condos.scss */
+/* line 182, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-navigation li {
   padding: 0 42px;
   display: inline-block;
@@ -4971,41 +5126,47 @@ ul.tabs {
   position: relative;
 }
 @media (max-width: 1023px) {
-  /* line 166, ../scss/components/post-types/_type-condos.scss */
+  /* line 182, ../scss/components/post-types/_type-condos.scss */
   .node--condo-project--full .ds-navigation li {
     padding: 0 10px;
   }
 }
-/* line 173, ../scss/components/post-types/_type-condos.scss */
+/* line 189, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-navigation li:after {
   content: "|";
   position: absolute;
   top: 0;
   right: 0;
 }
-/* line 179, ../scss/components/post-types/_type-condos.scss */
+/* line 195, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-navigation li:first-child {
   padding-left: 0;
 }
-/* line 182, ../scss/components/post-types/_type-condos.scss */
+/* line 198, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-navigation li:last-child {
   padding-right: 0;
 }
-/* line 184, ../scss/components/post-types/_type-condos.scss */
+/* line 200, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-navigation li:last-child:after {
   content: "";
 }
-/* line 189, ../scss/components/post-types/_type-condos.scss */
+/* line 205, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-navigation a {
-  color: #828282;
+  color: #000;
   font-family: "proxima-nova", helvetica, arial, sans-serif;
 }
-/* line 197, ../scss/components/post-types/_type-condos.scss */
+@media (max-width: 1023px) {
+  /* line 213, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-gallery .field--building-image {
+    margin-bottom: 5px;
+  }
+}
+/* line 218, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-gallery .field--gallery {
   padding: 0;
   margin: 0;
 }
-/* line 201, ../scss/components/post-types/_type-condos.scss */
+/* line 222, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-gallery .field--gallery li {
   list-style-type: none;
   margin: 0;
@@ -5017,12 +5178,12 @@ ul.tabs {
   margin-right: 1.6129%;
   margin-bottom: 1.6129%;
 }
-/* line 207, ../scss/components/post-types/_type-condos.scss */
+/* line 228, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-gallery .field--gallery li a, .node--condo-project--full .ds-gallery .field--gallery li img {
   display: block;
   width: 100%;
 }
-/* line 211, ../scss/components/post-types/_type-condos.scss */
+/* line 232, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-gallery .field--gallery li:nth-child(3n) {
   width: 32.25806%;
   clear: right;
@@ -5030,7 +5191,7 @@ ul.tabs {
   margin-right: 0;
 }
 @media (min-width: 1024px) {
-  /* line 217, ../scss/components/post-types/_type-condos.scss */
+  /* line 238, ../scss/components/post-types/_type-condos.scss */
   .node--condo-project--full .ds-gallery .field--building-image {
     width: 48.78049%;
     float: left;
@@ -5038,7 +5199,7 @@ ul.tabs {
     margin-left: 0;
     clear: none;
   }
-  /* line 220, ../scss/components/post-types/_type-condos.scss */
+  /* line 241, ../scss/components/post-types/_type-condos.scss */
   .node--condo-project--full .ds-gallery .field--gallery {
     width: 48.78049%;
     float: right;
@@ -5047,22 +5208,22 @@ ul.tabs {
     clear: none;
   }
 }
-/* line 225, ../scss/components/post-types/_type-condos.scss */
+/* line 246, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-meta {
   background-color: #e5e5e5;
 }
-/* line 227, ../scss/components/post-types/_type-condos.scss */
+/* line 248, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-meta .flag-message {
   left: 0;
   right: 0;
   margin: 0 auto;
 }
-/* line 232, ../scss/components/post-types/_type-condos.scss */
+/* line 253, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-meta h3,
 .node--condo-project--full .ds-meta .field-label,
 .node--condo-project--full .ds-meta .field-item {
-  font-size: 30px;
-  font-size: 1.875rem;
+  font-size: 26px;
+  font-size: 1.625rem;
   margin: 0;
   line-height: 1.1;
 }
@@ -5084,7 +5245,7 @@ ul.tabs {
   max-width: 360px;
   width: 100%;
   position: relative;
-  color: #666666;
+  color: #000;
 }
 /* line 15, ../scss/abstractions/_abstract-graphics.scss */
 .node--condo-project--full .ds-meta .flag-wrapper a .node--condo-project--full .ds-meta .flag-wrapper a.pager-next {
@@ -5130,24 +5291,29 @@ ul.tabs {
   background-color: #666666;
   z-index: 1;
 }
-/* line 246, ../scss/components/post-types/_type-condos.scss */
+/* line 267, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-meta .flag-wrapper i {
   display: none;
 }
-/* line 250, ../scss/components/post-types/_type-condos.scss */
+/* line 271, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-meta .field-container {
   text-align: center;
   position: relative;
 }
 @media (max-width: 1023px) {
-  /* line 250, ../scss/components/post-types/_type-condos.scss */
+  /* line 271, ../scss/components/post-types/_type-condos.scss */
   .node--condo-project--full .ds-meta .field-container {
     padding-top: 15px;
     padding-bottom: 15px;
+    border-bottom: 1px solid #adadad;
+  }
+  /* line 278, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-meta .field-container.flag-outer {
+    border-bottom: 0;
   }
 }
 @media (min-width: 1024px) {
-  /* line 250, ../scss/components/post-types/_type-condos.scss */
+  /* line 271, ../scss/components/post-types/_type-condos.scss */
   .node--condo-project--full .ds-meta .field-container {
     width: 33.33333%;
     clear: right;
@@ -5158,7 +5324,7 @@ ul.tabs {
     padding-left: 31px;
     padding-right: 31px;
   }
-  /* line 262, ../scss/components/post-types/_type-condos.scss */
+  /* line 287, ../scss/components/post-types/_type-condos.scss */
   .node--condo-project--full .ds-meta .field-container > .inner {
     position: relative;
     top: 50%;
@@ -5167,7 +5333,7 @@ ul.tabs {
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
   }
-  /* line 265, ../scss/components/post-types/_type-condos.scss */
+  /* line 290, ../scss/components/post-types/_type-condos.scss */
   .node--condo-project--full .ds-meta .field-container:last-child {
     width: 33.33333%;
     clear: right;
@@ -5177,36 +5343,37 @@ ul.tabs {
     padding-right: 0;
   }
 }
-/* line 274, ../scss/components/post-types/_type-condos.scss */
+/* line 299, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-sales {
   background-color: #f0f0f0;
 }
-/* line 276, ../scss/components/post-types/_type-condos.scss */
+/* line 301, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-sales .stat {
   position: relative;
 }
-/* line 279, ../scss/components/post-types/_type-condos.scss */
+/* line 304, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-sales .field-label {
   font-size: 22px;
   font-size: 1.375rem;
 }
-/* line 282, ../scss/components/post-types/_type-condos.scss */
+/* line 307, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-sales .description {
   position: absolute;
   top: 50%;
-  height: 40px;
-  margin-top: -20px;
+  height: 22px;
+  margin-top: -12px;
   left: 0;
   right: 0;
   text-transform: uppercase;
-  font-size: 22px;
-  font-size: 1.375rem;
+  width: 100%;
+  font-size: 15px;
+  font-size: 0.9375rem;
 }
-/* line 292, ../scss/components/post-types/_type-condos.scss */
+/* line 318, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-sales .field-container {
   text-align: center;
 }
-/* line 297, ../scss/components/post-types/_type-condos.scss */
+/* line 323, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-project-info h4.field-label {
   font-size: 16px;
   font-weight: 700;
@@ -5215,7 +5382,7 @@ ul.tabs {
   padding-bottom: 15px;
   border-bottom: 1px solid #dadada;
 }
-/* line 305, ../scss/components/post-types/_type-condos.scss */
+/* line 331, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-project-info img {
   position: absolute;
   display: block;
@@ -5227,16 +5394,16 @@ ul.tabs {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
-/* line 313, ../scss/components/post-types/_type-condos.scss */
+/* line 339, ../scss/components/post-types/_type-condos.scss */
 .svg .node--condo-project--full .ds-project-info img {
   height: 27px;
   width: 27px;
 }
-/* line 319, ../scss/components/post-types/_type-condos.scss */
+/* line 345, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-project-info address .locality-block {
   display: none;
 }
-/* line 322, ../scss/components/post-types/_type-condos.scss */
+/* line 348, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-project-info address > div {
   display: inline-block;
   vertical-align: middle;
@@ -5244,7 +5411,7 @@ ul.tabs {
   *zoom: 1;
   *display: inline;
 }
-/* line 328, ../scss/components/post-types/_type-condos.scss */
+/* line 354, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-project-info .col-1 .field-label,
 .node--condo-project--full .ds-project-info .col-2 .field-label {
   font-weight: 700;
@@ -5252,7 +5419,7 @@ ul.tabs {
   padding-left: 2.8125rem;
   position: relative;
 }
-/* line 334, ../scss/components/post-types/_type-condos.scss */
+/* line 360, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-project-info .col-1 .field-container,
 .node--condo-project--full .ds-project-info .col-2 .field-container {
   margin: 0;
@@ -5263,67 +5430,79 @@ ul.tabs {
   border-bottom: 1px solid #e9e9e9;
   position: relative;
 }
-/* line 345, ../scss/components/post-types/_type-condos.scss */
+@media (max-width: 1023px) {
+  /* line 370, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-project-info .col-3 {
+    padding-top: 15px;
+  }
+}
+/* line 376, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-why {
   background-color: #f7f6f6;
   text-align: center;
 }
 @media (min-width: 1024px) {
-  /* line 349, ../scss/components/post-types/_type-condos.scss */
+  /* line 380, ../scss/components/post-types/_type-condos.scss */
   .node--condo-project--full .ds-why .field-container {
     max-width: 800px;
     margin: 0 auto;
   }
 }
-/* line 355, ../scss/components/post-types/_type-condos.scss */
+/* line 386, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-contact-info {
   background-color: #666666;
   color: #FFF;
 }
-/* line 359, ../scss/components/post-types/_type-condos.scss */
+@media (max-width: 767px) {
+  /* line 389, ../scss/components/post-types/_type-condos.scss */
+  .node--condo-project--full .ds-contact-info .group-webform-wrapper {
+    margin-top: 15px;
+  }
+}
+/* line 395, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-contact-info .col-1 ul, .node--condo-project--full .ds-contact-info .col-1 li {
   padding: 0;
   margin: 0;
   list-style-type: none;
 }
-/* line 364, ../scss/components/post-types/_type-condos.scss */
+/* line 400, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-contact-info .col-1 a {
   display: block;
   color: #FFF;
   background-color: #333333;
   text-align: center;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
   margin-bottom: 5px;
   padding: 10px 15px;
 }
-/* line 374, ../scss/components/post-types/_type-condos.scss */
+/* line 410, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-contact-info .col-2 {
   background-color: #FFF;
   padding: 25px 15px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  color: #666666;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  color: #000;
   overflow: hidden;
   max-height: 142px;
   max-height: 8.875rem;
   line-height: 1.2;
 }
-/* line 382, ../scss/components/post-types/_type-condos.scss */
+/* line 418, ../scss/components/post-types/_type-condos.scss */
 .node--condo-project--full .ds-contact-info .col-2 p {
   margin-top: 3px;
 }
 @media (min-width: 1024px) {
-  /* line 387, ../scss/components/post-types/_type-condos.scss */
+  /* line 423, ../scss/components/post-types/_type-condos.scss */
   .node--condo-project--full .ds-contact-info .form-actions {
     width: 48.78049%;
     clear: right;
     float: right;
     margin-right: 0;
   }
-  /* line 390, ../scss/components/post-types/_type-condos.scss */
+  /* line 426, ../scss/components/post-types/_type-condos.scss */
   .node--condo-project--full .ds-contact-info .webform-component {
     width: 48.78049%;
     clear: right;
@@ -5331,14 +5510,14 @@ ul.tabs {
     margin-left: 0;
     margin-right: 2.43902%;
   }
-  /* line 392, ../scss/components/post-types/_type-condos.scss */
+  /* line 428, ../scss/components/post-types/_type-condos.scss */
   .node--condo-project--full .ds-contact-info .webform-component:nth-child(odd) {
     width: 48.78049%;
     clear: right;
     float: right;
     margin-right: 0;
   }
-  /* line 396, ../scss/components/post-types/_type-condos.scss */
+  /* line 432, ../scss/components/post-types/_type-condos.scss */
   .node--condo-project--full .ds-contact-info .webform-component-markup {
     float: none !important;
     width: 100% !important;
@@ -5363,7 +5542,7 @@ ul.tabs {
   max-width: 360px;
   width: 100%;
   position: relative;
-  color: #666666;
+  color: #000;
 }
 /* line 15, ../scss/abstractions/_abstract-graphics.scss */
 .node--condo-project--full .ds-floorplans .flag-wrapper a .node--condo-project--full .ds-floorplans .flag-wrapper a.pager-next {
@@ -5409,11 +5588,11 @@ ul.tabs {
   background-color: #666666;
   z-index: 1;
 }
-/* line 212, ../scss/base/_base-forms.scss */
+/* line 220, ../scss/base/_base-forms.scss */
 .node--condo-project--full .ds-floorplans .flag-wrapper i {
   display: none;
 }
-/* line 216, ../scss/base/_base-forms.scss */
+/* line 224, ../scss/base/_base-forms.scss */
 .node--condo-project--full .ds-floorplans .flag-throbber {
   display: none;
 }
@@ -5435,7 +5614,7 @@ ul.tabs {
   max-width: 360px;
   width: 100%;
   position: relative;
-  color: #666666;
+  color: #000;
 }
 /* line 15, ../scss/abstractions/_abstract-graphics.scss */
 .node--condo-project--full .ds-floorplans .views-field-field-floorplan a .node--condo-project--full .ds-floorplans .views-field-field-floorplan a.pager-next {
@@ -5481,79 +5660,76 @@ ul.tabs {
   background-color: #666666;
   z-index: 1;
 }
-/* line 223, ../scss/base/_base-forms.scss */
+/* line 231, ../scss/base/_base-forms.scss */
 .node--condo-project--full .ds-floorplans tbody .file-icon,
 .node--condo-project--full .ds-floorplans tbody .file-size {
   display: none;
 }
-/* line 227, ../scss/base/_base-forms.scss */
+/* line 235, ../scss/base/_base-forms.scss */
 .node--condo-project--full .ds-floorplans tbody a {
   font-size: 17px !important;
   min-width: 116px;
-  -moz-border-radius: 4px / 4px;
-  -webkit-border-radius: 4px 4px;
-  border-radius: 4px / 4px;
 }
 @media (max-width: 1023px) {
-  /* line 227, ../scss/base/_base-forms.scss */
+  /* line 235, ../scss/base/_base-forms.scss */
   .node--condo-project--full .ds-floorplans tbody a {
     font-size: 14px !important;
   }
 }
-/* line 234, ../scss/base/_base-forms.scss */
+/* line 241, ../scss/base/_base-forms.scss */
 .node--condo-project--full .ds-floorplans tbody a:after {
   background-color: transparent !important;
 }
-/* line 239, ../scss/base/_base-forms.scss */
+/* line 246, ../scss/base/_base-forms.scss */
 .node--condo-project--full .ds-floorplans tbody .field--floorplan a:after {
   display: none;
 }
 @media (max-width: 1023px) {
-  /* line 403, ../scss/components/post-types/_type-condos.scss */
+  /* line 439, ../scss/components/post-types/_type-condos.scss */
   .node--condo-project--full .ds-floorplans {
     /*
     Label the data
     */
   }
-  /* line 192, ../scss/base/_base-forms.scss */
+  /* line 200, ../scss/base/_base-forms.scss */
   .node--condo-project--full .ds-floorplans td:before {
     font-weight: 700;
   }
-  /* line 195, ../scss/base/_base-forms.scss */
+  /* line 203, ../scss/base/_base-forms.scss */
   .node--condo-project--full .ds-floorplans td:nth-of-type(1):before {
     content: "Project Name";
   }
-  /* line 196, ../scss/base/_base-forms.scss */
+  /* line 204, ../scss/base/_base-forms.scss */
   .node--condo-project--full .ds-floorplans td:nth-of-type(2):before {
     content: "Floor";
   }
-  /* line 197, ../scss/base/_base-forms.scss */
+  /* line 205, ../scss/base/_base-forms.scss */
   .node--condo-project--full .ds-floorplans td:nth-of-type(3):before {
     content: "Suite Number";
   }
-  /* line 198, ../scss/base/_base-forms.scss */
+  /* line 206, ../scss/base/_base-forms.scss */
   .node--condo-project--full .ds-floorplans td:nth-of-type(4):before {
     content: "Size";
   }
-  /* line 199, ../scss/base/_base-forms.scss */
+  /* line 207, ../scss/base/_base-forms.scss */
   .node--condo-project--full .ds-floorplans td:nth-of-type(5):before {
     content: "Parking";
   }
-  /* line 200, ../scss/base/_base-forms.scss */
+  /* line 208, ../scss/base/_base-forms.scss */
   .node--condo-project--full .ds-floorplans td:nth-of-type(6):before {
     content: "Pricing";
   }
-  /* line 201, ../scss/base/_base-forms.scss */
+  /* line 209, ../scss/base/_base-forms.scss */
   .node--condo-project--full .ds-floorplans td:nth-of-type(7):before {
     content: "Floor Plans";
   }
-  /* line 202, ../scss/base/_base-forms.scss */
+  /* line 210, ../scss/base/_base-forms.scss */
   .node--condo-project--full .ds-floorplans td:nth-of-type(8):before {
     content: "Save";
   }
 }
 
-/* line 407, ../scss/components/post-types/_type-condos.scss */
+/* line 443, ../scss/components/post-types/_type-condos.scss */
 .map-container {
   position: relative;
   top: 50%;
@@ -5565,27 +5741,27 @@ ul.tabs {
   padding: 0 35px;
 }
 @media (max-width: 767px) {
-  /* line 407, ../scss/components/post-types/_type-condos.scss */
+  /* line 443, ../scss/components/post-types/_type-condos.scss */
   .map-container {
     padding: 0 10px;
   }
 }
-/* line 414, ../scss/components/post-types/_type-condos.scss */
+/* line 450, ../scss/components/post-types/_type-condos.scss */
 .map-container #map-canvas {
   height: 500px;
 }
 @media (max-width: 767px) {
-  /* line 407, ../scss/components/post-types/_type-condos.scss */
+  /* line 443, ../scss/components/post-types/_type-condos.scss */
   .map-container {
     height: 320px;
   }
-  /* line 419, ../scss/components/post-types/_type-condos.scss */
+  /* line 455, ../scss/components/post-types/_type-condos.scss */
   .map-container #map-canvas {
     height: 320px;
   }
 }
 
-/* line 425, ../scss/components/post-types/_type-condos.scss */
+/* line 461, ../scss/components/post-types/_type-condos.scss */
 .entity-floorplans.view-mode-comparison {
   padding: 10px 15px;
   background-color: #f7f7f7;
@@ -5609,7 +5785,7 @@ ul.tabs {
   max-width: 360px;
   width: 100%;
   position: relative;
-  color: #666666;
+  color: #000;
 }
 /* line 15, ../scss/abstractions/_abstract-graphics.scss */
 .entity-floorplans.view-mode-comparison .field-container a .entity-floorplans.view-mode-comparison .field-container a.pager-next,
@@ -5662,7 +5838,7 @@ ul.tabs {
   background-color: #666666;
   z-index: 1;
 }
-/* line 433, ../scss/components/post-types/_type-condos.scss */
+/* line 469, ../scss/components/post-types/_type-condos.scss */
 .entity-floorplans.view-mode-comparison .field-label {
   font-weight: 700;
 }
@@ -5722,7 +5898,7 @@ td .flag-message, td
 .flag-count {
   margin-left: -50px;
   background-color: #ffcc33;
-  color: #666666;
+  color: #000;
   display: none;
 }
 /* line 40, ../scss/components/post-types/_type-flags.scss */
@@ -5753,7 +5929,7 @@ td .flag-message, td
   max-width: 360px;
   width: 100%;
   position: relative;
-  color: #666666;
+  color: #000;
 }
 /* line 15, ../scss/abstractions/_abstract-graphics.scss */
 .view-compare-floorplans .flag-wrapper a .view-compare-floorplans .flag-wrapper a.pager-next {
@@ -5799,11 +5975,11 @@ td .flag-message, td
   background-color: #666666;
   z-index: 1;
 }
-/* line 212, ../scss/base/_base-forms.scss */
+/* line 220, ../scss/base/_base-forms.scss */
 .view-compare-floorplans .flag-wrapper i {
   display: none;
 }
-/* line 216, ../scss/base/_base-forms.scss */
+/* line 224, ../scss/base/_base-forms.scss */
 .view-compare-floorplans .flag-throbber {
   display: none;
 }
@@ -5825,7 +6001,7 @@ td .flag-message, td
   max-width: 360px;
   width: 100%;
   position: relative;
-  color: #666666;
+  color: #000;
 }
 /* line 15, ../scss/abstractions/_abstract-graphics.scss */
 .view-compare-floorplans .views-field-field-floorplan a .view-compare-floorplans .views-field-field-floorplan a.pager-next {
@@ -5871,30 +6047,27 @@ td .flag-message, td
   background-color: #666666;
   z-index: 1;
 }
-/* line 223, ../scss/base/_base-forms.scss */
+/* line 231, ../scss/base/_base-forms.scss */
 .view-compare-floorplans tbody .file-icon,
 .view-compare-floorplans tbody .file-size {
   display: none;
 }
-/* line 227, ../scss/base/_base-forms.scss */
+/* line 235, ../scss/base/_base-forms.scss */
 .view-compare-floorplans tbody a {
   font-size: 17px !important;
   min-width: 116px;
-  -moz-border-radius: 4px / 4px;
-  -webkit-border-radius: 4px 4px;
-  border-radius: 4px / 4px;
 }
 @media (max-width: 1023px) {
-  /* line 227, ../scss/base/_base-forms.scss */
+  /* line 235, ../scss/base/_base-forms.scss */
   .view-compare-floorplans tbody a {
     font-size: 14px !important;
   }
 }
-/* line 234, ../scss/base/_base-forms.scss */
+/* line 241, ../scss/base/_base-forms.scss */
 .view-compare-floorplans tbody a:after {
   background-color: transparent !important;
 }
-/* line 239, ../scss/base/_base-forms.scss */
+/* line 246, ../scss/base/_base-forms.scss */
 .view-compare-floorplans tbody .field--floorplan a:after {
   display: none;
 }
@@ -5905,77 +6078,77 @@ td .flag-message, td
     Label the data
     */
   }
-  /* line 192, ../scss/base/_base-forms.scss */
+  /* line 200, ../scss/base/_base-forms.scss */
   .view-compare-floorplans td:before {
     font-weight: 700;
   }
-  /* line 195, ../scss/base/_base-forms.scss */
+  /* line 203, ../scss/base/_base-forms.scss */
   .view-compare-floorplans td:nth-of-type(1):before {
     content: "Project Name";
   }
-  /* line 196, ../scss/base/_base-forms.scss */
+  /* line 204, ../scss/base/_base-forms.scss */
   .view-compare-floorplans td:nth-of-type(2):before {
     content: "Floor";
   }
-  /* line 197, ../scss/base/_base-forms.scss */
+  /* line 205, ../scss/base/_base-forms.scss */
   .view-compare-floorplans td:nth-of-type(3):before {
     content: "Suite Number";
   }
-  /* line 198, ../scss/base/_base-forms.scss */
+  /* line 206, ../scss/base/_base-forms.scss */
   .view-compare-floorplans td:nth-of-type(4):before {
     content: "Size";
   }
-  /* line 199, ../scss/base/_base-forms.scss */
+  /* line 207, ../scss/base/_base-forms.scss */
   .view-compare-floorplans td:nth-of-type(5):before {
     content: "Parking";
   }
-  /* line 200, ../scss/base/_base-forms.scss */
+  /* line 208, ../scss/base/_base-forms.scss */
   .view-compare-floorplans td:nth-of-type(6):before {
     content: "Pricing";
   }
-  /* line 201, ../scss/base/_base-forms.scss */
+  /* line 209, ../scss/base/_base-forms.scss */
   .view-compare-floorplans td:nth-of-type(7):before {
     content: "Floor Plans";
   }
-  /* line 202, ../scss/base/_base-forms.scss */
+  /* line 210, ../scss/base/_base-forms.scss */
   .view-compare-floorplans td:nth-of-type(8):before {
     content: "Save";
   }
 }
 @media (max-width: 1023px) {
-  /* line 192, ../scss/base/_base-forms.scss */
+  /* line 200, ../scss/base/_base-forms.scss */
   .view-compare-floorplans td:before {
     font-weight: 700;
   }
-  /* line 195, ../scss/base/_base-forms.scss */
+  /* line 203, ../scss/base/_base-forms.scss */
   .view-compare-floorplans td:nth-of-type(1):before {
     content: "Project Name";
   }
-  /* line 196, ../scss/base/_base-forms.scss */
+  /* line 204, ../scss/base/_base-forms.scss */
   .view-compare-floorplans td:nth-of-type(2):before {
     content: "Floor";
   }
-  /* line 197, ../scss/base/_base-forms.scss */
+  /* line 205, ../scss/base/_base-forms.scss */
   .view-compare-floorplans td:nth-of-type(3):before {
     content: "Suite Number";
   }
-  /* line 198, ../scss/base/_base-forms.scss */
+  /* line 206, ../scss/base/_base-forms.scss */
   .view-compare-floorplans td:nth-of-type(4):before {
     content: "Size";
   }
-  /* line 199, ../scss/base/_base-forms.scss */
+  /* line 207, ../scss/base/_base-forms.scss */
   .view-compare-floorplans td:nth-of-type(5):before {
     content: "Parking";
   }
-  /* line 200, ../scss/base/_base-forms.scss */
+  /* line 208, ../scss/base/_base-forms.scss */
   .view-compare-floorplans td:nth-of-type(6):before {
     content: "Pricing";
   }
-  /* line 201, ../scss/base/_base-forms.scss */
+  /* line 209, ../scss/base/_base-forms.scss */
   .view-compare-floorplans td:nth-of-type(7):before {
     content: "Floor Plans";
   }
-  /* line 202, ../scss/base/_base-forms.scss */
+  /* line 210, ../scss/base/_base-forms.scss */
   .view-compare-floorplans td:nth-of-type(8):before {
     content: "Save";
   }
@@ -5998,7 +6171,7 @@ td .flag-message, td
   max-width: 360px;
   width: 100%;
   position: relative;
-  color: #666666;
+  color: #000;
 }
 /* line 15, ../scss/abstractions/_abstract-graphics.scss */
 .view-compare-floorplans .views-field-ops a .view-compare-floorplans .views-field-ops a.pager-next {
@@ -6062,7 +6235,7 @@ td .flag-message, td
   max-width: 360px;
   width: 100%;
   position: relative;
-  color: #666666;
+  color: #000;
 }
 /* line 15, ../scss/abstractions/_abstract-graphics.scss */
 .view-compare-floorplans .field--floorplan a .view-compare-floorplans .field--floorplan a.pager-next {
@@ -6118,41 +6291,33 @@ td .flag-message, td
 
 /* line 9, ../scss/components/post-types/_type-news.scss */
 .node--news--teaser h3 {
-  color: #666666;
-  max-width: 330px;
   font-size: 26px;
   font-size: 1.625rem;
   margin: 0;
   padding: 40px 0px 20px;
   padding: 2.5rem 0rem 1.25rem;
 }
-/* line 15, ../scss/components/post-types/_type-news.scss */
+/* line 14, ../scss/components/post-types/_type-news.scss */
 .node--news--teaser h3 a {
-  color: #666666;
-}
-@media (min-width: 1024px) {
-  /* line 22, ../scss/components/post-types/_type-news.scss */
-  .node--news--teaser .field--body {
-    max-width: 85%;
-  }
+  color: #000;
 }
 
-/* line 30, ../scss/components/post-types/_type-news.scss */
+/* line 26, ../scss/components/post-types/_type-news.scss */
 .view-news.view-display-id-page .field--news-image img {
   width: 100%;
 }
-/* line 34, ../scss/components/post-types/_type-news.scss */
+/* line 30, ../scss/components/post-types/_type-news.scss */
 .view-news.view-display-id-page .views-row {
   margin-bottom: 15px;
 }
 @media (max-width: 767px) {
-  /* line 34, ../scss/components/post-types/_type-news.scss */
+  /* line 30, ../scss/components/post-types/_type-news.scss */
   .view-news.view-display-id-page .views-row {
     text-align: center;
   }
 }
 @media (min-width: 768px) and (max-width: 1023px) {
-  /* line 34, ../scss/components/post-types/_type-news.scss */
+  /* line 30, ../scss/components/post-types/_type-news.scss */
   .view-news.view-display-id-page .views-row {
     width: 48.78049%;
     clear: right;
@@ -6160,7 +6325,7 @@ td .flag-message, td
     margin-left: 0;
     margin-right: 2.43902%;
   }
-  /* line 41, ../scss/components/post-types/_type-news.scss */
+  /* line 37, ../scss/components/post-types/_type-news.scss */
   .view-news.view-display-id-page .views-row.views-row-even {
     width: 48.78049%;
     clear: right;
@@ -6169,7 +6334,7 @@ td .flag-message, td
   }
 }
 @media (min-width: 1024px) {
-  /* line 34, ../scss/components/post-types/_type-news.scss */
+  /* line 30, ../scss/components/post-types/_type-news.scss */
   .view-news.view-display-id-page .views-row {
     width: 24.09639%;
     clear: right;
@@ -6177,7 +6342,7 @@ td .flag-message, td
     margin-left: 0;
     margin-right: 1.20482%;
   }
-  /* line 47, ../scss/components/post-types/_type-news.scss */
+  /* line 43, ../scss/components/post-types/_type-news.scss */
   .view-news.view-display-id-page .views-row:nth-child(4n+4) {
     width: 24.09639%;
     clear: right;
@@ -6201,40 +6366,41 @@ td .flag-message, td
   }
 }
 
-/* line 13, ../scss/components/post-types/_type-trends.scss */
+/* line 15, ../scss/components/post-types/_type-trends.scss */
 .view-trends .views-row-odd {
   background: url('../img/icons/couch-1.svg?1414001207') 90% top no-repeat;
 }
-/* line 16, ../scss/components/post-types/_type-trends.scss */
+/* line 18, ../scss/components/post-types/_type-trends.scss */
 .view-trends .views-row-even {
   background: url('../img/icons/couch-2.svg?1414001255') 90% top no-repeat;
 }
-/* line 19, ../scss/components/post-types/_type-trends.scss */
+/* line 21, ../scss/components/post-types/_type-trends.scss */
 .view-trends .views-row {
   margin-bottom: 45px;
-  background-size: 119px auto;
+  background-size: 96px auto;
 }
 @media (min-width: 1024px) {
-  /* line 19, ../scss/components/post-types/_type-trends.scss */
+  /* line 21, ../scss/components/post-types/_type-trends.scss */
   .view-trends .views-row {
     float: left;
     width: 50%;
     margin-right: 0%;
+    margin-bottom: 0;
   }
-  /* line 26, ../scss/components/post-types/_type-trends.scss */
+  /* line 29, ../scss/components/post-types/_type-trends.scss */
   .view-trends .views-row.views-row-last {
     margin-right: 0;
     float: right;
   }
 }
 @media (max-width: 767px) {
-  /* line 19, ../scss/components/post-types/_type-trends.scss */
+  /* line 21, ../scss/components/post-types/_type-trends.scss */
   .view-trends .views-row {
     background: none;
   }
 }
 @media (min-width: 1024px) {
-  /* line 40, ../scss/components/post-types/_type-trends.scss */
+  /* line 43, ../scss/components/post-types/_type-trends.scss */
   .view-trends .views-row-last .field--title-field > .inner,
   .view-trends .views-row-last .field--source > .inner,
   .view-trends .views-row-last .field--trends > .inner {
@@ -6242,54 +6408,46 @@ td .flag-message, td
   }
 }
 
-/* line 50, ../scss/components/post-types/_type-trends.scss */
-.node--trends {
-  color: #333333;
-}
-/* line 52, ../scss/components/post-types/_type-trends.scss */
+/* line 54, ../scss/components/post-types/_type-trends.scss */
 .node--trends .field-label,
 .node--trends h3 {
   margin: 0;
-  font-size: 33px;
-  font-size: 2.0625rem;
+  font-size: 26px;
+  font-size: 1.625rem;
   line-height: 1.2;
 }
-/* line 58, ../scss/components/post-types/_type-trends.scss */
-.node--trends h3 {
-  color: #999999;
-}
-/* line 61, ../scss/components/post-types/_type-trends.scss */
+/* line 63, ../scss/components/post-types/_type-trends.scss */
 .node--trends .field--source {
   font-size: 14px;
   font-size: 0.875rem;
 }
-/* line 64, ../scss/components/post-types/_type-trends.scss */
+/* line 66, ../scss/components/post-types/_type-trends.scss */
 .node--trends .field--price {
   font-size: 25px;
   font-size: 1.5625rem;
 }
 @media (max-width: 767px) {
-  /* line 64, ../scss/components/post-types/_type-trends.scss */
+  /* line 66, ../scss/components/post-types/_type-trends.scss */
   .node--trends .field--price {
     font-size: 20px;
     font-size: 1.25rem;
   }
 }
 @media (max-width: 767px) {
-  /* line 70, ../scss/components/post-types/_type-trends.scss */
+  /* line 72, ../scss/components/post-types/_type-trends.scss */
   .node--trends .field--general-location {
     line-height: 1.3;
     font-size: 14px;
     font-size: 0.875rem;
   }
 }
-/* line 76, ../scss/components/post-types/_type-trends.scss */
+/* line 78, ../scss/components/post-types/_type-trends.scss */
 .node--trends .field--trends {
   border-top: 1px solid #828282;
   margin-top: 20px;
   margin-top: 1.25rem;
 }
-/* line 80, ../scss/components/post-types/_type-trends.scss */
+/* line 82, ../scss/components/post-types/_type-trends.scss */
 .node--trends .field--trends > .inner > .field-item {
   width: 33.33333%;
   clear: right;
@@ -6301,7 +6459,7 @@ td .flag-message, td
   padding-top: 0.9375rem;
   text-align: center;
 }
-/* line 85, ../scss/components/post-types/_type-trends.scss */
+/* line 87, ../scss/components/post-types/_type-trends.scss */
 .node--trends .field--trends > .inner > .field-item:last-child {
   width: 33.33333%;
   clear: right;
@@ -6309,7 +6467,7 @@ td .flag-message, td
   margin-right: 0;
   border-right: 0;
 }
-/* line 89, ../scss/components/post-types/_type-trends.scss */
+/* line 91, ../scss/components/post-types/_type-trends.scss */
 .node--trends .field--trends > .inner > .field-item:first-child {
   text-align: left;
 }
@@ -6338,7 +6496,7 @@ td .flag-message, td
 /* line 1, ../scss/components/regions/_region-content-header.scss */
 .l-region--content-header {
   background-color: #ebebeb;
-  color: #666666;
+  color: #000;
 }
 /* line 4, ../scss/components/regions/_region-content-header.scss */
 .l-region--content-header .wrap, .l-region--content-header ul.tabs {
@@ -6352,14 +6510,10 @@ td .flag-message, td
 }
 /* line 12, ../scss/components/regions/_region-content-header.scss */
 .l-region--content-header a {
-  color: #666666;
+  color: #000;
 }
 /* line 15, ../scss/components/regions/_region-content-header.scss */
 .l-region--content-header .page-title {
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 40px;
-  font-size: 2.5rem;
   margin: 0;
 }
 @media (max-width: 1399px) {
@@ -6410,15 +6564,21 @@ td .flag-message, td
   z-index: 5;
 }
 /* line 23, ../scss/components/regions/_region-header.scss */
-.l-region--header h2 {
+.l-region--header h3 {
   margin-top: 0;
 }
-/* line 26, ../scss/components/regions/_region-header.scss */
+@media (max-width: 767px) {
+  /* line 23, ../scss/components/regions/_region-header.scss */
+  .l-region--header h3 {
+    font-size: 17px;
+  }
+}
+/* line 29, ../scss/components/regions/_region-header.scss */
 .l-region--header .selector {
   margin-bottom: 20px;
 }
 @media (min-width: 768px) {
-  /* line 26, ../scss/components/regions/_region-header.scss */
+  /* line 29, ../scss/components/regions/_region-header.scss */
   .l-region--header .selector {
     display: inline-block;
     vertical-align: middle;
@@ -6431,12 +6591,12 @@ td .flag-message, td
   }
 }
 @media (min-width: 1024px) {
-  /* line 26, ../scss/components/regions/_region-header.scss */
+  /* line 29, ../scss/components/regions/_region-header.scss */
   .l-region--header .selector {
     max-width: 360px;
   }
 }
-/* line 38, ../scss/components/regions/_region-header.scss */
+/* line 41, ../scss/components/regions/_region-header.scss */
 .page-user .l-region--header {
   display: none;
 }
@@ -6571,80 +6731,68 @@ td .flag-message, td
   margin-top: -12px;
   margin-top: -0.75rem;
 }
-@media (min-width: 1200px) {
-  /* line 18, ../scss/components/regions/_region-meta.scss */
-  .l-region--meta .condos i {
-    margin-top: -18px;
-    margin-top: -1.125rem;
-  }
-}
-/* line 27, ../scss/components/regions/_region-meta.scss */
+/* line 24, ../scss/components/regions/_region-meta.scss */
 .l-region--meta .condos i:before {
   font-size: 24px;
   font-size: 1.5rem;
 }
-@media (min-width: 1200px) {
-  /* line 27, ../scss/components/regions/_region-meta.scss */
-  .l-region--meta .condos i:before {
-    font-size: 36px;
-    font-size: 2.25rem;
-  }
-}
-/* line 34, ../scss/components/regions/_region-meta.scss */
+/* line 28, ../scss/components/regions/_region-meta.scss */
 .l-region--meta .condos > a {
   text-align: center;
 }
-/* line 36, ../scss/components/regions/_region-meta.scss */
+/* line 30, ../scss/components/regions/_region-meta.scss */
 .l-region--meta .condos > a span {
   padding-left: 31px;
   padding-left: 1.9375rem;
   display: inline-block;
   position: relative;
 }
-@media (min-width: 1200px) {
-  /* line 36, ../scss/components/regions/_region-meta.scss */
-  .l-region--meta .condos > a span {
-    padding-left: 46px;
-    padding-left: 2.875rem;
-  }
-}
-/* line 47, ../scss/components/regions/_region-meta.scss */
+/* line 38, ../scss/components/regions/_region-meta.scss */
 .l-region--meta a span {
   display: block;
 }
-/* line 52, ../scss/components/regions/_region-meta.scss */
+/* line 43, ../scss/components/regions/_region-meta.scss */
 .l-region--meta .ico-moon:before,
 .l-region--meta .translate {
   font-size: 20px;
   font-size: 1.25rem;
 }
-/* line 54, ../scss/components/regions/_region-meta.scss */
+/* line 45, ../scss/components/regions/_region-meta.scss */
 .l-region--meta .ico-moon:before a,
 .l-region--meta .translate a {
   color: #666;
 }
 @media (min-width: 1200px) {
-  /* line 52, ../scss/components/regions/_region-meta.scss */
+  /* line 43, ../scss/components/regions/_region-meta.scss */
   .l-region--meta .ico-moon:before,
   .l-region--meta .translate {
     font-size: 25px;
     font-size: 1.5625rem;
   }
 }
-@media (min-width: 1400px) {
-  /* line 52, ../scss/components/regions/_region-meta.scss */
-  .l-region--meta .ico-moon:before,
-  .l-region--meta .translate {
-    font-size: 36px;
-    font-size: 2.25rem;
-  }
-}
-/* line 66, ../scss/components/regions/_region-meta.scss */
+/* line 54, ../scss/components/regions/_region-meta.scss */
 .l-region--meta .translate a {
   font-size: 22px;
   font-size: 1.375rem;
 }
-/* line 70, ../scss/components/regions/_region-meta.scss */
+/* line 57, ../scss/components/regions/_region-meta.scss */
+.l-region--meta .translate a.english::after {
+  content: " ";
+  background: url('../img/flag-canada.svg?1427238497') no-repeat center center;
+  background-size: contain;
+  position: absolute;
+  height: 33px;
+  width: 33px;
+  top: 50%;
+  margin-top: -16.5px;
+  left: 50%;
+  margin-left: -16.5px;
+}
+/* line 69, ../scss/components/regions/_region-meta.scss */
+.l-region--meta .translate a.english span {
+  color: transparent;
+}
+/* line 75, ../scss/components/regions/_region-meta.scss */
 .l-region--meta .search a {
   color: #595959;
 }
@@ -6704,10 +6852,39 @@ td .flag-message, td
   color: #FFF;
   line-height: .91;
 }
-/* line 44, ../scss/components/sliders/_main-slider.scss */
+@media (max-width: 767px) {
+  /* line 22, ../scss/components/sliders/_main-slider.scss */
+  .owl-theme .owl-controls div {
+    width: 30px;
+    width: 1.875rem;
+    height: 30px;
+    height: 1.875rem;
+    border-width: 0px !important;
+    background-color: transparent !important;
+  }
+  /* line 42, ../scss/components/sliders/_main-slider.scss */
+  .owl-theme .owl-controls div::before {
+    top: 1px;
+    font-size: 29px;
+    font-size: 1.8125rem;
+  }
+}
+@media (max-width: 767px) {
+  /* line 49, ../scss/components/sliders/_main-slider.scss */
+  .owl-theme .owl-controls .owl-prev:before {
+    right: -1px;
+  }
+}
+/* line 57, ../scss/components/sliders/_main-slider.scss */
 .owl-theme .owl-controls .owl-next:before {
   right: -7px;
   right: -0.4375rem;
+}
+@media (max-width: 767px) {
+  /* line 57, ../scss/components/sliders/_main-slider.scss */
+  .owl-theme .owl-controls .owl-next:before {
+    right: -2px;
+  }
 }
 
 /* line 3, ../scss/layouts/_leap.layout.scss */
@@ -6940,8 +7117,50 @@ $slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'   
     height: 122px;
   }
 }
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* line 170, ../scss/layouts/_leap.layout.scss */
+  .node--condo-project--full .ds-sales .wrap > div, .node--condo-project--full .ds-sales ul.tabs > div {
+    -sgs-span-settings: ("span": 1, "location": 1, "grid": 3, "gutter": 0.1, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
+    width: 31.25%;
+    clear: right;
+    float: left;
+    margin-left: 0;
+    margin-right: 3.125%;
+  }
+  /* line 172, ../scss/layouts/_leap.layout.scss */
+  .node--condo-project--full .ds-sales .wrap > div:last-of-type, .node--condo-project--full .ds-sales ul.tabs > div:last-of-type {
+    -sgs-span-settings: ("span": 1, "location": 3, "grid": 3, "gutter": 0.1, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
+    width: 31.25%;
+    clear: right;
+    float: right;
+    margin-right: 0;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* line 184, ../scss/layouts/_leap.layout.scss */
+  .node--condo-project--full .ds-project-info .wrap .col-1, .node--condo-project--full .ds-project-info ul.tabs .col-1 {
+    -sgs-span-settings: ("span": 1, "location": 1, "grid": 2, "gutter": 0.1, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
+    width: 47.61905%;
+    clear: right;
+    float: left;
+    margin-left: 0;
+    margin-right: 4.7619%;
+  }
+  /* line 187, ../scss/layouts/_leap.layout.scss */
+  .node--condo-project--full .ds-project-info .wrap .col-2, .node--condo-project--full .ds-project-info ul.tabs .col-2 {
+    -sgs-span-settings: ("span": 1, "location": 2, "grid": 2, "gutter": 0.1, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
+    width: 47.61905%;
+    clear: right;
+    float: right;
+    margin-right: 0;
+  }
+  /* line 190, ../scss/layouts/_leap.layout.scss */
+  .node--condo-project--full .ds-project-info .wrap .col-3, .node--condo-project--full .ds-project-info ul.tabs .col-3 {
+    clear: both;
+  }
+}
 @media (min-width: 1024px) {
-  /* line 183, ../scss/layouts/_leap.layout.scss */
+  /* line 203, ../scss/layouts/_leap.layout.scss */
   .node--condo-project--full .ds-contact-info .contact-info > div {
     -sgs-span-settings: ("span": 1, "location": 1, "grid": 2, "gutter": 0.05, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
     width: 48.78049%;
@@ -6950,7 +7169,7 @@ $slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'   
     margin-left: 0;
     margin-right: 2.43902%;
   }
-  /* line 186, ../scss/layouts/_leap.layout.scss */
+  /* line 206, ../scss/layouts/_leap.layout.scss */
   .node--condo-project--full .ds-contact-info .contact-info > div:last-of-type {
     -sgs-span-settings: ("span": 1, "location": 2, "grid": 2, "gutter": 0.05, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
     width: 48.78049%;
@@ -6963,7 +7182,7 @@ $slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'   
 /**
 *Page title with views
 */
-/* line 205, ../scss/layouts/_leap.layout.scss */
+/* line 225, ../scss/layouts/_leap.layout.scss */
 .l-region--content-header .wrap, .l-region--content-header ul.tabs {
   position: relative;
   min-height: 111px;
@@ -6972,12 +7191,12 @@ $slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'   
   padding-bottom: 20px;
   padding-bottom: 1.25rem;
 }
-/* line 211, ../scss/layouts/_leap.layout.scss */
+/* line 231, ../scss/layouts/_leap.layout.scss */
 .l-region--content-header .page-title {
   padding-left: 0;
 }
 @media (min-width: 1024px) {
-  /* line 218, ../scss/layouts/_leap.layout.scss */
+  /* line 238, ../scss/layouts/_leap.layout.scss */
   .l-region--content-header .block--block-3 {
     position: absolute;
     right: 0;

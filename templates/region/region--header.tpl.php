@@ -32,7 +32,7 @@
 <div<?php print $attributes; ?>>
   <div class="wrap">
     <?php if($is_front):?>
-      <h2>The easiest way to find new condos and town houses in Vancouver, BC</h2>
+      <h3>The easiest way to find new condos and town houses in Vancouver, BC</h3>
     <?php endif;?>
     <?php include(path_to_theme().'/templates/custom/city-search.tpl.php');?>
     <?php include(path_to_theme().'/templates/custom/find-closest.tpl.php');?>

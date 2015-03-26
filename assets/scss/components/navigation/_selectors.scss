@@ -5,7 +5,7 @@
   width: 95%;
   max-width: 427px;
   background-color: #FFF;
-  color: #333333;
+  color: #000;
   @include transition(border-radius .25s ease-in);
 
   @include at(pt){
@@ -14,7 +14,7 @@
   &.open{
   }
   a{
-    color: #333333;
+    color: #000;
   }
   ul,li{
     padding: 0;
@@ -30,7 +30,8 @@
       height: 55px;
       display: block;
     }
-    .ico-moon{
+    .ico-moon,
+    .icon{
       @include transition(border-radius .25s ease-in);
       background-color: #666666;
       height: 100%;
@@ -48,10 +49,9 @@
           margin-left: auto;
           margin-right: auto;
           margin-top: -11px;          
-          
         }
         &:after{
-          border:2px solid #fff;
+          border:0px solid #fff;
           @include border-radius(1000px, 1000px);
           position: absolute;
           top:50%;
@@ -97,7 +97,7 @@
       @include rem(font-size, 20px);
       width: 82.435597189696%;
       @include to(lp){
-        font-size: 13px;
+        font-size: 16px;
       }
     }
   }

@@ -53,19 +53,19 @@ $debug-grid: false !default;
   }
 }
 %small-vertical-margin{
-  @include rem(padding-top, 10px);
-  @include rem(padding-bottom, 15px);
+  @include rem(margin-top, 10px);
+  @include rem(margin-bottom, 15px);
   @include from(lt, $noquery){
-    @include rem(padding-top, 20px);
-    @include rem(padding-bottom, 25px);
+    @include rem(margin-top, 20px);
+    @include rem(margin-bottom, 25px);
   }
 }
 %big-vertical-margin{
-  @include rem(padding-top, 30px);
-  @include rem(padding-bottom, 35px);
+  @include rem(margin-top, 30px);
+  @include rem(margin-bottom, 35px);
   @include from(lt, $noquery){
-    @include rem(padding-top, 60px);
-    @include rem(padding-bottom, 65px);
+    @include rem(margin-top, 60px);
+    @include rem(margin-bottom, 65px);
   }
 }
 %three-column{
@@ -80,7 +80,7 @@ $debug-grid: false !default;
 }
 %two-column{
   >div{
-    @include from(lt, $noquery){
+    @include from(pt, $noquery){
       @include float-span(1, $grid: 2, $gutter: .25);
       &:last-of-type{
         @include float-span(1,'last', $grid: 2, $gutter: .25);

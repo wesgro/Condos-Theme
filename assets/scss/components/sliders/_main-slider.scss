@@ -34,16 +34,32 @@
         color: #FFF;
         line-height: .91;
       }
+      @include to(lp){
+        @include rem(width, 30px);
+        @include rem(height, 30px);
+        border-width: 0px !important;
+        background-color: transparent !important;
+        &::before{
+          top:1px;
+          @include rem(font-size, 29px);
+        }
+      }
     }
     .owl-prev{
       &:before{
         @extend %icon-arrow-left;
+        @include to(lp){
+          right:-1px;
+        }
       }
     }
     .owl-next{
       &:before{
         @extend %icon-arrow-right;
         @include rem(right, -7px);
+        @include to(lp){
+          right:-2px;
+        }
       }
     }
   }

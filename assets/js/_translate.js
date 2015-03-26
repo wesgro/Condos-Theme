@@ -39,14 +39,23 @@ function doGTranslate(a) {
     }
 }
 (function($) {
-  $(function(){
-    $(".translate a").on('click', function(e){
+  $(window).load(function(){
+    var language = $(".goog-te-combo").find(":selected").text();
+    var lang = $.cookie('language');
+    var $translateLink = $(".translate a");
+    //console.log(lang);
+    if(lang === "CN"){
+      $translateLink.removeClass('chinese');
+      $translateLink.addClass('english');
+    }
+    $translateLink.on('click', function(e){
       e.preventDefault();
       var urlString=window.location.href;
       var url=urlString.split("#")[0];
      // window.location.href = url + "#mypara";
-      console.log();
-      var language = $(".goog-te-combo").find(":selected").text();
+      //console.log();
+      language = $(".goog-te-combo").find(":selected").text();
+      console.log("language is " + language);
       if(language === 'Select Language' || language === 'English'){
         //new GTranslateFireEvent('zh-CN', 'change');
        // window.location.href = url + "#googtrans(en|zh-CN)";
@@ -55,12 +64,14 @@ function doGTranslate(a) {
         doGTranslate('en|zh-CN');
         $(this).removeClass('chinese');
         $(this).addClass('english');
+        $.cookie('language', 'CN');
       }else{
          //window.location.href = url + "#googtrans(zh-CN|en)";
-         console.log('translate to english');
+        console.log('translate to english');
         doGTranslate('zh-CN|en');
         $(this).removeClass('english');
         $(this).addClass('chinese');
+        $.cookie('language', 'EN');
       }
      // location.reload();
     });

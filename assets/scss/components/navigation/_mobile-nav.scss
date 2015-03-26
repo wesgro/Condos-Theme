@@ -110,7 +110,7 @@ body.mobile-menu-visible{
 
 
 .l-page{
-  @include transition(transform .85s ease);
+  @include transition(transform .25s linear);
     &.mobile-menu-visible{
       @include translate3d(-100%,0,0);
       @include from(pt){
@@ -133,7 +133,7 @@ body.mobile-menu-visible{
   }
 }
 #mobile-navigation{
-  @include transition(all .98s ease );
+    @include transition(transform .25s linear);
     @include transform3d(translate3d(100%, 0,0));
     opacity: 1;
     &.mobile-menu-visible{
@@ -169,7 +169,6 @@ body.mobile-menu-visible{
   width: 40px;
   height: 40px;
   position: absolute;
-  background-color: $colourHighlight;
   @include border-radius(5px);
   @include squish-text;
   &:before{

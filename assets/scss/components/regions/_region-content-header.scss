@@ -1,6 +1,6 @@
 .l-region--content-header{
   background-color: #ebebeb;
-  color: #666666;
+  color: #000;
   .wrap{
     display: table;
     width: 100%;
@@ -10,12 +10,10 @@
     }
   }
   a{
-    color:#666666;
+    color:#000;
   }
   .page-title{
-    text-transform: uppercase;
-    font-weight: 700;
-    @include font-size(40px);
+    @extend .gamma;
     margin: 0;
     @include to(d){
      width: 396px;

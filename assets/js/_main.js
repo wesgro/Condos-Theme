@@ -13,6 +13,11 @@
  * To use the default WordPress version of jQuery, go to lib/config.php and
  * remove or comment out: add_theme_support('jquery-cdn');
  * ======================================================================== */
+if ('addEventListener' in document) {
+  document.addEventListener('DOMContentLoaded', function() {
+    FastClick.attach(document.body);
+  }, false);
+}
 Modernizr.addTest('svgasimg', document.implementation.hasFeature('http://www.w3.org/TR/SVG11/feature#Image', '1.1'));
 (function($) {
 
@@ -22,8 +27,13 @@ var Roots = {
   // All pages
   common: {
     init: function() {
-      FastClick.attach(document.body);
-      if(!Modernizr.svgasimg){
+      function getAndroidVersion(ua) {
+          ua = (ua || navigator.userAgent).toLowerCase(); 
+          var match = ua.match(/android\s([0-9\.]*)/);
+          return match ? match[1] : false;
+      }
+      if(!Modernizr.svgasimg || parseFloat(getAndroidVersion()) < 4.3){
+        //alert("android");
         $('img').each(function() {
           var img_src = $(this).attr('src');
           var new_src = img_src.replace(/\.svg$/, '.png');
@@ -33,6 +43,7 @@ var Roots = {
       if(Modernizr.input.placeholder){
         $(".webform-component-textfield  label, .webform-component-phone label, .webform-component-email label, .webform-component-select label").hide();
       }
+      $(".view-id-condos .views-row").matchHeight();
       $("input.required").attr('required','required');
     }
   },
@@ -58,10 +69,11 @@ var Roots = {
                 items:1,
                 nav:true,
                 margin:0,
+                touchDrag:true,
             },
             768:{
                 items:2,
-                nav:true
+                nav:true,
             },
             1000:{
                 items:2,

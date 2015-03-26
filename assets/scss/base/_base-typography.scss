@@ -31,7 +31,7 @@ html {
  * $LINKS
  */
 a{
-  color: $blue;
+  color: #000;
   text-decoration: none;
   @include transition(all .8s ease);
   &:hover{
@@ -60,16 +60,16 @@ h1, .alpha {
   
 }
 h2, .beta {
-  @include font-size(24px);
+  @include font-size(28px);
   line-height: 1.2;
   &.region-title{
       margin-top: 0;
-      @include font-size(30px);
+      @include font-size(26px);
       @include rem(margin-bottom, 25px);
   }
 }
 h3, .gamma {
-  @include font-size(20px);
+  @include font-size(26px);
   line-height: 1.1;
 }
 h4, .delta {
