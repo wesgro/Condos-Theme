@@ -22,7 +22,7 @@
   ?>
   <div class="col col-1">
   <ul>
-    <li><a href="<?php echo $url;?>">Visit Website</a></li>
+    <li><a href="<?php echo $url;?>" target="_blank">Visit Website</a></li>
     <li><a class="map-popup" href="#" data-lat="<?php echo $geo['lat'];?>" data-lng="<?php echo $geo['lon'];?>">View Map</a></li>
     <li><a href="tel:<?php echo $phone;?>"><?php echo $phone;?></a></li>
   </ul>

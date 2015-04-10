@@ -69,9 +69,9 @@ $moveInClass="";
 $moveIn = "?completed=100";
 $price = $urlPrefix."?sort_bef_combine=field_price_value%20ASC";
 $priceDir = "asc";
-$lovedText = "Least";
-$loved = $urlPrefix."?sort_bef_combine=count%20ASC";
-$lovedDir = "asc";
+$lovedText = "Most";
+$loved = $urlPrefix."?sort_bef_combine=count%20DESC";
+$lovedDir = "desc";
 if(isset($_GET['townhomes']) && $_GET['townhomes'] === '1'){
   $townhouse = "?townhomes=0";
   $townClass = "selected";
@@ -92,7 +92,7 @@ if(isset($_GET['sort_bef_combine']) && $_GET['sort_bef_combine'] === 'field_pric
 if(isset($_GET['sort_bef_combine']) && $_GET['sort_bef_combine'] === 'count DESC'){
   $loved = $urlPrefix."?sort_bef_combine=count%20ASC";
   $lovedDir = "asc selected";
-   $lovedText = "Least";
+  $lovedText = "Least";
 }
 if(isset($_GET['sort_bef_combine']) && $_GET['sort_bef_combine'] === 'count ASC'){
   $loved = $urlPrefix."?sort_bef_combine=count%20DESC";

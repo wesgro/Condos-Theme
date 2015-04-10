@@ -59,10 +59,10 @@
     border: 0;
     @include inline-block;
     border: 0px solid #000;
-    @include rem(font-size, 14px);
     width: 100%;
     font-weight: 400;
     max-width: 300px;
+    font-family: $otherFont;
     &:hover{
       
     } 
@@ -80,6 +80,7 @@
     font-weight: 400;
     margin-right: 10px;
     @include border-radius(0);
+    font-family: $otherFont;
     &#edit-delete{
       background-color: transparent;
       float: right;
@@ -87,6 +88,9 @@
     }
     &#edit-workflow-5{
       background-color: $blue;
+    }
+    .victoria &{
+      background-color: $victoriaHighlight;
     }
   }
 }
@@ -113,7 +117,9 @@ input[type=file]{
   //border: 1px solid #000;
   @include rem(font-size, 13px);
 }
-
+legend{
+  font-family: $otherFont;
+}
 .webform-client-form,
 .user-login,
 .page-user{
@@ -148,6 +154,7 @@ input[type=file]{
   label{
     font-size: 12px;
     text-transform: uppercase;
+    font-family: $otherFont;
   }
 }
 table{

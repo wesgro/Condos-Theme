@@ -252,6 +252,7 @@ top:36px;
 button {
   &.mfp-close,
   &.mfp-arrow {
+    font-family: $otherFont;
     overflow: visible;
     cursor: pointer;
     background: transparent;
@@ -624,7 +625,7 @@ button {
 }
 /* overlay animate in */
 .mfp-fade.mfp-bg.mfp-ready {
-  opacity: 1;
+  opacity: .7;
 }
 /* overlay animate out */
 .mfp-fade.mfp-bg.mfp-removing {

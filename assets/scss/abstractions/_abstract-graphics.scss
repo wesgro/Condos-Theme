@@ -11,7 +11,10 @@
     width: 100%;
     position: relative;
     color:$bodyCopy;
-    
+    font-family: $otherFont;
+    .victoria &{
+        background-color: $victoriaHighlight;
+    }
     & &.pager-next{
       padding-right: 53px;      
     }    

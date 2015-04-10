@@ -1,4 +1,5 @@
-.block--views-trends-block-1{
+.block--views-trends-block-1,
+.block--views-yearly-trends-block-1{
   background-color: #ebebeb;
   @include rem(padding-top, 66px);
   @include rem(padding-bottom, 60px);
@@ -8,7 +9,8 @@
   .views-row{
   }
 }
-.view-trends{
+.view-trends,
+.view-yearly-trends{
   .view-content{
     @extend %pcf;
   }
@@ -51,9 +53,12 @@
     
   }
 }
-.node--trends{
+.node--trends,
+.node--yearly-trends{
+  font-family: $otherFont;
   .field-label,
-  h3{
+  h3,
+  .field--year{
     margin: 0;
     @include rem(font-size, 26px);
     line-height: 1.2;
@@ -61,10 +66,12 @@
   h3{
 
   }
-  .field--source{
+  .field--source,
+  .field--yealy-trend-source{
     @include rem(font-size, 14px);
   }
-  .field--price{
+  .field--price,
+  .field--yearly-price-trend{
     @include rem(font-size, 25px);
     @include to(lp){
       @include rem(font-size, 20px);
@@ -92,6 +99,13 @@
       &:first-child{
         text-align: left;
       }
+    }
+  }
+  .field--yearly-price-trend{
+    border-top:1px solid #828282;
+    @include rem(margin-top, 20px);
+    > .inner > .field-item{
+      @include rem(padding-top, 15px);
     }
   }
 }

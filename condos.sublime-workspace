@@ -211,6 +211,22 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "templates/custom/city-search.tpl.php",
+			"settings":
+			{
+				"buffer_size": 642,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "assets/scss/base/_base-forms.scss",
+			"settings":
+			{
+				"buffer_size": 5521,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -267,22 +283,35 @@
 	[
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/js",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/ds_layouts/condo_project_list"
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/abstractions",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/base",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/post-types",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/templates",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/templates/block",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/templates/custom",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/templates/system"
 	],
 	"file_history":
 	[
+		"/Volumes/2015-2/floathouse/Web /wordpress.sql",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/_leap.hacks.scss",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/condos.info",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/regions/_region-footer.scss",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/templates/system/page.tpl.php",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/templates/system/html.tpl.php",
+		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/layouts/_leap.layout.scss",
+		"/Users/jake/Downloads/condos_content_type/condos_content_type.features.field_instance.inc",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/post-types/_type-flags.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/templates/flag/flag--condo-flag.tpl.php",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/libraries/magnificent/_magnificent.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/navigation/_mobile-nav.scss",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/condos.info",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/js/_condo-project.js",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/js/_main.js",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/post-types/_type-condos.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/template.php",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/ds_layouts/condo_project_list/condo-project-list.tpl.php",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/layouts/_leap.layout.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/post-types/_type-trends.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/base/_base-typography.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/templates/flag/flag.tpl.php",
@@ -313,8 +342,6 @@
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/base/_base-tables.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/navigation/_main-nav.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/post-types/_type-news.scss",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/templates/system/html.tpl.php",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/templates/system/page.tpl.php",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/js/_user-menu.js",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/templates/block/block--block--3.tpl.php",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/abstractions/_abstract-graphics.scss",
@@ -324,7 +351,6 @@
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/forms/_node-form.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/libraries/modernizr/feature-detects/css-lastchild.js",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/layouts/_leap.layout.query.scss",
-		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/components/regions/_region-footer.scss",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/img/icons/fitness.svg",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/config.rb",
 		"/Volumes/Work/Condos Vancouver BC/condovan_public/sites/all/themes/condos/assets/scss/libraries/leap_plugins/_button-effects.scss",
@@ -396,10 +422,7 @@
 		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/assets/css/main.css.map",
 		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/assets/css/main-no-query.css.map",
 		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/assets/scss/libraries/magnificent/_magnificent.scss",
-		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/assets/scss/base/_base-misc.scss",
-		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/assets/vendor/modernizr/test/index.html",
-		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/assets/scss/abstractions/_abstract-grid.scss",
-		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/assets/js/_hero.js"
+		"/Volumes/2015/walters_cove/web/walters_wp/fishfishfishfishandsalmonisgood/wp-content/themes/walterscove/assets/scss/base/_base-misc.scss"
 	],
 	"find":
 	{
@@ -410,6 +433,7 @@
 		"height": 118.0,
 		"where_history":
 		[
+			"<current file>",
 			"<open files>",
 			"",
 			"<project>",
@@ -422,6 +446,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"616",
+			"logo",
+			"http://localhost:8888/wordpress",
+			"localhost",
 			"border-ra",
 			"floorplan",
 			"ds-sales",
@@ -468,6 +496,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"http://floathousevictoria.com/floatingtonewworlds",
 			"class=\"wrapper\"",
 			"electralaserhairremoval.com",
 			"www.electralaserhairremoval.com",
@@ -482,8 +511,189 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "templates/custom/city-search.tpl.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 642,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								553,
+								553
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"apply_syntax_touched": true,
+							"bh_regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "assets/scss/base/_base-forms.scss",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 5521,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4649,
+								4199
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"apply_syntax_touched": true,
+							"bh_regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/SCSS/SCSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 1.0,
+						"translation.y": 4633.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -536,6 +746,10 @@
 		"selected_items":
 		[
 			[
+				"layout",
+				"assets/scss/layouts/_leap.layout.scss"
+			],
+			[
 				"typecondos",
 				"assets/scss/components/post-types/_type-condos.scss"
 			],
@@ -550,10 +764,6 @@
 			[
 				"flag",
 				"assets/scss/components/post-types/_type-flags.scss"
-			],
-			[
-				"layout",
-				"assets/scss/layouts/_leap.layout.scss"
 			],
 			[
 				"trend",

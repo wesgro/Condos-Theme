@@ -33,9 +33,16 @@
   z-index: 10;
 }
 .flag-count{
+  .victoria &{
+    background-color: $victoriaHighlight;
+    &:after{
+      @include triangle($victoriaHighlight, 20px, 20px, bottom);
+    }
+  }
   background-color: $yellow;
   color: $bodyCopy;
   display: none;
+  font-family: $otherFont;
   &:after{
     @include triangle($yellow, 20px, 20px, bottom);
   }

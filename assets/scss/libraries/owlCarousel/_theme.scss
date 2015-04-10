@@ -40,18 +40,22 @@
 				width: $dot-width;
 				height: $dot-height;
 				margin: $dot-margin;
-				background: $dot-background;
+				
 				display: block;
 				border: 1px solid #000;
 				-webkit-backface-visibility: visible;
 				@include transition(opacity, 200ms, ease);
 				@include rounded($dot-rounded);
+
 			}
 
 			&.active,
 			&:hover {
 				span {
-					background: $dot-background-active;
+          background: $colourHighlight;
+          .victoria &{
+            background-color: $victoriaHighlight;
+          }
 				}
 			}
 		}

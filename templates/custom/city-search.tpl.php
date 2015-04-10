@@ -14,7 +14,7 @@ $regions = leap_get_city_regions();
           <?php
             $regionName = str_replace(" ", "-", strtolower($region->name))
           ?>
-          <li><a href="/condo-search/<?php echo $regionName;?>"><?php echo $region->name;?></a></li>
+          <li><a href="/condo-search/<?php echo $regionName;?>" class="notranslate"><?php echo $region->name;?></a></li>
         <?php endforeach;?>
     </ul>
   </li>

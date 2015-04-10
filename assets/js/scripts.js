@@ -15757,10 +15757,13 @@ https://github.com/imakewebthings/jquery-waypoints/blob/master/licenses.txt
 }).call(this);;(function($) {
   $(function(){
     if(Modernizr.canvas){
+      var color='#ffcc33';
+      if($("html").hasClass('victoria')){
+        console.log("victoria");
+        color='#61B2CA';
+      }
       $(".knob").knob({
-        'draw':function(){
-          //this.o.element = this.$;
-        }
+        fgColor:color,
       });
       $('.knob').trigger('configure', {
         'format': function (v) {
@@ -16100,7 +16103,9 @@ var Roots = {
       if(Modernizr.input.placeholder){
         $(".webform-component-textfield  label, .webform-component-phone label, .webform-component-email label, .webform-component-select label").hide();
       }
-      $(".view-id-condos .views-row").matchHeight();
+      $(window).load(function(){
+        $(".view-id-condos .views-row").matchHeight();
+      });
       $("input.required").attr('required','required');
     }
   },
@@ -16118,7 +16123,7 @@ var Roots = {
         responsiveRefreshRate:50,
         autoplayHoverPause: true,
         responsiveClass:true,
-        dots:false,
+        dots:true,
         touchDrag:true,
         mouseDrag:false,
         responsive:{

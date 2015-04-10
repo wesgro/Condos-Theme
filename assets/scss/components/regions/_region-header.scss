@@ -16,12 +16,16 @@
   }
 }
 .l-region--header{
+  .victoria &{
+    background-color: $victoriaHighlight;
+  }
   background-color: $colourHighlight;
   text-align: center;
   position: relative;
   z-index: 5;
   h3{
     margin-top: 0;
+    font-size: 24px;
     @include to(lp){
       font-size: 17px;
     }
@@ -33,6 +37,9 @@
       margin-bottom: 0;
       margin-right: 25px;
       max-width: 320px;
+      &.closest-selector{
+        margin-right: 0;
+      }
     }
     @include from(lt, $noquery){
       max-width: 360px;

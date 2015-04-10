@@ -199,7 +199,7 @@ img, video {
 * layout vars
 */
 .view .pager-load-more a:after, a.loved:after, .node--condo-project--full .ds-meta .flag-wrapper a:after, .node--condo-project--full .ds-floorplans .flag-wrapper a:after, .node--condo-project--full .ds-floorplans .views-field-field-floorplan a:after, .entity-floorplans.view-mode-comparison .field-container a:after,
-.entity-floorplans.view-mode-comparison .flag-outer a:after, .view-compare-floorplans .flag-wrapper a:after, .view-compare-floorplans .views-field-field-floorplan a:after, .view-compare-floorplans .views-field-ops a:after, .view-compare-floorplans .field--floorplan a:after, .owl-theme .owl-controls div:before,
+.entity-floorplans.view-mode-comparison .flag-outer a:after, .view-compare-floorplans .flag-wrapper a:after, .view-compare-floorplans .views-field-field-floorplan a:after, .view-compare-floorplans .views-field-ops a:after, .view-compare-floorplans .field--floorplan a:after, .owl-theme .owl-controls .owl-nav div:before,
 .ico-moon {
   font-family: 'icomoon';
   speak: none;
@@ -1180,7 +1180,7 @@ a.townhouse:after {
 #login-modal .logo {
   width: 300px; }
 #login-modal form {
-  margin-top: 16px;
+  margin-top: 18px;
   margin-top: 1rem; }
   #login-modal form p {
     margin-bottom: 15px; }
@@ -1211,8 +1211,8 @@ a.townhouse:after {
   z-index: 1042;
   overflow: hidden;
   position: fixed;
-  background: #ffcc33;
-  opacity: 1; }
+  background: #FFF;
+  opacity: 0.7; }
 
 .mfp-wrap {
   top: 0;
@@ -1310,6 +1310,7 @@ a.townhouse:after {
   display: none; }
 
 button.mfp-close, button.mfp-arrow {
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif;
   overflow: visible;
   cursor: pointer;
   background: transparent;
@@ -1423,7 +1424,7 @@ button::-moz-focus-inner {
 
 /* overlay animate in */
 .mfp-fade.mfp-bg.mfp-ready {
-  opacity: 1; }
+  opacity: .7; }
 
 /* overlay animate out */
 .mfp-fade.mfp-bg.mfp-removing {
@@ -1493,8 +1494,8 @@ button::-moz-focus-inner {
   background: #FFF;
   width: auto;
   min-height: 100%;
-  font-family: "lato", helvetica, arial, sans-serif;
-  font-size: 16px;
+  font-family: "calluna", Georgia, Times, "Times New Roman", serif;
+  font-size: 18px;
   zoom: 1;
   -moz-transition: background-color 0.125s ease-in;
   -o-transition: background-color 0.125s ease-in;
@@ -1546,7 +1547,7 @@ button::-moz-focus-inner {
   background: #f2f2f2; }
 
 .mlpm_w h2 {
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1em;
   font-weight: bold;
   text-transform: uppercase;
@@ -1574,7 +1575,7 @@ button::-moz-focus-inner {
   display: block;
   outline: none;
   overflow: hidden;
-  font-size: 24px;
+  font-size: 27px;
   line-height: 1em;
   padding: 0.2em;
   text-decoration: none;
@@ -1752,10 +1753,10 @@ button::-moz-focus-inner {
   color: transparent; }
 .owl-theme .owl-controls .owl-nav .owl-prev {
   left: 20px;
-  left: 1.25rem; }
+  left: 1.11111rem; }
 .owl-theme .owl-controls .owl-nav .owl-next {
   right: 20px;
-  right: 1.25rem; }
+  right: 1.11111rem; }
 .owl-theme .owl-dots .owl-dot {
   display: inline-block;
   zoom: 1;
@@ -1764,7 +1765,6 @@ button::-moz-focus-inner {
     width: 16px;
     height: 16px;
     margin: 5px 7px;
-    background: #FFF;
     display: block;
     border: 1px solid #000;
     -webkit-backface-visibility: visible;
@@ -1772,11 +1772,13 @@ button::-moz-focus-inner {
     -o-transition: opacity, 200ms, ease;
     -webkit-transition: opacity, 200ms, ease;
     transition: opacity, 200ms, ease;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0; }
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%; }
   .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
-    background: #000; }
+    background: #ffcc33; }
+    .victoria .owl-theme .owl-dots .owl-dot.active span, .victoria .owl-theme .owl-dots .owl-dot:hover span {
+      background-color: #61B2CA; }
 
 /* 
  * 	Owl Carousel - Video Plugin
@@ -1844,10 +1846,10 @@ button::-moz-focus-inner {
   color: transparent; }
 .owl-theme .owl-controls .owl-nav .owl-prev {
   left: 20px;
-  left: 1.25rem; }
+  left: 1.11111rem; }
 .owl-theme .owl-controls .owl-nav .owl-next {
   right: 20px;
-  right: 1.25rem; }
+  right: 1.11111rem; }
 .owl-theme .owl-dots .owl-dot {
   display: inline-block;
   zoom: 1;
@@ -1856,7 +1858,6 @@ button::-moz-focus-inner {
     width: 16px;
     height: 16px;
     margin: 5px 7px;
-    background: #FFF;
     display: block;
     border: 1px solid #000;
     -webkit-backface-visibility: visible;
@@ -1864,11 +1865,13 @@ button::-moz-focus-inner {
     -o-transition: opacity, 200ms, ease;
     -webkit-transition: opacity, 200ms, ease;
     transition: opacity, 200ms, ease;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0; }
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%; }
   .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
-    background: #000; }
+    background: #ffcc33; }
+    .victoria .owl-theme .owl-dots .owl-dot.active span, .victoria .owl-theme .owl-dots .owl-dot:hover span {
+      background-color: #61B2CA; }
 
 /*! Swipebox v1.3.0 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
 html.swipebox-html.swipebox-touch {
@@ -2125,7 +2128,7 @@ html.swipebox-html.swipebox-touch {
   *display: inline;
   color: #000;
   text-transform: uppercase;
-  font-family: "lato", helvetica, arial, sans-serif;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif;
   border: none;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -2133,7 +2136,8 @@ html.swipebox-html.swipebox-touch {
   padding: 31px 44px;
   font-weight: 700;
   font-size: 16px;
-  line-height: 1; }
+  line-height: 1;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
   .button:hover {
     color: #000;
     background-color: #FFF; }
@@ -2167,17 +2171,20 @@ html.swipebox-html.swipebox-touch {
   @media (min-width: 1025px) {
     .float-list li {
       margin-right: 86px;
-      margin-right: 5.375rem; } }
+      margin-right: 4.77778rem; } }
 
-.node--condo-project--full .ds-gallery .field--gallery, .node--trends .field--trends {
+.node--condo-project--full .ds-gallery .field--gallery, .node--trends .field--trends,
+.node--yearly-trends .field--trends {
   overflow: hidden;
   *zoom: 1; }
 
 .l-region--meta ul, .selector .container, .view-id-condos .view-content, .node--condo-project--teaser .ds-meta,
-.node--condo-project--comparison .ds-meta, .entity-floorplans.view-mode-comparison, .view-trends .view-content, .l-header > .wrap, .l-header > ul.tabs, .node--condo-project--full .wrap, .node--condo-project--full ul.tabs {
+.node--condo-project--comparison .ds-meta, .entity-floorplans.view-mode-comparison, .view-trends .view-content,
+.view-yearly-trends .view-content, .l-header > .wrap, .l-header > ul.tabs, .node--condo-project--full .wrap, .node--condo-project--full ul.tabs {
   *zoom: 1; }
   .l-region--meta ul:after, .selector .container:after, .view-id-condos .view-content:after, .node--condo-project--teaser .ds-meta:after,
-  .node--condo-project--comparison .ds-meta:after, .entity-floorplans.view-mode-comparison:after, .view-trends .view-content:after, .l-header > .wrap:after, .l-header > ul.tabs:after, .node--condo-project--full .wrap:after, .node--condo-project--full ul.tabs:after {
+  .node--condo-project--comparison .ds-meta:after, .entity-floorplans.view-mode-comparison:after, .view-trends .view-content:after,
+  .view-yearly-trends .view-content:after, .l-header > .wrap:after, .l-header > ul.tabs:after, .node--condo-project--full .wrap:after, .node--condo-project--full ul.tabs:after {
     content: "";
     display: table;
     clear: both; }
@@ -2187,63 +2194,63 @@ html.swipebox-html.swipebox-touch {
 .section-node-edit .l-content,
 .page-node-workflow .l-content, .l-region--content-header .page-title {
   padding-left: 15px;
-  padding-left: 0.9375rem;
+  padding-left: 0.83333rem;
   padding-right: 15px;
-  padding-right: 0.9375rem; }
+  padding-right: 0.83333rem; }
   @media (min-width: 768px) {
     .wrap, ul.tabs,
     .l-region--hero .block__content,
     .section-node-edit .l-content,
     .page-node-workflow .l-content, .l-region--content-header .page-title {
       padding-left: 30px;
-      padding-left: 1.875rem;
+      padding-left: 1.66667rem;
       padding-right: 30px;
-      padding-right: 1.875rem; } }
+      padding-right: 1.66667rem; } }
   @media (min-width: 1025px) {
     .wrap, ul.tabs,
     .l-region--hero .block__content,
     .section-node-edit .l-content,
     .page-node-workflow .l-content, .l-region--content-header .page-title {
       padding-left: 16px;
-      padding-left: 1rem;
+      padding-left: 0.88889rem;
       padding-right: 16px;
-      padding-right: 1rem; } }
+      padding-right: 0.88889rem; } }
 
 .node--condo-project--full .ds-project-info {
   padding-top: 10px;
-  padding-top: 0.625rem;
+  padding-top: 0.55556rem;
   padding-bottom: 15px;
-  padding-bottom: 0.9375rem; }
+  padding-bottom: 0.83333rem; }
   @media (min-width: 1024px) {
     .node--condo-project--full .ds-project-info {
       padding-top: 20px;
-      padding-top: 1.25rem;
+      padding-top: 1.11111rem;
       padding-bottom: 25px;
-      padding-bottom: 1.5625rem; } }
+      padding-bottom: 1.38889rem; } }
 
 .node--condo-project--full .ds-hero, .node--condo-project--full .ds-sales, .node--condo-project--full .ds-why, .node--condo-project--full .ds-contact-info, .node--condo-project--full .ds-floorplans {
   padding-top: 30px;
-  padding-top: 1.875rem;
+  padding-top: 1.66667rem;
   padding-bottom: 35px;
-  padding-bottom: 2.1875rem; }
+  padding-bottom: 1.94444rem; }
   @media (min-width: 1024px) {
     .node--condo-project--full .ds-hero, .node--condo-project--full .ds-sales, .node--condo-project--full .ds-why, .node--condo-project--full .ds-contact-info, .node--condo-project--full .ds-floorplans {
       padding-top: 60px;
-      padding-top: 3.75rem;
+      padding-top: 3.33333rem;
       padding-bottom: 65px;
-      padding-bottom: 4.0625rem; } }
+      padding-bottom: 3.61111rem; } }
 
 .node--condo-project--full .ds-navigation, .node--condo-project--full .ds-gallery, .node--condo-project--full .ds-walkscore {
   margin-top: 10px;
-  margin-top: 0.625rem;
+  margin-top: 0.55556rem;
   margin-bottom: 15px;
-  margin-bottom: 0.9375rem; }
+  margin-bottom: 0.83333rem; }
   @media (min-width: 1024px) {
     .node--condo-project--full .ds-navigation, .node--condo-project--full .ds-gallery, .node--condo-project--full .ds-walkscore {
       margin-top: 20px;
-      margin-top: 1.25rem;
+      margin-top: 1.11111rem;
       margin-bottom: 25px;
-      margin-bottom: 1.5625rem; } }
+      margin-bottom: 1.38889rem; } }
 
 @media (min-width: 1024px) {
   .node--condo-project--full .ds-sales .wrap > div, .node--condo-project--full .ds-sales ul.tabs > div, .node--condo-project--full .ds-project-info .wrap > div, .node--condo-project--full .ds-project-info ul.tabs > div {
@@ -2295,7 +2302,7 @@ html.swipebox-html.swipebox-touch {
   *display: inline;
   color: #000;
   text-transform: uppercase;
-  font-family: "lato", helvetica, arial, sans-serif;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif;
   border: none;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -2303,7 +2310,8 @@ html.swipebox-html.swipebox-touch {
   padding: 31px 44px;
   font-weight: 700;
   font-size: 16px;
-  line-height: 1; }
+  line-height: 1;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
   .button:hover {
     color: #000;
     background-color: #FFF; }
@@ -2337,7 +2345,7 @@ html.swipebox-html.swipebox-touch {
   @media (min-width: 1025px) {
     .float-list li {
       margin-right: 86px;
-      margin-right: 5.375rem; } }
+      margin-right: 4.77778rem; } }
 
 .webform-client-form input[type=tel],
 .user-login input[type=tel],
@@ -2382,14 +2390,14 @@ html.swipebox-html.swipebox-touch {
 .user-login select,
 .page-user select {
   padding: 10px 15px;
-  padding: 0.625rem 0.9375rem;
+  padding: 0.55556rem 0.83333rem;
   vertical-align: middle;
   color: #000;
-  font-family: "lato", helvetica, arial, sans-serif;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif;
   font-weight: 300;
   height: 57px;
   font-size: 14px;
-  font-size: 0.875rem; }
+  font-size: 0.77778rem; }
   .webform-client-form input[type=tel].error,
   .user-login input[type=tel].error,
   .page-user input[type=tel].error,
@@ -2446,7 +2454,7 @@ html.swipebox-html.swipebox-touch {
   background-color: #333333;
   color: #FFF;
   padding: 15px 25px;
-  padding: 0.9375rem 1.5625rem;
+  padding: 0.83333rem 1.38889rem;
   text-align: center;
   border: 0;
   display: inline-block;
@@ -2455,11 +2463,10 @@ html.swipebox-html.swipebox-touch {
   *zoom: 1;
   *display: inline;
   border: 0px solid #000;
-  font-size: 14px;
-  font-size: 0.875rem;
   width: 100%;
   font-weight: 400;
-  max-width: 300px; }
+  max-width: 300px;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
 
 .l-content .form-actions input[type=submit] {
   -moz-appearance: none;
@@ -2473,13 +2480,16 @@ html.swipebox-html.swipebox-touch {
   margin-right: 10px;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
-  border-radius: 0; }
+  border-radius: 0;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
   .l-content .form-actions .form-submit#edit-delete {
     background-color: transparent;
     float: right;
     color: #cc0000; }
   .l-content .form-actions .form-submit#edit-workflow-5 {
     background-color: #759dcd; }
+  .victoria .l-content .form-actions .form-submit, .l-content .victoria .form-actions .form-submit {
+    background-color: #61B2CA; }
 
 fieldset {
   margin-top: 20px;
@@ -2488,22 +2498,22 @@ fieldset {
 input:-moz-placeholder {
   color: #bababa;
   font-size: 14px;
-  font-size: 0.875rem;
+  font-size: 0.77778rem;
   text-transform: uppercase; }
 input::-moz-placeholder {
   color: #bababa;
   font-size: 14px;
-  font-size: 0.875rem;
+  font-size: 0.77778rem;
   text-transform: uppercase; }
 input:-ms-input-placeholder {
   color: #bababa;
   font-size: 14px;
-  font-size: 0.875rem;
+  font-size: 0.77778rem;
   text-transform: uppercase; }
 input::-webkit-input-placeholder {
   color: #bababa;
   font-size: 14px;
-  font-size: 0.875rem;
+  font-size: 0.77778rem;
   text-transform: uppercase; }
 
 .gform_validation_container {
@@ -2513,16 +2523,19 @@ input[type=file] {
   -moz-appearance: none;
   -webkit-appearance: none;
   padding: 8px 0px;
-  padding: 0.5rem 0rem;
+  padding: 0.44444rem 0rem;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
   *zoom: 1;
   *display: inline;
   font-weight: 700;
-  font-family: "lato", helvetica, arial, sans-serif;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif;
   font-size: 13px;
-  font-size: 0.8125rem; }
+  font-size: 0.72222rem; }
+
+legend {
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
 
 .webform-client-form .form-item,
 .user-login .form-item {
@@ -2542,7 +2555,8 @@ input[type=file] {
 
 .l-content label {
   font-size: 12px;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
 
 @media (min-width: 768px) and (max-width: 1023px) {
   table tbody tr {
@@ -2620,6 +2634,9 @@ body {
   .wf-loading body {
     opacity: 0; }
 
+address {
+  font-style: normal; }
+
 .l-page {
   z-index: 1;
   position: relative; }
@@ -2632,10 +2649,11 @@ body {
 
 .l-page {
   padding-bottom: 40px;
-  padding-bottom: 2.5rem; }
+  padding-bottom: 2.22222rem; }
 
 table {
-  width: 100%; }
+  width: 100%;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
   table thead {
     border-top: 1px solid #cccccc;
     border-bottom: 1px solid #cccccc; }
@@ -2646,7 +2664,7 @@ table {
       padding-bottom: 10px;
       color: #000;
       font-size: 18px;
-      font-size: 1.125rem;
+      font-size: 1rem;
       margin-bottom: 15px; }
       table thead th a {
         color: #666666; }
@@ -2675,23 +2693,19 @@ table {
  * $BASE-TYPOGRAPHY
  */
 html {
-  font-family: "lato", helvetica, arial, sans-serif;
+  font-family: "calluna", Georgia, Times, "Times New Roman", serif;
   color: #000;
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
-  line-height: 1.5;
-  font-weight: 400; }
-  @media (max-width: 767px) {
-    html {
-      font-size: 14px; } }
-  @media (min-width: 768px) {
-    html {
-      font-size: 15px; } }
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7; }
   @media (min-width: 1200px) {
     html {
-      font-size: 16px; } }
+      font-size: 18px;
+      line-height: 1.9; } }
   html.lt-ie9 {
-    font-size: 16px; }
+    font-size: 18px; }
 
 /**
  * $LINKS
@@ -2716,57 +2730,59 @@ h3, .gamma, .l-region--content-header .page-title,
 h4, .delta,
 h5, .epsilon,
 h6, .zeta {
-  font-family: "lato", helvetica, arial, sans-serif;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif;
   font-weight: 400; }
 
 h1, .alpha {
   line-height: 1;
   font-size: 52px;
-  font-size: 3.25rem; }
+  font-size: 2.88889rem; }
 
 h2, .beta {
   font-size: 28px;
-  font-size: 1.75rem;
+  font-size: 1.55556rem;
   line-height: 1.2; }
   h2.region-title, .beta.region-title {
     margin-top: 0;
     font-size: 26px;
-    font-size: 1.625rem;
+    font-size: 1.44444rem;
     margin-bottom: 25px;
-    margin-bottom: 1.5625rem; }
+    margin-bottom: 1.38889rem; }
 
 h3, .gamma, .l-region--content-header .page-title {
   font-size: 26px;
-  font-size: 1.625rem;
+  font-size: 1.44444rem;
   line-height: 1.1; }
   @media (max-width: 1023px) {
     h3, .gamma, .l-region--content-header .page-title {
-      font-size: 24px;
-      font-size: 1.5rem; } }
+      font-size: 22px;
+      font-size: 1.22222rem; } }
 
 h4, .delta {
   font-size: 18px;
-  font-size: 1.125rem; }
+  font-size: 1rem; }
 
 h5, .epsilon {
   font-size: 16px;
-  font-size: 1rem; }
+  font-size: 0.88889rem; }
 
 h6, .zeta {
   font-size: 16px;
-  font-size: 1rem; }
+  font-size: 0.88889rem; }
 
 hr {
   border: 0;
   height: 1px;
   margin: 25px 0; }
 
-h1, h2, h3, h4, h5, h6, p, blockquote {
+h1, h2, h3, h4, h5, h6, p, blockquote, div, span {
   text-rendering: optimizeLegibility;
-  font-feature-settings: "kern";
-  -webkit-font-feature-settings: "kern";
-  -moz-font-feature-settings: "kern";
-  -moz-font-feature-settings: "kern=1"; }
+  -moz-font-feature-settings: "lnum" 1, "kern" 1, "liga" 1;
+  -moz-font-feature-settings: "lnum=1, kern=1, liga=1";
+  -ms-font-feature-settings: "lnum" 1, "kern" 1, "liga" 1;
+  -o-font-feature-settings: "lnum" 1, "kern" 1, "liga" 1;
+  -webkit-font-feature-settings: "lnum" 1, "kern" 1, "liga" 1;
+  font-feature-settings: "lnum" 1, "kern" 1, "liga" 1; }
 
 /**
  * $PARAGRAPHS
@@ -2774,13 +2790,12 @@ h1, h2, h3, h4, h5, h6, p, blockquote {
 p,
 blockquote {
   margin-top: 25px;
-  margin-top: 1.5625rem;
+  margin-top: 1.38889rem;
   margin-bottom: 25px;
-  margin-bottom: 1.5625rem;
+  margin-bottom: 1.38889rem;
   -ms-word-break: normal;
   -ms-word-wrap: normal;
-  word-break: normal;
-  line-height: 1.5; }
+  word-break: normal; }
 
 strong {
   font-weight: 700; }
@@ -2807,7 +2822,7 @@ mark,
   background: #3ba140;
   color: #fff;
   font-size: 12px;
-  font-size: 0.75rem;
+  font-size: 0.66667rem;
   text-transform: capitalize;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
@@ -2871,7 +2886,9 @@ mark,
   box-sizing: border-box;
   font-size: 72px;
   width: 100%;
-  border: 1px solid #000; }
+  border: 1px solid #000;
+  padding-left: 10px;
+  padding-right: 10px; }
   .search-feature input[type="text"]:-moz-placeholder {
     color: #bfbfbf;
     font-style: italic;
@@ -2908,7 +2925,7 @@ mark,
   .search-feature .search:after,
   .search-feature .close:after {
     font-size: 36px;
-    font-size: 2.25rem;
+    font-size: 2rem;
     position: absolute;
     top: 50%;
     margin-top: -19px;
@@ -2944,21 +2961,21 @@ mark,
 .autocomplete-suggestions {
   background-color: #FFF;
   padding-top: 5px;
-  padding-top: 0.3125rem;
+  padding-top: 0.27778rem;
   padding-bottom: 5px;
-  padding-bottom: 0.3125rem;
+  padding-bottom: 0.27778rem;
   -moz-border-radius: 0 0 5px 5px;
   -webkit-border-radius: 0;
   border-radius: 0 0 5px 5px; }
   .autocomplete-suggestions .autocomplete-suggestion {
     padding-right: 15px;
-    padding-right: 0.9375rem;
+    padding-right: 0.83333rem;
     padding-left: 15px;
-    padding-left: 0.9375rem;
+    padding-left: 0.83333rem;
     padding-top: 10px;
-    padding-top: 0.625rem;
+    padding-top: 0.55556rem;
     padding-bottom: 10px;
-    padding-bottom: 0.625rem;
+    padding-bottom: 0.55556rem;
     border-bottom: 1px solid #e0e0e0;
     cursor: pointer;
     -moz-transition: all 0.3s linear;
@@ -2987,17 +3004,20 @@ mark,
     *zoom: 1;
     *display: inline;
     font-size: 20px;
-    font-size: 1.25rem;
+    font-size: 1.11111rem;
     background-color: #ffcc33;
     padding-top: 15px;
-    padding-top: 0.9375rem;
+    padding-top: 0.83333rem;
     padding-bottom: 15px;
-    padding-bottom: 0.9375rem;
+    padding-bottom: 0.83333rem;
     text-align: center;
     max-width: 360px;
     width: 100%;
     position: relative;
-    color: #000; }
+    color: #000;
+    font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
+    .victoria .view .pager-load-more a {
+      background-color: #61B2CA; }
     .view .pager-load-more a .view .pager-load-more a.pager-next {
       padding-right: 53px; }
     .view .pager-load-more a::before {
@@ -3054,6 +3074,7 @@ mark,
 .views-exposed-widgets .bef-select-as-links .form-item > div:last-of-type, .block--block-3 .filter:last-of-type {
   margin-right: 0; }
 .views-exposed-widgets .bef-select-as-links .form-item > div a, .block--block-3 .filter a {
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif;
   display: block;
   padding: 20px 35px;
   text-transform: uppercase;
@@ -3064,7 +3085,7 @@ mark,
     background-color: #DDD; }
   .views-exposed-widgets .bef-select-as-links .form-item > div a:after, .block--block-3 .filter a:after {
     font-size: 16px;
-    font-size: 1rem;
+    font-size: 0.88889rem;
     color: #666666;
     right: 10px;
     position: absolute;
@@ -3113,7 +3134,7 @@ mark,
   padding-bottom: 21px;
   display: block;
   color: #000;
-  font-family: "proxima-nova", helvetica, arial, sans-serif; }
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
   @media (min-width: 1400px) {
     #block-system-main-menu a {
       padding: 21px 19px; } }
@@ -3171,7 +3192,7 @@ body.mobile-menu-visible {
     list-style-image: none; }
   #mobile-navigation .inner {
     padding: 55px 20px 0px;
-    padding: 3.4375rem 1.25rem 0rem; }
+    padding: 3.05556rem 1.11111rem 0rem; }
   .admin-bar #mobile-navigation {
     top: 46px; }
   #mobile-navigation .caret {
@@ -3196,20 +3217,21 @@ body.mobile-menu-visible {
   #mobile-navigation .user li {
     margin-bottom: 15px; }
     #mobile-navigation .user li a {
+      font-family: "tablet-gothic-wide", helvetica, arial, sans-serif;
       display: block;
       background-color: #ffcc33;
       color: #FFF;
       margin-right: 10px;
-      margin-right: 0.625rem;
+      margin-right: 0.55556rem;
       margin-bottom: 10px;
-      margin-bottom: 0.625rem;
+      margin-bottom: 0.55556rem;
       padding: 10px;
-      padding: 0.625rem; }
+      padding: 0.55556rem; }
   #mobile-navigation .main li a {
     font-size: 22px;
     display: block;
     padding: 20px 0 20px 0;
-    font-family: "lato", helvetica, arial, sans-serif;
+    font-family: "tablet-gothic-wide", helvetica, arial, sans-serif;
     font-weight: 700;
     text-transform: uppercase;
     border-bottom: 1px solid #DDD;
@@ -3330,7 +3352,8 @@ body.mobile-menu-visible {
   -moz-transition: border-radius 0.25s ease-in;
   -o-transition: border-radius 0.25s ease-in;
   -webkit-transition: border-radius 0.25s ease-in;
-  transition: border-radius 0.25s ease-in; }
+  transition: border-radius 0.25s ease-in;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
   @media (min-width: 768px) and (max-width: 1023px) {
     .selector {
       max-width: 395px; } }
@@ -3418,13 +3441,13 @@ body.mobile-menu-visible {
       transform: translateY(-50%);
       text-align: center;
       float: left;
-      font-family: "lato", helvetica, arial, sans-serif;
+      font-family: "tablet-gothic-wide", helvetica, arial, sans-serif;
       font-weight: 400;
       font-size: 14px;
       padding-left: 10px;
       padding-right: 10px;
       font-size: 20px;
-      font-size: 1.25rem;
+      font-size: 1.11111rem;
       width: 82.435597189696%; }
       @media (max-width: 767px) {
         .selector .container b {
@@ -3514,17 +3537,20 @@ ul.tabs {
       *zoom: 1;
       *display: inline;
       font-size: 20px;
-      font-size: 1.25rem;
+      font-size: 1.11111rem;
       background-color: #ffcc33;
       padding-top: 15px;
-      padding-top: 0.9375rem;
+      padding-top: 0.83333rem;
       padding-bottom: 15px;
-      padding-bottom: 0.9375rem;
+      padding-bottom: 0.83333rem;
       text-align: center;
       max-width: 360px;
       width: 100%;
       position: relative;
-      color: #000; }
+      color: #000;
+      font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
+      .victoria #user-menu .menu a {
+        background-color: #61B2CA; }
       #user-menu .menu a #user-menu .menu a.pager-next {
         padding-right: 53px; }
       #user-menu .menu a::before {
@@ -3567,7 +3593,7 @@ ul.tabs {
 .view-id-condos .views-row {
   background-color: #f7f7f7;
   margin-bottom: 25px;
-  margin-bottom: 1.5625rem;
+  margin-bottom: 1.38889rem;
   position: relative; }
   @media (min-width: 768px) and (max-width: 1023px) {
     .view-id-condos .views-row {
@@ -3596,154 +3622,166 @@ ul.tabs {
         margin-right: 0;
         float: right; } }
 
-.node--condo-project--teaser .field-label,
-.node--condo-project--comparison .field-label {
-  font-weight: 700;
-  padding-bottom: 5px; }
-.node--condo-project--teaser .field-item,
-.node--condo-project--comparison .field-item {
-  padding-bottom: 5px; }
-.node--condo-project--teaser .ds-region,
-.node--condo-project--comparison .ds-region {
-  padding-left: 25px;
-  padding-left: 1.5625rem;
-  padding-right: 25px;
-  padding-right: 1.5625rem;
-  padding-top: 15px;
-  padding-top: 0.9375rem;
-  padding-bottom: 15px;
-  padding-bottom: 0.9375rem; }
-.node--condo-project--teaser figure,
-.node--condo-project--comparison figure {
-  line-height: 0; }
-.node--condo-project--teaser .ds-hero,
-.node--condo-project--comparison .ds-hero {
-  padding: 0; }
-.node--condo-project--teaser .ds-title,
-.node--condo-project--comparison .ds-title {
-  padding-bottom: 0;
-  padding-top: 0;
-  padding-right: 0;
-  padding-left: 0; }
-  .node--condo-project--teaser .ds-title .field-item,
-  .node--condo-project--comparison .ds-title .field-item {
-    padding-bottom: 0; }
-  .node--condo-project--teaser .ds-title h3,
-  .node--condo-project--comparison .ds-title h3 {
-    margin-top: 0;
-    margin-bottom: 0; }
-  .node--condo-project--teaser .ds-title a,
-  .node--condo-project--comparison .ds-title a {
-    display: block;
-    background-color: #ffcc33;
-    line-height: 1.1;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    text-transform: uppercase;
+.node--condo-project--teaser,
+.node--condo-project--comparison {
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
+  .node--condo-project--teaser .field-label,
+  .node--condo-project--comparison .field-label {
     font-weight: 700;
-    margin: 0;
-    padding-left: 25px;
-    padding-left: 1.5625rem;
-    padding-right: 25px;
-    padding-right: 1.5625rem;
-    font-size: 23px;
-    font-size: 1.4375rem; }
-    @media (max-width: 767px) {
-      .node--condo-project--teaser .ds-title a,
+    padding-bottom: 5px; }
+  .node--condo-project--teaser .field-item,
+  .node--condo-project--comparison .field-item {
+    padding-bottom: 5px;
+    text-overflow: ellipsis; }
+  .node--condo-project--teaser .ds-region,
+  .node--condo-project--comparison .ds-region {
+    padding-left: 20px;
+    padding-left: 1.11111rem;
+    padding-right: 20px;
+    padding-right: 1.11111rem;
+    padding-top: 15px;
+    padding-top: 0.83333rem;
+    padding-bottom: 15px;
+    padding-bottom: 0.83333rem; }
+  .node--condo-project--teaser figure,
+  .node--condo-project--comparison figure {
+    line-height: 0; }
+  .node--condo-project--teaser .ds-hero,
+  .node--condo-project--comparison .ds-hero {
+    padding: 0; }
+  .node--condo-project--teaser .ds-title,
+  .node--condo-project--comparison .ds-title {
+    padding-bottom: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-left: 0; }
+    .node--condo-project--teaser .ds-title .field-item,
+    .node--condo-project--comparison .ds-title .field-item {
+      padding-bottom: 0; }
+    .node--condo-project--teaser .ds-title h3,
+    .node--condo-project--comparison .ds-title h3 {
+      margin-top: 0;
+      margin-bottom: 0; }
+    .node--condo-project--teaser .ds-title a,
+    .node--condo-project--comparison .ds-title a {
+      display: block;
+      background-color: #ffcc33;
+      line-height: 1.1;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin: 0;
+      padding-left: 25px;
+      padding-left: 1.38889rem;
+      padding-right: 25px;
+      padding-right: 1.38889rem;
+      font-size: 23px;
+      font-size: 1.27778rem; }
+      .victoria .node--condo-project--teaser .ds-title a, .victoria
       .node--condo-project--comparison .ds-title a {
-        font-size: 18px;
-        font-size: 1.125rem; } }
-    .node--condo-project--teaser .ds-title a:hover,
-    .node--condo-project--comparison .ds-title a:hover {
-      color: #FFF; }
-.node--condo-project--teaser .ds-price,
-.node--condo-project--comparison .ds-price {
-  background-color: #333333;
-  color: #FFF;
-  font-size: 20px;
-  font-size: 1.25rem;
-  height: 53px;
-  height: 3.3125rem;
-  padding-top: 0;
-  padding-bottom: 0; }
-.node--condo-project--teaser .ds-details,
-.node--condo-project--comparison .ds-details {
-  background-color: #f7f7f7;
-  margin-bottom: 94px; }
-.node--condo-project--teaser address,
-.node--condo-project--comparison address {
-  font-style: normal; }
-  .node--condo-project--teaser address > div, .node--condo-project--teaser address span,
-  .node--condo-project--comparison address > div,
-  .node--condo-project--comparison address span {
-    display: none; }
-  .node--condo-project--teaser address .street-block,
-  .node--condo-project--comparison address .street-block {
-    display: inline-block;
-    vertical-align: middle;
-    *vertical-align: auto;
-    *zoom: 1;
-    *display: inline; }
-.node--condo-project--teaser .ds-meta,
-.node--condo-project--comparison .ds-meta {
-  padding: 0;
-  background-color: #dcdcdc;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%; }
-  .node--condo-project--teaser .ds-meta a,
-  .node--condo-project--comparison .ds-meta a {
-    color: #000; }
-  .node--condo-project--teaser .ds-meta .field-label,
-  .node--condo-project--teaser .ds-meta a,
-  .node--condo-project--comparison .ds-meta .field-label,
-  .node--condo-project--comparison .ds-meta a {
-    font-weight: 400;
-    margin: 0;
-    text-align: center;
-    font-size: 15px;
-    font-size: 0.9375rem; }
-  .node--condo-project--teaser .ds-meta .field-items,
-  .node--condo-project--comparison .ds-meta .field-items {
-    font-size: 25px;
-    font-size: 1.5625rem;
-    line-height: 1; }
-  .node--condo-project--teaser .ds-meta .flag-outer-condo-flag *,
-  .node--condo-project--comparison .ds-meta .flag-outer-condo-flag * {
-    will-change: transform; }
-  .node--condo-project--teaser .ds-meta .flag-outer-condo-flag .inner,
-  .node--condo-project--comparison .ds-meta .flag-outer-condo-flag .inner {
-    height: 61px; }
-  .node--condo-project--teaser .ds-meta .flag-outer-condo-flag .ico-moon,
-  .node--condo-project--comparison .ds-meta .flag-outer-condo-flag .ico-moon {
-    display: block;
-    height: 31px;
+        background-color: #61B2CA; }
+      @media (max-width: 767px) {
+        .node--condo-project--teaser .ds-title a,
+        .node--condo-project--comparison .ds-title a {
+          font-size: 18px;
+          font-size: 1rem; } }
+      .node--condo-project--teaser .ds-title a:hover,
+      .node--condo-project--comparison .ds-title a:hover {
+        color: #FFF; }
+  .node--condo-project--teaser .ds-price,
+  .node--condo-project--comparison .ds-price {
+    background-color: #333333;
+    color: #FFF;
+    font-size: 20px;
+    font-size: 1.11111rem;
+    height: 53px;
+    height: 2.94444rem;
+    padding-top: 0;
+    padding-bottom: 0; }
+  .node--condo-project--teaser .ds-details,
+  .node--condo-project--comparison .ds-details {
+    background-color: #f7f7f7;
+    margin-bottom: 94px; }
+    .node--condo-project--teaser .ds-details .inner,
+    .node--condo-project--comparison .ds-details .inner {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+  .node--condo-project--teaser address,
+  .node--condo-project--comparison address {
+    font-style: normal; }
+    .node--condo-project--teaser address > div, .node--condo-project--teaser address span,
+    .node--condo-project--comparison address > div,
+    .node--condo-project--comparison address span {
+      display: none; }
+    .node--condo-project--teaser address .street-block,
+    .node--condo-project--comparison address .street-block {
+      display: inline-block;
+      vertical-align: middle;
+      *vertical-align: auto;
+      *zoom: 1;
+      *display: inline; }
+  .node--condo-project--teaser .ds-meta,
+  .node--condo-project--comparison .ds-meta {
+    padding: 0;
+    background-color: #dcdcdc;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%; }
-  .node--condo-project--teaser .ds-meta .flag-outer-condo-flag .ico-moon:before,
-  .node--condo-project--comparison .ds-meta .flag-outer-condo-flag .ico-moon:before {
-    font-size: 23px;
-    font-size: 1.4375rem;
-    position: relative;
-    top: 5px; }
-  .node--condo-project--teaser .ds-meta .field-container,
-  .node--condo-project--comparison .ds-meta .field-container {
-    height: 94px;
-    height: 5.875rem;
-    border-right: 4px solid #d2d2d2;
-    width: 33.33333%;
-    clear: right;
-    float: left;
-    margin-left: 0;
-    margin-right: 0%;
-    text-align: center; }
-    .node--condo-project--teaser .ds-meta .field-container:last-child,
-    .node--condo-project--comparison .ds-meta .field-container:last-child {
-      border-right: 0;
+    .node--condo-project--teaser .ds-meta a,
+    .node--condo-project--comparison .ds-meta a {
+      color: #000; }
+    .node--condo-project--teaser .ds-meta .field-label,
+    .node--condo-project--teaser .ds-meta a,
+    .node--condo-project--comparison .ds-meta .field-label,
+    .node--condo-project--comparison .ds-meta a {
+      font-weight: 400;
+      margin: 0;
+      text-align: center;
+      font-size: 15px;
+      font-size: 0.83333rem; }
+    .node--condo-project--teaser .ds-meta .field-items,
+    .node--condo-project--comparison .ds-meta .field-items {
+      font-size: 25px;
+      font-size: 1.38889rem;
+      line-height: 1; }
+    .node--condo-project--teaser .ds-meta .flag-outer-condo-flag *,
+    .node--condo-project--comparison .ds-meta .flag-outer-condo-flag * {
+      will-change: transform; }
+    .node--condo-project--teaser .ds-meta .flag-outer-condo-flag .inner,
+    .node--condo-project--comparison .ds-meta .flag-outer-condo-flag .inner {
+      height: 61px; }
+    .node--condo-project--teaser .ds-meta .flag-outer-condo-flag .ico-moon,
+    .node--condo-project--comparison .ds-meta .flag-outer-condo-flag .ico-moon {
+      display: block;
+      height: 25px;
+      width: 100%; }
+    .node--condo-project--teaser .ds-meta .flag-outer-condo-flag .ico-moon:before,
+    .node--condo-project--comparison .ds-meta .flag-outer-condo-flag .ico-moon:before {
+      font-size: 23px;
+      font-size: 1.27778rem;
+      position: relative;
+      top: 5px; }
+    .node--condo-project--teaser .ds-meta .field-container,
+    .node--condo-project--comparison .ds-meta .field-container {
+      height: 94px;
+      height: 5.22222rem;
+      border-right: 4px solid #d2d2d2;
       width: 33.33333%;
       clear: right;
-      float: right;
-      margin-right: 0; }
+      float: left;
+      margin-left: 0;
+      margin-right: 0%;
+      text-align: center; }
+      .node--condo-project--teaser .ds-meta .field-container:last-child,
+      .node--condo-project--comparison .ds-meta .field-container:last-child {
+        border-right: 0;
+        width: 33.33333%;
+        clear: right;
+        float: right;
+        margin-right: 0; }
 
 .node--condo-project--full .ds-hero {
   text-align: center; }
@@ -3778,7 +3816,7 @@ ul.tabs {
       content: ""; }
 .node--condo-project--full .ds-navigation a {
   color: #000;
-  font-family: "proxima-nova", helvetica, arial, sans-serif; }
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
 @media (max-width: 1023px) {
   .node--condo-project--full .ds-gallery .field--building-image {
     margin-bottom: 5px; } }
@@ -3825,8 +3863,9 @@ ul.tabs {
   .node--condo-project--full .ds-meta h3,
   .node--condo-project--full .ds-meta .field-label,
   .node--condo-project--full .ds-meta .field-item {
+    font-family: "tablet-gothic-wide", helvetica, arial, sans-serif;
     font-size: 26px;
-    font-size: 1.625rem;
+    font-size: 1.44444rem;
     margin: 0;
     line-height: 1.1; }
   .node--condo-project--full .ds-meta .flag-wrapper a {
@@ -3836,17 +3875,20 @@ ul.tabs {
     *zoom: 1;
     *display: inline;
     font-size: 20px;
-    font-size: 1.25rem;
+    font-size: 1.11111rem;
     background-color: #ffcc33;
     padding-top: 15px;
-    padding-top: 0.9375rem;
+    padding-top: 0.83333rem;
     padding-bottom: 15px;
-    padding-bottom: 0.9375rem;
+    padding-bottom: 0.83333rem;
     text-align: center;
     max-width: 360px;
     width: 100%;
     position: relative;
-    color: #000; }
+    color: #000;
+    font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
+    .victoria .node--condo-project--full .ds-meta .flag-wrapper a {
+      background-color: #61B2CA; }
     .node--condo-project--full .ds-meta .flag-wrapper a .node--condo-project--full .ds-meta .flag-wrapper a.pager-next {
       padding-right: 53px; }
     .node--condo-project--full .ds-meta .flag-wrapper a::before {
@@ -3925,8 +3967,9 @@ ul.tabs {
     position: relative; }
   .node--condo-project--full .ds-sales .field-label {
     font-size: 22px;
-    font-size: 1.375rem; }
+    font-size: 1.22222rem; }
   .node--condo-project--full .ds-sales .description {
+    font-family: "tablet-gothic-wide", helvetica, arial, sans-serif;
     position: absolute;
     top: 50%;
     height: 22px;
@@ -3936,7 +3979,7 @@ ul.tabs {
     text-transform: uppercase;
     width: 100%;
     font-size: 15px;
-    font-size: 0.9375rem; }
+    font-size: 0.83333rem; }
   .node--condo-project--full .ds-sales .field-container {
     text-align: center; }
 .node--condo-project--full .ds-project-info h4.field-label {
@@ -3967,21 +4010,25 @@ ul.tabs {
   *vertical-align: auto;
   *zoom: 1;
   *display: inline; }
-.node--condo-project--full .ds-project-info .col-1 .field-label,
-.node--condo-project--full .ds-project-info .col-2 .field-label {
-  font-weight: 700;
-  padding-left: 45px;
-  padding-left: 2.8125rem;
-  position: relative; }
-.node--condo-project--full .ds-project-info .col-1 .field-container,
-.node--condo-project--full .ds-project-info .col-2 .field-container {
-  margin: 0;
-  padding-top: 15px;
-  padding-top: 0.9375rem;
-  padding-bottom: 15px;
-  padding-bottom: 0.9375rem;
-  border-bottom: 1px solid #e9e9e9;
-  position: relative; }
+.node--condo-project--full .ds-project-info .col-1,
+.node--condo-project--full .ds-project-info .col-2 {
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
+  .node--condo-project--full .ds-project-info .col-1 .field-label,
+  .node--condo-project--full .ds-project-info .col-2 .field-label {
+    padding-left: 45px;
+    padding-left: 2.5rem;
+    position: relative; }
+  .node--condo-project--full .ds-project-info .col-1 .field-container,
+  .node--condo-project--full .ds-project-info .col-2 .field-container {
+    margin: 0;
+    padding-top: 15px;
+    padding-top: 0.83333rem;
+    padding-bottom: 15px;
+    padding-bottom: 0.83333rem;
+    border-bottom: 1px solid #e9e9e9;
+    position: relative; }
+.node--condo-project--full .ds-project-info .col-3 h4 {
+  font-weight: 400; }
 @media (max-width: 1023px) {
   .node--condo-project--full .ds-project-info .col-3 {
     padding-top: 15px; } }
@@ -4011,7 +4058,10 @@ ul.tabs {
     -webkit-border-radius: 0px;
     border-radius: 0px;
     margin-bottom: 5px;
-    padding: 10px 15px; }
+    padding: 10px 15px;
+    font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
+    .victoria .node--condo-project--full .ds-contact-info .col-1 a {
+      background-color: #61B2CA; }
   .node--condo-project--full .ds-contact-info .col-2 {
     background-color: #FFF;
     padding: 25px 15px;
@@ -4021,7 +4071,7 @@ ul.tabs {
     color: #000;
     overflow: hidden;
     max-height: 142px;
-    max-height: 8.875rem;
+    max-height: 7.88889rem;
     line-height: 1.2; }
     .node--condo-project--full .ds-contact-info .col-2 p {
       margin-top: 3px; }
@@ -4053,17 +4103,20 @@ ul.tabs {
   *zoom: 1;
   *display: inline;
   font-size: 20px;
-  font-size: 1.25rem;
+  font-size: 1.11111rem;
   background-color: #ffcc33;
   padding-top: 15px;
-  padding-top: 0.9375rem;
+  padding-top: 0.83333rem;
   padding-bottom: 15px;
-  padding-bottom: 0.9375rem;
+  padding-bottom: 0.83333rem;
   text-align: center;
   max-width: 360px;
   width: 100%;
   position: relative;
-  color: #000; }
+  color: #000;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
+  .victoria .node--condo-project--full .ds-floorplans .flag-wrapper a {
+    background-color: #61B2CA; }
   .node--condo-project--full .ds-floorplans .flag-wrapper a .node--condo-project--full .ds-floorplans .flag-wrapper a.pager-next {
     padding-right: 53px; }
   .node--condo-project--full .ds-floorplans .flag-wrapper a::before {
@@ -4111,17 +4164,20 @@ ul.tabs {
   *zoom: 1;
   *display: inline;
   font-size: 20px;
-  font-size: 1.25rem;
+  font-size: 1.11111rem;
   background-color: #ffcc33;
   padding-top: 15px;
-  padding-top: 0.9375rem;
+  padding-top: 0.83333rem;
   padding-bottom: 15px;
-  padding-bottom: 0.9375rem;
+  padding-bottom: 0.83333rem;
   text-align: center;
   max-width: 360px;
   width: 100%;
   position: relative;
-  color: #000; }
+  color: #000;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
+  .victoria .node--condo-project--full .ds-floorplans .views-field-field-floorplan a {
+    background-color: #61B2CA; }
   .node--condo-project--full .ds-floorplans .views-field-field-floorplan a .node--condo-project--full .ds-floorplans .views-field-field-floorplan a.pager-next {
     padding-right: 53px; }
   .node--condo-project--full .ds-floorplans .views-field-field-floorplan a::before {
@@ -4226,17 +4282,21 @@ ul.tabs {
     *zoom: 1;
     *display: inline;
     font-size: 20px;
-    font-size: 1.25rem;
+    font-size: 1.11111rem;
     background-color: #ffcc33;
     padding-top: 15px;
-    padding-top: 0.9375rem;
+    padding-top: 0.83333rem;
     padding-bottom: 15px;
-    padding-bottom: 0.9375rem;
+    padding-bottom: 0.83333rem;
     text-align: center;
     max-width: 360px;
     width: 100%;
     position: relative;
-    color: #000; }
+    color: #000;
+    font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
+    .victoria .entity-floorplans.view-mode-comparison .field-container a, .victoria
+    .entity-floorplans.view-mode-comparison .flag-outer a {
+      background-color: #61B2CA; }
     .entity-floorplans.view-mode-comparison .field-container a .entity-floorplans.view-mode-comparison .field-container a.pager-next,
     .entity-floorplans.view-mode-comparison .flag-outer a .entity-floorplans.view-mode-comparison .field-container a.pager-next, .entity-floorplans.view-mode-comparison .field-container a
     .entity-floorplans.view-mode-comparison .flag-outer a.pager-next,
@@ -4300,7 +4360,7 @@ ul.tabs {
   left: 50%;
   margin-left: -75px;
   font-size: 15px;
-  font-size: 0.9375rem;
+  font-size: 0.83333rem;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px; }
@@ -4327,7 +4387,17 @@ ul.tabs {
 .flag-count {
   background-color: #ffcc33;
   color: #000;
-  display: none; }
+  display: none;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
+  .victoria .flag-count {
+    background-color: #61B2CA; }
+    .victoria .flag-count:after {
+      display: block;
+      width: 0;
+      height: 0;
+      border: 0 solid transparent;
+      border-top-color: #61B2CA;
+      border-width: 20px 10px 0 10px; }
   .flag-count:after {
     display: block;
     width: 0;
@@ -4343,17 +4413,20 @@ ul.tabs {
   *zoom: 1;
   *display: inline;
   font-size: 20px;
-  font-size: 1.25rem;
+  font-size: 1.11111rem;
   background-color: #ffcc33;
   padding-top: 15px;
-  padding-top: 0.9375rem;
+  padding-top: 0.83333rem;
   padding-bottom: 15px;
-  padding-bottom: 0.9375rem;
+  padding-bottom: 0.83333rem;
   text-align: center;
   max-width: 360px;
   width: 100%;
   position: relative;
-  color: #000; }
+  color: #000;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
+  .victoria .view-compare-floorplans .flag-wrapper a {
+    background-color: #61B2CA; }
   .view-compare-floorplans .flag-wrapper a .view-compare-floorplans .flag-wrapper a.pager-next {
     padding-right: 53px; }
   .view-compare-floorplans .flag-wrapper a::before {
@@ -4401,17 +4474,20 @@ ul.tabs {
   *zoom: 1;
   *display: inline;
   font-size: 20px;
-  font-size: 1.25rem;
+  font-size: 1.11111rem;
   background-color: #ffcc33;
   padding-top: 15px;
-  padding-top: 0.9375rem;
+  padding-top: 0.83333rem;
   padding-bottom: 15px;
-  padding-bottom: 0.9375rem;
+  padding-bottom: 0.83333rem;
   text-align: center;
   max-width: 360px;
   width: 100%;
   position: relative;
-  color: #000; }
+  color: #000;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
+  .victoria .view-compare-floorplans .views-field-field-floorplan a {
+    background-color: #61B2CA; }
   .view-compare-floorplans .views-field-field-floorplan a .view-compare-floorplans .views-field-field-floorplan a.pager-next {
     padding-right: 53px; }
   .view-compare-floorplans .views-field-field-floorplan a::before {
@@ -4510,17 +4586,20 @@ ul.tabs {
   *zoom: 1;
   *display: inline;
   font-size: 20px;
-  font-size: 1.25rem;
+  font-size: 1.11111rem;
   background-color: #ffcc33;
   padding-top: 15px;
-  padding-top: 0.9375rem;
+  padding-top: 0.83333rem;
   padding-bottom: 15px;
-  padding-bottom: 0.9375rem;
+  padding-bottom: 0.83333rem;
   text-align: center;
   max-width: 360px;
   width: 100%;
   position: relative;
-  color: #000; }
+  color: #000;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
+  .victoria .view-compare-floorplans .views-field-ops a {
+    background-color: #61B2CA; }
   .view-compare-floorplans .views-field-ops a .view-compare-floorplans .views-field-ops a.pager-next {
     padding-right: 53px; }
   .view-compare-floorplans .views-field-ops a::before {
@@ -4564,17 +4643,20 @@ ul.tabs {
   *zoom: 1;
   *display: inline;
   font-size: 20px;
-  font-size: 1.25rem;
+  font-size: 1.11111rem;
   background-color: #ffcc33;
   padding-top: 15px;
-  padding-top: 0.9375rem;
+  padding-top: 0.83333rem;
   padding-bottom: 15px;
-  padding-bottom: 0.9375rem;
+  padding-bottom: 0.83333rem;
   text-align: center;
   max-width: 360px;
   width: 100%;
   position: relative;
-  color: #000; }
+  color: #000;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
+  .victoria .view-compare-floorplans .field--floorplan a {
+    background-color: #61B2CA; }
   .view-compare-floorplans .field--floorplan a .view-compare-floorplans .field--floorplan a.pager-next {
     padding-right: 53px; }
   .view-compare-floorplans .field--floorplan a::before {
@@ -4615,14 +4697,15 @@ ul.tabs {
 .node--news .field--post-date {
   font-size: 12px;
   margin: 10px 0;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
 
 .node--news--teaser h3 {
   font-size: 26px;
-  font-size: 1.625rem;
+  font-size: 1.44444rem;
   margin: 0;
   padding: 40px 0px 20px;
-  padding: 2.5rem 0rem 1.25rem; }
+  padding: 2.22222rem 0rem 1.11111rem; }
   .node--news--teaser h3 a {
     color: #000; }
 
@@ -4658,90 +4741,132 @@ ul.tabs {
         float: right;
         margin-right: 0; } }
 
-.block--views-trends-block-1 {
+.block--views-trends-block-1,
+.block--views-yearly-trends-block-1 {
   background-color: #ebebeb;
   padding-top: 66px;
-  padding-top: 4.125rem;
+  padding-top: 3.66667rem;
   padding-bottom: 60px;
-  padding-bottom: 3.75rem; }
+  padding-bottom: 3.33333rem; }
   @media (max-width: 767px) {
-    .block--views-trends-block-1 {
+    .block--views-trends-block-1,
+    .block--views-yearly-trends-block-1 {
       display: none; } }
 
-.view-trends .views-row-odd {
+.view-trends .views-row-odd,
+.view-yearly-trends .views-row-odd {
   background: url('../img/icons/couch-1.svg?1414001207') 90% top no-repeat; }
-.view-trends .views-row-even {
+.view-trends .views-row-even,
+.view-yearly-trends .views-row-even {
   background: url('../img/icons/couch-2.svg?1414001255') 90% top no-repeat; }
-.view-trends .views-row {
+.view-trends .views-row,
+.view-yearly-trends .views-row {
   margin-bottom: 45px;
   background-size: 96px auto; }
   @media (min-width: 1024px) {
-    .front .view-trends .views-row {
+    .front .view-trends .views-row, .front
+    .view-yearly-trends .views-row {
       margin-bottom: 0; } }
   @media (min-width: 1024px) {
-    .view-trends .views-row {
+    .view-trends .views-row,
+    .view-yearly-trends .views-row {
       width: 47.61905%;
       clear: right;
       float: left;
       margin-left: 0;
       margin-right: 4.7619%; }
-      .view-trends .views-row.views-row-last {
+      .view-trends .views-row.views-row-last,
+      .view-yearly-trends .views-row.views-row-last {
         width: 47.61905%;
         clear: right;
         float: right;
         margin-right: 0; } }
   @media (max-width: 767px) {
-    .view-trends .views-row {
+    .view-trends .views-row,
+    .view-yearly-trends .views-row {
       background: none; } }
 @media (min-width: 1024px) {
   .view-trends .views-row-last .field--title-field > .inner,
   .view-trends .views-row-last .field--source > .inner,
-  .view-trends .views-row-last .field--trends > .inner {
+  .view-trends .views-row-last .field--trends > .inner,
+  .view-yearly-trends .views-row-last .field--title-field > .inner,
+  .view-yearly-trends .views-row-last .field--source > .inner,
+  .view-yearly-trends .views-row-last .field--trends > .inner {
     padding-left: 10px; } }
 
-.node--trends .field-label,
-.node--trends h3 {
-  margin: 0;
-  font-size: 26px;
-  font-size: 1.625rem;
-  line-height: 1.2; }
-.node--trends .field--source {
-  font-size: 14px;
-  font-size: 0.875rem; }
-.node--trends .field--price {
-  font-size: 25px;
-  font-size: 1.5625rem; }
-  @media (max-width: 767px) {
-    .node--trends .field--price {
-      font-size: 20px;
-      font-size: 1.25rem; } }
-@media (max-width: 767px) {
-  .node--trends .field--general-location {
-    line-height: 1.3;
+.node--trends,
+.node--yearly-trends {
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
+  .node--trends .field-label,
+  .node--trends h3,
+  .node--trends .field--year,
+  .node--yearly-trends .field-label,
+  .node--yearly-trends h3,
+  .node--yearly-trends .field--year {
+    margin: 0;
+    font-size: 26px;
+    font-size: 1.44444rem;
+    line-height: 1.2; }
+  .node--trends .field--source,
+  .node--trends .field--yealy-trend-source,
+  .node--yearly-trends .field--source,
+  .node--yearly-trends .field--yealy-trend-source {
     font-size: 14px;
-    font-size: 0.875rem; } }
-.node--trends .field--trends {
-  border-top: 1px solid #828282;
-  margin-top: 20px;
-  margin-top: 1.25rem; }
-  .node--trends .field--trends > .inner > .field-item {
-    width: 33.33333%;
-    clear: right;
-    float: left;
-    margin-left: 0;
-    margin-right: 0%;
-    border-right: 1px solid #828282;
-    padding-top: 15px;
-    padding-top: 0.9375rem;
-    text-align: center; }
-    .node--trends .field--trends > .inner > .field-item:last-child {
+    font-size: 0.77778rem; }
+  .node--trends .field--price,
+  .node--trends .field--yearly-price-trend,
+  .node--yearly-trends .field--price,
+  .node--yearly-trends .field--yearly-price-trend {
+    font-size: 25px;
+    font-size: 1.38889rem; }
+    @media (max-width: 767px) {
+      .node--trends .field--price,
+      .node--trends .field--yearly-price-trend,
+      .node--yearly-trends .field--price,
+      .node--yearly-trends .field--yearly-price-trend {
+        font-size: 20px;
+        font-size: 1.11111rem; } }
+  @media (max-width: 767px) {
+    .node--trends .field--general-location,
+    .node--yearly-trends .field--general-location {
+      line-height: 1.3;
+      font-size: 14px;
+      font-size: 0.77778rem; } }
+  .node--trends .field--trends,
+  .node--yearly-trends .field--trends {
+    border-top: 1px solid #828282;
+    margin-top: 20px;
+    margin-top: 1.11111rem; }
+    .node--trends .field--trends > .inner > .field-item,
+    .node--yearly-trends .field--trends > .inner > .field-item {
       width: 33.33333%;
       clear: right;
-      float: right;
-      margin-right: 0;
-      border-right: 0; }
-    .node--trends .field--trends > .inner > .field-item:first-child {
-      text-align: left; }
+      float: left;
+      margin-left: 0;
+      margin-right: 0%;
+      border-right: 1px solid #828282;
+      padding-top: 15px;
+      padding-top: 0.83333rem;
+      text-align: center; }
+      .node--trends .field--trends > .inner > .field-item:last-child,
+      .node--yearly-trends .field--trends > .inner > .field-item:last-child {
+        width: 33.33333%;
+        clear: right;
+        float: right;
+        margin-right: 0;
+        border-right: 0; }
+      .node--trends .field--trends > .inner > .field-item:first-child,
+      .node--yearly-trends .field--trends > .inner > .field-item:first-child {
+        text-align: left; }
+  .node--trends .field--yearly-price-trend,
+  .node--yearly-trends .field--yearly-price-trend {
+    border-top: 1px solid #828282;
+    margin-top: 20px;
+    margin-top: 1.11111rem; }
+    .node--trends .field--yearly-price-trend > .inner > .field-item,
+    .node--yearly-trends .field--yearly-price-trend > .inner > .field-item {
+      padding-top: 15px;
+      padding-top: 0.83333rem; }
 
 .node--webform--full div input[type=text],
 .node--webform--full div input[type=email],
@@ -4792,11 +4917,11 @@ ul.tabs {
 
 .l-branding h1 {
   font-size: 20px;
-  font-size: 1.25rem;
+  font-size: 1.11111rem;
   margin: 0;
   text-transform: uppercase;
   font-weight: 900;
-  font-family: "proxima-nova", helvetica, arial, sans-serif;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif;
   word-spacing: -4px;
   color: #666666; }
   .l-branding h1 a {
@@ -4809,8 +4934,11 @@ ul.tabs {
   text-align: center;
   position: relative;
   z-index: 5; }
+  .victoria .l-region--header {
+    background-color: #61B2CA; }
   .l-region--header h3 {
-    margin-top: 0; }
+    margin-top: 0;
+    font-size: 24px; }
     @media (max-width: 767px) {
       .l-region--header h3 {
         font-size: 17px; } }
@@ -4825,7 +4953,9 @@ ul.tabs {
         *display: inline;
         margin-bottom: 0;
         margin-right: 25px;
-        max-width: 320px; } }
+        max-width: 320px; }
+        .l-region--header .selector.closest-selector {
+          margin-right: 0; } }
     @media (min-width: 1024px) {
       .l-region--header .selector {
         max-width: 360px; } }
@@ -4902,76 +5032,78 @@ ul.tabs {
       float: right;
       margin-right: 0; } }
 
-.l-region--meta > ul > li {
-  display: table; }
-  .l-region--meta > ul > li > a {
-    display: table-cell;
-    vertical-align: middle; }
-.l-region--meta a {
-  position: relative;
-  display: block; }
-.l-region--meta .condos {
-  float: left; }
-  .l-region--meta .condos a {
-    color: #FFF; }
-  .l-region--meta .condos i {
-    position: absolute;
-    top: 50%;
-    float: left;
-    left: 0;
-    margin-top: -12px;
-    margin-top: -0.75rem; }
-    .l-region--meta .condos i:before {
-      font-size: 24px;
-      font-size: 1.5rem; }
-  .l-region--meta .condos > a {
-    text-align: center; }
-    .l-region--meta .condos > a span {
-      padding-left: 31px;
-      padding-left: 1.9375rem;
-      display: inline-block;
-      position: relative; }
-.l-region--meta a span {
-  display: block; }
-.l-region--meta .ico-moon:before,
-.l-region--meta .translate {
-  font-size: 20px;
-  font-size: 1.25rem; }
-  .l-region--meta .ico-moon:before a,
+.l-region--meta {
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
+  .l-region--meta > ul > li {
+    display: table; }
+    .l-region--meta > ul > li > a {
+      display: table-cell;
+      vertical-align: middle; }
+  .l-region--meta a {
+    position: relative;
+    display: block; }
+  .l-region--meta .condos {
+    float: left; }
+    .l-region--meta .condos a {
+      color: #FFF; }
+    .l-region--meta .condos i {
+      position: absolute;
+      top: 50%;
+      float: left;
+      left: 0;
+      margin-top: -12px;
+      margin-top: -0.66667rem; }
+      .l-region--meta .condos i:before {
+        font-size: 24px;
+        font-size: 1.33333rem; }
+    .l-region--meta .condos > a {
+      text-align: center; }
+      .l-region--meta .condos > a span {
+        padding-left: 31px;
+        padding-left: 1.72222rem;
+        display: inline-block;
+        position: relative; }
+  .l-region--meta a span {
+    display: block; }
+  .l-region--meta .ico-moon:before,
+  .l-region--meta .translate {
+    font-size: 20px;
+    font-size: 1.11111rem; }
+    .l-region--meta .ico-moon:before a,
+    .l-region--meta .translate a {
+      color: #666; }
+    @media (min-width: 1200px) {
+      .l-region--meta .ico-moon:before,
+      .l-region--meta .translate {
+        font-size: 25px;
+        font-size: 1.38889rem; } }
   .l-region--meta .translate a {
-    color: #666; }
-  @media (min-width: 1200px) {
-    .l-region--meta .ico-moon:before,
-    .l-region--meta .translate {
-      font-size: 25px;
-      font-size: 1.5625rem; } }
-.l-region--meta .translate a {
-  font-size: 22px;
-  font-size: 1.375rem; }
-  .l-region--meta .translate a.english::after {
-    content: " ";
-    background: url('../img/flag-canada.svg?1427238497') no-repeat center center;
-    background-size: contain;
-    position: absolute;
-    height: 33px;
-    width: 33px;
-    top: 50%;
-    margin-top: -16.5px;
-    left: 50%;
-    margin-left: -16.5px; }
-  .l-region--meta .translate a.english span {
-    color: transparent; }
-.l-region--meta .search a {
-  color: #595959; }
+    font-size: 22px;
+    font-size: 1.22222rem; }
+    .l-region--meta .translate a.english::after {
+      content: " ";
+      background: url('../img/flag-canada.svg?1427238497') no-repeat center center;
+      background-size: contain;
+      position: absolute;
+      height: 33px;
+      width: 33px;
+      top: 50%;
+      margin-top: -16.5px;
+      left: 50%;
+      margin-left: -16.5px; }
+    .l-region--meta .translate a.english span {
+      color: transparent; }
+  .l-region--meta .search a {
+    color: #595959; }
 
 .owl-theme .owl-controls .owl-nav {
   position: absolute;
   width: 100%;
   top: 31%;
   margin-top: -37.5px;
-  margin-top: -2.34375rem;
+  margin-top: -2.08333rem;
   height: 75px;
-  height: 4.6875rem; }
+  height: 4.16667rem; }
   @media (min-width: 768px) {
     .owl-theme .owl-controls .owl-nav {
       top: 26%; } }
@@ -4984,41 +5116,41 @@ ul.tabs {
   @media (min-width: 1400px) {
     .owl-theme .owl-controls .owl-nav {
       top: 37%; } }
-.owl-theme .owl-controls div {
+.owl-theme .owl-controls .owl-nav div {
   width: 75px;
-  width: 4.6875rem;
+  width: 4.16667rem;
   height: 75px;
-  height: 4.6875rem; }
-  .owl-theme .owl-controls div:before {
+  height: 4.16667rem; }
+  .owl-theme .owl-controls .owl-nav div:before {
     position: absolute;
     text-align: center;
     font-size: 72px;
-    font-size: 4.5rem;
+    font-size: 4rem;
     z-index: 10;
     top: 0;
     right: -3px;
-    right: -0.1875rem;
+    right: -0.16667rem;
     bottom: 0;
     color: #FFF;
     line-height: .91; }
   @media (max-width: 767px) {
-    .owl-theme .owl-controls div {
+    .owl-theme .owl-controls .owl-nav div {
       width: 30px;
-      width: 1.875rem;
+      width: 1.66667rem;
       height: 30px;
-      height: 1.875rem;
+      height: 1.66667rem;
       border-width: 0px !important;
       background-color: transparent !important; }
-      .owl-theme .owl-controls div::before {
+      .owl-theme .owl-controls .owl-nav div::before {
         top: 1px;
         font-size: 29px;
-        font-size: 1.8125rem; } }
+        font-size: 1.61111rem; } }
 @media (max-width: 767px) {
   .owl-theme .owl-controls .owl-prev:before {
     right: -1px; } }
 .owl-theme .owl-controls .owl-next:before {
   right: -7px;
-  right: -0.4375rem; }
+  right: -0.38889rem; }
   @media (max-width: 767px) {
     .owl-theme .owl-controls .owl-next:before {
       right: -2px; } }
@@ -5099,20 +5231,20 @@ $slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'   
 
 .front .l-region--header {
   padding-top: 57px;
-  padding-top: 3.5625rem;
+  padding-top: 3.16667rem;
   padding-bottom: 65px;
-  padding-bottom: 4.0625rem; }
+  padding-bottom: 3.61111rem; }
   @media (max-width: 767px) {
     .front .l-region--header {
       padding-top: 35px;
-      padding-top: 2.1875rem;
+      padding-top: 1.94444rem;
       padding-bottom: 35px;
-      padding-bottom: 2.1875rem; } }
+      padding-bottom: 1.94444rem; } }
 .not-front .l-region--header {
   padding-top: 20px;
-  padding-top: 1.25rem;
+  padding-top: 1.11111rem;
   padding-bottom: 25px;
-  padding-bottom: 1.5625rem; }
+  padding-bottom: 1.38889rem; }
 
 .l-region--branding {
   position: absolute;
@@ -5166,7 +5298,7 @@ $slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'   
   margin-bottom: 21px; }
   .l-region--hero .block.block--views-news-block-1 {
     margin-bottom: 60px;
-    margin-bottom: 3.75rem; }
+    margin-bottom: 3.33333rem; }
 
 /**
 * Full condos page
@@ -5227,9 +5359,9 @@ $slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'   
   position: relative;
   min-height: 111px;
   padding-top: 20px;
-  padding-top: 1.25rem;
+  padding-top: 1.11111rem;
   padding-bottom: 20px;
-  padding-bottom: 1.25rem; }
+  padding-bottom: 1.11111rem; }
 .l-region--content-header .page-title {
   padding-left: 0; }
 @media (min-width: 1024px) {

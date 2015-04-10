@@ -43,7 +43,9 @@ var Roots = {
       if(Modernizr.input.placeholder){
         $(".webform-component-textfield  label, .webform-component-phone label, .webform-component-email label, .webform-component-select label").hide();
       }
-      $(".view-id-condos .views-row").matchHeight();
+      $(window).load(function(){
+        $(".view-id-condos .views-row").matchHeight();
+      });
       $("input.required").attr('required','required');
     }
   },
@@ -61,7 +63,7 @@ var Roots = {
         responsiveRefreshRate:50,
         autoplayHoverPause: true,
         responsiveClass:true,
-        dots:false,
+        dots:true,
         touchDrag:true,
         mouseDrag:false,
         responsive:{

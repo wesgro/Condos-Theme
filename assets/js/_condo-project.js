@@ -1,10 +1,13 @@
 (function($) {
   $(function(){
     if(Modernizr.canvas){
+      var color='#ffcc33';
+      if($("html").hasClass('victoria')){
+        console.log("victoria");
+        color='#61B2CA';
+      }
       $(".knob").knob({
-        'draw':function(){
-          //this.o.element = this.$;
-        }
+        fgColor:color,
       });
       $('.knob').trigger('configure', {
         'format': function (v) {

@@ -11,16 +11,12 @@ html {
   color: $bodyCopy;
   /* Better Font Rendering =========== */
 	-webkit-font-smoothing: antialiased;
-	line-height: 1.5;
 	font-weight: $bodyFontWeight;
-  @include to(lp){
-    font-size: 14px;
-	}
-	@include from(pt){
-  	font-size: 15px;
-	}
+  font-size: 16px;
+  line-height: 1.7;
 	@include from(d){
 	  font-size: $base-font-size;
+    line-height: 1.9;
 	}
 	&.lt-ie9{
   	font-size: $base-font-size;
@@ -72,7 +68,7 @@ h3, .gamma {
   @include font-size(26px);
   line-height: 1.1;
   @include to(pt){
-     @include font-size(24px);
+     @include font-size(22px);
   }
 }
 h4, .delta {
@@ -89,12 +85,14 @@ hr{
   height: 1px;
   margin: 25px 0;
 }
-h1,h2,h3,h4,h5,h6,p,%p{
+h1,h2,h3,h4,h5,h6,p,%p,div,span{
   text-rendering: optimizeLegibility;
-  font-feature-settings: "kern";
-  -webkit-font-feature-settings: "kern";
-  -moz-font-feature-settings: "kern";
-  -moz-font-feature-settings: "kern=1";
+   -moz-font-feature-settings:"lnum" 1, "kern" 1, "liga" 1; 
+  -moz-font-feature-settings:"lnum=1, kern=1, liga=1"; 
+  -ms-font-feature-settings:"lnum" 1, "kern" 1, "liga" 1; 
+  -o-font-feature-settings:"lnum" 1, "kern" 1, "liga" 1; 
+  -webkit-font-feature-settings:"lnum" 1, "kern" 1, "liga" 1; 
+  font-feature-settings:"lnum" 1, "kern" 1, "liga" 1;
 }
 /**
  * $PARAGRAPHS
@@ -106,7 +104,6 @@ p,
   -ms-word-break: normal;
   -ms-word-wrap: normal;
   word-break: normal;
-  line-height: 1.5;
 }
 strong{
   font-weight: 700;

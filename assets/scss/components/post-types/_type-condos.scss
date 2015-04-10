@@ -46,16 +46,18 @@
 }
 .node--condo-project--teaser,
 .node--condo-project--comparison{
+  font-family: $otherFont;
   .field-label{
     font-weight: 700;
     padding-bottom: 5px;
   }
   .field-item{
-    padding-bottom: 5px;    
+    padding-bottom: 5px;  
+    text-overflow: ellipsis;  
   }
   .ds-region{
-    @include rem(padding-left, 25px);
-    @include rem(padding-right, 25px);
+    @include rem(padding-left, 20px);
+    @include rem(padding-right, 20px);
     @include rem(padding-top, 15px);
     @include rem(padding-bottom, 15px);
   }
@@ -89,6 +91,9 @@
       @include rem(padding-left, 25px);
       @include rem(padding-right, 25px);
       @include rem(font-size, 23px);
+      .victoria &{
+        background-color: $victoriaHighlight;
+      }
       @include to(lp){
         @include rem(font-size, 18px);
       }
@@ -111,6 +116,11 @@
   .ds-details{
     background-color: #f7f7f7;
     margin-bottom: 94px;
+    .inner{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow:ellipsis;
+    }
   }
   address{
     font-style: normal;
@@ -155,7 +165,7 @@
       }
       .ico-moon{
         display: block;
-        height: 31px;
+        height: 25px;
         width: 100%;
       }
       .ico-moon:before{
@@ -266,6 +276,7 @@
     h3,
     .field-label,
     .field-item{
+      font-family: $otherFont;
       @include rem(font-size, 26px);
       margin: 0;
       line-height: 1.1;
@@ -318,6 +329,7 @@
       @include rem(font-size, 22px);
     }
     .description{
+      font-family: $otherFont;
       position: absolute;
       top:50%;
       height: 22px;
@@ -364,8 +376,8 @@
     }
     .col-1,
     .col-2{
+      font-family: $otherFont;
       .field-label{
-        font-weight: 700;
         @include rem(padding-left, 45px);
         position: relative;
         
@@ -381,6 +393,9 @@
       }
     }
     .col-3{
+      h4{
+        font-weight: 400;
+      }
       @include to(pt){
         padding-top: 15px;
       }
@@ -418,6 +433,10 @@
         @include border-radius(0px);
         margin-bottom: 5px;
         padding:10px 15px;
+        font-family: $otherFont;
+        .victoria &{
+          background-color: $victoriaHighlight;
+        }
       }
     }
     .col-2{

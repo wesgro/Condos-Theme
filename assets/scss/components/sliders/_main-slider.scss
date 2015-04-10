@@ -19,7 +19,7 @@
         top:37%;
       }
     }
-    div{
+    .owl-nav div{
       @include rem(width, 75px);
       @include rem(height, 75px);
       &:before{
