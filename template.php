@@ -83,9 +83,9 @@ function leap_project_icons($icon, $classes, $element, $label, $items, $title_at
   <?php foreach ($items as $delta => $item): ?>
     <<?php echo $container;?> class="field-item"<?php print $attributes; ?>>
       <?php print render($item); ?>
-    </div>
-  <?php endforeach; ?>
     </<?php echo $container;?>>
+  <?php endforeach; ?>
+    </div>
   </div>
   <?php
 }
@@ -117,16 +117,18 @@ $form['actions']['submit'] = array('#type' => 'image_button', '#src' => base_pat
     $form['search_block_form']['#attributes']['placeholder'] = t('Search');
   }
 
-  if($form_id ===  'user_login_block'){
-    //$form['#validate'][] = 'leap_custom_login_val';
+  if($form_id === 'user_login'){
+    $form['#validate'][] = 'leap_custom_login_val';
   }
 }
 
 
 function leap_custom_login_val($form, &$form_state) {
+  //die('dieing');
   $form = form_get_error($form['name']) . form_get_error($form['pass']);
   if($form != '') {
     $_GET['destination'] = 'user/login';
     drupal_goto('user/login');    
   }
+  //drupal_goto('user/login'); 
 }
