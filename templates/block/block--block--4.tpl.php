@@ -46,7 +46,7 @@
 $node = menu_get_object();
 $title = drupal_get_title();
 if(isset($node) && $node->type === 'news'){
-  $title = 'News';
+  $title = 'Latest Stories';
 }
 ?>
 <?php if (drupal_get_title() ): ?>

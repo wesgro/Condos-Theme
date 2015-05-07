@@ -4,7 +4,7 @@
     @include floorplan-table-lables;
   }
   .views-field-ops{
-    @include button-builder('a', '%icon-heart');
+    @include button-builder('a', '%icon-empty-heart');
   }
   .field--floorplan{
     @include button-builder('a');

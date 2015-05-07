@@ -394,13 +394,13 @@
                         vSwipe = false;
                         if ( Math.abs( vDistance ) >= 2 * vSwipMinDistance && Math.abs( vDistance ) > Math.abs( vDistanceLast ) ) {
                             var vOffset = vDistance > 0 ? slider.height() : - slider.height();
-                            slider.animate( { top: vOffset + 'px', 'opacity': 0 },
+                            slider.velocity( { top: vOffset + 'px', 'opacity': 0 },
                                 300,
                                 function () {
                                     $this.closeSlide();
                                 } );
                         } else {
-                            slider.animate( { top: 0, 'opacity': 1 }, 300 );
+                            slider.velocity( { top: 0, 'opacity': 1 }, 300 );
                         }
 
                     } else if ( hSwipe ) {
@@ -472,8 +472,8 @@
                 if ( this.doCssTrans() ) {
                     bars.addClass( 'visible-bars' );
                 } else {
-                    $( '#swipebox-top-bar' ).animate( { top : 0 }, 500 );
-                    $( '#swipebox-bottom-bar' ).animate( { bottom : 0 }, 500 );
+                    $( '#swipebox-top-bar' ).velocity( { top : 0 }, 500 );
+                    $( '#swipebox-bottom-bar' ).velocity( { bottom : 0 }, 500 );
                     setTimeout( function() {
                         bars.addClass( 'visible-bars' );
                     }, 1000 );
@@ -488,8 +488,8 @@
                 if ( this.doCssTrans() ) {
                     bars.removeClass( 'visible-bars' );
                 } else {
-                    $( '#swipebox-top-bar' ).animate( { top : '-50px' }, 500 );
-                    $( '#swipebox-bottom-bar' ).animate( { bottom : '-50px' }, 500 );
+                    $( '#swipebox-top-bar' ).velocity( { top : '-50px' }, 500 );
+                    $( '#swipebox-bottom-bar' ).velocity( { bottom : '-50px' }, 500 );
                     setTimeout( function() {
                         bars.removeClass( 'visible-bars' );
                     }, 1000 );
@@ -604,7 +604,7 @@
                         'transform' : 'translate3d(' + (-index*100)+'%, 0, 0)'
                     } );
                 } else {
-                    slider.animate( { left : ( -index*100 )+'%' } );
+                    slider.velocity( { left : ( -index*100 )+'%' } );
                 }
 
                 $( '#swipebox-slider .slide' ).removeClass( 'current' );

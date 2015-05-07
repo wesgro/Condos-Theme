@@ -23,6 +23,7 @@
   }
 }
 .view-news.view-display-id-page{
+  @include clearfix;
   .field--news-image{
     img{
       width: 100%;

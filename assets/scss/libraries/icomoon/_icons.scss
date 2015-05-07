@@ -21,7 +21,12 @@ $fontDir:"../fonts";
 }
 %icon-empty-heart,
 .icon-empty-heart:before{
-	content: "\e602";
+	content: "\e600";
+}
+%icon-menu,
+.icon-menu:before,
+%menu{
+	content: "\e9bd";
 }
 %icon-square,
 .icon-square:before{
@@ -41,7 +46,7 @@ $fontDir:"../fonts";
 }
 %icon-truck,
 .icon-truck:before{
-	content: "\e607";
+	content: "\e9b0";
 }
 %icon-arrow-left,
 .icon-arrow-left:before {

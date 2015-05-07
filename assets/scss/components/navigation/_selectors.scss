@@ -7,7 +7,7 @@
   background-color: #FFF;
   color: #000;
   @include transition(border-radius .25s ease-in);
-  font-family: $otherFont;
+  @include header-font();
   @include at(pt){
     max-width: 395px;
   }
@@ -90,7 +90,7 @@
       text-align: center;
       float: left;
       font-family: $headerFont;
-      font-weight: 400;
+      font-weight: 200;
       font-size: 14px;
       padding-left: 10px;
       padding-right: 10px;
@@ -122,6 +122,11 @@
     padding: 0;
     margin: 0;
     list-style-type: none;
+    &:last-child{
+      a{
+        border-bottom: 0;
+      }
+    }
   }
   a{
     display: block;

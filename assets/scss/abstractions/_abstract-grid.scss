@@ -37,8 +37,8 @@ $debug-grid: false !default;
   }
 }
 %small-vertical-padding{
-  @include rem(padding-top, 10px);
-  @include rem(padding-bottom, 15px);
+  @include rem(padding-top, 30px);
+  @include rem(padding-bottom, 35px);
   @include from(lt, $noquery){
     @include rem(padding-top, 20px);
     @include rem(padding-bottom, 25px);

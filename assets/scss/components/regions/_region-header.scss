@@ -26,12 +26,18 @@
   h3{
     margin-top: 0;
     font-size: 24px;
+    @include at(pt){
+      font-size: 20px;
+    }
     @include to(lp){
       font-size: 17px;
     }
   }
   .selector{
     margin-bottom: 20px;
+    &.closest-selector{
+      margin-bottom: 0;
+    }
     @include from(pt, $noquery){
       @include inline-block;
       margin-bottom: 0;

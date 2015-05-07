@@ -117,7 +117,11 @@
       $menu = 'menu-marketer-menu';
     }
     
-    ?><div class="user"><?php
+    ?><div class="user">
+      <ul>
+        <li class="translate"><a href="#" class="chinese"><span class="notranslate">中国</span></a></li>
+      </ul>
+      <?php
       $menu_depth = 2;
       $tree = menu_tree_all_data($menu, null, $menu_depth);
       $output = menu_tree_output($tree);
@@ -132,6 +136,39 @@
         print drupal_render($output);
       ?>
       </div>
+      <div class="mobile-search">
+      <?php
+        $block = module_invoke('search', 'block_view', 'search');
+        print render($block);
+      ?>
+      </div>
+      <?php
+        $site_email = variable_get('site_mail', '');
+        $site_name = variable_get('site_name', '');
+      ?>
+      <?php
+        $nid = 74;
+        $node = node_load($nid);
+        $address =  field_get_items('node', $node, 'field_site_address');
+        $phone = field_get_items('node', $node, 'field_site_phone');
+        $fullAddress = $address[0]['premise']." ".$address[0]['thoroughfare']." ".$address[0]['locality']." ".$address[0]['administrative_area'];
+        $fullAddress = urlencode($fullAddress);
+      ?>
+      <footer class="contact">
+        <h2>Contact Info</h2>
+        <ul>
+          <li><a href="mailto:<?php echo $site_email;?>"><i class="icon icon-mail"></i> <?php echo $site_email;?></a></li>
+          <li><a href="tel:<?php echo $phone[0]['value'];?>"><i class="icon icon-phone"></i> <?php echo $phone[0]['value'];?></a></li>
+          <li class="address">
+            <a href="https://maps.google.com/?q=<?php echo $fullAddress;?>" target="_blank">
+            <?php echo $address[0]['premise'];?> <?php echo $address[0]['thoroughfare'];?><br/>
+            <?php echo $address[0]['locality'];?> <?php echo $address[0]['administrative_area'];?><br/>
+            <?php echo $address[0]['postal_code'];?>
+            </a>
+          </li>
+        </ul>
+        <?php include(path_to_theme().'/templates/custom/social-media.tpl.php');?>
+      </footer>
     </div>
   </div>
   <div class="search-feature">
@@ -165,10 +202,10 @@
         $menu_depth = 2;
         $tree = menu_tree_all_data($menu, null, $menu_depth);
         $output = menu_tree_output($tree);
-        //print_r($output);
         print drupal_render($output);
       ?>
   </div>
+  <a class="up" href="#"><i class="icon icon-angle-up"></i></a>
   <?php print $page_bottom; ?>
 </body>
 </html>

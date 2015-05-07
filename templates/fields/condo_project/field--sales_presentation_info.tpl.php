@@ -12,8 +12,10 @@
     $field = field_get_items('node', $element['#object'], 'field_geo_data');
     $geo = $field[0];
   
-    $field = field_get_items('node', $element['#object'], 'field_address');
-    $output = field_view_value('node', $element['#object'], 'field_address', $field[0]);
+    $field = field_get_items('node', $element['#object'], 'field_presentation_address');
+    $fullAddress = $field[0]['thoroughfare']." ".$field[0]['locality']." ".$field[0]['administrative_area'];
+    $fullAddress = urlencode($fullAddress);
+    $output = field_view_value('node', $element['#object'], 'field_presentation_address', $field[0]);
     $address = render($output);
     
     $field = field_get_items('node', $element['#object'], 'field_open_times');
@@ -23,14 +25,14 @@
   <div class="col col-1">
   <ul>
     <li><a href="<?php echo $url;?>" target="_blank">Visit Website</a></li>
-    <li><a class="map-popup" href="#" data-lat="<?php echo $geo['lat'];?>" data-lng="<?php echo $geo['lon'];?>">View Map</a></li>
+    <li><a class="" href="https://maps.google.com/?q=<?php echo $fullAddress;?>" target="_blank" data-lat="<?php echo $geo['lat'];?>" data-lng="<?php echo $geo['lon'];?>">View Map</a></li>
     <li><a href="tel:<?php echo $phone;?>"><?php echo $phone;?></a></li>
   </ul>
   </div>
   <div class="col col-2">
     <div class="inner">
       <?php echo $address;?>
-      <p><?php echo $open;?></p>
+      <p><?php echo nl2br($open);?></p>
     </div>
   </div>
 </div>

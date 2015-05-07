@@ -1,1648 +1,844 @@
-/**
- * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
- *
- * @version 1.0.3
- * @codingstandard ftlabs-jsv2
- * @copyright The Financial Times Limited [All Rights Reserved]
- * @license MIT License (see LICENSE.txt)
- */
-
-/*jslint browser:true, node:true*/
-/*global define, Event, Node*/
-
-
-/**
- * Instantiate fast-clicking listeners on the specified layer.
- *
- * @constructor
- * @param {Element} layer The layer to listen on
- * @param {Object} options The options to override the defaults
- */
-function FastClick(layer, options) {
+;(function () {
 	'use strict';
-	var oldOnClick;
-
-	options = options || {};
 
 	/**
-	 * Whether a click is currently being tracked.
+	 * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
+	 *
+	 * @codingstandard ftlabs-jsv2
+	 * @copyright The Financial Times Limited [All Rights Reserved]
+	 * @license MIT License (see LICENSE.txt)
+	 */
+
+	/*jslint browser:true, node:true*/
+	/*global define, Event, Node*/
+
+
+	/**
+	 * Instantiate fast-clicking listeners on the specified layer.
+	 *
+	 * @constructor
+	 * @param {Element} layer The layer to listen on
+	 * @param {Object} [options={}] The options to override the defaults
+	 */
+	function FastClick(layer, options) {
+		var oldOnClick;
+
+		options = options || {};
+
+		/**
+		 * Whether a click is currently being tracked.
+		 *
+		 * @type boolean
+		 */
+		this.trackingClick = false;
+
+
+		/**
+		 * Timestamp for when click tracking started.
+		 *
+		 * @type number
+		 */
+		this.trackingClickStart = 0;
+
+
+		/**
+		 * The element being tracked for a click.
+		 *
+		 * @type EventTarget
+		 */
+		this.targetElement = null;
+
+
+		/**
+		 * X-coordinate of touch start event.
+		 *
+		 * @type number
+		 */
+		this.touchStartX = 0;
+
+
+		/**
+		 * Y-coordinate of touch start event.
+		 *
+		 * @type number
+		 */
+		this.touchStartY = 0;
+
+
+		/**
+		 * ID of the last touch, retrieved from Touch.identifier.
+		 *
+		 * @type number
+		 */
+		this.lastTouchIdentifier = 0;
+
+
+		/**
+		 * Touchmove boundary, beyond which a click will be cancelled.
+		 *
+		 * @type number
+		 */
+		this.touchBoundary = options.touchBoundary || 10;
+
+
+		/**
+		 * The FastClick layer.
+		 *
+		 * @type Element
+		 */
+		this.layer = layer;
+
+		/**
+		 * The minimum time between tap(touchstart and touchend) events
+		 *
+		 * @type number
+		 */
+		this.tapDelay = options.tapDelay || 200;
+
+		/**
+		 * The maximum time for a tap
+		 *
+		 * @type number
+		 */
+		this.tapTimeout = options.tapTimeout || 700;
+
+		if (FastClick.notNeeded(layer)) {
+			return;
+		}
+
+		// Some old versions of Android don't have Function.prototype.bind
+		function bind(method, context) {
+			return function() { return method.apply(context, arguments); };
+		}
+
+
+		var methods = ['onMouse', 'onClick', 'onTouchStart', 'onTouchMove', 'onTouchEnd', 'onTouchCancel'];
+		var context = this;
+		for (var i = 0, l = methods.length; i < l; i++) {
+			context[methods[i]] = bind(context[methods[i]], context);
+		}
+
+		// Set up event handlers as required
+		if (deviceIsAndroid) {
+			layer.addEventListener('mouseover', this.onMouse, true);
+			layer.addEventListener('mousedown', this.onMouse, true);
+			layer.addEventListener('mouseup', this.onMouse, true);
+		}
+
+		layer.addEventListener('click', this.onClick, true);
+		layer.addEventListener('touchstart', this.onTouchStart, false);
+		layer.addEventListener('touchmove', this.onTouchMove, false);
+		layer.addEventListener('touchend', this.onTouchEnd, false);
+		layer.addEventListener('touchcancel', this.onTouchCancel, false);
+
+		// Hack is required for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
+		// which is how FastClick normally stops click events bubbling to callbacks registered on the FastClick
+		// layer when they are cancelled.
+		if (!Event.prototype.stopImmediatePropagation) {
+			layer.removeEventListener = function(type, callback, capture) {
+				var rmv = Node.prototype.removeEventListener;
+				if (type === 'click') {
+					rmv.call(layer, type, callback.hijacked || callback, capture);
+				} else {
+					rmv.call(layer, type, callback, capture);
+				}
+			};
+
+			layer.addEventListener = function(type, callback, capture) {
+				var adv = Node.prototype.addEventListener;
+				if (type === 'click') {
+					adv.call(layer, type, callback.hijacked || (callback.hijacked = function(event) {
+						if (!event.propagationStopped) {
+							callback(event);
+						}
+					}), capture);
+				} else {
+					adv.call(layer, type, callback, capture);
+				}
+			};
+		}
+
+		// If a handler is already declared in the element's onclick attribute, it will be fired before
+		// FastClick's onClick handler. Fix this by pulling out the user-defined handler function and
+		// adding it as listener.
+		if (typeof layer.onclick === 'function') {
+
+			// Android browser on at least 3.2 requires a new reference to the function in layer.onclick
+			// - the old one won't work if passed to addEventListener directly.
+			oldOnClick = layer.onclick;
+			layer.addEventListener('click', function(event) {
+				oldOnClick(event);
+			}, false);
+			layer.onclick = null;
+		}
+	}
+
+	/**
+	* Windows Phone 8.1 fakes user agent string to look like Android and iPhone.
+	*
+	* @type boolean
+	*/
+	var deviceIsWindowsPhone = navigator.userAgent.indexOf("Windows Phone") >= 0;
+
+	/**
+	 * Android requires exceptions.
 	 *
 	 * @type boolean
 	 */
-	this.trackingClick = false;
+	var deviceIsAndroid = navigator.userAgent.indexOf('Android') > 0 && !deviceIsWindowsPhone;
 
 
 	/**
-	 * Timestamp for when click tracking started.
+	 * iOS requires exceptions.
 	 *
-	 * @type number
+	 * @type boolean
 	 */
-	this.trackingClickStart = 0;
+	var deviceIsIOS = /iP(ad|hone|od)/.test(navigator.userAgent) && !deviceIsWindowsPhone;
 
 
 	/**
-	 * The element being tracked for a click.
+	 * iOS 4 requires an exception for select elements.
 	 *
-	 * @type EventTarget
+	 * @type boolean
 	 */
-	this.targetElement = null;
+	var deviceIsIOS4 = deviceIsIOS && (/OS 4_\d(_\d)?/).test(navigator.userAgent);
 
 
 	/**
-	 * X-coordinate of touch start event.
+	 * iOS 6.0-7.* requires the target element to be manually derived
 	 *
-	 * @type number
+	 * @type boolean
 	 */
-	this.touchStartX = 0;
-
+	var deviceIsIOSWithBadTarget = deviceIsIOS && (/OS [6-7]_\d/).test(navigator.userAgent);
 
 	/**
-	 * Y-coordinate of touch start event.
+	 * BlackBerry requires exceptions.
 	 *
-	 * @type number
+	 * @type boolean
 	 */
-	this.touchStartY = 0;
-
+	var deviceIsBlackBerry10 = navigator.userAgent.indexOf('BB10') > 0;
 
 	/**
-	 * ID of the last touch, retrieved from Touch.identifier.
+	 * Determine whether a given element requires a native click.
 	 *
-	 * @type number
+	 * @param {EventTarget|Element} target Target DOM element
+	 * @returns {boolean} Returns true if the element needs a native click
 	 */
-	this.lastTouchIdentifier = 0;
+	FastClick.prototype.needsClick = function(target) {
+		switch (target.nodeName.toLowerCase()) {
 
-
-	/**
-	 * Touchmove boundary, beyond which a click will be cancelled.
-	 *
-	 * @type number
-	 */
-	this.touchBoundary = options.touchBoundary || 10;
-
-
-	/**
-	 * The FastClick layer.
-	 *
-	 * @type Element
-	 */
-	this.layer = layer;
-
-	/**
-	 * The minimum time between tap(touchstart and touchend) events
-	 *
-	 * @type number
-	 */
-	this.tapDelay = options.tapDelay || 200;
-
-	if (FastClick.notNeeded(layer)) {
-		return;
-	}
-
-	// Some old versions of Android don't have Function.prototype.bind
-	function bind(method, context) {
-		return function() { return method.apply(context, arguments); };
-	}
-
-
-	var methods = ['onMouse', 'onClick', 'onTouchStart', 'onTouchMove', 'onTouchEnd', 'onTouchCancel'];
-	var context = this;
-	for (var i = 0, l = methods.length; i < l; i++) {
-		context[methods[i]] = bind(context[methods[i]], context);
-	}
-
-	// Set up event handlers as required
-	if (deviceIsAndroid) {
-		layer.addEventListener('mouseover', this.onMouse, true);
-		layer.addEventListener('mousedown', this.onMouse, true);
-		layer.addEventListener('mouseup', this.onMouse, true);
-	}
-
-	layer.addEventListener('click', this.onClick, true);
-	layer.addEventListener('touchstart', this.onTouchStart, false);
-	layer.addEventListener('touchmove', this.onTouchMove, false);
-	layer.addEventListener('touchend', this.onTouchEnd, false);
-	layer.addEventListener('touchcancel', this.onTouchCancel, false);
-
-	// Hack is required for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
-	// which is how FastClick normally stops click events bubbling to callbacks registered on the FastClick
-	// layer when they are cancelled.
-	if (!Event.prototype.stopImmediatePropagation) {
-		layer.removeEventListener = function(type, callback, capture) {
-			var rmv = Node.prototype.removeEventListener;
-			if (type === 'click') {
-				rmv.call(layer, type, callback.hijacked || callback, capture);
-			} else {
-				rmv.call(layer, type, callback, capture);
-			}
-		};
-
-		layer.addEventListener = function(type, callback, capture) {
-			var adv = Node.prototype.addEventListener;
-			if (type === 'click') {
-				adv.call(layer, type, callback.hijacked || (callback.hijacked = function(event) {
-					if (!event.propagationStopped) {
-						callback(event);
-					}
-				}), capture);
-			} else {
-				adv.call(layer, type, callback, capture);
-			}
-		};
-	}
-
-	// If a handler is already declared in the element's onclick attribute, it will be fired before
-	// FastClick's onClick handler. Fix this by pulling out the user-defined handler function and
-	// adding it as listener.
-	if (typeof layer.onclick === 'function') {
-
-		// Android browser on at least 3.2 requires a new reference to the function in layer.onclick
-		// - the old one won't work if passed to addEventListener directly.
-		oldOnClick = layer.onclick;
-		layer.addEventListener('click', function(event) {
-			oldOnClick(event);
-		}, false);
-		layer.onclick = null;
-	}
-}
-
-
-/**
- * Android requires exceptions.
- *
- * @type boolean
- */
-var deviceIsAndroid = navigator.userAgent.indexOf('Android') > 0;
-
-
-/**
- * iOS requires exceptions.
- *
- * @type boolean
- */
-var deviceIsIOS = /iP(ad|hone|od)/.test(navigator.userAgent);
-
-
-/**
- * iOS 4 requires an exception for select elements.
- *
- * @type boolean
- */
-var deviceIsIOS4 = deviceIsIOS && (/OS 4_\d(_\d)?/).test(navigator.userAgent);
-
-
-/**
- * iOS 6.0(+?) requires the target element to be manually derived
- *
- * @type boolean
- */
-var deviceIsIOSWithBadTarget = deviceIsIOS && (/OS ([6-9]|\d{2})_\d/).test(navigator.userAgent);
-
-/**
- * BlackBerry requires exceptions.
- *
- * @type boolean
- */
-var deviceIsBlackBerry10 = navigator.userAgent.indexOf('BB10') > 0;
-
-/**
- * Determine whether a given element requires a native click.
- *
- * @param {EventTarget|Element} target Target DOM element
- * @returns {boolean} Returns true if the element needs a native click
- */
-FastClick.prototype.needsClick = function(target) {
-	'use strict';
-	switch (target.nodeName.toLowerCase()) {
-
-	// Don't send a synthetic click to disabled inputs (issue #62)
-	case 'button':
-	case 'select':
-	case 'textarea':
-		if (target.disabled) {
-			return true;
-		}
-
-		break;
-	case 'input':
-
-		// File inputs need real clicks on iOS 6 due to a browser bug (issue #68)
-		if ((deviceIsIOS && target.type === 'file') || target.disabled) {
-			return true;
-		}
-
-		break;
-	case 'label':
-	case 'video':
-		return true;
-	}
-
-	return (/\bneedsclick\b/).test(target.className);
-};
-
-
-/**
- * Determine whether a given element requires a call to focus to simulate click into element.
- *
- * @param {EventTarget|Element} target Target DOM element
- * @returns {boolean} Returns true if the element requires a call to focus to simulate native click.
- */
-FastClick.prototype.needsFocus = function(target) {
-	'use strict';
-	switch (target.nodeName.toLowerCase()) {
-	case 'textarea':
-		return true;
-	case 'select':
-		return !deviceIsAndroid;
-	case 'input':
-		switch (target.type) {
+		// Don't send a synthetic click to disabled inputs (issue #62)
 		case 'button':
-		case 'checkbox':
-		case 'file':
-		case 'image':
-		case 'radio':
-		case 'submit':
-			return false;
-		}
-
-		// No point in attempting to focus disabled inputs
-		return !target.disabled && !target.readOnly;
-	default:
-		return (/\bneedsfocus\b/).test(target.className);
-	}
-};
-
-
-/**
- * Send a click event to the specified element.
- *
- * @param {EventTarget|Element} targetElement
- * @param {Event} event
- */
-FastClick.prototype.sendClick = function(targetElement, event) {
-	'use strict';
-	var clickEvent, touch;
-
-	// On some Android devices activeElement needs to be blurred otherwise the synthetic click will have no effect (#24)
-	if (document.activeElement && document.activeElement !== targetElement) {
-		document.activeElement.blur();
-	}
-
-	touch = event.changedTouches[0];
-
-	// Synthesise a click event, with an extra attribute so it can be tracked
-	clickEvent = document.createEvent('MouseEvents');
-	clickEvent.initMouseEvent(this.determineEventType(targetElement), true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
-	clickEvent.forwardedTouchEvent = true;
-	targetElement.dispatchEvent(clickEvent);
-};
-
-FastClick.prototype.determineEventType = function(targetElement) {
-	'use strict';
-
-	//Issue #159: Android Chrome Select Box does not open with a synthetic click event
-	if (deviceIsAndroid && targetElement.tagName.toLowerCase() === 'select') {
-		return 'mousedown';
-	}
-
-	return 'click';
-};
-
-
-/**
- * @param {EventTarget|Element} targetElement
- */
-FastClick.prototype.focus = function(targetElement) {
-	'use strict';
-	var length;
-
-	// Issue #160: on iOS 7, some input elements (e.g. date datetime) throw a vague TypeError on setSelectionRange. These elements don't have an integer value for the selectionStart and selectionEnd properties, but unfortunately that can't be used for detection because accessing the properties also throws a TypeError. Just check the type instead. Filed as Apple bug #15122724.
-	if (deviceIsIOS && targetElement.setSelectionRange && targetElement.type.indexOf('date') !== 0 && targetElement.type !== 'time') {
-		length = targetElement.value.length;
-		targetElement.setSelectionRange(length, length);
-	} else {
-		targetElement.focus();
-	}
-};
-
-
-/**
- * Check whether the given target element is a child of a scrollable layer and if so, set a flag on it.
- *
- * @param {EventTarget|Element} targetElement
- */
-FastClick.prototype.updateScrollParent = function(targetElement) {
-	'use strict';
-	var scrollParent, parentElement;
-
-	scrollParent = targetElement.fastClickScrollParent;
-
-	// Attempt to discover whether the target element is contained within a scrollable layer. Re-check if the
-	// target element was moved to another parent.
-	if (!scrollParent || !scrollParent.contains(targetElement)) {
-		parentElement = targetElement;
-		do {
-			if (parentElement.scrollHeight > parentElement.offsetHeight) {
-				scrollParent = parentElement;
-				targetElement.fastClickScrollParent = parentElement;
-				break;
+		case 'select':
+		case 'textarea':
+			if (target.disabled) {
+				return true;
 			}
 
-			parentElement = parentElement.parentElement;
-		} while (parentElement);
-	}
+			break;
+		case 'input':
 
-	// Always update the scroll top tracker if possible.
-	if (scrollParent) {
-		scrollParent.fastClickLastScrollTop = scrollParent.scrollTop;
-	}
-};
+			// File inputs need real clicks on iOS 6 due to a browser bug (issue #68)
+			if ((deviceIsIOS && target.type === 'file') || target.disabled) {
+				return true;
+			}
 
-
-/**
- * @param {EventTarget} targetElement
- * @returns {Element|EventTarget}
- */
-FastClick.prototype.getTargetElementFromEventTarget = function(eventTarget) {
-	'use strict';
-
-	// On some older browsers (notably Safari on iOS 4.1 - see issue #56) the event target may be a text node.
-	if (eventTarget.nodeType === Node.TEXT_NODE) {
-		return eventTarget.parentNode;
-	}
-
-	return eventTarget;
-};
-
-
-/**
- * On touch start, record the position and scroll offset.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.onTouchStart = function(event) {
-	'use strict';
-	var targetElement, touch, selection;
-
-	// Ignore multiple touches, otherwise pinch-to-zoom is prevented if both fingers are on the FastClick element (issue #111).
-	if (event.targetTouches.length > 1) {
-		return true;
-	}
-
-	targetElement = this.getTargetElementFromEventTarget(event.target);
-	touch = event.targetTouches[0];
-
-	if (deviceIsIOS) {
-
-		// Only trusted events will deselect text on iOS (issue #49)
-		selection = window.getSelection();
-		if (selection.rangeCount && !selection.isCollapsed) {
+			break;
+		case 'label':
+		case 'iframe': // iOS8 homescreen apps can prevent events bubbling into frames
+		case 'video':
 			return true;
 		}
 
-		if (!deviceIsIOS4) {
+		return (/\bneedsclick\b/).test(target.className);
+	};
 
-			// Weird things happen on iOS when an alert or confirm dialog is opened from a click event callback (issue #23):
-			// when the user next taps anywhere else on the page, new touchstart and touchend events are dispatched
-			// with the same identifier as the touch event that previously triggered the click that triggered the alert.
-			// Sadly, there is an issue on iOS 4 that causes some normal touch events to have the same identifier as an
-			// immediately preceeding touch event (issue #52), so this fix is unavailable on that platform.
-			// Issue 120: touch.identifier is 0 when Chrome dev tools 'Emulate touch events' is set with an iOS device UA string,
-			// which causes all touch events to be ignored. As this block only applies to iOS, and iOS identifiers are always long,
-			// random integers, it's safe to to continue if the identifier is 0 here.
-			if (touch.identifier && touch.identifier === this.lastTouchIdentifier) {
-				event.preventDefault();
+
+	/**
+	 * Determine whether a given element requires a call to focus to simulate click into element.
+	 *
+	 * @param {EventTarget|Element} target Target DOM element
+	 * @returns {boolean} Returns true if the element requires a call to focus to simulate native click.
+	 */
+	FastClick.prototype.needsFocus = function(target) {
+		switch (target.nodeName.toLowerCase()) {
+		case 'textarea':
+			return true;
+		case 'select':
+			return !deviceIsAndroid;
+		case 'input':
+			switch (target.type) {
+			case 'button':
+			case 'checkbox':
+			case 'file':
+			case 'image':
+			case 'radio':
+			case 'submit':
 				return false;
 			}
 
-			this.lastTouchIdentifier = touch.identifier;
-
-			// If the target element is a child of a scrollable layer (using -webkit-overflow-scrolling: touch) and:
-			// 1) the user does a fling scroll on the scrollable layer
-			// 2) the user stops the fling scroll with another tap
-			// then the event.target of the last 'touchend' event will be the element that was under the user's finger
-			// when the fling scroll was started, causing FastClick to send a click event to that layer - unless a check
-			// is made to ensure that a parent layer was not scrolled before sending a synthetic click (issue #42).
-			this.updateScrollParent(targetElement);
+			// No point in attempting to focus disabled inputs
+			return !target.disabled && !target.readOnly;
+		default:
+			return (/\bneedsfocus\b/).test(target.className);
 		}
-	}
-
-	this.trackingClick = true;
-	this.trackingClickStart = event.timeStamp;
-	this.targetElement = targetElement;
-
-	this.touchStartX = touch.pageX;
-	this.touchStartY = touch.pageY;
-
-	// Prevent phantom clicks on fast double-tap (issue #36)
-	if ((event.timeStamp - this.lastClickTime) < this.tapDelay) {
-		event.preventDefault();
-	}
-
-	return true;
-};
+	};
 
 
-/**
- * Based on a touchmove event object, check whether the touch has moved past a boundary since it started.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.touchHasMoved = function(event) {
-	'use strict';
-	var touch = event.changedTouches[0], boundary = this.touchBoundary;
+	/**
+	 * Send a click event to the specified element.
+	 *
+	 * @param {EventTarget|Element} targetElement
+	 * @param {Event} event
+	 */
+	FastClick.prototype.sendClick = function(targetElement, event) {
+		var clickEvent, touch;
 
-	if (Math.abs(touch.pageX - this.touchStartX) > boundary || Math.abs(touch.pageY - this.touchStartY) > boundary) {
-		return true;
-	}
+		// On some Android devices activeElement needs to be blurred otherwise the synthetic click will have no effect (#24)
+		if (document.activeElement && document.activeElement !== targetElement) {
+			document.activeElement.blur();
+		}
 
-	return false;
-};
-
-
-/**
- * Update the last position.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.onTouchMove = function(event) {
-	'use strict';
-	if (!this.trackingClick) {
-		return true;
-	}
-
-	// If the touch has moved, cancel the click tracking
-	if (this.targetElement !== this.getTargetElementFromEventTarget(event.target) || this.touchHasMoved(event)) {
-		this.trackingClick = false;
-		this.targetElement = null;
-	}
-
-	return true;
-};
-
-
-/**
- * Attempt to find the labelled control for the given label element.
- *
- * @param {EventTarget|HTMLLabelElement} labelElement
- * @returns {Element|null}
- */
-FastClick.prototype.findControl = function(labelElement) {
-	'use strict';
-
-	// Fast path for newer browsers supporting the HTML5 control attribute
-	if (labelElement.control !== undefined) {
-		return labelElement.control;
-	}
-
-	// All browsers under test that support touch events also support the HTML5 htmlFor attribute
-	if (labelElement.htmlFor) {
-		return document.getElementById(labelElement.htmlFor);
-	}
-
-	// If no for attribute exists, attempt to retrieve the first labellable descendant element
-	// the list of which is defined here: http://www.w3.org/TR/html5/forms.html#category-label
-	return labelElement.querySelector('button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea');
-};
-
-
-/**
- * On touch end, determine whether to send a click event at once.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.onTouchEnd = function(event) {
-	'use strict';
-	var forElement, trackingClickStart, targetTagName, scrollParent, touch, targetElement = this.targetElement;
-
-	if (!this.trackingClick) {
-		return true;
-	}
-
-	// Prevent phantom clicks on fast double-tap (issue #36)
-	if ((event.timeStamp - this.lastClickTime) < this.tapDelay) {
-		this.cancelNextClick = true;
-		return true;
-	}
-
-	// Reset to prevent wrong click cancel on input (issue #156).
-	this.cancelNextClick = false;
-
-	this.lastClickTime = event.timeStamp;
-
-	trackingClickStart = this.trackingClickStart;
-	this.trackingClick = false;
-	this.trackingClickStart = 0;
-
-	// On some iOS devices, the targetElement supplied with the event is invalid if the layer
-	// is performing a transition or scroll, and has to be re-detected manually. Note that
-	// for this to function correctly, it must be called *after* the event target is checked!
-	// See issue #57; also filed as rdar://13048589 .
-	if (deviceIsIOSWithBadTarget) {
 		touch = event.changedTouches[0];
 
-		// In certain cases arguments of elementFromPoint can be negative, so prevent setting targetElement to null
-		targetElement = document.elementFromPoint(touch.pageX - window.pageXOffset, touch.pageY - window.pageYOffset) || targetElement;
-		targetElement.fastClickScrollParent = this.targetElement.fastClickScrollParent;
-	}
+		// Synthesise a click event, with an extra attribute so it can be tracked
+		clickEvent = document.createEvent('MouseEvents');
+		clickEvent.initMouseEvent(this.determineEventType(targetElement), true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
+		clickEvent.forwardedTouchEvent = true;
+		targetElement.dispatchEvent(clickEvent);
+	};
 
-	targetTagName = targetElement.tagName.toLowerCase();
-	if (targetTagName === 'label') {
-		forElement = this.findControl(targetElement);
-		if (forElement) {
-			this.focus(targetElement);
-			if (deviceIsAndroid) {
-				return false;
+	FastClick.prototype.determineEventType = function(targetElement) {
+
+		//Issue #159: Android Chrome Select Box does not open with a synthetic click event
+		if (deviceIsAndroid && targetElement.tagName.toLowerCase() === 'select') {
+			return 'mousedown';
+		}
+
+		return 'click';
+	};
+
+
+	/**
+	 * @param {EventTarget|Element} targetElement
+	 */
+	FastClick.prototype.focus = function(targetElement) {
+		var length;
+
+		// Issue #160: on iOS 7, some input elements (e.g. date datetime month) throw a vague TypeError on setSelectionRange. These elements don't have an integer value for the selectionStart and selectionEnd properties, but unfortunately that can't be used for detection because accessing the properties also throws a TypeError. Just check the type instead. Filed as Apple bug #15122724.
+		if (deviceIsIOS && targetElement.setSelectionRange && targetElement.type.indexOf('date') !== 0 && targetElement.type !== 'time' && targetElement.type !== 'month') {
+			length = targetElement.value.length;
+			targetElement.setSelectionRange(length, length);
+		} else {
+			targetElement.focus();
+		}
+	};
+
+
+	/**
+	 * Check whether the given target element is a child of a scrollable layer and if so, set a flag on it.
+	 *
+	 * @param {EventTarget|Element} targetElement
+	 */
+	FastClick.prototype.updateScrollParent = function(targetElement) {
+		var scrollParent, parentElement;
+
+		scrollParent = targetElement.fastClickScrollParent;
+
+		// Attempt to discover whether the target element is contained within a scrollable layer. Re-check if the
+		// target element was moved to another parent.
+		if (!scrollParent || !scrollParent.contains(targetElement)) {
+			parentElement = targetElement;
+			do {
+				if (parentElement.scrollHeight > parentElement.offsetHeight) {
+					scrollParent = parentElement;
+					targetElement.fastClickScrollParent = parentElement;
+					break;
+				}
+
+				parentElement = parentElement.parentElement;
+			} while (parentElement);
+		}
+
+		// Always update the scroll top tracker if possible.
+		if (scrollParent) {
+			scrollParent.fastClickLastScrollTop = scrollParent.scrollTop;
+		}
+	};
+
+
+	/**
+	 * @param {EventTarget} targetElement
+	 * @returns {Element|EventTarget}
+	 */
+	FastClick.prototype.getTargetElementFromEventTarget = function(eventTarget) {
+
+		// On some older browsers (notably Safari on iOS 4.1 - see issue #56) the event target may be a text node.
+		if (eventTarget.nodeType === Node.TEXT_NODE) {
+			return eventTarget.parentNode;
+		}
+
+		return eventTarget;
+	};
+
+
+	/**
+	 * On touch start, record the position and scroll offset.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onTouchStart = function(event) {
+		var targetElement, touch, selection;
+
+		// Ignore multiple touches, otherwise pinch-to-zoom is prevented if both fingers are on the FastClick element (issue #111).
+		if (event.targetTouches.length > 1) {
+			return true;
+		}
+
+		targetElement = this.getTargetElementFromEventTarget(event.target);
+		touch = event.targetTouches[0];
+
+		if (deviceIsIOS) {
+
+			// Only trusted events will deselect text on iOS (issue #49)
+			selection = window.getSelection();
+			if (selection.rangeCount && !selection.isCollapsed) {
+				return true;
 			}
 
-			targetElement = forElement;
+			if (!deviceIsIOS4) {
+
+				// Weird things happen on iOS when an alert or confirm dialog is opened from a click event callback (issue #23):
+				// when the user next taps anywhere else on the page, new touchstart and touchend events are dispatched
+				// with the same identifier as the touch event that previously triggered the click that triggered the alert.
+				// Sadly, there is an issue on iOS 4 that causes some normal touch events to have the same identifier as an
+				// immediately preceeding touch event (issue #52), so this fix is unavailable on that platform.
+				// Issue 120: touch.identifier is 0 when Chrome dev tools 'Emulate touch events' is set with an iOS device UA string,
+				// which causes all touch events to be ignored. As this block only applies to iOS, and iOS identifiers are always long,
+				// random integers, it's safe to to continue if the identifier is 0 here.
+				if (touch.identifier && touch.identifier === this.lastTouchIdentifier) {
+					event.preventDefault();
+					return false;
+				}
+
+				this.lastTouchIdentifier = touch.identifier;
+
+				// If the target element is a child of a scrollable layer (using -webkit-overflow-scrolling: touch) and:
+				// 1) the user does a fling scroll on the scrollable layer
+				// 2) the user stops the fling scroll with another tap
+				// then the event.target of the last 'touchend' event will be the element that was under the user's finger
+				// when the fling scroll was started, causing FastClick to send a click event to that layer - unless a check
+				// is made to ensure that a parent layer was not scrolled before sending a synthetic click (issue #42).
+				this.updateScrollParent(targetElement);
+			}
 		}
-	} else if (this.needsFocus(targetElement)) {
 
-		// Case 1: If the touch started a while ago (best guess is 100ms based on tests for issue #36) then focus will be triggered anyway. Return early and unset the target element reference so that the subsequent click will be allowed through.
-		// Case 2: Without this exception for input elements tapped when the document is contained in an iframe, then any inputted text won't be visible even though the value attribute is updated as the user types (issue #37).
-		if ((event.timeStamp - trackingClickStart) > 100 || (deviceIsIOS && window.top !== window && targetTagName === 'input')) {
-			this.targetElement = null;
-			return false;
-		}
+		this.trackingClick = true;
+		this.trackingClickStart = event.timeStamp;
+		this.targetElement = targetElement;
 
-		this.focus(targetElement);
-		this.sendClick(targetElement, event);
+		this.touchStartX = touch.pageX;
+		this.touchStartY = touch.pageY;
 
-		// Select elements need the event to go through on iOS 4, otherwise the selector menu won't open.
-		// Also this breaks opening selects when VoiceOver is active on iOS6, iOS7 (and possibly others)
-		if (!deviceIsIOS || targetTagName !== 'select') {
-			this.targetElement = null;
+		// Prevent phantom clicks on fast double-tap (issue #36)
+		if ((event.timeStamp - this.lastClickTime) < this.tapDelay) {
 			event.preventDefault();
 		}
 
-		return false;
-	}
+		return true;
+	};
 
-	if (deviceIsIOS && !deviceIsIOS4) {
 
-		// Don't send a synthetic click event if the target element is contained within a parent layer that was scrolled
-		// and this tap is being used to stop the scrolling (usually initiated by a fling - issue #42).
-		scrollParent = targetElement.fastClickScrollParent;
-		if (scrollParent && scrollParent.fastClickLastScrollTop !== scrollParent.scrollTop) {
+	/**
+	 * Based on a touchmove event object, check whether the touch has moved past a boundary since it started.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.touchHasMoved = function(event) {
+		var touch = event.changedTouches[0], boundary = this.touchBoundary;
+
+		if (Math.abs(touch.pageX - this.touchStartX) > boundary || Math.abs(touch.pageY - this.touchStartY) > boundary) {
 			return true;
 		}
-	}
-
-	// Prevent the actual click from going though - unless the target node is marked as requiring
-	// real clicks or if it is in the whitelist in which case only non-programmatic clicks are permitted.
-	if (!this.needsClick(targetElement)) {
-		event.preventDefault();
-		this.sendClick(targetElement, event);
-	}
-
-	return false;
-};
-
-
-/**
- * On touch cancel, stop tracking the click.
- *
- * @returns {void}
- */
-FastClick.prototype.onTouchCancel = function() {
-	'use strict';
-	this.trackingClick = false;
-	this.targetElement = null;
-};
-
-
-/**
- * Determine mouse events which should be permitted.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.onMouse = function(event) {
-	'use strict';
-
-	// If a target element was never set (because a touch event was never fired) allow the event
-	if (!this.targetElement) {
-		return true;
-	}
-
-	if (event.forwardedTouchEvent) {
-		return true;
-	}
-
-	// Programmatically generated events targeting a specific element should be permitted
-	if (!event.cancelable) {
-		return true;
-	}
-
-	// Derive and check the target element to see whether the mouse event needs to be permitted;
-	// unless explicitly enabled, prevent non-touch click events from triggering actions,
-	// to prevent ghost/doubleclicks.
-	if (!this.needsClick(this.targetElement) || this.cancelNextClick) {
-
-		// Prevent any user-added listeners declared on FastClick element from being fired.
-		if (event.stopImmediatePropagation) {
-			event.stopImmediatePropagation();
-		} else {
-
-			// Part of the hack for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
-			event.propagationStopped = true;
-		}
-
-		// Cancel the event
-		event.stopPropagation();
-		event.preventDefault();
 
 		return false;
-	}
-
-	// If the mouse event is permitted, return true for the action to go through.
-	return true;
-};
+	};
 
 
-/**
- * On actual clicks, determine whether this is a touch-generated click, a click action occurring
- * naturally after a delay after a touch (which needs to be cancelled to avoid duplication), or
- * an actual click which should be permitted.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.onClick = function(event) {
-	'use strict';
-	var permitted;
+	/**
+	 * Update the last position.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onTouchMove = function(event) {
+		if (!this.trackingClick) {
+			return true;
+		}
 
-	// It's possible for another FastClick-like library delivered with third-party code to fire a click event before FastClick does (issue #44). In that case, set the click-tracking flag back to false and return early. This will cause onTouchEnd to return early.
-	if (this.trackingClick) {
-		this.targetElement = null;
+		// If the touch has moved, cancel the click tracking
+		if (this.targetElement !== this.getTargetElementFromEventTarget(event.target) || this.touchHasMoved(event)) {
+			this.trackingClick = false;
+			this.targetElement = null;
+		}
+
+		return true;
+	};
+
+
+	/**
+	 * Attempt to find the labelled control for the given label element.
+	 *
+	 * @param {EventTarget|HTMLLabelElement} labelElement
+	 * @returns {Element|null}
+	 */
+	FastClick.prototype.findControl = function(labelElement) {
+
+		// Fast path for newer browsers supporting the HTML5 control attribute
+		if (labelElement.control !== undefined) {
+			return labelElement.control;
+		}
+
+		// All browsers under test that support touch events also support the HTML5 htmlFor attribute
+		if (labelElement.htmlFor) {
+			return document.getElementById(labelElement.htmlFor);
+		}
+
+		// If no for attribute exists, attempt to retrieve the first labellable descendant element
+		// the list of which is defined here: http://www.w3.org/TR/html5/forms.html#category-label
+		return labelElement.querySelector('button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea');
+	};
+
+
+	/**
+	 * On touch end, determine whether to send a click event at once.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onTouchEnd = function(event) {
+		var forElement, trackingClickStart, targetTagName, scrollParent, touch, targetElement = this.targetElement;
+
+		if (!this.trackingClick) {
+			return true;
+		}
+
+		// Prevent phantom clicks on fast double-tap (issue #36)
+		if ((event.timeStamp - this.lastClickTime) < this.tapDelay) {
+			this.cancelNextClick = true;
+			return true;
+		}
+
+		if ((event.timeStamp - this.trackingClickStart) > this.tapTimeout) {
+			return true;
+		}
+
+		// Reset to prevent wrong click cancel on input (issue #156).
+		this.cancelNextClick = false;
+
+		this.lastClickTime = event.timeStamp;
+
+		trackingClickStart = this.trackingClickStart;
 		this.trackingClick = false;
-		return true;
-	}
+		this.trackingClickStart = 0;
 
-	// Very odd behaviour on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
-	if (event.target.type === 'submit' && event.detail === 0) {
-		return true;
-	}
+		// On some iOS devices, the targetElement supplied with the event is invalid if the layer
+		// is performing a transition or scroll, and has to be re-detected manually. Note that
+		// for this to function correctly, it must be called *after* the event target is checked!
+		// See issue #57; also filed as rdar://13048589 .
+		if (deviceIsIOSWithBadTarget) {
+			touch = event.changedTouches[0];
 
-	permitted = this.onMouse(event);
+			// In certain cases arguments of elementFromPoint can be negative, so prevent setting targetElement to null
+			targetElement = document.elementFromPoint(touch.pageX - window.pageXOffset, touch.pageY - window.pageYOffset) || targetElement;
+			targetElement.fastClickScrollParent = this.targetElement.fastClickScrollParent;
+		}
 
-	// Only unset targetElement if the click is not permitted. This will ensure that the check for !targetElement in onMouse fails and the browser's click doesn't go through.
-	if (!permitted) {
+		targetTagName = targetElement.tagName.toLowerCase();
+		if (targetTagName === 'label') {
+			forElement = this.findControl(targetElement);
+			if (forElement) {
+				this.focus(targetElement);
+				if (deviceIsAndroid) {
+					return false;
+				}
+
+				targetElement = forElement;
+			}
+		} else if (this.needsFocus(targetElement)) {
+
+			// Case 1: If the touch started a while ago (best guess is 100ms based on tests for issue #36) then focus will be triggered anyway. Return early and unset the target element reference so that the subsequent click will be allowed through.
+			// Case 2: Without this exception for input elements tapped when the document is contained in an iframe, then any inputted text won't be visible even though the value attribute is updated as the user types (issue #37).
+			if ((event.timeStamp - trackingClickStart) > 100 || (deviceIsIOS && window.top !== window && targetTagName === 'input')) {
+				this.targetElement = null;
+				return false;
+			}
+
+			this.focus(targetElement);
+			this.sendClick(targetElement, event);
+
+			// Select elements need the event to go through on iOS 4, otherwise the selector menu won't open.
+			// Also this breaks opening selects when VoiceOver is active on iOS6, iOS7 (and possibly others)
+			if (!deviceIsIOS || targetTagName !== 'select') {
+				this.targetElement = null;
+				event.preventDefault();
+			}
+
+			return false;
+		}
+
+		if (deviceIsIOS && !deviceIsIOS4) {
+
+			// Don't send a synthetic click event if the target element is contained within a parent layer that was scrolled
+			// and this tap is being used to stop the scrolling (usually initiated by a fling - issue #42).
+			scrollParent = targetElement.fastClickScrollParent;
+			if (scrollParent && scrollParent.fastClickLastScrollTop !== scrollParent.scrollTop) {
+				return true;
+			}
+		}
+
+		// Prevent the actual click from going though - unless the target node is marked as requiring
+		// real clicks or if it is in the whitelist in which case only non-programmatic clicks are permitted.
+		if (!this.needsClick(targetElement)) {
+			event.preventDefault();
+			this.sendClick(targetElement, event);
+		}
+
+		return false;
+	};
+
+
+	/**
+	 * On touch cancel, stop tracking the click.
+	 *
+	 * @returns {void}
+	 */
+	FastClick.prototype.onTouchCancel = function() {
+		this.trackingClick = false;
 		this.targetElement = null;
-	}
-
-	// If clicks are permitted, return true for the action to go through.
-	return permitted;
-};
+	};
 
 
-/**
- * Remove all FastClick's event listeners.
- *
- * @returns {void}
- */
-FastClick.prototype.destroy = function() {
-	'use strict';
-	var layer = this.layer;
+	/**
+	 * Determine mouse events which should be permitted.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onMouse = function(event) {
 
-	if (deviceIsAndroid) {
-		layer.removeEventListener('mouseover', this.onMouse, true);
-		layer.removeEventListener('mousedown', this.onMouse, true);
-		layer.removeEventListener('mouseup', this.onMouse, true);
-	}
+		// If a target element was never set (because a touch event was never fired) allow the event
+		if (!this.targetElement) {
+			return true;
+		}
 
-	layer.removeEventListener('click', this.onClick, true);
-	layer.removeEventListener('touchstart', this.onTouchStart, false);
-	layer.removeEventListener('touchmove', this.onTouchMove, false);
-	layer.removeEventListener('touchend', this.onTouchEnd, false);
-	layer.removeEventListener('touchcancel', this.onTouchCancel, false);
-};
+		if (event.forwardedTouchEvent) {
+			return true;
+		}
 
+		// Programmatically generated events targeting a specific element should be permitted
+		if (!event.cancelable) {
+			return true;
+		}
 
-/**
- * Check whether FastClick is needed.
- *
- * @param {Element} layer The layer to listen on
- */
-FastClick.notNeeded = function(layer) {
-	'use strict';
-	var metaViewport;
-	var chromeVersion;
-	var blackberryVersion;
+		// Derive and check the target element to see whether the mouse event needs to be permitted;
+		// unless explicitly enabled, prevent non-touch click events from triggering actions,
+		// to prevent ghost/doubleclicks.
+		if (!this.needsClick(this.targetElement) || this.cancelNextClick) {
 
-	// Devices that don't support touch don't need FastClick
-	if (typeof window.ontouchstart === 'undefined') {
+			// Prevent any user-added listeners declared on FastClick element from being fired.
+			if (event.stopImmediatePropagation) {
+				event.stopImmediatePropagation();
+			} else {
+
+				// Part of the hack for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
+				event.propagationStopped = true;
+			}
+
+			// Cancel the event
+			event.stopPropagation();
+			event.preventDefault();
+
+			return false;
+		}
+
+		// If the mouse event is permitted, return true for the action to go through.
 		return true;
-	}
+	};
 
-	// Chrome version - zero for other browsers
-	chromeVersion = +(/Chrome\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
 
-	if (chromeVersion) {
+	/**
+	 * On actual clicks, determine whether this is a touch-generated click, a click action occurring
+	 * naturally after a delay after a touch (which needs to be cancelled to avoid duplication), or
+	 * an actual click which should be permitted.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onClick = function(event) {
+		var permitted;
+
+		// It's possible for another FastClick-like library delivered with third-party code to fire a click event before FastClick does (issue #44). In that case, set the click-tracking flag back to false and return early. This will cause onTouchEnd to return early.
+		if (this.trackingClick) {
+			this.targetElement = null;
+			this.trackingClick = false;
+			return true;
+		}
+
+		// Very odd behaviour on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
+		if (event.target.type === 'submit' && event.detail === 0) {
+			return true;
+		}
+
+		permitted = this.onMouse(event);
+
+		// Only unset targetElement if the click is not permitted. This will ensure that the check for !targetElement in onMouse fails and the browser's click doesn't go through.
+		if (!permitted) {
+			this.targetElement = null;
+		}
+
+		// If clicks are permitted, return true for the action to go through.
+		return permitted;
+	};
+
+
+	/**
+	 * Remove all FastClick's event listeners.
+	 *
+	 * @returns {void}
+	 */
+	FastClick.prototype.destroy = function() {
+		var layer = this.layer;
 
 		if (deviceIsAndroid) {
-			metaViewport = document.querySelector('meta[name=viewport]');
+			layer.removeEventListener('mouseover', this.onMouse, true);
+			layer.removeEventListener('mousedown', this.onMouse, true);
+			layer.removeEventListener('mouseup', this.onMouse, true);
+		}
 
-			if (metaViewport) {
-				// Chrome on Android with user-scalable="no" doesn't need FastClick (issue #89)
-				if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
-					return true;
-				}
-				// Chrome 32 and above with width=device-width or less don't need FastClick
-				if (chromeVersion > 31 && document.documentElement.scrollWidth <= window.outerWidth) {
-					return true;
-				}
-			}
+		layer.removeEventListener('click', this.onClick, true);
+		layer.removeEventListener('touchstart', this.onTouchStart, false);
+		layer.removeEventListener('touchmove', this.onTouchMove, false);
+		layer.removeEventListener('touchend', this.onTouchEnd, false);
+		layer.removeEventListener('touchcancel', this.onTouchCancel, false);
+	};
 
-		// Chrome desktop doesn't need FastClick (issue #15)
-		} else {
+
+	/**
+	 * Check whether FastClick is needed.
+	 *
+	 * @param {Element} layer The layer to listen on
+	 */
+	FastClick.notNeeded = function(layer) {
+		var metaViewport;
+		var chromeVersion;
+		var blackberryVersion;
+		var firefoxVersion;
+
+		// Devices that don't support touch don't need FastClick
+		if (typeof window.ontouchstart === 'undefined') {
 			return true;
 		}
-	}
 
-	if (deviceIsBlackBerry10) {
-		blackberryVersion = navigator.userAgent.match(/Version\/([0-9]*)\.([0-9]*)/);
+		// Chrome version - zero for other browsers
+		chromeVersion = +(/Chrome\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
 
-		// BlackBerry 10.3+ does not require Fastclick library.
-		// https://github.com/ftlabs/fastclick/issues/251
-		if (blackberryVersion[1] >= 10 && blackberryVersion[2] >= 3) {
-			metaViewport = document.querySelector('meta[name=viewport]');
+		if (chromeVersion) {
 
-			if (metaViewport) {
-				// user-scalable=no eliminates click delay.
-				if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
-					return true;
+			if (deviceIsAndroid) {
+				metaViewport = document.querySelector('meta[name=viewport]');
+
+				if (metaViewport) {
+					// Chrome on Android with user-scalable="no" doesn't need FastClick (issue #89)
+					if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
+						return true;
+					}
+					// Chrome 32 and above with width=device-width or less don't need FastClick
+					if (chromeVersion > 31 && document.documentElement.scrollWidth <= window.outerWidth) {
+						return true;
+					}
 				}
-				// width=device-width (or less than device-width) eliminates click delay.
-				if (document.documentElement.scrollWidth <= window.outerWidth) {
-					return true;
+
+			// Chrome desktop doesn't need FastClick (issue #15)
+			} else {
+				return true;
+			}
+		}
+
+		if (deviceIsBlackBerry10) {
+			blackberryVersion = navigator.userAgent.match(/Version\/([0-9]*)\.([0-9]*)/);
+
+			// BlackBerry 10.3+ does not require Fastclick library.
+			// https://github.com/ftlabs/fastclick/issues/251
+			if (blackberryVersion[1] >= 10 && blackberryVersion[2] >= 3) {
+				metaViewport = document.querySelector('meta[name=viewport]');
+
+				if (metaViewport) {
+					// user-scalable=no eliminates click delay.
+					if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
+						return true;
+					}
+					// width=device-width (or less than device-width) eliminates click delay.
+					if (document.documentElement.scrollWidth <= window.outerWidth) {
+						return true;
+					}
 				}
 			}
 		}
+
+		// IE10 with -ms-touch-action: none or manipulation, which disables double-tap-to-zoom (issue #97)
+		if (layer.style.msTouchAction === 'none' || layer.style.touchAction === 'manipulation') {
+			return true;
+		}
+
+		// Firefox version - zero for other browsers
+		firefoxVersion = +(/Firefox\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
+
+		if (firefoxVersion >= 27) {
+			// Firefox 27+ does not have tap delay if the content is not zoomable - https://bugzilla.mozilla.org/show_bug.cgi?id=922896
+
+			metaViewport = document.querySelector('meta[name=viewport]');
+			if (metaViewport && (metaViewport.content.indexOf('user-scalable=no') !== -1 || document.documentElement.scrollWidth <= window.outerWidth)) {
+				return true;
+			}
+		}
+
+		// IE11: prefixed -ms-touch-action is no longer supported and it's recomended to use non-prefixed version
+		// http://msdn.microsoft.com/en-us/library/windows/apps/Hh767313.aspx
+		if (layer.style.touchAction === 'none' || layer.style.touchAction === 'manipulation') {
+			return true;
+		}
+
+		return false;
+	};
+
+
+	/**
+	 * Factory method for creating a FastClick object
+	 *
+	 * @param {Element} layer The layer to listen on
+	 * @param {Object} [options={}] The options to override the defaults
+	 */
+	FastClick.attach = function(layer, options) {
+		return new FastClick(layer, options);
+	};
+
+
+	if (typeof define === 'function' && typeof define.amd === 'object' && define.amd) {
+
+		// AMD. Register as an anonymous module.
+		define(function() {
+			return FastClick;
+		});
+	} else if (typeof module !== 'undefined' && module.exports) {
+		module.exports = FastClick.attach;
+		module.exports.FastClick = FastClick;
+	} else {
+		window.FastClick = FastClick;
 	}
-
-	// IE10 with -ms-touch-action: none, which disables double-tap-to-zoom (issue #97)
-	if (layer.style.msTouchAction === 'none') {
-		return true;
-	}
-
-	return false;
-};
-
-
-/**
- * Factory method for creating a FastClick object
- *
- * @param {Element} layer The layer to listen on
- * @param {Object} options The options to override the defaults
- */
-FastClick.attach = function(layer, options) {
-	'use strict';
-	return new FastClick(layer, options);
-};
-
-
-if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
-
-	// AMD. Register as an anonymous module.
-	define(function() {
-		'use strict';
-		return FastClick;
-	});
-} else if (typeof module !== 'undefined' && module.exports) {
-	module.exports = FastClick.attach;
-	module.exports.FastClick = FastClick;
-} else {
-	window.FastClick = FastClick;
-}
-;/**
-*  Ajax Autocomplete for jQuery, version 1.2.9
-*  (c) 2013 Tomas Kirda
-*
-*  Ajax Autocomplete for jQuery is freely distributable under the terms of an MIT-style license.
-*  For details, see the web site: https://github.com/devbridge/jQuery-Autocomplete
-*
-*/
-
-/*jslint  browser: true, white: true, plusplus: true */
-/*global define, window, document, jQuery */
-
-// Expose plugin as an AMD module if AMD loader is present:
-(function (factory) {
-    'use strict';
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define(['jquery'], factory);
-    } else {
-        // Browser globals
-        factory(jQuery);
-    }
-}(function ($) {
-    'use strict';
-
-    var
-        utils = (function () {
-            return {
-                escapeRegExChars: function (value) {
-                    return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-                },
-                createNode: function (containerClass) {
-                    var div = document.createElement('div');
-                    div.className = containerClass;
-                    div.style.position = 'absolute';
-                    div.style.display = 'none';
-                    return div;
-                }
-            };
-        }()),
-
-        keys = {
-            ESC: 27,
-            TAB: 9,
-            RETURN: 13,
-            LEFT: 37,
-            UP: 38,
-            RIGHT: 39,
-            DOWN: 40
-        };
-
-    function Autocomplete(el, options) {
-        var noop = function () { },
-            that = this,
-            defaults = {
-                autoSelectFirst: false,
-                appendTo: 'body',
-                serviceUrl: null,
-                lookup: null,
-                onSelect: null,
-                width: 'auto',
-                minChars: 1,
-                maxHeight: 300,
-                deferRequestBy: 0,
-                params: {},
-                formatResult: Autocomplete.formatResult,
-                delimiter: null,
-                zIndex: 9999,
-                type: 'GET',
-                noCache: false,
-                onSearchStart: noop,
-                onSearchComplete: noop,
-                onSearchError: noop,
-                containerClass: 'autocomplete-suggestions',
-                tabDisabled: false,
-                dataType: 'text',
-                currentRequest: null,
-                triggerSelectOnValidInput: true,
-                lookupFilter: function (suggestion, originalQuery, queryLowerCase) {
-                    return suggestion.value.toLowerCase().indexOf(queryLowerCase) !== -1;
-                },
-                paramName: 'query',
-                transformResult: function (response) {
-                    return typeof response === 'string' ? $.parseJSON(response) : response;
-                }
-            };
-
-        // Shared variables:
-        that.element = el;
-        that.el = $(el);
-        that.suggestions = [];
-        that.badQueries = [];
-        that.selectedIndex = -1;
-        that.currentValue = that.element.value;
-        that.intervalId = 0;
-        that.cachedResponse = {};
-        that.onChangeInterval = null;
-        that.onChange = null;
-        that.isLocal = false;
-        that.suggestionsContainer = null;
-        that.options = $.extend({}, defaults, options);
-        that.classes = {
-            selected: 'autocomplete-selected',
-            suggestion: 'autocomplete-suggestion'
-        };
-        that.hint = null;
-        that.hintValue = '';
-        that.selection = null;
-
-        // Initialize and set options:
-        that.initialize();
-        that.setOptions(options);
-    }
-
-    Autocomplete.utils = utils;
-
-    $.Autocomplete = Autocomplete;
-
-    Autocomplete.formatResult = function (suggestion, currentValue) {
-        var pattern = '(' + utils.escapeRegExChars(currentValue) + ')';
-
-        return suggestion.value.replace(new RegExp(pattern, 'gi'), '<strong>$1<\/strong>');
-    };
-
-    Autocomplete.prototype = {
-
-        killerFn: null,
-
-        initialize: function () {
-            var that = this,
-                suggestionSelector = '.' + that.classes.suggestion,
-                selected = that.classes.selected,
-                options = that.options,
-                container;
-
-            // Remove autocomplete attribute to prevent native suggestions:
-            that.element.setAttribute('autocomplete', 'off');
-
-            that.killerFn = function (e) {
-                if ($(e.target).closest('.' + that.options.containerClass).length === 0) {
-                    that.killSuggestions();
-                    that.disableKillerFn();
-                }
-            };
-
-            that.suggestionsContainer = Autocomplete.utils.createNode(options.containerClass);
-
-            container = $(that.suggestionsContainer);
-
-            container.appendTo(options.appendTo);
-
-            // Only set width if it was provided:
-            if (options.width !== 'auto') {
-                container.width(options.width);
-            }
-
-            // Listen for mouse over event on suggestions list:
-            container.on('mouseover.autocomplete', suggestionSelector, function () {
-                that.activate($(this).data('index'));
-            });
-
-            // Deselect active element when mouse leaves suggestions container:
-            container.on('mouseout.autocomplete', function () {
-                that.selectedIndex = -1;
-                container.children('.' + selected).removeClass(selected);
-            });
-
-            // Listen for click event on suggestions list:
-            container.on('click.autocomplete', suggestionSelector, function () {
-                that.select($(this).data('index'));
-            });
-
-            that.fixPosition();
-
-            that.fixPositionCapture = function () {
-                if (that.visible) {
-                    that.fixPosition();
-                }
-            };
-
-            $(window).on('resize.autocomplete', that.fixPositionCapture);
-
-            that.el.on('keydown.autocomplete', function (e) { that.onKeyPress(e); });
-            that.el.on('keyup.autocomplete', function (e) { that.onKeyUp(e); });
-            that.el.on('blur.autocomplete', function () { that.onBlur(); });
-            that.el.on('focus.autocomplete', function () { that.onFocus(); });
-            that.el.on('change.autocomplete', function (e) { that.onKeyUp(e); });
-        },
-
-        onFocus: function () {
-            var that = this;
-            that.fixPosition();
-            if (that.options.minChars <= that.el.val().length) {
-                that.onValueChange();
-            }
-        },
-
-        onBlur: function () {
-            this.enableKillerFn();
-        },
-
-        setOptions: function (suppliedOptions) {
-            var that = this,
-                options = that.options;
-
-            $.extend(options, suppliedOptions);
-
-            that.isLocal = $.isArray(options.lookup);
-
-            if (that.isLocal) {
-                options.lookup = that.verifySuggestionsFormat(options.lookup);
-            }
-
-            // Adjust height, width and z-index:
-            $(that.suggestionsContainer).css({
-                'max-height': options.maxHeight + 'px',
-                'width': options.width + 'px',
-                'z-index': options.zIndex
-            });
-        },
-
-        clearCache: function () {
-            this.cachedResponse = {};
-            this.badQueries = [];
-        },
-
-        clear: function () {
-            this.clearCache();
-            this.currentValue = '';
-            this.suggestions = [];
-        },
-
-        disable: function () {
-            var that = this;
-            that.disabled = true;
-            if (that.currentRequest) {
-                that.currentRequest.abort();
-            }
-        },
-
-        enable: function () {
-            this.disabled = false;
-        },
-
-        fixPosition: function () {
-            var that = this,
-                offset,
-                styles;
-
-            // Don't adjsut position if custom container has been specified:
-            if (that.options.appendTo !== 'body') {
-                return;
-            }
-
-            offset = that.el.offset();
-
-            styles = {
-                top: (offset.top + that.el.outerHeight()) + 'px',
-                left: offset.left + 'px'
-            };
-
-            if (that.options.width === 'auto') {
-                styles.width = (that.el.outerWidth() - 2) + 'px';
-            }
-
-            $(that.suggestionsContainer).css(styles);
-        },
-
-        enableKillerFn: function () {
-            var that = this;
-            $(document).on('click.autocomplete', that.killerFn);
-        },
-
-        disableKillerFn: function () {
-            var that = this;
-            $(document).off('click.autocomplete', that.killerFn);
-        },
-
-        killSuggestions: function () {
-            var that = this;
-            that.stopKillSuggestions();
-            that.intervalId = window.setInterval(function () {
-                that.hide();
-                that.stopKillSuggestions();
-            }, 50);
-        },
-
-        stopKillSuggestions: function () {
-            window.clearInterval(this.intervalId);
-        },
-
-        isCursorAtEnd: function () {
-            var that = this,
-                valLength = that.el.val().length,
-                selectionStart = that.element.selectionStart,
-                range;
-
-            if (typeof selectionStart === 'number') {
-                return selectionStart === valLength;
-            }
-            if (document.selection) {
-                range = document.selection.createRange();
-                range.moveStart('character', -valLength);
-                return valLength === range.text.length;
-            }
-            return true;
-        },
-
-        onKeyPress: function (e) {
-            var that = this;
-
-            // If suggestions are hidden and user presses arrow down, display suggestions:
-            if (!that.disabled && !that.visible && e.which === keys.DOWN && that.currentValue) {
-                that.suggest();
-                return;
-            }
-
-            if (that.disabled || !that.visible) {
-                return;
-            }
-
-            switch (e.which) {
-                case keys.ESC:
-                    that.el.val(that.currentValue);
-                    that.hide();
-                    break;
-                case keys.RIGHT:
-                    if (that.hint && that.options.onHint && that.isCursorAtEnd()) {
-                        that.selectHint();
-                        break;
-                    }
-                    return;
-                case keys.TAB:
-                    if (that.hint && that.options.onHint) {
-                        that.selectHint();
-                        return;
-                    }
-                    // Fall through to RETURN
-                case keys.RETURN:
-                    if (that.selectedIndex === -1) {
-                        that.hide();
-                        return;
-                    }
-                    that.select(that.selectedIndex);
-                    if (e.which === keys.TAB && that.options.tabDisabled === false) {
-                        return;
-                    }
-                    break;
-                case keys.UP:
-                    that.moveUp();
-                    break;
-                case keys.DOWN:
-                    that.moveDown();
-                    break;
-                default:
-                    return;
-            }
-
-            // Cancel event if function did not return:
-            e.stopImmediatePropagation();
-            e.preventDefault();
-        },
-
-        onKeyUp: function (e) {
-            var that = this;
-
-            if (that.disabled) {
-                return;
-            }
-
-            switch (e.which) {
-                case keys.UP:
-                case keys.DOWN:
-                    return;
-            }
-
-            clearInterval(that.onChangeInterval);
-
-            if (that.currentValue !== that.el.val()) {
-                that.findBestHint();
-                if (that.options.deferRequestBy > 0) {
-                    // Defer lookup in case when value changes very quickly:
-                    that.onChangeInterval = setInterval(function () {
-                        that.onValueChange();
-                    }, that.options.deferRequestBy);
-                } else {
-                    that.onValueChange();
-                }
-            }
-        },
-
-        onValueChange: function () {
-            var that = this,
-                options = that.options,
-                value = that.el.val(),
-                query = that.getQuery(value),
-                index;
-
-            if (that.selection) {
-                that.selection = null;
-                (options.onInvalidateSelection || $.noop).call(that.element);
-            }
-
-            clearInterval(that.onChangeInterval);
-            that.currentValue = value;
-            that.selectedIndex = -1;
-
-            // Check existing suggestion for the match before proceeding:
-            if (options.triggerSelectOnValidInput) {
-                index = that.findSuggestionIndex(query);
-                if (index !== -1) {
-                    that.select(index);
-                    return;
-                }
-            }
-
-            if (query.length < options.minChars) {
-                that.hide();
-            } else {
-                that.getSuggestions(query);
-            }
-        },
-
-        findSuggestionIndex: function (query) {
-            var that = this,
-                index = -1,
-                queryLowerCase = query.toLowerCase();
-
-            $.each(that.suggestions, function (i, suggestion) {
-                if (suggestion.value.toLowerCase() === queryLowerCase) {
-                    index = i;
-                    return false;
-                }
-            });
-
-            return index;
-        },
-
-        getQuery: function (value) {
-            var delimiter = this.options.delimiter,
-                parts;
-
-            if (!delimiter) {
-                return value;
-            }
-            parts = value.split(delimiter);
-            return $.trim(parts[parts.length - 1]);
-        },
-
-        getSuggestionsLocal: function (query) {
-            var that = this,
-                options = that.options,
-                queryLowerCase = query.toLowerCase(),
-                filter = options.lookupFilter,
-                limit = parseInt(options.lookupLimit, 10),
-                data;
-
-            data = {
-                suggestions: $.grep(options.lookup, function (suggestion) {
-                    return filter(suggestion, query, queryLowerCase);
-                })
-            };
-
-            if (limit && data.suggestions.length > limit) {
-                data.suggestions = data.suggestions.slice(0, limit);
-            }
-
-            return data;
-        },
-
-        getSuggestions: function (q) {
-            var response,
-                that = this,
-                options = that.options,
-                serviceUrl = options.serviceUrl,
-                data,
-                cacheKey;
-
-            options.params[options.paramName] = q;
-            data = options.ignoreParams ? null : options.params;
-
-            if (that.isLocal) {
-                response = that.getSuggestionsLocal(q);
-            } else {
-                if ($.isFunction(serviceUrl)) {
-                    serviceUrl = serviceUrl.call(that.element, q);
-                }
-                cacheKey = serviceUrl + '?' + $.param(data || {});
-                response = that.cachedResponse[cacheKey];
-            }
-
-            if (response && $.isArray(response.suggestions)) {
-                that.suggestions = response.suggestions;
-                that.suggest();
-            } else if (!that.isBadQuery(q)) {
-                if (options.onSearchStart.call(that.element, options.params) === false) {
-                    return;
-                }
-                if (that.currentRequest) {
-                    that.currentRequest.abort();
-                }
-                that.currentRequest = $.ajax({
-                    url: serviceUrl,
-                    data: data,
-                    type: options.type,
-                    dataType: options.dataType
-                }).done(function (data) {
-                    that.currentRequest = null;
-                    that.processResponse(data, q, cacheKey);
-                    options.onSearchComplete.call(that.element, q);
-                }).fail(function (jqXHR, textStatus, errorThrown) {
-                    options.onSearchError.call(that.element, q, jqXHR, textStatus, errorThrown);
-                });
-            }
-        },
-
-        isBadQuery: function (q) {
-            var badQueries = this.badQueries,
-                i = badQueries.length;
-
-            while (i--) {
-                if (q.indexOf(badQueries[i]) === 0) {
-                    return true;
-                }
-            }
-
-            return false;
-        },
-
-        hide: function () {
-            var that = this;
-            that.visible = false;
-            that.selectedIndex = -1;
-            $(that.suggestionsContainer).hide();
-            that.signalHint(null);
-        },
-
-        suggest: function () {
-            if (this.suggestions.length === 0) {
-                this.hide();
-                return;
-            }
-
-            var that = this,
-                options = that.options,
-                formatResult = options.formatResult,
-                value = that.getQuery(that.currentValue),
-                className = that.classes.suggestion,
-                classSelected = that.classes.selected,
-                container = $(that.suggestionsContainer),
-                beforeRender = options.beforeRender,
-                html = '',
-                index,
-                width;
-
-            if (options.triggerSelectOnValidInput) {
-                index = that.findSuggestionIndex(value);
-                if (index !== -1) {
-                    that.select(index);
-                    return;
-                }
-            }
-
-            // Build suggestions inner HTML:
-            $.each(that.suggestions, function (i, suggestion) {
-                html += '<div class="' + className + '" data-index="' + i + '">' + formatResult(suggestion, value) + '</div>';
-            });
-
-            // If width is auto, adjust width before displaying suggestions,
-            // because if instance was created before input had width, it will be zero.
-            // Also it adjusts if input width has changed.
-            // -2px to account for suggestions border.
-            if (options.width === 'auto') {
-                width = that.el.outerWidth() - 2;
-                container.width(width > 0 ? width : 300);
-            }
-
-            container.html(html);
-
-            // Select first value by default:
-            if (options.autoSelectFirst) {
-                that.selectedIndex = 0;
-                container.children().first().addClass(classSelected);
-            }
-
-            if ($.isFunction(beforeRender)) {
-                beforeRender.call(that.element, container);
-            }
-
-            container.show();
-            that.visible = true;
-
-            that.findBestHint();
-        },
-
-        findBestHint: function () {
-            var that = this,
-                value = that.el.val().toLowerCase(),
-                bestMatch = null;
-
-            if (!value) {
-                return;
-            }
-
-            $.each(that.suggestions, function (i, suggestion) {
-                var foundMatch = suggestion.value.toLowerCase().indexOf(value) === 0;
-                if (foundMatch) {
-                    bestMatch = suggestion;
-                }
-                return !foundMatch;
-            });
-
-            that.signalHint(bestMatch);
-        },
-
-        signalHint: function (suggestion) {
-            var hintValue = '',
-                that = this;
-            if (suggestion) {
-                hintValue = that.currentValue + suggestion.value.substr(that.currentValue.length);
-            }
-            if (that.hintValue !== hintValue) {
-                that.hintValue = hintValue;
-                that.hint = suggestion;
-                (this.options.onHint || $.noop)(hintValue);
-            }
-        },
-
-        verifySuggestionsFormat: function (suggestions) {
-            // If suggestions is string array, convert them to supported format:
-            if (suggestions.length && typeof suggestions[0] === 'string') {
-                return $.map(suggestions, function (value) {
-                    return { value: value, data: null };
-                });
-            }
-
-            return suggestions;
-        },
-
-        processResponse: function (response, originalQuery, cacheKey) {
-            var that = this,
-                options = that.options,
-                result = options.transformResult(response, originalQuery);
-
-            result.suggestions = that.verifySuggestionsFormat(result.suggestions);
-
-            // Cache results if cache is not disabled:
-            if (!options.noCache) {
-                that.cachedResponse[cacheKey] = result;
-                if (result.suggestions.length === 0) {
-                    that.badQueries.push(cacheKey);
-                }
-            }
-
-            // Return if originalQuery is not matching current query:
-            if (originalQuery !== that.getQuery(that.currentValue)) {
-                return;
-            }
-
-            that.suggestions = result.suggestions;
-            that.suggest();
-        },
-
-        activate: function (index) {
-            var that = this,
-                activeItem,
-                selected = that.classes.selected,
-                container = $(that.suggestionsContainer),
-                children = container.children();
-
-            container.children('.' + selected).removeClass(selected);
-
-            that.selectedIndex = index;
-
-            if (that.selectedIndex !== -1 && children.length > that.selectedIndex) {
-                activeItem = children.get(that.selectedIndex);
-                $(activeItem).addClass(selected);
-                return activeItem;
-            }
-
-            return null;
-        },
-
-        selectHint: function () {
-            var that = this,
-                i = $.inArray(that.hint, that.suggestions);
-
-            that.select(i);
-        },
-
-        select: function (i) {
-            var that = this;
-            that.hide();
-            that.onSelect(i);
-        },
-
-        moveUp: function () {
-            var that = this;
-
-            if (that.selectedIndex === -1) {
-                return;
-            }
-
-            if (that.selectedIndex === 0) {
-                $(that.suggestionsContainer).children().first().removeClass(that.classes.selected);
-                that.selectedIndex = -1;
-                that.el.val(that.currentValue);
-                that.findBestHint();
-                return;
-            }
-
-            that.adjustScroll(that.selectedIndex - 1);
-        },
-
-        moveDown: function () {
-            var that = this;
-
-            if (that.selectedIndex === (that.suggestions.length - 1)) {
-                return;
-            }
-
-            that.adjustScroll(that.selectedIndex + 1);
-        },
-
-        adjustScroll: function (index) {
-            var that = this,
-                activeItem = that.activate(index),
-                offsetTop,
-                upperBound,
-                lowerBound,
-                heightDelta = 25;
-
-            if (!activeItem) {
-                return;
-            }
-
-            offsetTop = activeItem.offsetTop;
-            upperBound = $(that.suggestionsContainer).scrollTop();
-            lowerBound = upperBound + that.options.maxHeight - heightDelta;
-
-            if (offsetTop < upperBound) {
-                $(that.suggestionsContainer).scrollTop(offsetTop);
-            } else if (offsetTop > lowerBound) {
-                $(that.suggestionsContainer).scrollTop(offsetTop - that.options.maxHeight + heightDelta);
-            }
-
-            that.el.val(that.getValue(that.suggestions[index].value));
-            that.signalHint(null);
-        },
-
-        onSelect: function (index) {
-            var that = this,
-                onSelectCallback = that.options.onSelect,
-                suggestion = that.suggestions[index];
-
-            that.currentValue = that.getValue(suggestion.value);
-            that.el.val(that.currentValue);
-            that.signalHint(null);
-            that.suggestions = [];
-            that.selection = suggestion;
-
-            if ($.isFunction(onSelectCallback)) {
-                onSelectCallback.call(that.element, suggestion);
-            }
-        },
-
-        getValue: function (value) {
-            var that = this,
-                delimiter = that.options.delimiter,
-                currentValue,
-                parts;
-
-            if (!delimiter) {
-                return value;
-            }
-
-            currentValue = that.currentValue;
-            parts = currentValue.split(delimiter);
-
-            if (parts.length === 1) {
-                return value;
-            }
-
-            return currentValue.substr(0, currentValue.length - parts[parts.length - 1].length) + value;
-        },
-
-        dispose: function () {
-            var that = this;
-            that.el.off('.autocomplete').removeData('autocomplete');
-            that.disableKillerFn();
-            $(window).off('resize.autocomplete', that.fixPositionCapture);
-            $(that.suggestionsContainer).remove();
-        }
-    };
-
-    // Create chainable jQuery plugin:
-    $.fn.autocomplete = function (options, args) {
-        var dataKey = 'autocomplete';
-        // If function invoked without argument return
-        // instance of the first matched element:
-        if (arguments.length === 0) {
-            return this.first().data(dataKey);
-        }
-
-        return this.each(function () {
-            var inputElement = $(this),
-                instance = inputElement.data(dataKey);
-
-            if (typeof options === 'string') {
-                if (instance && typeof instance[options] === 'function') {
-                    instance[options](args);
-                }
-            } else {
-                // If instance already exists, destroy it:
-                if (instance && instance.dispose) {
-                    instance.dispose();
-                }
-                instance = new Autocomplete(this, options);
-                inputElement.data(dataKey, instance);
-            }
-        });
-    };
-}));
-;/*!
+}());;/*!
  * jQuery Cookie Plugin v1.4.1
  * https://github.com/carhartl/jquery-cookie
  *
@@ -3766,10 +2962,21 @@ function makeArray( obj ) {
         ).parent();
     };
 
-}));;/*! Magnific Popup - v0.9.9 - 2013-12-27
+}));;/*! Magnific Popup - v1.0.0 - 2015-01-03
 * http://dimsemenov.com/plugins/magnific-popup/
-* Copyright (c) 2013 Dmitry Semenov; */
-;(function($) {
+* Copyright (c) 2015 Dmitry Semenov; */
+;(function (factory) { 
+if (typeof define === 'function' && define.amd) { 
+ // AMD. Register as an anonymous module. 
+ define(['jquery'], factory); 
+ } else if (typeof exports === 'object') { 
+ // Node/CommonJS 
+ factory(require('jquery')); 
+ } else { 
+ // Browser globals 
+ factory(window.jQuery || window.Zepto); 
+ } 
+ }(function($) { 
 
 /*>>core*/
 /**
@@ -3799,12 +3006,12 @@ var CLOSE_EVENT = 'Close',
 /**
  * Private vars 
  */
+/*jshint -W079 */
 var mfp, // As we have only one instance of MagnificPopup object, we define it locally to not to use 'this'
 	MagnificPopup = function(){},
 	_isJQ = !!(window.jQuery),
 	_prevStatus,
 	_window = $(window),
-	_body,
 	_document,
 	_prevContentType,
 	_wrapClasses,
@@ -3854,6 +3061,7 @@ var _mfpOn = function(name, f) {
 	// Initialize Magnific Popup only when called at least once
 	_checkInstance = function() {
 		if(!$.magnificPopup.instance) {
+			/*jshint -W020 */
 			mfp = new MagnificPopup();
 			mfp.init();
 			$.magnificPopup.instance = mfp;
@@ -3912,10 +3120,6 @@ MagnificPopup.prototype = {
 	 * @param  data [description]
 	 */
 	open: function(data) {
-
-		if(!_body) {
-			_body = $(document.body);
-		}
 
 		var i;
 
@@ -4115,7 +3319,7 @@ MagnificPopup.prototype = {
 		$('html').css(windowStyles);
 		
 		// add everything to DOM
-		mfp.bgOverlay.add(mfp.wrap).prependTo( mfp.st.prependTo || _body );
+		mfp.bgOverlay.add(mfp.wrap).prependTo( mfp.st.prependTo || $(document.body) );
 
 		// Save last focused element
 		mfp._lastFocusedEl = document.activeElement;
@@ -4574,7 +3778,6 @@ MagnificPopup.prototype = {
 		// thx David
 		if(mfp.scrollbarSize === undefined) {
 			var scrollDiv = document.createElement("div");
-			scrollDiv.id = "mfp-sbm";
 			scrollDiv.style.cssText = 'width: 99px; height: 99px; overflow: scroll; position: absolute; top: -9999px;';
 			document.body.appendChild(scrollDiv);
 			mfp.scrollbarSize = scrollDiv.offsetWidth - scrollDiv.clientWidth;
@@ -4816,7 +4019,92 @@ $.magnificPopup.registerModule(INLINE_NS, {
 
 /*>>inline*/
 
+/*>>ajax*/
+var AJAX_NS = 'ajax',
+	_ajaxCur,
+	_removeAjaxCursor = function() {
+		if(_ajaxCur) {
+			$(document.body).removeClass(_ajaxCur);
+		}
+	},
+	_destroyAjaxRequest = function() {
+		_removeAjaxCursor();
+		if(mfp.req) {
+			mfp.req.abort();
+		}
+	};
 
+$.magnificPopup.registerModule(AJAX_NS, {
+
+	options: {
+		settings: null,
+		cursor: 'mfp-ajax-cur',
+		tError: '<a href="%url%">The content</a> could not be loaded.'
+	},
+
+	proto: {
+		initAjax: function() {
+			mfp.types.push(AJAX_NS);
+			_ajaxCur = mfp.st.ajax.cursor;
+
+			_mfpOn(CLOSE_EVENT+'.'+AJAX_NS, _destroyAjaxRequest);
+			_mfpOn('BeforeChange.' + AJAX_NS, _destroyAjaxRequest);
+		},
+		getAjax: function(item) {
+
+			if(_ajaxCur) {
+				$(document.body).addClass(_ajaxCur);
+			}
+
+			mfp.updateStatus('loading');
+
+			var opts = $.extend({
+				url: item.src,
+				success: function(data, textStatus, jqXHR) {
+					var temp = {
+						data:data,
+						xhr:jqXHR
+					};
+
+					_mfpTrigger('ParseAjax', temp);
+
+					mfp.appendContent( $(temp.data), AJAX_NS );
+
+					item.finished = true;
+
+					_removeAjaxCursor();
+
+					mfp._setFocus();
+
+					setTimeout(function() {
+						mfp.wrap.addClass(READY_CLASS);
+					}, 16);
+
+					mfp.updateStatus('ready');
+
+					_mfpTrigger('AjaxContentAdded');
+				},
+				error: function() {
+					_removeAjaxCursor();
+					item.finished = item.loadError = true;
+					mfp.updateStatus('error', mfp.st.ajax.tError.replace('%url%', item.src));
+				}
+			}, mfp.st.ajax.settings);
+
+			mfp.req = $.ajax(opts);
+
+			return '';
+		}
+	}
+});
+
+
+
+
+
+	
+
+/*>>ajax*/
 
 /*>>image*/
 var _imgInterval,
@@ -4866,13 +4154,13 @@ $.magnificPopup.registerModule('image', {
 
 			_mfpOn(OPEN_EVENT+ns, function() {
 				if(mfp.currItem.type === 'image' && imgSt.cursor) {
-					_body.addClass(imgSt.cursor);
+					$(document.body).addClass(imgSt.cursor);
 				}
 			});
 
 			_mfpOn(CLOSE_EVENT+ns, function() {
 				if(imgSt.cursor) {
-					_body.removeClass(imgSt.cursor);
+					$(document.body).removeClass(imgSt.cursor);
 				}
 				_window.off('resize' + EVENT_NS);
 			});
@@ -5010,6 +4298,9 @@ $.magnificPopup.registerModule('image', {
 			if(el.length) {
 				var img = document.createElement('img');
 				img.className = 'mfp-img';
+				if(item.el && item.el.find('img').length) {
+					img.alt = item.el.find('img').attr('alt');
+				}
 				item.img = $(img).on('load.mfploader', onLoadComplete).on('error.mfploader', onLoadError);
 				img.src = item.src;
 
@@ -5595,7 +4886,44 @@ addSwipeGesture: function() {
 
 /*>>gallery*/
 
+/*>>retina*/
 
+var RETINA_NS = 'retina';
+
+$.magnificPopup.registerModule(RETINA_NS, {
+	options: {
+		replaceSrc: function(item) {
+			return item.src.replace(/\.\w+$/, function(m) { return '@2x' + m; });
+		},
+		ratio: 1 // Function or number.  Set to 1 to disable.
+	},
+	proto: {
+		initRetina: function() {
+			if(window.devicePixelRatio > 1) {
+
+				var st = mfp.st.retina,
+					ratio = st.ratio;
+
+				ratio = !isNaN(ratio) ? ratio : ratio();
+
+				if(ratio > 1) {
+					_mfpOn('ImageHasSize' + '.' + RETINA_NS, function(e, item) {
+						item.img.css({
+							'max-width': item.img[0].naturalWidth / ratio,
+							'width': '100%'
+						});
+					});
+					_mfpOn('ElementParse' + '.' + RETINA_NS, function(e, item) {
+						item.src = st.replaceSrc(item, ratio);
+					});
+				}
+			}
+
+		}
+	}
+});
+
+/*>>retina*/
 
 /*>>fastclick*/
 /**
@@ -5693,7 +5021,7 @@ addSwipeGesture: function() {
 })();
 
 /*>>fastclick*/
- _checkInstance(); })(window.jQuery || window.Zepto);;/**
+ _checkInstance(); }));;/**
 * jquery.matchHeight.js v0.5.2
 * http://brm.io/jquery-match-height/
 * License: MIT
@@ -9002,192 +8330,6 @@ addSwipeGesture: function() {
 	$.fn.owlCarousel.Constructor.Plugins.Hash = Hash;
 
 })(window.Zepto || window.jQuery, window, document);
-;/*!
- * jQuery.ScrollTo
- * Copyright (c) 2007-2014 Ariel Flesler - aflesler<a>gmail<d>com | http://flesler.blogspot.com
- * Licensed under MIT
- * http://flesler.blogspot.com/2007/10/jqueryscrollto.html
- * @projectDescription Easy element scrolling using jQuery.
- * @author Ariel Flesler
- * @version 1.4.12
- */
-
-;(function(plugin) {
-    // AMD Support
-    if (typeof define === 'function' && define.amd) {
-        define(['jquery'], plugin);
-    } else {
-        plugin(jQuery);
-    }
-}(function($) {
-
-	var $scrollTo = $.scrollTo = function( target, duration, settings ) {
-		return $(window).scrollTo( target, duration, settings );
-	};
-
-	$scrollTo.defaults = {
-		axis:'xy',
-		duration: parseFloat($.fn.jquery) >= 1.3 ? 0 : 1,
-		limit:true
-	};
-
-	// Returns the element that needs to be animated to scroll the window.
-	// Kept for backwards compatibility (specially for localScroll & serialScroll)
-	$scrollTo.window = function( scope ) {
-		return $(window)._scrollable();
-	};
-
-	// Hack, hack, hack :)
-	// Returns the real elements to scroll (supports window/iframes, documents and regular nodes)
-	$.fn._scrollable = function() {
-		return this.map(function() {
-			var elem = this,
-				isWin = !elem.nodeName || $.inArray( elem.nodeName.toLowerCase(), ['iframe','#document','html','body'] ) != -1;
-
-				if (!isWin)
-					return elem;
-
-			var doc = (elem.contentWindow || elem).document || elem.ownerDocument || elem;
-
-			return /webkit/i.test(navigator.userAgent) || doc.compatMode == 'BackCompat' ?
-				doc.body :
-				doc.documentElement;
-		});
-	};
-
-	$.fn.scrollTo = function( target, duration, settings ) {
-		if (typeof duration == 'object') {
-			settings = duration;
-			duration = 0;
-		}
-		if (typeof settings == 'function')
-			settings = { onAfter:settings };
-
-		if (target == 'max')
-			target = 9e9;
-
-		settings = $.extend( {}, $scrollTo.defaults, settings );
-		// Speed is still recognized for backwards compatibility
-		duration = duration || settings.duration;
-		// Make sure the settings are given right
-		settings.queue = settings.queue && settings.axis.length > 1;
-
-		if (settings.queue)
-			// Let's keep the overall duration
-			duration /= 2;
-		settings.offset = both( settings.offset );
-		settings.over = both( settings.over );
-
-		return this._scrollable().each(function() {
-			// Null target yields nothing, just like jQuery does
-			if (target == null) return;
-
-			var elem = this,
-				$elem = $(elem),
-				targ = target, toff, attr = {},
-				win = $elem.is('html,body');
-
-			switch (typeof targ) {
-				// A number will pass the regex
-				case 'number':
-				case 'string':
-					if (/^([+-]=?)?\d+(\.\d+)?(px|%)?$/.test(targ)) {
-						targ = both( targ );
-						// We are done
-						break;
-					}
-					// Relative/Absolute selector, no break!
-					targ = win ? $(targ) : $(targ, this);
-					if (!targ.length) return;
-				case 'object':
-					// DOMElement / jQuery
-					if (targ.is || targ.style)
-						// Get the real position of the target
-						toff = (targ = $(targ)).offset();
-			}
-			
-			var offset = $.isFunction(settings.offset) && settings.offset(elem, targ) || settings.offset;
-			
-			$.each( settings.axis.split(''), function( i, axis ) {
-				var Pos	= axis == 'x' ? 'Left' : 'Top',
-					pos = Pos.toLowerCase(),
-					key = 'scroll' + Pos,
-					old = elem[key],
-					max = $scrollTo.max(elem, axis);
-
-				if (toff) {// jQuery / DOMElement
-					attr[key] = toff[pos] + ( win ? 0 : old - $elem.offset()[pos] );
-
-					// If it's a dom element, reduce the margin
-					if (settings.margin) {
-						attr[key] -= parseInt(targ.css('margin'+Pos)) || 0;
-						attr[key] -= parseInt(targ.css('border'+Pos+'Width')) || 0;
-					}
-
-					attr[key] += offset[pos] || 0;
-
-					if(settings.over[pos])
-						// Scroll to a fraction of its width/height
-						attr[key] += targ[axis=='x'?'width':'height']() * settings.over[pos];
-				} else {
-					var val = targ[pos];
-					// Handle percentage values
-					attr[key] = val.slice && val.slice(-1) == '%' ?
-						parseFloat(val) / 100 * max
-						: val;
-				}
-
-				// Number or 'number'
-				if (settings.limit && /^\d+$/.test(attr[key]))
-					// Check the limits
-					attr[key] = attr[key] <= 0 ? 0 : Math.min( attr[key], max );
-
-				// Queueing axes
-				if (!i && settings.queue) {
-					// Don't waste time animating, if there's no need.
-					if (old != attr[key])
-						// Intermediate animation
-						animate( settings.onAfterFirst );
-					// Don't animate this axis again in the next iteration.
-					delete attr[key];
-				}
-			});
-
-			animate( settings.onAfter );
-
-			function animate( callback ) {
-				$elem.animate( attr, duration, settings.easing, callback && function() {
-					callback.call(this, targ, settings);
-				});
-			};
-
-		}).end();
-	};
-
-	// Max scrolling position, works on quirks mode
-	// It only fails (not too badly) on IE, quirks mode.
-	$scrollTo.max = function( elem, axis ) {
-		var Dim = axis == 'x' ? 'Width' : 'Height',
-			scroll = 'scroll'+Dim;
-
-		if (!$(elem).is('html,body'))
-			return elem[scroll] - $(elem)[Dim.toLowerCase()]();
-
-		var size = 'client' + Dim,
-			html = elem.ownerDocument.documentElement,
-			body = elem.ownerDocument.body;
-
-		return Math.max( html[scroll], body[scroll] )
-			 - Math.min( html[size]  , body[size]   );
-	};
-
-	function both( val ) {
-		return $.isFunction(val) || typeof val == 'object' ? val : { top:val, left:val };
-	};
-
-    // AMD requirement
-    return $scrollTo;
-}));
 ;/*! Swipebox v1.3.0.2 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
 
 ;( function ( window, document, $, undefined ) {
@@ -9584,13 +8726,13 @@ addSwipeGesture: function() {
                         vSwipe = false;
                         if ( Math.abs( vDistance ) >= 2 * vSwipMinDistance && Math.abs( vDistance ) > Math.abs( vDistanceLast ) ) {
                             var vOffset = vDistance > 0 ? slider.height() : - slider.height();
-                            slider.animate( { top: vOffset + 'px', 'opacity': 0 },
+                            slider.velocity( { top: vOffset + 'px', 'opacity': 0 },
                                 300,
                                 function () {
                                     $this.closeSlide();
                                 } );
                         } else {
-                            slider.animate( { top: 0, 'opacity': 1 }, 300 );
+                            slider.velocity( { top: 0, 'opacity': 1 }, 300 );
                         }
 
                     } else if ( hSwipe ) {
@@ -9662,8 +8804,8 @@ addSwipeGesture: function() {
                 if ( this.doCssTrans() ) {
                     bars.addClass( 'visible-bars' );
                 } else {
-                    $( '#swipebox-top-bar' ).animate( { top : 0 }, 500 );
-                    $( '#swipebox-bottom-bar' ).animate( { bottom : 0 }, 500 );
+                    $( '#swipebox-top-bar' ).velocity( { top : 0 }, 500 );
+                    $( '#swipebox-bottom-bar' ).velocity( { bottom : 0 }, 500 );
                     setTimeout( function() {
                         bars.addClass( 'visible-bars' );
                     }, 1000 );
@@ -9678,8 +8820,8 @@ addSwipeGesture: function() {
                 if ( this.doCssTrans() ) {
                     bars.removeClass( 'visible-bars' );
                 } else {
-                    $( '#swipebox-top-bar' ).animate( { top : '-50px' }, 500 );
-                    $( '#swipebox-bottom-bar' ).animate( { bottom : '-50px' }, 500 );
+                    $( '#swipebox-top-bar' ).velocity( { top : '-50px' }, 500 );
+                    $( '#swipebox-bottom-bar' ).velocity( { bottom : '-50px' }, 500 );
                     setTimeout( function() {
                         bars.removeClass( 'visible-bars' );
                     }, 1000 );
@@ -9794,7 +8936,7 @@ addSwipeGesture: function() {
                         'transform' : 'translate3d(' + (-index*100)+'%, 0, 0)'
                     } );
                 } else {
-                    slider.animate( { left : ( -index*100 )+'%' } );
+                    slider.velocity( { left : ( -index*100 )+'%' } );
                 }
 
                 $( '#swipebox-slider .slide' ).removeClass( 'current' );
@@ -10590,7 +9732,7 @@ Released under the MIT License
   };
   
 })(this);
-;/*! VelocityJS.org (1.1.0). (C) 2014 Julian Shapiro. MIT @license: en.wikipedia.org/wiki/MIT_License */
+;/*! VelocityJS.org (1.2.2). (C) 2014 Julian Shapiro. MIT @license: en.wikipedia.org/wiki/MIT_License */
 
 /*************************
    Velocity jQuery Shim
@@ -11169,8 +10311,6 @@ return function (global, window, document, undefined) {
         State
     *************/
 
-    /* Note: The global object also doubles as a publicly-accessible data store for the purposes of unit testing. */
-    /* Note: Alias the lowercase and uppercase variants of "velocity" to minimize user confusion due to the lowercase nature of the $.fn extension. */
     var Velocity = {
         /* Container for page-wide Velocity state data. */
         State: {
@@ -11187,7 +10327,7 @@ return function (global, window, document, undefined) {
             prefixMatches: {},
             /* Cache the anchor used for animating window scrolling. */
             scrollAnchor: null,
-            /* Cache the property names associated with the scroll anchor. */
+            /* Cache the browser-specific property names associated with the scroll anchor. */
             scrollPropertyLeft: null,
             scrollPropertyTop: null,
             /* Keep track of whether our RAF tick is running. */
@@ -11197,14 +10337,14 @@ return function (global, window, document, undefined) {
         },
         /* Velocity's custom CSS stack. Made global for unit testing. */
         CSS: { /* Defined below. */ },
-        /* Defined by Velocity's optional jQuery shim. */
+        /* A shim of the jQuery utility functions used by Velocity -- provided by Velocity's optional jQuery shim. */
         Utilities: $,
-        /* Container for the user's custom animation redirects that are referenced by name in place of a properties map object. */
+        /* Container for the user's custom animation redirects that are referenced by name in place of the properties map argument. */
         Redirects: { /* Manually registered by the user. */ },
         Easings: { /* Defined below. */ },
         /* Attempt to use ES6 Promises by default. Users can override this with a third-party promises library. */
         Promise: window.Promise,
-        /* Page-wide option defaults, which can be overriden by the user. */
+        /* Velocity option defaults, which can be overriden by the user. */
         defaults: {
             queue: "",
             duration: DURATION_DEFAULT,
@@ -11217,11 +10357,10 @@ return function (global, window, document, undefined) {
             loop: false,
             delay: false,
             mobileHA: true,
-            /* Set to false to prevent property values from being cached between consecutive Velocity-initiated chain calls. */
+            /* Advanced: Set to false to prevent property values from being cached between consecutive Velocity-initiated chain calls. */
             _cacheValues: true
         },
-        /* A design goal of Velocity is to cache data wherever possible in order to avoid DOM requerying.
-           Accordingly, each element has a data cache instantiated on it. */
+        /* A design goal of Velocity is to cache data wherever possible in order to avoid DOM requerying. Accordingly, each element has a data cache. */
         init: function (element) {
             $.data(element, "velocity", {
                 /* Store whether this is an SVG element, since its properties are retrieved and updated differently than standard HTML elements. */
@@ -11246,7 +10385,7 @@ return function (global, window, document, undefined) {
         hook: null, /* Defined below. */
         /* Velocity-wide animation time remapping for testing purposes. */
         mock: false,
-        version: { major: 1, minor: 1, patch: 0 },
+        version: { major: 1, minor: 2, patch: 2 },
         /* Set to 1 or 2 (most verbose) to output debug info to console. */
         debug: false
     };
@@ -11621,7 +10760,6 @@ return function (global, window, document, undefined) {
             /* Each template consists of the compound-value's base name, its constituent subproperty names, and those subproperties' default values. */
             templates: {
                 "textShadow": [ "Color X Y Blur", "black 0px 0px 0px" ],
-                /* Todo: Add support for inset boxShadows. (webkit places it last whereas IE places it first.) */
                 "boxShadow": [ "Color X Y Blur Spread", "black 0px 0px 0px 0px" ],
                 "clip": [ "Top Right Bottom Left", "0px 0px 0px 0px" ],
                 "backgroundPosition": [ "X Y", "0% 0%" ],
@@ -11804,7 +10942,7 @@ return function (global, window, document, undefined) {
                 blur: function(type, element, propertyValue) {
                     switch (type) {
                         case "name":
-                            return "-webkit-filter";
+                            return Velocity.State.isFirefox ? "filter" : "-webkit-filter";
                         case "extract":
                             var extracted = parseFloat(propertyValue);
 
@@ -12169,6 +11307,10 @@ return function (global, window, document, undefined) {
                     return "list-item";
                 } else if (/^(tr)$/i.test(tagName)) {
                     return "table-row";
+                } else if (/^(table)$/i.test(tagName)) {
+                    return "table";
+                } else if (/^(tbody)$/i.test(tagName)) {
+                    return "table-row-group";
                 /* Default to "block" when no match is found. */
                 } else {
                     return "block";
@@ -12263,8 +11405,9 @@ return function (global, window, document, undefined) {
                     }
 
                     /* IE and Firefox do not return a value for the generic borderColor -- they only return individual values for each border side's color.
-                       As a polyfill for querying individual border side colors, just return the top border's color. */
-                    if ((IE || Velocity.State.isFirefox) && property === "borderColor") {
+                       Also, in all browsers, when border colors aren't all the same, a compound value is returned that Velocity isn't setup to parse.
+                       So, as a polyfill for querying individual border side colors, we just return the top border's color and animate all borders from that value. */
+                    if (property === "borderColor") {
                         property = "borderTopColor";
                     }
 
@@ -12364,7 +11507,12 @@ return function (global, window, document, undefined) {
                     /* Since the height/width attribute values must be set manually, they don't reflect computed values.
                        Thus, we use use getBBox() to ensure we always get values for elements with undefined height/width attributes. */
                     if (/^(height|width)$/i.test(property)) {
-                        propertyValue = element.getBBox()[property];
+                        /* Firefox throws an error if .getBBox() is called on an SVG that isn't attached to the DOM. */
+                        try {
+                            propertyValue = element.getBBox()[property];
+                        } catch (error) {
+                            propertyValue = 0;
+                        }
                     /* Otherwise, access the attribute value directly. */
                     } else {
                         propertyValue = element.getAttribute(property);
@@ -12604,10 +11752,10 @@ return function (global, window, document, undefined) {
            Arguments Assignment
         *************************/
 
-        /* To allow for expressive CoffeeScript code, Velocity supports an alternative syntax in which "properties" and "options"
+        /* To allow for expressive CoffeeScript code, Velocity supports an alternative syntax in which "elements" (or "e"), "properties" (or "p"), and "options" (or "o")
            objects are defined on a container object that's passed in as Velocity's sole argument. */
         /* Note: Some browsers automatically populate arguments with a "properties" object. We detect it by checking for its default "names" property. */
-        var syntacticSugar = (arguments[0] && (($.isPlainObject(arguments[0].properties) && !arguments[0].properties.names) || Type.isString(arguments[0].properties))),
+        var syntacticSugar = (arguments[0] && (arguments[0].p || (($.isPlainObject(arguments[0].properties) && !arguments[0].properties.names) || Type.isString(arguments[0].properties)))),
             /* Whether Velocity was called via the utility function (as opposed to on a jQuery/Zepto object). */
             isUtility,
             /* When Velocity is called via the utility function ($.Velocity()/Velocity()), elements are explicitly
@@ -12631,7 +11779,7 @@ return function (global, window, document, undefined) {
             isUtility = true;
 
             argumentIndex = 1;
-            elements = syntacticSugar ? arguments[0].elements : arguments[0];
+            elements = syntacticSugar ? (arguments[0].elements || arguments[0].e) : arguments[0];
         }
 
         elements = sanitizeElements(elements);
@@ -12641,8 +11789,8 @@ return function (global, window, document, undefined) {
         }
 
         if (syntacticSugar) {
-            propertiesMap = arguments[0].properties;
-            options = arguments[0].options;
+            propertiesMap = arguments[0].properties || arguments[0].p;
+            options = arguments[0].options || arguments[0].o;
         } else {
             propertiesMap = arguments[argumentIndex];
             options = arguments[argumentIndex + 1];
@@ -12659,8 +11807,8 @@ return function (global, window, document, undefined) {
 
         /* Support is included for jQuery's argument overloading: $.animate(propertyMap [, duration] [, easing] [, complete]).
            Overloading is detected by checking for the absence of an object being passed into options. */
-        /* Note: The stop action does not accept animation options, and is therefore excluded from this check. */
-        if (propertiesMap !== "stop" && !$.isPlainObject(options)) {
+        /* Note: The stop and finish actions do not accept animation options, and are therefore excluded from this check. */
+        if (!/^(stop|finish)$/i.test(propertiesMap) && !$.isPlainObject(options)) {
             /* The utility function shifts all arguments one position to the right, so we adjust for that offset. */
             var startingArgumentPosition = argumentIndex + 1;
 
@@ -12725,6 +11873,7 @@ return function (global, window, document, undefined) {
                 action = "reverse";
                 break;
 
+            case "finish":
             case "stop":
                 /*******************
                     Action: Stop
@@ -12748,11 +11897,11 @@ return function (global, window, document, undefined) {
                 var callsToStop = [];
 
                 /* When the stop action is triggered, the elements' currently active call is immediately stopped. The active call might have
-                   been applied to multiple elements, in which case all of the call's elements will be subjected to stopping. When an element
+                   been applied to multiple elements, in which case all of the call's elements will be stopped. When an element
                    is stopped, the next item in its animation queue is immediately triggered. */
                 /* An additional argument may be passed in to clear an element's remaining queued calls. Either true (which defaults to the "fx" queue)
                    or a custom queue string can be passed in. */
-                /* Note: The stop command runs prior to Queueing since its behavior is intended to take effect *immediately*,
+                /* Note: The stop command runs prior to Velocity's Queueing phase since its behavior is intended to take effect *immediately*,
                    regardless of the element's current queue state. */
 
                 /* Iterate through every active call. */
@@ -12761,20 +11910,27 @@ return function (global, window, document, undefined) {
                     if (activeCall) {
                         /* Iterate through the active call's targeted elements. */
                         $.each(activeCall[1], function(k, activeElement) {
-                            var queueName = Type.isString(options) ? options : "";
+                            /* If true was passed in as a secondary argument, clear absolutely all calls on this element. Otherwise, only
+                               clear calls associated with the relevant queue. */
+                            /* Call stopping logic works as follows:
+                               - options === true --> stop current default queue calls (and queue:false calls), including remaining queued ones.
+                               - options === undefined --> stop current queue:"" call and all queue:false calls.
+                               - options === false --> stop only queue:false calls.
+                               - options === "custom" --> stop current queue:"custom" call, including remaining queued ones (there is no functionality to only clear the currently-running queue:"custom" call). */
+                            var queueName = (options === undefined) ? "" : options;
 
-                            if (options !== undefined && activeCall[2].queue !== queueName) {
+                            if (queueName !== true && (activeCall[2].queue !== queueName) && !(options === undefined && activeCall[2].queue === false)) {
                                 return true;
                             }
 
                             /* Iterate through the calls targeted by the stop command. */
-                            $.each(elements, function(l, element) {
+                            $.each(elements, function(l, element) {                                
                                 /* Check that this call was applied to the target element. */
                                 if (element === activeElement) {
                                     /* Optionally clear the remaining queued calls. */
-                                    if (options !== undefined) {
+                                    if (options === true || Type.isString(options)) {
                                         /* Iterate through the items in the element's queue. */
-                                        $.each($.queue(element, queueName), function(_, item) {
+                                        $.each($.queue(element, Type.isString(options) ? options : ""), function(_, item) {
                                             /* The queue array can contain an "inprogress" string, which we skip. */
                                             if (Type.isFunction(item)) {
                                                 /* Pass the item's callback a flag indicating that we want to abort from the queue call.
@@ -12784,33 +11940,43 @@ return function (global, window, document, undefined) {
                                         });
 
                                         /* Clearing the $.queue() array is achieved by resetting it to []. */
-                                        $.queue(element, queueName, []);
+                                        $.queue(element, Type.isString(options) ? options : "", []);
                                     }
 
-                                    if (Data(element) && queueName === "") {
-                                        /* Since "reverse" uses cached start values (the previous call's endValues),
-                                           these values must be changed to reflect the final value that the elements were actually tweened to. */
-                                        $.each(Data(element).tweensContainer, function(m, activeTween) {
-                                            activeTween.endValue = activeTween.currentValue;
-                                        });
-                                    }
+                                    if (propertiesMap === "stop") {
+                                        /* Since "reverse" uses cached start values (the previous call's endValues), these values must be
+                                           changed to reflect the final value that the elements were actually tweened to. */
+                                        /* Note: If only queue:false animations are currently running on an element, it won't have a tweensContainer
+                                           object. Also, queue:false animations can't be reversed. */
+                                        if (Data(element) && Data(element).tweensContainer && queueName !== false) {
+                                            $.each(Data(element).tweensContainer, function(m, activeTween) {
+                                                activeTween.endValue = activeTween.currentValue;
+                                            });
+                                        }
 
-                                    callsToStop.push(i);
+                                        callsToStop.push(i);
+                                    } else if (propertiesMap === "finish") {
+                                        /* To get active tweens to finish immediately, we forcefully shorten their durations to 1ms so that
+                                        they finish upon the next rAf tick then proceed with normal call completion logic. */
+                                        activeCall[2].duration = 1;
+                                    }
                                 }
                             });
                         });
                     }
                 });
 
-                /* Prematurely call completeCall() on each matched active call, passing an additional flag to indicate
+                /* Prematurely call completeCall() on each matched active call. Pass an additional flag for "stop" to indicate
                    that the complete callback and display:none setting should be skipped since we're completing prematurely. */
-                $.each(callsToStop, function(i, j) {
-                    completeCall(j, true);
-                });
+                if (propertiesMap === "stop") {
+                    $.each(callsToStop, function(i, j) {
+                        completeCall(j, true);
+                    });
 
-                if (promiseData.promise) {
-                    /* Immediately resolve the promise associated with this stop call since stop runs synchronously. */
-                    promiseData.resolver(elements);
+                    if (promiseData.promise) {
+                        /* Immediately resolve the promise associated with this stop call since stop runs synchronously. */
+                        promiseData.resolver(elements);
+                    }
                 }
 
                 /* Since we're stopping, and not proceeding with queueing, exit out of Velocity. */
@@ -13101,8 +12267,6 @@ return function (global, window, document, undefined) {
                             /* $.position() values are relative to the container's currently viewable area (without taking into account the container's true dimensions
                                -- say, for example, if the container was not overflowing). Thus, the scroll end value is the sum of the child element's position *and*
                                the scroll container's current scroll position. */
-                            /* Note: jQuery does not offer a utility alias for $.position(), so we have to incur jQuery object conversion here.
-                               This syncs up with an ensuing batch of GETs, so it fortunately does not trigger layout thrashing. */
                             scrollPositionEnd = (scrollPositionCurrent + $(element).position()[scrollDirection.toLowerCase()]) + scrollOffset; /* GET */
                         /* If a value other than a jQuery object or a raw DOM element was passed in, default to null so that this option is ignored. */
                         } else {
@@ -13366,12 +12530,12 @@ return function (global, window, document, undefined) {
                         var rootProperty = CSS.Hooks.getRoot(property),
                             rootPropertyValue = false;
 
-                        /* Properties that are not supported by the browser (and do not have an associated normalization) will
+                        /* Other than for the dummy tween property, properties that are not supported by the browser (and do not have an associated normalization) will
                            inherently produce no style changes when set, so they are skipped in order to decrease animation tick overhead.
                            Property support is determined via prefixCheck(), which returns a false flag when no supported is detected. */
                         /* Note: Since SVG elements have some of their properties directly applied as HTML attributes,
                            there is no way to check for their explicit browser support, and so we skip skip this check for them. */
-                        if (!Data(element).isSVG && CSS.Names.prefixCheck(rootProperty)[1] === false && CSS.Normalizations.registered[rootProperty] === undefined) {
+                        if (!Data(element).isSVG && rootProperty !== "tween" && CSS.Names.prefixCheck(rootProperty)[1] === false && CSS.Normalizations.registered[rootProperty] === undefined) {
                             if (Velocity.debug) console.log("Skipping [" + rootProperty + "] due to a lack of browser support.");
 
                             continue;
@@ -13742,13 +12906,6 @@ return function (global, window, document, undefined) {
                     /* Once the final element in this call's element set has been processed, push the call array onto
                        Velocity.State.calls for the animation tick to immediately begin processing. */
                     if (elementsIndex === elementsLength - 1) {
-                        /* To speed up iterating over this array, it is compacted (falsey items -- calls that have completed -- are removed)
-                           when its length has ballooned to a point that can impact tick performance. This only becomes necessary when animation
-                           has been continuous with many elements over a long period of time; whenever all active calls are completed, completeCall() clears Velocity.State.calls. */
-                        if (Velocity.State.calls.length > 10000) {
-                            Velocity.State.calls = compactSparseArray(Velocity.State.calls);
-                        }
-
                         /* Add the current call plus its associated metadata (the element set and the call's options) onto the global call container.
                            Anything on this call container is subjected to tick() processing. */
                         Velocity.State.calls.push([ call, elements, opts, null, promiseData.resolver ]);
@@ -13930,8 +13087,17 @@ return function (global, window, document, undefined) {
                Call Iteration
             ********************/
 
+            var callsLength = Velocity.State.calls.length;
+
+            /* To speed up iterating over this array, it is compacted (falsey items -- calls that have completed -- are removed)
+               when its length has ballooned to a point that can impact tick performance. This only becomes necessary when animation
+               has been continuous with many elements over a long period of time; whenever all active calls are completed, completeCall() clears Velocity.State.calls. */
+            if (callsLength > 10000) {
+                Velocity.State.calls = compactSparseArray(Velocity.State.calls);
+            }
+
             /* Iterate through each active call. */
-            for (var i = 0, callsLength = Velocity.State.calls.length; i < callsLength; i++) {
+            for (var i = 0; i < callsLength; i++) {
                 /* When a Velocity call is completed, its Velocity.State.calls entry is set to false. Continue on to the next call. */
                 if (!Velocity.State.calls[i]) {
                     continue;
@@ -13945,7 +13111,8 @@ return function (global, window, document, undefined) {
                     call = callContainer[0],
                     opts = callContainer[2],
                     timeStart = callContainer[3],
-                    firstTick = !!timeStart;
+                    firstTick = !!timeStart,
+                    tweenDummyValue = null;
 
                 /* If timeStart is undefined, then this is the first time that this call has been processed by tick().
                    We assign timeStart now so that its value is as close to the real animation start time as possible.
@@ -14028,7 +13195,8 @@ return function (global, window, document, undefined) {
                                 currentValue = tween.endValue;
                             /* Otherwise, calculate currentValue based on the current delta from startValue. */
                             } else {
-                                currentValue = tween.startValue + ((tween.endValue - tween.startValue) * easing(percentComplete));
+                                var tweenDelta = tween.endValue - tween.startValue;
+                                currentValue = tween.startValue + (tweenDelta * easing(percentComplete, opts, tweenDelta));
 
                                 /* If no value change is occurring, don't proceed with DOM updating. */
                                 if (!firstTick && (currentValue === tween.currentValue)) {
@@ -14038,57 +13206,64 @@ return function (global, window, document, undefined) {
 
                             tween.currentValue = currentValue;
 
-                            /******************
-                               Hooks: Part I
-                            ******************/
+                            /* If we're tweening a fake 'tween' property in order to log transition values, update the one-per-call variable so that
+                               it can be passed into the progress callback. */ 
+                            if (property === "tween") {
+                                tweenDummyValue = currentValue;
+                            } else {
+                                /******************
+                                   Hooks: Part I
+                                ******************/
 
-                            /* For hooked properties, the newly-updated rootPropertyValueCache is cached onto the element so that it can be used
-                               for subsequent hooks in this call that are associated with the same root property. If we didn't cache the updated
-                               rootPropertyValue, each subsequent update to the root property in this tick pass would reset the previous hook's
-                               updates to rootPropertyValue prior to injection. A nice performance byproduct of rootPropertyValue caching is that
-                               subsequently chained animations using the same hookRoot but a different hook can use this cached rootPropertyValue. */
-                            if (CSS.Hooks.registered[property]) {
-                                var hookRoot = CSS.Hooks.getRoot(property),
-                                    rootPropertyValueCache = Data(element).rootPropertyValueCache[hookRoot];
+                                /* For hooked properties, the newly-updated rootPropertyValueCache is cached onto the element so that it can be used
+                                   for subsequent hooks in this call that are associated with the same root property. If we didn't cache the updated
+                                   rootPropertyValue, each subsequent update to the root property in this tick pass would reset the previous hook's
+                                   updates to rootPropertyValue prior to injection. A nice performance byproduct of rootPropertyValue caching is that
+                                   subsequently chained animations using the same hookRoot but a different hook can use this cached rootPropertyValue. */
+                                if (CSS.Hooks.registered[property]) {
+                                    var hookRoot = CSS.Hooks.getRoot(property),
+                                        rootPropertyValueCache = Data(element).rootPropertyValueCache[hookRoot];
 
-                                if (rootPropertyValueCache) {
-                                    tween.rootPropertyValue = rootPropertyValueCache;
+                                    if (rootPropertyValueCache) {
+                                        tween.rootPropertyValue = rootPropertyValueCache;
+                                    }
                                 }
-                            }
 
-                            /*****************
-                                DOM Update
-                            *****************/
+                                /*****************
+                                    DOM Update
+                                *****************/
 
-                            /* setPropertyValue() returns an array of the property name and property value post any normalization that may have been performed. */
-                            /* Note: To solve an IE<=8 positioning bug, the unit type is dropped when setting a property value of 0. */
-                            var adjustedSetData = CSS.setPropertyValue(element, /* SET */
-                                                                       property,
-                                                                       tween.currentValue + (parseFloat(currentValue) === 0 ? "" : tween.unitType),
-                                                                       tween.rootPropertyValue,
-                                                                       tween.scrollData);
+                                /* setPropertyValue() returns an array of the property name and property value post any normalization that may have been performed. */
+                                /* Note: To solve an IE<=8 positioning bug, the unit type is dropped when setting a property value of 0. */
+                                var adjustedSetData = CSS.setPropertyValue(element, /* SET */
+                                                                           property,
+                                                                           tween.currentValue + (parseFloat(currentValue) === 0 ? "" : tween.unitType),
+                                                                           tween.rootPropertyValue,
+                                                                           tween.scrollData);
 
-                            /*******************
-                               Hooks: Part II
-                            *******************/
+                                /*******************
+                                   Hooks: Part II
+                                *******************/
 
-                            /* Now that we have the hook's updated rootPropertyValue (the post-processed value provided by adjustedSetData), cache it onto the element. */
-                            if (CSS.Hooks.registered[property]) {
-                                /* Since adjustedSetData contains normalized data ready for DOM updating, the rootPropertyValue needs to be re-extracted from its normalized form. ?? */
-                                if (CSS.Normalizations.registered[hookRoot]) {
-                                    Data(element).rootPropertyValueCache[hookRoot] = CSS.Normalizations.registered[hookRoot]("extract", null, adjustedSetData[1]);
-                                } else {
-                                    Data(element).rootPropertyValueCache[hookRoot] = adjustedSetData[1];
+                                /* Now that we have the hook's updated rootPropertyValue (the post-processed value provided by adjustedSetData), cache it onto the element. */
+                                if (CSS.Hooks.registered[property]) {
+                                    /* Since adjustedSetData contains normalized data ready for DOM updating, the rootPropertyValue needs to be re-extracted from its normalized form. ?? */
+                                    if (CSS.Normalizations.registered[hookRoot]) {
+                                        Data(element).rootPropertyValueCache[hookRoot] = CSS.Normalizations.registered[hookRoot]("extract", null, adjustedSetData[1]);
+                                    } else {
+                                        Data(element).rootPropertyValueCache[hookRoot] = adjustedSetData[1];
+                                    }
                                 }
-                            }
 
-                            /***************
-                               Transforms
-                            ***************/
+                                /***************
+                                   Transforms
+                                ***************/
 
-                            /* Flag whether a transform property is being animated so that flushTransformCache() can be triggered once this tick pass is complete. */
-                            if (adjustedSetData[0] === "transform") {
-                                transformPropertyExists = true;
+                                /* Flag whether a transform property is being animated so that flushTransformCache() can be triggered once this tick pass is complete. */
+                                if (adjustedSetData[0] === "transform") {
+                                    transformPropertyExists = true;
+                                }
+
                             }
                         }
                     }
@@ -14123,14 +13298,14 @@ return function (global, window, document, undefined) {
                     Velocity.State.calls[i][2].visibility = false;
                 }
 
-
-                /* Pass the elements and the timing data (percentComplete, msRemaining, and timeStart) into the progress callback. */
+                /* Pass the elements and the timing data (percentComplete, msRemaining, timeStart, tweenDummyValue) into the progress callback. */
                 if (opts.progress) {
                     opts.progress.call(callContainer[1],
                                        callContainer[1],
                                        percentComplete,
                                        Math.max(0, (timeStart + opts.duration) - timeCurrent),
-                                       timeStart);
+                                       timeStart,
+                                       tweenDummyValue);
                 }
 
                 /* If this call has finished tweening, pass its index to completeCall() to handle call cleanup. */
@@ -14254,13 +13429,18 @@ return function (global, window, document, undefined) {
                Option: Loop (Infinite)
             ****************************/
 
-            if (opts.loop === true && !isStopped) {
+            if (Data(element) && opts.loop === true && !isStopped) {
                 /* If a rotateX/Y/Z property is being animated to 360 deg with loop:true, swap tween start/end values to enable
                    continuous iterative rotation looping. (Otherise, the element would just rotate back and forth.) */
                 $.each(Data(element).tweensContainer, function(propertyName, tweenContainer) {
                     if (/^rotate/.test(propertyName) && parseFloat(tweenContainer.endValue) === 360) {
                         tweenContainer.endValue = 0;
                         tweenContainer.startValue = 360;
+                    }
+
+                    if (/^backgroundPosition/.test(propertyName) && parseFloat(tweenContainer.endValue) === 100 && tweenContainer.unitType === "%") {
+                        tweenContainer.endValue = 0;
+                        tweenContainer.startValue = 100;
                     }
                 });
 
@@ -14350,7 +13530,6 @@ return function (global, window, document, undefined) {
 
                 /* Cache the elements' original vertical dimensional property values so that we can animate back to them. */
                 for (var property in computedValues) {
-                    /* Cache all inline values, we reset to upon animation completion. */
                     inlineValues[property] = element.style[property];
 
                     /* For slideDown, use forcefeeding to animate all vertical properties from 0. For slideUp,
@@ -14425,7 +13604,7 @@ will produce an inaccurate conversion value. The same issue exists with the cx/c
    Velocity UI Pack
 **********************/
 
-/* VelocityJS.org UI Pack (5.0.0). (C) 2014 Julian Shapiro. MIT @license: en.wikipedia.org/wiki/MIT_License. Portions copyright Daniel Eden, Christian Pucci. */
+/* VelocityJS.org UI Pack (5.0.4). (C) 2014 Julian Shapiro. MIT @license: en.wikipedia.org/wiki/MIT_License. Portions copyright Daniel Eden, Christian Pucci. */
 
 ;(function (factory) {
     /* CommonJS module. */
@@ -14689,7 +13868,7 @@ return function (global, window, document, undefined) {
             "callout.pulse": {
                 defaultDuration: 825,
                 calls: [
-                    [ { scaleX: 1.1, scaleY: 1.1 }, 0.50 ],
+                    [ { scaleX: 1.1, scaleY: 1.1 }, 0.50, { easing: "easeInExpo" } ],
                     [ { scaleX: 1, scaleY: 1 }, 0.50 ]
                 ]
             },
@@ -15064,7 +14243,8 @@ return function (global, window, document, undefined) {
                 defaultDuration: 800,
                 calls: [
                     [ { opacity: [ 1, 0 ], transformPerspective: [ 800, 800 ], transformOriginX: [ 0, 0 ], transformOriginY: [ "100%", "100%" ], rotateX: [ 0, -180 ] } ]
-                ]
+                ],
+                reset: { transformPerspective: 0, transformOriginX: "50%", transformOriginY: "50%" }
             },
             /* Magic.css */
             /* Support: Loses rotation in IE9/Android 2.3 (fades only). */
@@ -15140,7 +14320,7 @@ return function (global, window, document, undefined) {
        Sequence Running
     **********************/
 
-    /* Sequence calls must use Velocity's single-object arguments syntax. */
+    /* Note: Sequence calls must use Velocity's single-object arguments syntax. */
     Velocity.RunSequence = function (originalSequence) {
         var sequence = $.extend(true, [], originalSequence);
 
@@ -15152,18 +14332,26 @@ return function (global, window, document, undefined) {
                     /* Parallel sequence calls (indicated via sequenceQueue:false) are triggered
                        in the previous call's begin callback. Otherwise, chained calls are normally triggered
                        in the previous call's complete callback. */
-                    var timing = (currentCall.options && currentCall.options.sequenceQueue === false) ? "begin" : "complete",
-                        callbackOriginal = nextCall.options && nextCall.options[timing],
+                    var currentCallOptions = currentCall.o || currentCall.options,
+                        nextCallOptions = nextCall.o || nextCall.options;
+
+                    var timing = (currentCallOptions && currentCallOptions.sequenceQueue === false) ? "begin" : "complete",
+                        callbackOriginal = nextCallOptions && nextCallOptions[timing],
                         options = {};
 
                     options[timing] = function() {
-                        var elements = nextCall.elements.nodeType ? [ nextCall.elements ] : nextCall.elements;
+                        var nextCallElements = nextCall.e || nextCall.elements;
+                        var elements = nextCallElements.nodeType ? [ nextCallElements ] : nextCallElements;
 
                         callbackOriginal && callbackOriginal.call(elements, elements);
                         Velocity(currentCall);
                     }
 
-                    nextCall.options = $.extend({}, nextCall.options, options);
+                    if (nextCall.o) {
+                        nextCall.o = $.extend({}, nextCallOptions, options);
+                    } else {
+                        nextCall.options = $.extend({}, nextCallOptions, options);
+                    }
                 }
             });
 
@@ -15173,594 +14361,659 @@ return function (global, window, document, undefined) {
         Velocity(sequence[0]);
     };
 }((window.jQuery || window.Zepto || window), window, document);
-}));;// Generated by CoffeeScript 1.6.2
-/*!
-jQuery Waypoints - v2.0.5
-Copyright (c) 2011-2014 Caleb Troughton
+}));;/*!
+Waypoints - 3.1.1
+Copyright © 2011-2015 Caleb Troughton
 Licensed under the MIT license.
-https://github.com/imakewebthings/jquery-waypoints/blob/master/licenses.txt
+https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
 */
-
-
 (function() {
-  var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
-    __slice = [].slice;
+  'use strict'
 
-  (function(root, factory) {
-    if (typeof define === 'function' && define.amd) {
-      return define('waypoints', ['jquery'], function($) {
-        return factory($, root);
-      });
-    } else {
-      return factory(root.jQuery, root);
+  var keyCounter = 0
+  var allWaypoints = {}
+
+  /* http://imakewebthings.com/waypoints/api/waypoint */
+  function Waypoint(options) {
+    if (!options) {
+      throw new Error('No options passed to Waypoint constructor')
     }
-  })(window, function($, window) {
-    var $w, Context, Waypoint, allWaypoints, contextCounter, contextKey, contexts, isTouch, jQMethods, methods, resizeEvent, scrollEvent, waypointCounter, waypointKey, wp, wps;
-
-    $w = $(window);
-    isTouch = __indexOf.call(window, 'ontouchstart') >= 0;
-    allWaypoints = {
-      horizontal: {},
-      vertical: {}
-    };
-    contextCounter = 1;
-    contexts = {};
-    contextKey = 'waypoints-context-id';
-    resizeEvent = 'resize.waypoints';
-    scrollEvent = 'scroll.waypoints';
-    waypointCounter = 1;
-    waypointKey = 'waypoints-waypoint-ids';
-    wp = 'waypoint';
-    wps = 'waypoints';
-    Context = (function() {
-      function Context($element) {
-        var _this = this;
-
-        this.$element = $element;
-        this.element = $element[0];
-        this.didResize = false;
-        this.didScroll = false;
-        this.id = 'context' + contextCounter++;
-        this.oldScroll = {
-          x: $element.scrollLeft(),
-          y: $element.scrollTop()
-        };
-        this.waypoints = {
-          horizontal: {},
-          vertical: {}
-        };
-        this.element[contextKey] = this.id;
-        contexts[this.id] = this;
-        $element.bind(scrollEvent, function() {
-          var scrollHandler;
-
-          if (!(_this.didScroll || isTouch)) {
-            _this.didScroll = true;
-            scrollHandler = function() {
-              _this.doScroll();
-              return _this.didScroll = false;
-            };
-            return window.setTimeout(scrollHandler, $[wps].settings.scrollThrottle);
-          }
-        });
-        $element.bind(resizeEvent, function() {
-          var resizeHandler;
-
-          if (!_this.didResize) {
-            _this.didResize = true;
-            resizeHandler = function() {
-              $[wps]('refresh');
-              return _this.didResize = false;
-            };
-            return window.setTimeout(resizeHandler, $[wps].settings.resizeThrottle);
-          }
-        });
-      }
-
-      Context.prototype.doScroll = function() {
-        var axes,
-          _this = this;
-
-        axes = {
-          horizontal: {
-            newScroll: this.$element.scrollLeft(),
-            oldScroll: this.oldScroll.x,
-            forward: 'right',
-            backward: 'left'
-          },
-          vertical: {
-            newScroll: this.$element.scrollTop(),
-            oldScroll: this.oldScroll.y,
-            forward: 'down',
-            backward: 'up'
-          }
-        };
-        if (isTouch && (!axes.vertical.oldScroll || !axes.vertical.newScroll)) {
-          $[wps]('refresh');
-        }
-        $.each(axes, function(aKey, axis) {
-          var direction, isForward, triggered;
-
-          triggered = [];
-          isForward = axis.newScroll > axis.oldScroll;
-          direction = isForward ? axis.forward : axis.backward;
-          $.each(_this.waypoints[aKey], function(wKey, waypoint) {
-            var _ref, _ref1;
-
-            if ((axis.oldScroll < (_ref = waypoint.offset) && _ref <= axis.newScroll)) {
-              return triggered.push(waypoint);
-            } else if ((axis.newScroll < (_ref1 = waypoint.offset) && _ref1 <= axis.oldScroll)) {
-              return triggered.push(waypoint);
-            }
-          });
-          triggered.sort(function(a, b) {
-            return a.offset - b.offset;
-          });
-          if (!isForward) {
-            triggered.reverse();
-          }
-          return $.each(triggered, function(i, waypoint) {
-            if (waypoint.options.continuous || i === triggered.length - 1) {
-              return waypoint.trigger([direction]);
-            }
-          });
-        });
-        return this.oldScroll = {
-          x: axes.horizontal.newScroll,
-          y: axes.vertical.newScroll
-        };
-      };
-
-      Context.prototype.refresh = function() {
-        var axes, cOffset, isWin,
-          _this = this;
-
-        isWin = $.isWindow(this.element);
-        cOffset = this.$element.offset();
-        this.doScroll();
-        axes = {
-          horizontal: {
-            contextOffset: isWin ? 0 : cOffset.left,
-            contextScroll: isWin ? 0 : this.oldScroll.x,
-            contextDimension: this.$element.width(),
-            oldScroll: this.oldScroll.x,
-            forward: 'right',
-            backward: 'left',
-            offsetProp: 'left'
-          },
-          vertical: {
-            contextOffset: isWin ? 0 : cOffset.top,
-            contextScroll: isWin ? 0 : this.oldScroll.y,
-            contextDimension: isWin ? $[wps]('viewportHeight') : this.$element.height(),
-            oldScroll: this.oldScroll.y,
-            forward: 'down',
-            backward: 'up',
-            offsetProp: 'top'
-          }
-        };
-        return $.each(axes, function(aKey, axis) {
-          return $.each(_this.waypoints[aKey], function(i, waypoint) {
-            var adjustment, elementOffset, oldOffset, _ref, _ref1;
-
-            adjustment = waypoint.options.offset;
-            oldOffset = waypoint.offset;
-            elementOffset = $.isWindow(waypoint.element) ? 0 : waypoint.$element.offset()[axis.offsetProp];
-            if ($.isFunction(adjustment)) {
-              adjustment = adjustment.apply(waypoint.element);
-            } else if (typeof adjustment === 'string') {
-              adjustment = parseFloat(adjustment);
-              if (waypoint.options.offset.indexOf('%') > -1) {
-                adjustment = Math.ceil(axis.contextDimension * adjustment / 100);
-              }
-            }
-            waypoint.offset = elementOffset - axis.contextOffset + axis.contextScroll - adjustment;
-            if ((waypoint.options.onlyOnScroll && (oldOffset != null)) || !waypoint.enabled) {
-              return;
-            }
-            if (oldOffset !== null && (oldOffset < (_ref = axis.oldScroll) && _ref <= waypoint.offset)) {
-              return waypoint.trigger([axis.backward]);
-            } else if (oldOffset !== null && (oldOffset > (_ref1 = axis.oldScroll) && _ref1 >= waypoint.offset)) {
-              return waypoint.trigger([axis.forward]);
-            } else if (oldOffset === null && axis.oldScroll >= waypoint.offset) {
-              return waypoint.trigger([axis.forward]);
-            }
-          });
-        });
-      };
-
-      Context.prototype.checkEmpty = function() {
-        if ($.isEmptyObject(this.waypoints.horizontal) && $.isEmptyObject(this.waypoints.vertical)) {
-          this.$element.unbind([resizeEvent, scrollEvent].join(' '));
-          return delete contexts[this.id];
-        }
-      };
-
-      return Context;
-
-    })();
-    Waypoint = (function() {
-      function Waypoint($element, context, options) {
-        var idList, _ref;
-
-        if (options.offset === 'bottom-in-view') {
-          options.offset = function() {
-            var contextHeight;
-
-            contextHeight = $[wps]('viewportHeight');
-            if (!$.isWindow(context.element)) {
-              contextHeight = context.$element.height();
-            }
-            return contextHeight - $(this).outerHeight();
-          };
-        }
-        this.$element = $element;
-        this.element = $element[0];
-        this.axis = options.horizontal ? 'horizontal' : 'vertical';
-        this.callback = options.handler;
-        this.context = context;
-        this.enabled = options.enabled;
-        this.id = 'waypoints' + waypointCounter++;
-        this.offset = null;
-        this.options = options;
-        context.waypoints[this.axis][this.id] = this;
-        allWaypoints[this.axis][this.id] = this;
-        idList = (_ref = this.element[waypointKey]) != null ? _ref : [];
-        idList.push(this.id);
-        this.element[waypointKey] = idList;
-      }
-
-      Waypoint.prototype.trigger = function(args) {
-        if (!this.enabled) {
-          return;
-        }
-        if (this.callback != null) {
-          this.callback.apply(this.element, args);
-        }
-        if (this.options.triggerOnce) {
-          return this.destroy();
-        }
-      };
-
-      Waypoint.prototype.disable = function() {
-        return this.enabled = false;
-      };
-
-      Waypoint.prototype.enable = function() {
-        this.context.refresh();
-        return this.enabled = true;
-      };
-
-      Waypoint.prototype.destroy = function() {
-        delete allWaypoints[this.axis][this.id];
-        delete this.context.waypoints[this.axis][this.id];
-        return this.context.checkEmpty();
-      };
-
-      Waypoint.getWaypointsByElement = function(element) {
-        var all, ids;
-
-        ids = element[waypointKey];
-        if (!ids) {
-          return [];
-        }
-        all = $.extend({}, allWaypoints.horizontal, allWaypoints.vertical);
-        return $.map(ids, function(id) {
-          return all[id];
-        });
-      };
-
-      return Waypoint;
-
-    })();
-    methods = {
-      init: function(f, options) {
-        var _ref;
-
-        options = $.extend({}, $.fn[wp].defaults, options);
-        if ((_ref = options.handler) == null) {
-          options.handler = f;
-        }
-        this.each(function() {
-          var $this, context, contextElement, _ref1;
-
-          $this = $(this);
-          contextElement = (_ref1 = options.context) != null ? _ref1 : $.fn[wp].defaults.context;
-          if (!$.isWindow(contextElement)) {
-            contextElement = $this.closest(contextElement);
-          }
-          contextElement = $(contextElement);
-          context = contexts[contextElement[0][contextKey]];
-          if (!context) {
-            context = new Context(contextElement);
-          }
-          return new Waypoint($this, context, options);
-        });
-        $[wps]('refresh');
-        return this;
-      },
-      disable: function() {
-        return methods._invoke.call(this, 'disable');
-      },
-      enable: function() {
-        return methods._invoke.call(this, 'enable');
-      },
-      destroy: function() {
-        return methods._invoke.call(this, 'destroy');
-      },
-      prev: function(axis, selector) {
-        return methods._traverse.call(this, axis, selector, function(stack, index, waypoints) {
-          if (index > 0) {
-            return stack.push(waypoints[index - 1]);
-          }
-        });
-      },
-      next: function(axis, selector) {
-        return methods._traverse.call(this, axis, selector, function(stack, index, waypoints) {
-          if (index < waypoints.length - 1) {
-            return stack.push(waypoints[index + 1]);
-          }
-        });
-      },
-      _traverse: function(axis, selector, push) {
-        var stack, waypoints;
-
-        if (axis == null) {
-          axis = 'vertical';
-        }
-        if (selector == null) {
-          selector = window;
-        }
-        waypoints = jQMethods.aggregate(selector);
-        stack = [];
-        this.each(function() {
-          var index;
-
-          index = $.inArray(this, waypoints[axis]);
-          return push(stack, index, waypoints[axis]);
-        });
-        return this.pushStack(stack);
-      },
-      _invoke: function(method) {
-        this.each(function() {
-          var waypoints;
-
-          waypoints = Waypoint.getWaypointsByElement(this);
-          return $.each(waypoints, function(i, waypoint) {
-            waypoint[method]();
-            return true;
-          });
-        });
-        return this;
-      }
-    };
-    $.fn[wp] = function() {
-      var args, method;
-
-      method = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
-      if (methods[method]) {
-        return methods[method].apply(this, args);
-      } else if ($.isFunction(method)) {
-        return methods.init.apply(this, arguments);
-      } else if ($.isPlainObject(method)) {
-        return methods.init.apply(this, [null, method]);
-      } else if (!method) {
-        return $.error("jQuery Waypoints needs a callback function or handler option.");
-      } else {
-        return $.error("The " + method + " method does not exist in jQuery Waypoints.");
-      }
-    };
-    $.fn[wp].defaults = {
-      context: window,
-      continuous: true,
-      enabled: true,
-      horizontal: false,
-      offset: 0,
-      triggerOnce: false
-    };
-    jQMethods = {
-      refresh: function() {
-        return $.each(contexts, function(i, context) {
-          return context.refresh();
-        });
-      },
-      viewportHeight: function() {
-        var _ref;
-
-        return (_ref = window.innerHeight) != null ? _ref : $w.height();
-      },
-      aggregate: function(contextSelector) {
-        var collection, waypoints, _ref;
-
-        collection = allWaypoints;
-        if (contextSelector) {
-          collection = (_ref = contexts[$(contextSelector)[0][contextKey]]) != null ? _ref.waypoints : void 0;
-        }
-        if (!collection) {
-          return [];
-        }
-        waypoints = {
-          horizontal: [],
-          vertical: []
-        };
-        $.each(waypoints, function(axis, arr) {
-          $.each(collection[axis], function(key, waypoint) {
-            return arr.push(waypoint);
-          });
-          arr.sort(function(a, b) {
-            return a.offset - b.offset;
-          });
-          waypoints[axis] = $.map(arr, function(waypoint) {
-            return waypoint.element;
-          });
-          return waypoints[axis] = $.unique(waypoints[axis]);
-        });
-        return waypoints;
-      },
-      above: function(contextSelector) {
-        if (contextSelector == null) {
-          contextSelector = window;
-        }
-        return jQMethods._filter(contextSelector, 'vertical', function(context, waypoint) {
-          return waypoint.offset <= context.oldScroll.y;
-        });
-      },
-      below: function(contextSelector) {
-        if (contextSelector == null) {
-          contextSelector = window;
-        }
-        return jQMethods._filter(contextSelector, 'vertical', function(context, waypoint) {
-          return waypoint.offset > context.oldScroll.y;
-        });
-      },
-      left: function(contextSelector) {
-        if (contextSelector == null) {
-          contextSelector = window;
-        }
-        return jQMethods._filter(contextSelector, 'horizontal', function(context, waypoint) {
-          return waypoint.offset <= context.oldScroll.x;
-        });
-      },
-      right: function(contextSelector) {
-        if (contextSelector == null) {
-          contextSelector = window;
-        }
-        return jQMethods._filter(contextSelector, 'horizontal', function(context, waypoint) {
-          return waypoint.offset > context.oldScroll.x;
-        });
-      },
-      enable: function() {
-        return jQMethods._invoke('enable');
-      },
-      disable: function() {
-        return jQMethods._invoke('disable');
-      },
-      destroy: function() {
-        return jQMethods._invoke('destroy');
-      },
-      extendFn: function(methodName, f) {
-        return methods[methodName] = f;
-      },
-      _invoke: function(method) {
-        var waypoints;
-
-        waypoints = $.extend({}, allWaypoints.vertical, allWaypoints.horizontal);
-        return $.each(waypoints, function(key, waypoint) {
-          waypoint[method]();
-          return true;
-        });
-      },
-      _filter: function(selector, axis, test) {
-        var context, waypoints;
-
-        context = contexts[$(selector)[0][contextKey]];
-        if (!context) {
-          return [];
-        }
-        waypoints = [];
-        $.each(context.waypoints[axis], function(i, waypoint) {
-          if (test(context, waypoint)) {
-            return waypoints.push(waypoint);
-          }
-        });
-        waypoints.sort(function(a, b) {
-          return a.offset - b.offset;
-        });
-        return $.map(waypoints, function(waypoint) {
-          return waypoint.element;
-        });
-      }
-    };
-    $[wps] = function() {
-      var args, method;
-
-      method = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
-      if (jQMethods[method]) {
-        return jQMethods[method].apply(null, args);
-      } else {
-        return jQMethods.aggregate.call(null, method);
-      }
-    };
-    $[wps].settings = {
-      resizeThrottle: 100,
-      scrollThrottle: 30
-    };
-    return $w.on('load.waypoints', function() {
-      return $[wps]('refresh');
-    });
-  });
-
-}).call(this);
-// Generated by CoffeeScript 1.6.2
-/*
-Sticky Elements Shortcut for jQuery Waypoints - v2.0.5
-Copyright (c) 2011-2014 Caleb Troughton
-Licensed under the MIT license.
-https://github.com/imakewebthings/jquery-waypoints/blob/master/licenses.txt
-*/
-
-
-(function() {
-  (function(root, factory) {
-    if (typeof define === 'function' && define.amd) {
-      return define(['jquery', 'waypoints'], factory);
-    } else {
-      return factory(root.jQuery);
+    if (!options.element) {
+      throw new Error('No element option passed to Waypoint constructor')
     }
-  })(window, function($) {
-    var defaults, wrap;
+    if (!options.handler) {
+      throw new Error('No handler option passed to Waypoint constructor')
+    }
 
-    defaults = {
-      wrapper: '<div class="sticky-wrapper" />',
-      stuckClass: 'stuck',
-      direction: 'down right'
-    };
-    wrap = function($elements, options) {
-      var $parent;
+    this.key = 'waypoint-' + keyCounter
+    this.options = Waypoint.Adapter.extend({}, Waypoint.defaults, options)
+    this.element = this.options.element
+    this.adapter = new Waypoint.Adapter(this.element)
+    this.callback = options.handler
+    this.axis = this.options.horizontal ? 'horizontal' : 'vertical'
+    this.enabled = this.options.enabled
+    this.triggerPoint = null
+    this.group = Waypoint.Group.findOrCreate({
+      name: this.options.group,
+      axis: this.axis
+    })
+    this.context = Waypoint.Context.findOrCreateByElement(this.options.context)
 
-      $elements.wrap(options.wrapper);
-      $parent = $elements.parent();
-      return $parent.data('isWaypointStickyWrapper', true);
-    };
-    $.waypoints('extendFn', 'sticky', function(opt) {
-      var $wrap, options, originalHandler;
+    if (Waypoint.offsetAliases[this.options.offset]) {
+      this.options.offset = Waypoint.offsetAliases[this.options.offset]
+    }
+    this.group.add(this)
+    this.context.add(this)
+    allWaypoints[this.key] = this
+    keyCounter += 1
+  }
 
-      options = $.extend({}, $.fn.waypoint.defaults, defaults, opt);
-      $wrap = wrap(this, options);
-      originalHandler = options.handler;
-      options.handler = function(direction) {
-        var $sticky, shouldBeStuck;
+  /* Private */
+  Waypoint.prototype.queueTrigger = function(direction) {
+    this.group.queueTrigger(this, direction)
+  }
 
-        $sticky = $(this).children(':first');
-        shouldBeStuck = options.direction.indexOf(direction) !== -1;
-        $sticky.toggleClass(options.stuckClass, shouldBeStuck);
-        $wrap.height(shouldBeStuck ? $sticky.outerHeight() : '');
-        if (originalHandler != null) {
-          return originalHandler.call(this, direction);
-        }
-      };
-      $wrap.waypoint(options);
-      return this.data('stuckClass', options.stuckClass);
-    });
-    return $.waypoints('extendFn', 'unsticky', function() {
-      var $parent;
+  /* Private */
+  Waypoint.prototype.trigger = function(args) {
+    if (!this.enabled) {
+      return
+    }
+    if (this.callback) {
+      this.callback.apply(this, args)
+    }
+  }
 
-      $parent = this.parent();
-      if (!$parent.data('isWaypointStickyWrapper')) {
-        return this;
+  /* Public */
+  /* http://imakewebthings.com/waypoints/api/destroy */
+  Waypoint.prototype.destroy = function() {
+    this.context.remove(this)
+    this.group.remove(this)
+    delete allWaypoints[this.key]
+  }
+
+  /* Public */
+  /* http://imakewebthings.com/waypoints/api/disable */
+  Waypoint.prototype.disable = function() {
+    this.enabled = false
+    return this
+  }
+
+  /* Public */
+  /* http://imakewebthings.com/waypoints/api/enable */
+  Waypoint.prototype.enable = function() {
+    this.context.refresh()
+    this.enabled = true
+    return this
+  }
+
+  /* Public */
+  /* http://imakewebthings.com/waypoints/api/next */
+  Waypoint.prototype.next = function() {
+    return this.group.next(this)
+  }
+
+  /* Public */
+  /* http://imakewebthings.com/waypoints/api/previous */
+  Waypoint.prototype.previous = function() {
+    return this.group.previous(this)
+  }
+
+  /* Private */
+  Waypoint.invokeAll = function(method) {
+    var allWaypointsArray = []
+    for (var waypointKey in allWaypoints) {
+      allWaypointsArray.push(allWaypoints[waypointKey])
+    }
+    for (var i = 0, end = allWaypointsArray.length; i < end; i++) {
+      allWaypointsArray[i][method]()
+    }
+  }
+
+  /* Public */
+  /* http://imakewebthings.com/waypoints/api/destroy-all */
+  Waypoint.destroyAll = function() {
+    Waypoint.invokeAll('destroy')
+  }
+
+  /* Public */
+  /* http://imakewebthings.com/waypoints/api/disable-all */
+  Waypoint.disableAll = function() {
+    Waypoint.invokeAll('disable')
+  }
+
+  /* Public */
+  /* http://imakewebthings.com/waypoints/api/enable-all */
+  Waypoint.enableAll = function() {
+    Waypoint.invokeAll('enable')
+  }
+
+  /* Public */
+  /* http://imakewebthings.com/waypoints/api/refresh-all */
+  Waypoint.refreshAll = function() {
+    Waypoint.Context.refreshAll()
+  }
+
+  /* Public */
+  /* http://imakewebthings.com/waypoints/api/viewport-height */
+  Waypoint.viewportHeight = function() {
+    return window.innerHeight || document.documentElement.clientHeight
+  }
+
+  /* Public */
+  /* http://imakewebthings.com/waypoints/api/viewport-width */
+  Waypoint.viewportWidth = function() {
+    return document.documentElement.clientWidth
+  }
+
+  Waypoint.adapters = []
+
+  Waypoint.defaults = {
+    context: window,
+    continuous: true,
+    enabled: true,
+    group: 'default',
+    horizontal: false,
+    offset: 0
+  }
+
+  Waypoint.offsetAliases = {
+    'bottom-in-view': function() {
+      return this.context.innerHeight() - this.adapter.outerHeight()
+    },
+    'right-in-view': function() {
+      return this.context.innerWidth() - this.adapter.outerWidth()
+    }
+  }
+
+  window.Waypoint = Waypoint
+}())
+;(function() {
+  'use strict'
+
+  function requestAnimationFrameShim(callback) {
+    window.setTimeout(callback, 1000 / 60)
+  }
+
+  var keyCounter = 0
+  var contexts = {}
+  var Waypoint = window.Waypoint
+  var oldWindowLoad = window.onload
+
+  /* http://imakewebthings.com/waypoints/api/context */
+  function Context(element) {
+    this.element = element
+    this.Adapter = Waypoint.Adapter
+    this.adapter = new this.Adapter(element)
+    this.key = 'waypoint-context-' + keyCounter
+    this.didScroll = false
+    this.didResize = false
+    this.oldScroll = {
+      x: this.adapter.scrollLeft(),
+      y: this.adapter.scrollTop()
+    }
+    this.waypoints = {
+      vertical: {},
+      horizontal: {}
+    }
+
+    element.waypointContextKey = this.key
+    contexts[element.waypointContextKey] = this
+    keyCounter += 1
+
+    this.createThrottledScrollHandler()
+    this.createThrottledResizeHandler()
+  }
+
+  /* Private */
+  Context.prototype.add = function(waypoint) {
+    var axis = waypoint.options.horizontal ? 'horizontal' : 'vertical'
+    this.waypoints[axis][waypoint.key] = waypoint
+    this.refresh()
+  }
+
+  /* Private */
+  Context.prototype.checkEmpty = function() {
+    var horizontalEmpty = this.Adapter.isEmptyObject(this.waypoints.horizontal)
+    var verticalEmpty = this.Adapter.isEmptyObject(this.waypoints.vertical)
+    if (horizontalEmpty && verticalEmpty) {
+      this.adapter.off('.waypoints')
+      delete contexts[this.key]
+    }
+  }
+
+  /* Private */
+  Context.prototype.createThrottledResizeHandler = function() {
+    var self = this
+
+    function resizeHandler() {
+      self.handleResize()
+      self.didResize = false
+    }
+
+    this.adapter.on('resize.waypoints', function() {
+      if (!self.didResize) {
+        self.didResize = true
+        Waypoint.requestAnimationFrame(resizeHandler)
       }
-      $parent.waypoint('destroy');
-      this.unwrap();
-      return this.removeClass(this.data('stuckClass'));
-    });
-  });
+    })
+  }
 
-}).call(this);;(function($) {
+  /* Private */
+  Context.prototype.createThrottledScrollHandler = function() {
+    var self = this
+    function scrollHandler() {
+      self.handleScroll()
+      self.didScroll = false
+    }
+
+    this.adapter.on('scroll.waypoints', function() {
+      if (!self.didScroll || Waypoint.isTouch) {
+        self.didScroll = true
+        Waypoint.requestAnimationFrame(scrollHandler)
+      }
+    })
+  }
+
+  /* Private */
+  Context.prototype.handleResize = function() {
+    Waypoint.Context.refreshAll()
+  }
+
+  /* Private */
+  Context.prototype.handleScroll = function() {
+    var triggeredGroups = {}
+    var axes = {
+      horizontal: {
+        newScroll: this.adapter.scrollLeft(),
+        oldScroll: this.oldScroll.x,
+        forward: 'right',
+        backward: 'left'
+      },
+      vertical: {
+        newScroll: this.adapter.scrollTop(),
+        oldScroll: this.oldScroll.y,
+        forward: 'down',
+        backward: 'up'
+      }
+    }
+
+    for (var axisKey in axes) {
+      var axis = axes[axisKey]
+      var isForward = axis.newScroll > axis.oldScroll
+      var direction = isForward ? axis.forward : axis.backward
+
+      for (var waypointKey in this.waypoints[axisKey]) {
+        var waypoint = this.waypoints[axisKey][waypointKey]
+        var wasBeforeTriggerPoint = axis.oldScroll < waypoint.triggerPoint
+        var nowAfterTriggerPoint = axis.newScroll >= waypoint.triggerPoint
+        var crossedForward = wasBeforeTriggerPoint && nowAfterTriggerPoint
+        var crossedBackward = !wasBeforeTriggerPoint && !nowAfterTriggerPoint
+        if (crossedForward || crossedBackward) {
+          waypoint.queueTrigger(direction)
+          triggeredGroups[waypoint.group.id] = waypoint.group
+        }
+      }
+    }
+
+    for (var groupKey in triggeredGroups) {
+      triggeredGroups[groupKey].flushTriggers()
+    }
+
+    this.oldScroll = {
+      x: axes.horizontal.newScroll,
+      y: axes.vertical.newScroll
+    }
+  }
+
+  /* Private */
+  Context.prototype.innerHeight = function() {
+    /*eslint-disable eqeqeq */
+    if (this.element == this.element.window) {
+      return Waypoint.viewportHeight()
+    }
+    /*eslint-enable eqeqeq */
+    return this.adapter.innerHeight()
+  }
+
+  /* Private */
+  Context.prototype.remove = function(waypoint) {
+    delete this.waypoints[waypoint.axis][waypoint.key]
+    this.checkEmpty()
+  }
+
+  /* Private */
+  Context.prototype.innerWidth = function() {
+    /*eslint-disable eqeqeq */
+    if (this.element == this.element.window) {
+      return Waypoint.viewportWidth()
+    }
+    /*eslint-enable eqeqeq */
+    return this.adapter.innerWidth()
+  }
+
+  /* Public */
+  /* http://imakewebthings.com/waypoints/api/context-destroy */
+  Context.prototype.destroy = function() {
+    var allWaypoints = []
+    for (var axis in this.waypoints) {
+      for (var waypointKey in this.waypoints[axis]) {
+        allWaypoints.push(this.waypoints[axis][waypointKey])
+      }
+    }
+    for (var i = 0, end = allWaypoints.length; i < end; i++) {
+      allWaypoints[i].destroy()
+    }
+  }
+
+  /* Public */
+  /* http://imakewebthings.com/waypoints/api/context-refresh */
+  Context.prototype.refresh = function() {
+    /*eslint-disable eqeqeq */
+    var isWindow = this.element == this.element.window
+    /*eslint-enable eqeqeq */
+    var contextOffset = this.adapter.offset()
+    var triggeredGroups = {}
+    var axes
+
+    this.handleScroll()
+    axes = {
+      horizontal: {
+        contextOffset: isWindow ? 0 : contextOffset.left,
+        contextScroll: isWindow ? 0 : this.oldScroll.x,
+        contextDimension: this.innerWidth(),
+        oldScroll: this.oldScroll.x,
+        forward: 'right',
+        backward: 'left',
+        offsetProp: 'left'
+      },
+      vertical: {
+        contextOffset: isWindow ? 0 : contextOffset.top,
+        contextScroll: isWindow ? 0 : this.oldScroll.y,
+        contextDimension: this.innerHeight(),
+        oldScroll: this.oldScroll.y,
+        forward: 'down',
+        backward: 'up',
+        offsetProp: 'top'
+      }
+    }
+
+    for (var axisKey in axes) {
+      var axis = axes[axisKey]
+      for (var waypointKey in this.waypoints[axisKey]) {
+        var waypoint = this.waypoints[axisKey][waypointKey]
+        var adjustment = waypoint.options.offset
+        var oldTriggerPoint = waypoint.triggerPoint
+        var elementOffset = 0
+        var freshWaypoint = oldTriggerPoint == null
+        var contextModifier, wasBeforeScroll, nowAfterScroll
+        var triggeredBackward, triggeredForward
+
+        if (waypoint.element !== waypoint.element.window) {
+          elementOffset = waypoint.adapter.offset()[axis.offsetProp]
+        }
+
+        if (typeof adjustment === 'function') {
+          adjustment = adjustment.apply(waypoint)
+        }
+        else if (typeof adjustment === 'string') {
+          adjustment = parseFloat(adjustment)
+          if (waypoint.options.offset.indexOf('%') > - 1) {
+            adjustment = Math.ceil(axis.contextDimension * adjustment / 100)
+          }
+        }
+
+        contextModifier = axis.contextScroll - axis.contextOffset
+        waypoint.triggerPoint = elementOffset + contextModifier - adjustment
+        wasBeforeScroll = oldTriggerPoint < axis.oldScroll
+        nowAfterScroll = waypoint.triggerPoint >= axis.oldScroll
+        triggeredBackward = wasBeforeScroll && nowAfterScroll
+        triggeredForward = !wasBeforeScroll && !nowAfterScroll
+
+        if (!freshWaypoint && triggeredBackward) {
+          waypoint.queueTrigger(axis.backward)
+          triggeredGroups[waypoint.group.id] = waypoint.group
+        }
+        else if (!freshWaypoint && triggeredForward) {
+          waypoint.queueTrigger(axis.forward)
+          triggeredGroups[waypoint.group.id] = waypoint.group
+        }
+        else if (freshWaypoint && axis.oldScroll >= waypoint.triggerPoint) {
+          waypoint.queueTrigger(axis.forward)
+          triggeredGroups[waypoint.group.id] = waypoint.group
+        }
+      }
+    }
+
+    for (var groupKey in triggeredGroups) {
+      triggeredGroups[groupKey].flushTriggers()
+    }
+
+    return this
+  }
+
+  /* Private */
+  Context.findOrCreateByElement = function(element) {
+    return Context.findByElement(element) || new Context(element)
+  }
+
+  /* Private */
+  Context.refreshAll = function() {
+    for (var contextId in contexts) {
+      contexts[contextId].refresh()
+    }
+  }
+
+  /* Public */
+  /* http://imakewebthings.com/waypoints/api/context-find-by-element */
+  Context.findByElement = function(element) {
+    return contexts[element.waypointContextKey]
+  }
+
+  window.onload = function() {
+    if (oldWindowLoad) {
+      oldWindowLoad()
+    }
+    Context.refreshAll()
+  }
+
+  Waypoint.requestAnimationFrame = function(callback) {
+    var requestFn = window.requestAnimationFrame ||
+      window.mozRequestAnimationFrame ||
+      window.webkitRequestAnimationFrame ||
+      requestAnimationFrameShim
+    requestFn.call(window, callback)
+  }
+  Waypoint.Context = Context
+}())
+;(function() {
+  'use strict'
+
+  function byTriggerPoint(a, b) {
+    return a.triggerPoint - b.triggerPoint
+  }
+
+  function byReverseTriggerPoint(a, b) {
+    return b.triggerPoint - a.triggerPoint
+  }
+
+  var groups = {
+    vertical: {},
+    horizontal: {}
+  }
+  var Waypoint = window.Waypoint
+
+  /* http://imakewebthings.com/waypoints/api/group */
+  function Group(options) {
+    this.name = options.name
+    this.axis = options.axis
+    this.id = this.name + '-' + this.axis
+    this.waypoints = []
+    this.clearTriggerQueues()
+    groups[this.axis][this.name] = this
+  }
+
+  /* Private */
+  Group.prototype.add = function(waypoint) {
+    this.waypoints.push(waypoint)
+  }
+
+  /* Private */
+  Group.prototype.clearTriggerQueues = function() {
+    this.triggerQueues = {
+      up: [],
+      down: [],
+      left: [],
+      right: []
+    }
+  }
+
+  /* Private */
+  Group.prototype.flushTriggers = function() {
+    for (var direction in this.triggerQueues) {
+      var waypoints = this.triggerQueues[direction]
+      var reverse = direction === 'up' || direction === 'left'
+      waypoints.sort(reverse ? byReverseTriggerPoint : byTriggerPoint)
+      for (var i = 0, end = waypoints.length; i < end; i += 1) {
+        var waypoint = waypoints[i]
+        if (waypoint.options.continuous || i === waypoints.length - 1) {
+          waypoint.trigger([direction])
+        }
+      }
+    }
+    this.clearTriggerQueues()
+  }
+
+  /* Private */
+  Group.prototype.next = function(waypoint) {
+    this.waypoints.sort(byTriggerPoint)
+    var index = Waypoint.Adapter.inArray(waypoint, this.waypoints)
+    var isLast = index === this.waypoints.length - 1
+    return isLast ? null : this.waypoints[index + 1]
+  }
+
+  /* Private */
+  Group.prototype.previous = function(waypoint) {
+    this.waypoints.sort(byTriggerPoint)
+    var index = Waypoint.Adapter.inArray(waypoint, this.waypoints)
+    return index ? this.waypoints[index - 1] : null
+  }
+
+  /* Private */
+  Group.prototype.queueTrigger = function(waypoint, direction) {
+    this.triggerQueues[direction].push(waypoint)
+  }
+
+  /* Private */
+  Group.prototype.remove = function(waypoint) {
+    var index = Waypoint.Adapter.inArray(waypoint, this.waypoints)
+    if (index > -1) {
+      this.waypoints.splice(index, 1)
+    }
+  }
+
+  /* Public */
+  /* http://imakewebthings.com/waypoints/api/first */
+  Group.prototype.first = function() {
+    return this.waypoints[0]
+  }
+
+  /* Public */
+  /* http://imakewebthings.com/waypoints/api/last */
+  Group.prototype.last = function() {
+    return this.waypoints[this.waypoints.length - 1]
+  }
+
+  /* Private */
+  Group.findOrCreate = function(options) {
+    return groups[options.axis][options.name] || new Group(options)
+  }
+
+  Waypoint.Group = Group
+}())
+;(function() {
+  'use strict'
+
+  var $ = window.jQuery
+  var Waypoint = window.Waypoint
+
+  function JQueryAdapter(element) {
+    this.$element = $(element)
+  }
+
+  $.each([
+    'innerHeight',
+    'innerWidth',
+    'off',
+    'offset',
+    'on',
+    'outerHeight',
+    'outerWidth',
+    'scrollLeft',
+    'scrollTop'
+  ], function(i, method) {
+    JQueryAdapter.prototype[method] = function() {
+      var args = Array.prototype.slice.call(arguments)
+      return this.$element[method].apply(this.$element, args)
+    }
+  })
+
+  $.each([
+    'extend',
+    'inArray',
+    'isEmptyObject'
+  ], function(i, method) {
+    JQueryAdapter[method] = $[method]
+  })
+
+  Waypoint.adapters.push({
+    name: 'jquery',
+    Adapter: JQueryAdapter
+  })
+  Waypoint.Adapter = JQueryAdapter
+}())
+;(function() {
+  'use strict'
+
+  var Waypoint = window.Waypoint
+
+  function createExtension(framework) {
+    return function() {
+      var waypoints = []
+      var overrides = arguments[0]
+
+      if (framework.isFunction(arguments[0])) {
+        overrides = framework.extend({}, arguments[1])
+        overrides.handler = arguments[0]
+      }
+
+      this.each(function() {
+        var options = framework.extend({}, overrides, {
+          element: this
+        })
+        if (typeof options.context === 'string') {
+          options.context = framework(this).closest(options.context)[0]
+        }
+        waypoints.push(new Waypoint(options))
+      })
+
+      return waypoints
+    }
+  }
+
+  if (window.jQuery) {
+    window.jQuery.fn.waypoint = createExtension(window.jQuery)
+  }
+  if (window.Zepto) {
+    window.Zepto.fn.waypoint = createExtension(window.Zepto)
+  }
+}())
+;;;(function($) {
   $(function(){
     if(Modernizr.canvas){
       var color='#ffcc33';
-      if($("html").hasClass('victoria')){
-        console.log("victoria");
-        color='#61B2CA';
+      if($("body").hasClass('victoria')){
+        //console.log("victoria");
+        color='#00ccff';
       }
       $(".knob").knob({
         fgColor:color,
@@ -16100,11 +15353,42 @@ var Roots = {
           $(this).attr('src', new_src);
         });
       }
+      $(".l-main option").each(function(){
+        if($(this).val() === ''){
+          $(this).remove();
+        }
+      });
+      $("select").each(function(){
+        var $that = $(this);
+        var $label = $("label[for='"+$that.attr('id')+"']");
+        if($label.html().length> 0){
+          var option = '<option selected="selected" value="" disabled="disabled">'+$label.html()+'</option>';
+          $that.prepend(option);
+        }
+      });
+      $(".up,.up i").on('click touchstart',function(e){
+        e.preventDefault();
+        $("body").velocity("scroll", { duration: 500, easing: "ease" });
+        return false;
+      });
+      $(".l-header").waypoint(function(direction){
+        if(direction === 'down'){
+          $(".up").addClass('show');
+        }else{
+          $(".up").removeClass('show');
+        }
+      },
+      {offset:'-300'});
+
       if(Modernizr.input.placeholder){
         $(".webform-component-textfield  label, .webform-component-phone label, .webform-component-email label, .webform-component-select label").hide();
       }
       $(window).load(function(){
         $(".view-id-condos .views-row").matchHeight();
+      });
+      $(document).ajaxComplete(function(){
+        $matchRows =  $(".view-id-condos .views-row");
+        matchHeight_after_ajax($matchRows);
       });
       $("input.required").attr('required','required');
     }
@@ -16116,8 +15400,7 @@ var Roots = {
       var slider = $('.news-slider');
       //mainSlider.trigger('destroy.owl.carousel');
       slider.owlCarousel({
-        items:2,
-        margin:26,
+        items:1,
         stagePadding:0,
         loop:false,
         responsiveRefreshRate:50,
@@ -16135,11 +15418,13 @@ var Roots = {
             768:{
                 items:2,
                 nav:true,
+                margin:26,
             },
             1000:{
                 items:2,
                 nav:true,
-                loop:false
+                loop:false,
+                margin:26,
             }
         }
       });
@@ -16153,7 +15438,12 @@ var Roots = {
   },
   page_news: {
     init:function(){
-      $(".view-news.view-display-id-page .views-row").matchHeight();
+      var $matchRows = $(".view-news.view-display-id-page .views-row");
+      $matchRows.matchHeight();
+      $(document).ajaxComplete(function(){
+        $matchRows = $(".view-news.view-display-id-page .views-row");
+        matchHeight_after_ajax($matchRows);
+      });
     }
   }
 };
@@ -16178,7 +15468,17 @@ var UTIL = {
 };
 
 $(document).ready(UTIL.loadEvents);
-
+function matchHeight_after_ajax($img_container) { // do callback when images in $img_container (jQuery object) are loaded. Only works when ALL images in $img_container are newly inserted images and this function is called immediately after images are inserted into the target.
+  var _imgs = $img_container.find('img'),
+  img_length = _imgs.length,
+  img_load_cntr = 0;
+  if (img_length) { //if the $img_container contains new images.
+    _imgs.on('load', function() { //then we avoid the callback until images are loaded
+        img_load_cntr++;
+        $img_container.matchHeight();
+    });
+  }
+}
 })(jQuery); 
 ;(function($) {
   $(function(){
@@ -16257,7 +15557,7 @@ $(document).ready(UTIL.loadEvents);
     }
     function closeMobileMenu(e){
       if($(".l-page").hasClass('mobile-menu-visible')) {
-        $(".l-page,body").removeClass('mobile-menu-visible');
+        $(".l-page, body,html").removeClass('mobile-menu-visible');
         $mobileNavContainer.removeClass('mobile-menu-visible');
         $('#mobile-navigation-toggle').removeClass('active');
         //$('.navbar-nav').tendina('hideAll');
@@ -16269,13 +15569,13 @@ $(document).ready(UTIL.loadEvents);
     //$mobileNavContainer.height($(window).height());
     $('.menu-toggle').on('click', function(e) {
       if (!$mobileNavContainer.hasClass('mobile-menu-visible')) {
-        $(".l-page, body").addClass('mobile-menu-visible');
+        $(".l-page, body,html").addClass('mobile-menu-visible');
         $mobileNavContainer.addClass('mobile-menu-visible');
         $(this).addClass('active');
         e.preventDefault();
         e.stopPropagation();
       }else{
-        $(".l-page,body").removeClass('mobile-menu-visible');
+        $(".l-page, body,html").removeClass('mobile-menu-visible');
         $mobileNavContainer.removeClass('mobile-menu-visible');
         $(this).removeClass('active');
         e.preventDefault();
@@ -16378,7 +15678,7 @@ function doGTranslate(a) {
   $(window).load(function(){
     var language = $(".goog-te-combo").find(":selected").text();
     var lang = $.cookie('language');
-    var $translateLink = $(".translate a");
+    var $translateLink = $(".translate a, a.translate");
     //console.log(lang);
     if(lang === "CN"){
       $translateLink.removeClass('chinese');

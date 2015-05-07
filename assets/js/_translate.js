@@ -42,7 +42,7 @@ function doGTranslate(a) {
   $(window).load(function(){
     var language = $(".goog-te-combo").find(":selected").text();
     var lang = $.cookie('language');
-    var $translateLink = $(".translate a");
+    var $translateLink = $(".translate a, a.translate");
     //console.log(lang);
     if(lang === "CN"){
       $translateLink.removeClass('chinese');

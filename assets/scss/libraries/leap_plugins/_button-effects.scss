@@ -18,13 +18,11 @@
 .sc-btn {
   display: inline-block;
   position: relative;
-  margin: 0 .25em .5em 0;
   padding: 0;
   color: #fff;
   font-family: "Helvetica Neue", "Helvetica", sans-serif;
-  font-size: 13px;
   font-weight: 400;
-  line-height: 1em;
+  line-height: 1;
   text-decoration: none;
   text-shadow: rgba(0, 0, 0, 0.3) 0px -0.1em 0px;
   border: 0;
@@ -57,13 +55,12 @@
 
 .sc-icon {
   margin: 0 -.4em 0 0;
-  padding: 0.6em .8em .5em;
+  padding: 12px 10px;
   border-right: rgba(255, 255, 255, 0.1) 0.1em solid;
   box-shadow: inset rgba(0, 0, 0, 0.1) -0.1em 0px 0px; }
 
 .sc-text {
-  padding: .95em 1em .85em 1em;
-  font-size: 1.15em;
+  padding:19px 10px;
   text-align: center; }
 
 svg {

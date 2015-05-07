@@ -44,9 +44,9 @@
  * some advanced theming you may have to remove all the whitespace.
  */
  if($action === 'flag'){
-   $link_text = '<i class="ico-moon icon-heart"></i>'.$link_text;
+  $link_text = '<i class="ico-moon icon-empty-heart"></i>'.$link_text;
  }else{
-   $link_text = '<i class="ico-moon icon-empty-heart"></i>'.$link_text;
+   $link_text = '<i class="ico-moon icon-heart"></i>'.$link_text;
  }
 ?>
 <?php if ($needs_wrapping_element): ?>

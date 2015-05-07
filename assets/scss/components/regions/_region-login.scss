@@ -1,5 +1,12 @@
 #login{
   @include vertical-align;
+  .register{
+    text-align: center;;
+    a{
+      padding:19px 25px;
+      white-space: nowrap;
+    }
+  }
   &.wrap{
     background-color: #fff;
     @include pie-clearfix;
@@ -46,6 +53,14 @@
     }
     .col-2{
       @include float-span(1, 2,$grid:1 2,$gutter:.25);
+    }
+    form{
+      >div{
+        padding-left: 35px;
+      }
+      *{
+        will-change:transform;
+      }
     }
   }
   @include from(d,$noquery){

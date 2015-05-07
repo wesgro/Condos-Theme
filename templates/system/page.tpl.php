@@ -75,7 +75,7 @@
     <div class="wrap">
       <div class="l-branding l-region l-region--branding">
         <?php if ($logo): ?>
-          <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="site-logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" /></a>
+          <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="site-logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" width="230"/></a>
         <?php endif; ?>
   
         <?php if (($site_name || $site_slogan) && !$logo): ?>

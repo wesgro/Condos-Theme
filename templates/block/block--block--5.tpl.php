@@ -58,11 +58,24 @@
         </span>
       </a>
     </div>
+    
   </div>
   <div class="col col-2">
     <?php
-      $elements = drupal_get_form("user_login"); 
-      $form = drupal_render($elements);
-      echo $form;
+      //$elements = drupal_get_form("user_login"); 
+      //$form = drupal_render($block);
+    $elements = drupal_get_form('user_login_block');
+    $rendered = drupal_render($elements);
+    $output  = '<form action="' . $elements['#action'] .
+                              '" method="' . $elements['#method'] .
+                              '" id="' . $elements['#id'] .
+                              '" accept-charset="UTF-8" class="user-login"><div>';
+    $output .= $elements['name']['#children'];
+    $output .= $elements['pass']['#children'];
+    $output .= $elements['form_build_id']['#children'];
+    $output .= $elements['form_id']['#children'];
+    $output .= $elements['actions']['#children'];
+    $output .= '</div><div><a href="/user/register">Make a new account</a> | <a href="/user/password">Forgot your password?</a></div></form>';
+    print $output;
     ?>
   </div>

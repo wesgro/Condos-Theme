@@ -32,6 +32,6 @@
 <?php if ($content): ?>
   <div<?php print $attributes; ?>>
     <?php print $content; ?>
-    <a href="#" class="menu-toggle">Menu</a>
+    <a href="#" class="menu-toggle icon-menu ico-moon">Menu</a>
   </div>
 <?php endif; ?>

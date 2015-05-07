@@ -33,3 +33,41 @@ address{
 .l-page{
   @include rem(padding-bottom, 40);
 }
+.not-logged-in{
+  .tabs{
+    display: none;
+  }
+}
+.up{
+  display: block;
+  position: fixed;
+  right: 0px;
+  bottom:0px;
+  z-index: 10;
+  cursor:pointer;
+  height: 50px;
+  width: 100%;
+  background-color: rgba(0,0,0,0.3);
+  @include transition(all .35s linear);
+  @include translateY(100%);
+  &.show{
+    @include translateY(0%);
+  }
+  i{
+    display: block;
+    position: absolute;
+    top:50%;
+    left:50%;
+    font-size: 24px;
+    margin-left: -12px;
+    margin-top: -12px;
+    color:#FFF;
+  }
+  &:hover,
+  &:focus{
+    background-color: rgba(0,0,0,0.5);
+  }
+  @include from(sd,$noquery){
+    display: none;
+  }
+}

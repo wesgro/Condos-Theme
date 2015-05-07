@@ -35,27 +35,46 @@
   #{$property}: $remValues; 
 }
 
+@mixin header-font(){
+  font-family: $headerFont;
+  font-weight: 200;
+}
 
 @mixin button{
+  text-align: center;
+  position: relative;
   @include inline-block;
   color: #000;
-  text-transform: uppercase;
-  font-family: $headerFont;
   border: none;
-  @include border-radius(5px);
-  padding: 31px 44px;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 1;
-  font-family: $otherFont;
-  &:hover{
-    color: #000;
-    background-color: #FFF;
+  @include border-radius(0px);
+  padding: 10px 25px;
+  @include header-font;
+  background-color: $colourHighlight;
+  .victoria &{
+    background-color: $victoriaHighlight;
   }
-  @include breakpoint($mobile){
-    padding: 10px 21px 14px;
-    font-size: 14px;
-    
+  &::before{
+    content: " ";
+    border: 2px solid #fff;
+    position: absolute;
+    top:0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    opacity: 0;
+    @include transition(all .5s ease);
+    @include scale(0,0);
+  }
+  &:hover,
+  &:focus{
+    color:#fff;
+    background-color: #333333;
+  }
+  &:hover::before,
+  &:focus::before{
+      opacity: 1;
+      @include scale(1,1);
   }
 }
 .button{

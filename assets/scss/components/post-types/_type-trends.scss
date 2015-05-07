@@ -30,7 +30,8 @@
     }
     @include from(lt, $noquery){
       @include float-span(1,$grid:2,$gutter:.10);
-      &.views-row-last{
+      &.views-row-last,
+      &.views-row-even{
         @include float-span(1,'last',$grid:2,$gutter:.10);
       }
     }
@@ -55,7 +56,7 @@
 }
 .node--trends,
 .node--yearly-trends{
-  font-family: $otherFont;
+  @include header-font();
   .field-label,
   h3,
   .field--year{

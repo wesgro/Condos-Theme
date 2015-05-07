@@ -4,17 +4,41 @@ $fontDir:"../fonts";
 @charset "UTF-8";
 
 @font-face {
+  font-family: 'icomoon';
+  src:url('#{$fontDir}/icomoon.eot?sk63z1');
+  src:url('#{$fontDir}/icomoon.eot?#iefixsk63z1') format('embedded-opentype'),
+    url('#{$fontDir}/icomoon.woff?sk63z1') format('woff'),
+    url('#{$fontDir}/icomoon.ttf?sk63z1') format('truetype'),
+    url('#{$fontDir}/icomoon.svg?sk63z1#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="ico-"]:before,
+[class*=" ico-"]:before,
+%ico,
+.ico-moon {
+  font-family: "icomoon" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+@font-face {
   font-family: "leap-font-set";
-  src:url("#{$fontDir}/leap-font-set.eot");
-  src:url("#{$fontDir}/leap-font-set.eot?#iefix") format("embedded-opentype"),
-      url("#{$fontDir}/leap-font-set.woff") format("woff"),
-      url("#{$fontDir}/leap-font-set.ttf") format("truetype"),
-      url("#{$fontDir}/leap-font-set.svg#leap-font-set") format("svg");
+  src:url("#{$fontDir}/standard-leap-font.eot");
+  src:url("#{$fontDir}/standard-leap-font.eot?#iefix") format("embedded-opentype"),
+      url("#{$fontDir}/standard-leap-font.woff") format("woff"),
+      url("#{$fontDir}/standard-leap-font.ttf") format("truetype"),
+      url("#{$fontDir}/standard-leap-font.svg#leap-font-set") format("svg");
   font-weight: normal;
   font-style: normal;
 
 }
-
+ 
 [data-icon]:before {
   font-family: "leap-font-set" !important;
   content: attr(data-icon);
@@ -28,7 +52,7 @@ $fontDir:"../fonts";
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon:before,
+.icon::before,
 %icon {
   font-family: "leap-font-set" !important;
   font-style: normal !important;
@@ -41,308 +65,339 @@ $fontDir:"../fonts";
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-.icon-bus:before,
-%bus {
+.icon-logout:before,
+%logout {
   content: "\e000";
-}
-.icon-clock:before,
-%clock {
-  content: "\e001";
-}
-.icon-microphone:before,
-%microphone{
-  content: "\e002";
-}
-.icon-fontawesome-webfont:before,
-%caret-left {
-  content: "\e003";
-}
-.icon-fontawesome-webfont-1:before,
-%caret-right {
-  content: "\e004";
-}
-.icon-fontawesome-webfont-2:before,
-%caret-up {
-  content: "\e005";
-}
-.icon-fontawesome-webfont-3:before,
-%caret-down {
-  content: "\e006";
-}
-.icon-fontawesome-webfont-4:before,
-%twitter-bird {
-  content: "\e007";
-}
-.icon-fontawesome-webfont-5:before,
-%skype {
-  content: "\e008";
-}
-.icon-fontawesome-webfont-6:before,
-%instagram {
-  content: "\e009";
-}
-.icon-fontawesome-webfont-7:before,
-%facebook-badge {
-  content: "\e00a";
-}
-.icon-fontawesome-webfont-8:before,
-%twitter-badge {
-  content: "\e00b";
-}
-.icon-fontawesome-webfont-9:before,
-%linkedin-badge {
-  content: "\e00c";
-}
-.icon-fontawesome-webfont-10:before,
-%pinterest {
-  content: "\e00d";
-}
-.icon-fontawesome-webfont-11:before,
-%googleplus-badge {
-  content: "\e00e";
-}
-.icon-fontawesome-webfont-12:before,
-%pinterest-badge {
-  content: "\e00f";
-}
-.icon-fontawesome-webfont-13:before,
-%googleplus {
-  content: "\e010";
-}
-.icon-fontawesome-webfont-14:before,
-%twitter-badge-letter  {
-  content: "\e011";
-}
-.icon-fontawesome-webfont-15:before,
-%twitter-letter {
-  content: "\e012";
-}
-.icon-fontawesome-webfont-16:before,
-%youtube-badge {
-  content: "\e013";
-}
-.icon-fontawesome-webfont-17:before,
-%youtube {
-  content: "\e014";
-}
-.icon-fontawesome-webfont-18:before,
-%youtube-play{
-  content: "\e015";
-}
-.icon-fontawesome-webfont-19:before,
-%instagram-flat {
-  content: "\e016";
-}
-.icon-fontawesome-webfont-20:before,
-%search {
-  content: "\e017";
-}
-
-.icon-circle-minus:before,
-%circle-minus {
-  content: "\e018";
-}
-.icon-circle-plus:before,
-%circle-plus {
-  content: "\e019";
-}
-.icon-fontawesome-webfont-21:before,
-%facebook-letter {
-  content: "\e01a";
-}
-.icon-fontawesome-webfont-22:before,
-%linkedin-letter {
-  content: "\e01b";
-}
-.icon-square-minus:before,
-%square-minus {
-  content: "\e01c";
-}
-.icon-square-plus:before,
-%square-plus {
-  content: "\e01d";
-}
-.icon-fontawesome-webfont-23:before,
-%envelope {
-  content: "\e01e";
-}
-.icon-square-delete:before,
-%square-delete {
-  content: "\e01f";
-}
-.icon-fontawesome-webfont-24:before,
-%home {
-  content: "\e020";
-}
-.icon-fontawesome-webfont-25:before,
-%phone {
-  content: "\e021";
-}
-
-.icon-iphone:before,
-%mobile {
-  content: "\e022";
-}
-.icon-pin2:before,
-%pin {
-  content: "\e023";
-}
-.icon-user:before,
-%user{
-  content: "\e024";
-}
-.icon-fontawesome-webfont-26:before,
-%right-arrow {
-  content: "\e025";
-}
-.icon-fontawesome-webfont-27:before,
-%down-arrow {
-  content: "\e026";
-}
-.icon-fontawesome-webfont-28:before,
-%up-arrow {
-  content: "\e027";
-}
-.icon-fontawesome-webfont-29:before,
-%left-arrow {
-  content: "\e028";
 }
 .icon-plus:before,
 %plus {
-  content: "\e029";
+  content: "\e001";
 }
-.icon-plus-circled:before,
-%plus-circle {
-  content: "\e02a";
+.icon-trip-advisor:before,
+%trip-advisor {
+  content: "\e002";
 }
-.icon-fontawesome-webfont-30:before,
-%circle-full {
-  content: "\e02b";
+.icon-pencil:before,
+%pencil {
+  content: "\e003";
 }
-.icon-fontawesome-webfont-31:before,
-%circle-empty {
-  content: "\e02c";
-}
-
-.icon-fontawesome-webfont-32:before,
-%caret-right-fat {
-  content: "\e02d";
-}
-.icon-cancel-circled:before,
-%caret-left-circle {
-  content: "\e02f";
-}
-.icon-fontawesome-webfont-33:before,
-%circle-delete {
-  content: "\e030";
-}
-.icon-fontawesome-webfont-34:before,
-%caret-right-circle {
-  content: "\e02e";
-}
-.icon-fontawesome-webfont-35:before {
-  content: "\e02f";
-}
-.icon-fontawesome-webfont-36:before,
-%caret-up-circle {
-  content: "\e031";
-}
-.icon-fontawesome-webfont-37:before,
-%caret-down-circle {
-  content: "\e032";
-}
-.icon-fax:before,
-%fax{
-  content: "\e033";
-}
-.icon-office:before,
-%office {
-  content: "\e034";
-}
-.icon-mail:before,
-%mail {
-  content: "\e035";
-}
-.icon-fontawesome-webfont-38:before,
-%check-circle-full {
-  content: "\e036";
-}
-.icon-fontawesome-webfont-39:before,
-%check-thick {
-  content: "\e037";
-}
-.icon-fontawesome-webfont-40:before,
-%check-square {
-  content: "\e038";
-}
-.icon-fontawesome-webfont-41:before,
-%check-circle {
-  content: "\e039";
-}
-.icon-fontawesome-webfont-42:before,
-%check-square-filled {
-  content: "\e03a";
-}
-.icon-fontawesome-webfont-43:before,
-%speech-bubble {
-  content: "\e03b";
-}
-.icon-fontawesome-webfont-44:before,
-%speech-bubble-two {
-  content: "\e03c";
-}
-.icon-fontawesome-webfont-45:before,
-%like {
-  content: "\e03d";
-}
-.icon-laptop:before,
-%laptop {
-  content: "\e03e";
-}
-.icon-monitor:before,
-%monitor {
-  content: "\e03f";
-}
-.icon-marker:before,
-%marker2 {
-  content: "\e040";
-}
-.icon-check:before,
-%check {
-  content: "\e041";
-}
-.icon-close:before,
-%close {
-  content: "\e042";
-}
-
-.icon-menu:before,
-%menu {
-  content: "\e043";
-}
-
-.icon-arrow-left-and-right:before,
-%arrow-left-and-right {
-  content: "\e044";
-}
-.icon-bulls-eye:before,
-%bulls-eye {
-  content: "\e045";
-}
-.icon-line-graph:before,
-%line-graph {
-  content: "\e046";
+.icon-cart:before,
+%cart {
+  content: "\e004";
 }
 .icon-piggy-bank:before,
 %piggy-bank {
+  content: "\e005";
+}
+.icon-beer:before,
+%beer {
+  content: "\e006";
+}
+.icon-alert:before,
+%alert {
+  content: "\e007";
+}
+.icon-cloud-download:before,
+%cloud-download {
+  content: "\e008";
+}
+.icon-cloud-upload:before,
+%cloud-upload {
+  content: "\e009";
+}
+.icon-untapped-icon:before,
+%untapped-icon {
+  content: "\e00a";
+}
+.icon-pencil-on-book:before,
+%pencil-on-book {
+  content: "\e00b";
+}
+.icon-cell-phone-apps:before,
+%cell-phone-apps {
+  content: "\e00c";
+}
+.icon-cell-phone:before,
+%cell-phone {
+  content: "\e00d";
+}
+.icon-thin-clock:before,
+%thin-clock {
+  content: "\e00e";
+}
+.icon-bulls-eye:before,
+%bulls-eye {
+  content: "\e00f";
+}
+.icon-line-graph:before,
+%line-graph {
+  content: "\e010";
+}
+.icon-arrow-left-and-right:before,
+%arrow-left-and-right {
+  content: "\e011";
+}
+.icon-globe:before,
+%globe {
+  content: "\e012";
+}
+
+.icon-home:before,
+%home{
+  content: "\e014";
+}
+.icon-sign-in:before,
+%sign-in {
+  content: "\e015";
+}
+.icon-sign-out:before,
+%sign-out {
+  content: "\e016";
+}
+.icon-trashcan:before,
+%trashcan {
+  content: "\e017";
+}
+.icon-close:before,
+%close{
+  content: "\e018";
+}
+.icon-office:before,
+%office {
+  content: "\e019";
+}
+.icon-fax:before,
+%fax {
+  content: "\e01a";
+}
+.icon-iphone:before,
+%iphone {
+  content: "\e01b";
+}
+.icon-pin2:before,
+%pin2 {
+  content: "\e01c";
+}
+.icon-user-circle:before,
+%user-circle {
+  content: "\e01d";
+}
+.icon-square-plus:before,
+%square-plus {
+  content: "\e01e";
+}
+.icon-square-minus:before,
+%square-minus {
+  content: "\e01f";
+}
+.icon-microphone:before,
+%microphone {
+  content: "\e020";
+}
+.icon-clock:before,
+%clock {
+  content: "\e021";
+}
+.icon-bus:before,
+%bus {
+  content: "\e022";
+}
+.icon-user:before,
+%user{
+  content: "\e023";
+}
+.icon-user-circle-1:before,
+%user-circle-1 {
+  content: "\e024";
+}
+.icon-users:before,
+%users {
+  content: "\e025";
+}
+.icon-circle-plus:before,
+ %circle-plus{
+  content: "\e026";
+}
+.icon-circle-minus:before,
+%circle-minus {
+  content: "\e027";
+}
+.icon-computer-mouse:before,
+%computer-mouse {
+  content: "\e028";
+}
+.icon-computer-screen:before,
+%computer-screen {
+  content: "\e029";
+}
+.icon-mail:before,
+%mail {
+  content: "\e02a";
+}
+.icon-list-thumbnails:before,
+%list-thumbnails {
+  content: "\e02b";
+}
+.icon-magnifying-glass:before,
+%magnifying-glass {
+  content: "\e02c";
+}
+.icon-monitor:before,
+%monitor {
+  content: "\e02d";
+}
+.icon-print:before
+%print {
+  content: "\e02e";
+}
+.icon-price-tag:before,
+%price-tag {
+  content: "\e02f";
+}
+.icon-social-yelp:before,
+%yelp {
+  content: "\e030";
+}
+.icon-angle-down:before,
+%angle-down,
+%caret-down {
+  content: "\e031";
+}
+.icon-angle-left:before,
+%angle-left {
+  content: "\e032";
+}
+.icon-angle-right:before,
+%angle-right,
+%caret-right {
+  content: "\e033";
+}
+.icon-angle-up:before,
+%angle-up,
+%caret-up {
+  content: "\e034";
+}
+.icon-facebook:before,
+%facebook {
+  content: "\e035";
+}
+.icon-facebook-square:before,
+%facebook-square {
+  content: "\e036";
+}
+.icon-google-plus-square:before,
+%google-plus-square {
+  content: "\e037";
+}
+.icon-google-plus:before,
+%google-plus {
+  content: "\e038";
+}
+.icon-home-1:before,
+%home-1 {
+  content: "\e039";
+}
+.icon-instagram:before,
+%instagram {
+  content: "\e03a";
+}
+.icon-linkedin-square:before,
+%linkedin-square {
+  content: "\e03b";
+}
+.icon-linkedin:before,
+%linkedin {
+  content: "\e03c";
+}
+.icon-letter-mail:before,
+%envelope {
+  content: "\e03d";
+}
+.icon-log-in:before,
+%log-in {
+  content: "\e03e";
+}
+.icon-log-out:before,
+%log-out {
+  content: "\e03f";
+}
+.icon-minus:before,
+%minus {
+  content: "\e040";
+}
+.icon-rss:before,
+%rss {
+  content: "\e041";
+}
+.icon-skype:before,
+%skype {
+  content: "\e042";
+}
+.icon-twitter:before,
+%twitter {
+  content: "\e043";
+}
+.icon-twitter-square:before,
+%twitter-square {
+  content: "\e044";
+}
+.icon-youtube-play:before,
+%youtube-play {
+  content: "\e045";
+}
+.icon-youtube:before,
+%youtube {
+  content: "\e046";
+}
+.icon-pinterest:before,
+%pinterest {
+  content: "\e049";
+}
+.icon-pinterest-square:before,
+%pinterest-square {
+  content: "\e04a";
+}
+.icon-phone:before,
+%phone {
+  content: "\e04b";
+}
+.icon-chevron-right-circle:before,
+%chevron-right-circle {
+  content: "\e04c";
+}
+.icon-chevron-up-circle:before,
+%chevron-up-circle {
+  content: "\e04d";
+}
+.icon-chevron-down-circle:before,
+%chevron-down-circle {
+  content: "\e04e";
+}
+.icon-delete-circle:before,
+%delete-circle {
+  content: "\e04f";
+}
+.icon-zoom-in:before,
+%zoom-in{
+  content: "\e050";
+}
+.icon-zoom-out:before,
+%zoom-out{
+  content: "\e051";
+}
+.icon-search-find:before,
+%search-find {
+  content: "\e052";
+}
+.icon-telephone:before,
+%telephone {
   content: "\e047";
 }
-.icon-pin-love:before,
-%pin-love {
+.icon-search:before,
+%search {
   content: "\e048";
 }
-.icon-user-network:before,
-%user-network {
-  content: "\e049";
+.icon-play:before,
+%play {
+  content: "\e053";
 }

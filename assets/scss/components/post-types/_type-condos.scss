@@ -46,9 +46,9 @@
 }
 .node--condo-project--teaser,
 .node--condo-project--comparison{
-  font-family: $otherFont;
+  @include header-font();
   .field-label{
-    font-weight: 700;
+    font-weight: 400;
     padding-bottom: 5px;
   }
   .field-item{
@@ -63,6 +63,9 @@
   }
   figure{
     line-height: 0;
+    img{
+      min-width: 100%;
+    }
   }
   .ds-hero{
     padding: 0;
@@ -86,10 +89,10 @@
       padding-top: 20px;
       padding-bottom: 20px;
       text-transform: uppercase;
-      font-weight: 700;
+      @include header-font();
       margin: 0;
-      @include rem(padding-left, 25px);
-      @include rem(padding-right, 25px);
+      @include rem(padding-left, 20px);
+      @include rem(padding-right, 20px);
       @include rem(font-size, 23px);
       .victoria &{
         background-color: $victoriaHighlight;
@@ -139,6 +142,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
+    z-index: 5;
     a{
       color:#000;
     }
@@ -226,7 +230,7 @@
     }
     a{
       color:#000;
-      font-family: $otherFont;
+      @include header-font();
     }
   }
   .ds-gallery{
@@ -276,16 +280,20 @@
     h3,
     .field-label,
     .field-item{
-      font-family: $otherFont;
+      @include header-font();
       @include rem(font-size, 26px);
       margin: 0;
       line-height: 1.1;
     }
     .flag-wrapper{
-      @include button-builder('a', '%icon-heart');
+      @include button-builder('a', '%icon-empty-heart');
+      &::after{
+
+      }
       a.unflag-action{
         &:after{
-          @extend %icon-empty-heart;
+          @extend %icon-heart;
+          color:#d91919;
         }
       }
       i{
@@ -304,7 +312,7 @@
         }
       }
       @include from(lt, $noquery){
-        @include float-span(1, $grid:3,$gutter:0);
+        @include float-span(1, $grid:4,$gutter:0);
         border-right: 1px solid #adadad;
         padding-left: 31px;
         padding-right: 31px;
@@ -312,7 +320,7 @@
           @include vertical-align;
         }
         &:last-child{
-          @include float-span(1, 'last', $grid:3,$gutter:0);
+          @include float-span(1, 'last', $grid:4,$gutter:0);
           border-right: 0;
           padding-right: 0;
         }
@@ -329,11 +337,11 @@
       @include rem(font-size, 22px);
     }
     .description{
-      font-family: $otherFont;
+      @include header-font();
       position: absolute;
       top:50%;
       height: 22px;
-      margin-top: -12px;
+      margin-top: -16px;
       left: 0;
       right: 0;
       text-transform: uppercase;
@@ -345,13 +353,22 @@
     }
   }
   .ds-project-info{
+    .col-1,.col-2{
+      line-height: 1.1;
+    }
+    .field-item{
+      font-weight: 400;
+    }
     h4.field-label{
       font-size: 16px;
-      font-weight: 700;
       margin: 0;
       margin-bottom: 15px;
       padding-bottom: 15px;
       border-bottom: 1px solid #dadada;
+      @include to(pt){
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
     }
     img{
       position: absolute;
@@ -376,7 +393,7 @@
     }
     .col-1,
     .col-2{
-      font-family: $otherFont;
+      @include header-font();
       .field-label{
         @include rem(padding-left, 45px);
         position: relative;
@@ -393,9 +410,6 @@
       }
     }
     .col-3{
-      h4{
-        font-weight: 400;
-      }
       @include to(pt){
         padding-top: 15px;
       }
@@ -403,8 +417,9 @@
   }
   .ds-why{
     background-color: #f7f6f6;
-    text-align: center;
+    
     @include from(lt, $noquery){
+      text-align: center;
       .field-container{
         max-width: 800px;
         margin: 0 auto;
@@ -426,14 +441,12 @@
         list-style-type: none;
       }
       a{
+        @include button;
         display: block;
         color: #000;
         background-color: $colourHighlight;
         text-align: center;
-        @include border-radius(0px);
         margin-bottom: 5px;
-        padding:10px 15px;
-        font-family: $otherFont;
         .victoria &{
           background-color: $victoriaHighlight;
         }
@@ -444,11 +457,11 @@
       padding:25px 15px;
       @include border-radius(0px); 
       color: #000;
-      overflow: hidden;
-      @include rem(max-height, 142px);
+      @include rem(min-height, 172px);
       line-height: 1.2;
       p{
         margin-top: 3px;
+        margin-bottom: 0;
       }
     }
     @include from(lt, $noquery){
@@ -499,7 +512,7 @@
       @include button-builder('a');
     }
     .field-label{
-      font-weight: 700;
+      font-weight: 400;
     }
   }
 }

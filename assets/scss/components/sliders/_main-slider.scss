@@ -20,46 +20,36 @@
       }
     }
     .owl-nav div{
-      @include rem(width, 75px);
-      @include rem(height, 75px);
+      width: 72px;
+      height:72px;
       &:before{
-        @extend %ico-moon;
+        @extend %icon;
         position: absolute;
         text-align: center;
         @include rem(font-size, 72px);
         z-index: 10;
         top: 0;
-        @include rem(right, -3px);
         bottom: 0;
         color: #FFF;
-        line-height: .91;
       }
       @include to(lp){
-        @include rem(width, 30px);
-        @include rem(height, 30px);
-        border-width: 0px !important;
-        background-color: transparent !important;
+        width: 48px;
+        height:48px;
         &::before{
-          top:1px;
-          @include rem(font-size, 29px);
+          @include rem(font-size, 48px);
         }
       }
     }
     .owl-prev{
       &:before{
-        @extend %icon-arrow-left;
-        @include to(lp){
-          right:-1px;
-        }
+        @extend %angle-left;
+        left: 0;
       }
     }
     .owl-next{
       &:before{
-        @extend %icon-arrow-right;
-        @include rem(right, -7px);
-        @include to(lp){
-          right:-2px;
-        }
+        @extend %angle-right;
+        right:0;
       }
     }
   }

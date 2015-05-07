@@ -64,7 +64,7 @@ $slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'   
 .l-region--header{
   .front &{
     @include rem(padding-top, 57px);
-    @include rem(padding-bottom, 65px);
+    @include rem(padding-bottom, 57px);
     @include to(lp){
       @include rem(padding-top, 35px);
       @include rem(padding-bottom, 35px);
@@ -72,14 +72,17 @@ $slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'   
   }
   .not-front &{
     @include rem(padding-top, 20px);
-    @include rem(padding-bottom, 25px);
+    @include rem(padding-bottom, 20px);
   }
 }
 .l-region--branding{
   position: absolute;
   left: 15px;
   top:50%;
-  margin-top: -10px;
+  margin-top: -11.5px;
+  img{
+    display: block;
+  }
 }
 .menu-toggle{
   @include from(sd, $noquery){
@@ -87,6 +90,34 @@ $slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'   
   }
   .touch &{
     display: block !important;
+  }
+}
+#block-menu-menu-social-media,
+#block-system-main-menu{
+  .menu li{
+    height: 67px;
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+#block-menu-menu-social-media{
+  display: none;
+  .touch &{
+    display: none;
+  }
+  .menu{
+    display: table;
+    width: 100%;
+  }
+  @include from(lt,$noquery){
+    display: block;
+    float: left;
+    margin-left: 70.28571%;
+    width: 5.57143%;
+  }
+  @include from(ld){
+    margin-left: 71.28571%;
+    width: 4.57143%;
   }
 }
 #block-system-main-menu{
@@ -97,7 +128,7 @@ $slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'   
   @include from(lt, $noquery){
     display: block;
     @include grid-span(3,3);
-    margin-left: 26.28571%;
+    margin-left: 24.28571%;
     width: 50.57143%;
   }
   @include from(sd, $noquery){

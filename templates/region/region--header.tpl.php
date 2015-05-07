@@ -28,11 +28,13 @@
  * @see template_preprocess_region()
  * @see template_process()
  */
+$site_name = variable_get('site_name');
+$city = (strpos(strtolower($site_name),'van') === false)?'Victoria':'Vancouver';
 ?>
 <div<?php print $attributes; ?>>
   <div class="wrap">
     <?php if($is_front):?>
-      <h3>The easiest way to find new condos and town houses in Vancouver, BC</h3>
+      <h3>The easiest way to find new condos and town houses in <?php echo $city;?>, BC</h3>
     <?php endif;?>
     <?php include(path_to_theme().'/templates/custom/city-search.tpl.php');?>
     <?php include(path_to_theme().'/templates/custom/find-closest.tpl.php');?>

@@ -8,7 +8,7 @@
 <div<?php print $attributes; ?>>
   <ul>
     <li class="translate"><a href="#" class="chinese"><span class="notranslate">中国</span></a></li>
-    <li class="search"><a href="#"><span><i class="ico-moon icon-search"></i></span></a></li>
+    <li class="search"><a href="#"><span><i class="icon icon-search-find"></i></span></a></li>
     <li class="user-menu condos">
       <a href="#" class=""><span><i class="ico-moon icon-empty-heart"></i> My List</span></a>
       <?php

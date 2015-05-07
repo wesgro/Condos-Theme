@@ -5,7 +5,7 @@ $regions = leap_get_city_regions();
 <ul class="dropdown city-selector selector">
   <li class="top-level">
     <div class="container">
-      <b>Where do you want to live?</b> <span class="ico-moon icon-arrow-down"></span>
+      <b>Where do you want to live?</b> <span class="icon icon-angle-down"></span>
     </div>
     <ul class="city-selections selections">
       <?php 

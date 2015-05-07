@@ -2,9 +2,9 @@
   $(function(){
     if(Modernizr.canvas){
       var color='#ffcc33';
-      if($("html").hasClass('victoria')){
-        console.log("victoria");
-        color='#61B2CA';
+      if($("body").hasClass('victoria')){
+        //console.log("victoria");
+        color='#00ccff';
       }
       $(".knob").knob({
         fgColor:color,

@@ -40,11 +40,42 @@ var Roots = {
           $(this).attr('src', new_src);
         });
       }
+      $(".l-main option").each(function(){
+        if($(this).val() === ''){
+          $(this).remove();
+        }
+      });
+      $("select").each(function(){
+        var $that = $(this);
+        var $label = $("label[for='"+$that.attr('id')+"']");
+        if($label.html().length> 0){
+          var option = '<option selected="selected" value="" disabled="disabled">'+$label.html()+'</option>';
+          $that.prepend(option);
+        }
+      });
+      $(".up,.up i").on('click touchstart',function(e){
+        e.preventDefault();
+        $("body").velocity("scroll", { duration: 500, easing: "ease" });
+        return false;
+      });
+      $(".l-header").waypoint(function(direction){
+        if(direction === 'down'){
+          $(".up").addClass('show');
+        }else{
+          $(".up").removeClass('show');
+        }
+      },
+      {offset:'-300'});
+
       if(Modernizr.input.placeholder){
         $(".webform-component-textfield  label, .webform-component-phone label, .webform-component-email label, .webform-component-select label").hide();
       }
       $(window).load(function(){
         $(".view-id-condos .views-row").matchHeight();
+      });
+      $(document).ajaxComplete(function(){
+        $matchRows =  $(".view-id-condos .views-row");
+        matchHeight_after_ajax($matchRows);
       });
       $("input.required").attr('required','required');
     }
@@ -56,8 +87,7 @@ var Roots = {
       var slider = $('.news-slider');
       //mainSlider.trigger('destroy.owl.carousel');
       slider.owlCarousel({
-        items:2,
-        margin:26,
+        items:1,
         stagePadding:0,
         loop:false,
         responsiveRefreshRate:50,
@@ -75,11 +105,13 @@ var Roots = {
             768:{
                 items:2,
                 nav:true,
+                margin:26,
             },
             1000:{
                 items:2,
                 nav:true,
-                loop:false
+                loop:false,
+                margin:26,
             }
         }
       });
@@ -93,7 +125,12 @@ var Roots = {
   },
   page_news: {
     init:function(){
-      $(".view-news.view-display-id-page .views-row").matchHeight();
+      var $matchRows = $(".view-news.view-display-id-page .views-row");
+      $matchRows.matchHeight();
+      $(document).ajaxComplete(function(){
+        $matchRows = $(".view-news.view-display-id-page .views-row");
+        matchHeight_after_ajax($matchRows);
+      });
     }
   }
 };
@@ -118,5 +155,15 @@ var UTIL = {
 };
 
 $(document).ready(UTIL.loadEvents);
-
+function matchHeight_after_ajax($img_container) { // do callback when images in $img_container (jQuery object) are loaded. Only works when ALL images in $img_container are newly inserted images and this function is called immediately after images are inserted into the target.
+  var _imgs = $img_container.find('img'),
+  img_length = _imgs.length,
+  img_load_cntr = 0;
+  if (img_length) { //if the $img_container contains new images.
+    _imgs.on('load', function() { //then we avoid the callback until images are loaded
+        img_load_cntr++;
+        $img_container.matchHeight();
+    });
+  }
+}
 })(jQuery); 

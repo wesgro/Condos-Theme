@@ -10,21 +10,17 @@
 	// Styling Next and Prev buttons
 	.owl-controls {
 		.owl-nav{
-      
       >div{
         position: absolute;
         top:0;
         color: #FFF;
-        @include border-radius(50%);
-        border: 5px solid #FFF;
-        background-color: rgba(#000, .25);
         @include squish-text;
       }
       .owl-prev{
-        @include rem(left, 20px);
+        @include rem(left, 10px);
       }
       .owl-next{
-        @include rem(right, 20px);
+        @include rem(right, 10px);
       }
     }
 	}
@@ -40,9 +36,9 @@
 				width: $dot-width;
 				height: $dot-height;
 				margin: $dot-margin;
-				
+				background-color: #000;
 				display: block;
-				border: 1px solid #000;
+				border: 0px solid #000;
 				-webkit-backface-visibility: visible;
 				@include transition(opacity, 200ms, ease);
 				@include rounded($dot-rounded);

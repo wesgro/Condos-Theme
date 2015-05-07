@@ -21,7 +21,7 @@
     vertical-align: middle;
     color: #000;
     font-family: $headerFont;
-    font-weight: 300;
+    @include header-font();
     height: 57px;
     @include rem(font-size, 14px);
     &.error{
@@ -62,10 +62,18 @@
     width: 100%;
     font-weight: 400;
     max-width: 300px;
-    font-family: $otherFont;
+    @include header-font();
+    line-height: inherit;
+    @include transition(all .3s ease);
     &:hover{
-      
+      background-color: #333333;
+      color: #fff;
     } 
+  }
+  .form-actions{
+    @include to(lp){
+      text-align: center;
+    }
   }
 }
 %submit-button{
@@ -77,10 +85,9 @@
     background-color: $colourHighlight;
     color: #000;
     padding:10px 25px;
-    font-weight: 400;
     margin-right: 10px;
     @include border-radius(0);
-    font-family: $otherFont;
+    @include header-font();
     &#edit-delete{
       background-color: transparent;
       float: right;
@@ -100,9 +107,8 @@ fieldset{
 }
 input{
   @include input-placeholder {
+    text-transform: none;
     color: darken($lightGrey,15%);
-    @include rem(font-size, 14px);
-    text-transform: uppercase;
   }
 }
 .gform_validation_container{
@@ -155,6 +161,7 @@ legend{
     font-size: 12px;
     text-transform: uppercase;
     font-family: $otherFont;
+    font-weight: 400;
   }
 }
 table{
@@ -198,6 +205,8 @@ table{
         width: 33%; 
         padding-right: 10px; 
         white-space: nowrap;
+        font-size: 13px;
+
       }
       
   }
@@ -205,7 +214,7 @@ table{
 
 @mixin floorplan-table-lables{
   td:before{
-    font-weight: 700;
+    font-weight: 400;
   }
   td:nth-of-type(1):before { content: "Project Name"; }
   td:nth-of-type(2):before { content: "Floor"; }
@@ -218,10 +227,11 @@ table{
 }
 @mixin floorplan-table{
   .flag-wrapper{
-      @include button-builder('a', '%icon-heart');
+      @include button-builder('a', '%icon-empty-heart');
       a.unflag-action{
         &:after{
-          @extend %icon-empty-heart;
+          @extend %icon-heart;
+          color:#d91919;
         }
       }
       i{
@@ -261,4 +271,12 @@ table{
       */
       @include floorplan-table-lables;
     }
+}
+.captcha{
+  @include to(pt){
+    text-align: center;
+    >div{
+      @include inline-block;
+    }
+  }
 }

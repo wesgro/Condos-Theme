@@ -27,7 +27,9 @@ function leap_render_block_content($module, $delta) {
  
  function leap_get_city_regions(){
    $vocabulary = taxonomy_vocabulary_machine_name_load('Location');
-   $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+   //$terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+   $terms = taxonomy_get_tree($vocabulary->vid, $parent = 0, $max_depth = 1);
+  // print_r($terms);
    return $terms;
  }
 
@@ -63,6 +65,9 @@ function leap_circle_maker($element){
 }
 function leap_project_icons($icon, $classes, $element, $label, $items, $title_attributes, $attributes, $address = false){
   $container = ($address === true)?'address':'div';
+  if(sizeof($items) === 0){
+    //return false;
+  }
   ?>
   <div class="field-container <?php print $classes; ?>">
     <div class="inner">
