@@ -15472,10 +15472,19 @@ function matchHeight_after_ajax($img_container) { // do callback when images in 
   var _imgs = $img_container.find('img'),
   img_length = _imgs.length,
   img_load_cntr = 0;
+  var $jumpRow;
+  $img_container.each(function(){
+    //console.log("checking for style "+$(this).attr("style"));
+    if( $(this).attr("style") === 'opacity: 0;'){
+      $jumpRow = $(this);
+      return false;
+    }
+  });
   if (img_length) { //if the $img_container contains new images.
     _imgs.on('load', function() { //then we avoid the callback until images are loaded
         img_load_cntr++;
         $img_container.matchHeight();
+        $(window).scrollTop($jumpRow.offset().top);
     });
   }
 }

@@ -150,6 +150,7 @@ mark,
 
 .inline{
   .field-label{
+    @include inline-block;
     margin-right: 3px;
   }
   .field-item,

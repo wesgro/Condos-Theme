@@ -419,8 +419,8 @@
     background-color: #f7f6f6;
     
     @include from(lt, $noquery){
-      text-align: center;
-      .field-container{
+      .field-container,
+      .region-title{
         max-width: 800px;
         margin: 0 auto;
       }

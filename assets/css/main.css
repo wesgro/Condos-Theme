@@ -2711,6 +2711,10 @@ figure {
 .file-size {
   display: none; }
 
+.field--body img[style] {
+  width: auto !important;
+  height: auto !important; }
+
 html, body {
   min-width: 100%; }
 
@@ -2980,6 +2984,11 @@ mark,
   border-radius: 10px; }
 
 .inline .field-label {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
   margin-right: 3px; }
 .inline .field-item,
 .inline .field-items {
@@ -4470,11 +4479,10 @@ ul.tabs {
 .node--condo-project--full .ds-why {
   background-color: #f7f6f6; }
   @media (min-width: 1024px) {
-    .node--condo-project--full .ds-why {
-      text-align: center; }
-      .node--condo-project--full .ds-why .field-container {
-        max-width: 800px;
-        margin: 0 auto; } }
+    .node--condo-project--full .ds-why .field-container,
+    .node--condo-project--full .ds-why .region-title {
+      max-width: 800px;
+      margin: 0 auto; } }
 .node--condo-project--full .ds-contact-info {
   background-color: #666666;
   color: #FFF; }
