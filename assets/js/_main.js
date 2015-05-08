@@ -167,11 +167,12 @@ function matchHeight_after_ajax($img_container) { // do callback when images in 
       return false;
     }
   });
+  $(window).scrollTop($jumpRow.offset().top);
   if (img_length) { //if the $img_container contains new images.
     _imgs.on('load', function() { //then we avoid the callback until images are loaded
         img_load_cntr++;
         $img_container.matchHeight();
-        $(window).scrollTop($jumpRow.offset().top);
+
     });
   }
 }

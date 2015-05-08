@@ -52,8 +52,14 @@ function condos_page_alter(&$page) {
 function leap_circle_maker($element){
   $field = field_get_items('node', $element['#object'], $element['#field_name']);
   $output = field_view_value('node', $element['#object'], $element['#field_name'], $field[0]);
-  //krumo($field[0]);
+  //krumo($output);
   $percent = (isset($field[0]['safe_value']))?'100':$field[0]['value'];
+  if($output['#markup'] === '0% Sold'){
+    $output['#markup'] = 'Now Selling';
+  }
+  if($output['#markup'] === '0% Complete'){
+    $output['#markup'] = 'Just Starting';
+  }
   ?>
   <div class="stat">
     <input class="knob" data-thickness=".25" value="<?php echo $percent;?>" data-width="222" data-height="222" data-bgColor="#e3e2e2" data-inputColor="#666666" data-font="lato"  data-fgColor="#ffcc33" data-readOnly="true" data-min="0" data-max="100" data-fontWeight="400" data-angleOffset="180" data-endVal="<?php echo $percent;?>"/>

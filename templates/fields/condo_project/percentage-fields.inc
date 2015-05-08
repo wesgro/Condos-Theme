@@ -20,6 +20,11 @@
 <?php endif; ?>
 
 <?php foreach ($items as $delta => $item): ?>
+  <?php
+  if($item['#markup'] === '0% Sold'){
+    $item['#markup'] = 'Now Selling';
+  }
+  ?>
   <div class="field-item"<?php print $attributes; ?>>
     <?php if($element['#view_mode'] === 'full'):?>
       <?php leap_circle_maker($element);?>
