@@ -429,6 +429,7 @@
   .ds-contact-info{
     background-color: #666666;
     color: #FFF;
+    font-family: $headerFont;
     .group-webform-wrapper{
       @include to(lp){
         margin-top: 15px;

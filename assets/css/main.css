@@ -4485,7 +4485,8 @@ ul.tabs {
       margin: 0 auto; } }
 .node--condo-project--full .ds-contact-info {
   background-color: #666666;
-  color: #FFF; }
+  color: #FFF;
+  font-family: "tablet-gothic-wide", helvetica, arial, sans-serif; }
   @media (max-width: 767px) {
     .node--condo-project--full .ds-contact-info .group-webform-wrapper {
       margin-top: 15px; } }
