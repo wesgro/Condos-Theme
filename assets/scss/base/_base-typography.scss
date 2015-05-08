@@ -9,8 +9,6 @@
 html {
   font-family: $bodyFont;
   color: $bodyCopy;
-  /* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
 	font-weight: $bodyFontWeight;
   font-size: 16px;
   line-height: 1.7;
@@ -94,13 +92,7 @@ hr{
   margin: 25px 0;
 }
 h1,h2,h3,h4,h5,h6,p,%p,div,span{
-  text-rendering: optimizeLegibility;
-   -moz-font-feature-settings:"lnum" 1, "kern" 1, "liga" 1; 
-  -moz-font-feature-settings:"lnum=1, kern=1, liga=1"; 
-  -ms-font-feature-settings:"lnum" 1, "kern" 1, "liga" 1; 
-  -o-font-feature-settings:"lnum" 1, "kern" 1, "liga" 1; 
-  -webkit-font-feature-settings:"lnum" 1, "kern" 1, "liga" 1; 
-  font-feature-settings:"lnum" 1, "kern" 1, "liga" 1;
+
 }
 /**
  * $PARAGRAPHS

@@ -27,6 +27,9 @@
 
 	// Styling dots
 	.owl-dots {
+    position: absolute;
+    width: 100%;
+    bottom:-50px;
 		.owl-dot {
 			display: inline-block;
 			zoom: 1;

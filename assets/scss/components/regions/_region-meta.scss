@@ -10,6 +10,14 @@
   a{
     position: relative;
     display: block;
+    @include transition(all .3s ease);
+    &:hover{
+      color:#FFF!important;
+      background-color:$colourHighlight;
+      .victoria &{
+        background-color:$victoriaHighlight;
+      }
+    }
   }
   .condos{
     float: left;

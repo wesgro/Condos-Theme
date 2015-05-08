@@ -162,7 +162,10 @@ $slicer-breakpoint-names:'pp'        'lp'        'pt'        'lt'        'sd'   
     margin-bottom: 21px;
 
     &.block--views-news-block-1{
-      @include rem(margin-bottom, 60);      
+      @include rem(margin-bottom, 60);  
+      @include to(lp){
+        margin-bottom: 70px;
+      }    
     }
   }
 }

@@ -55,7 +55,7 @@ var Roots = {
       });
       $(".up,.up i").on('click touchstart',function(e){
         e.preventDefault();
-        $("body").velocity("scroll", { duration: 500, easing: "ease" });
+        $("html").velocity("scroll", { offset:0,duration: 500, mobileHA: false });
         return false;
       });
       $(".l-header").waypoint(function(direction){
@@ -159,7 +159,7 @@ function matchHeight_after_ajax($img_container) { // do callback when images in 
   var _imgs = $img_container.find('img'),
   img_length = _imgs.length,
   img_load_cntr = 0;
-  var $jumpRow;
+  var $jumpRow = false;
   $img_container.each(function(){
     //console.log("checking for style "+$(this).attr("style"));
     if( $(this).attr("style") === 'opacity: 0;'){
@@ -167,12 +167,14 @@ function matchHeight_after_ajax($img_container) { // do callback when images in 
       return false;
     }
   });
-  $(window).scrollTop($jumpRow.offset().top);
+  
   if (img_length) { //if the $img_container contains new images.
     _imgs.on('load', function() { //then we avoid the callback until images are loaded
         img_load_cntr++;
         $img_container.matchHeight();
-
+        if($jumpRow !== false){
+          $(window).scrollTop($jumpRow.offset().top);
+        }
     });
   }
 }

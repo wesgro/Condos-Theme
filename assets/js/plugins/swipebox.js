@@ -582,7 +582,7 @@
                     } );
                 }
 
-                $( '#swipebox-close' ).bind( action, function() {
+                $( '#swipebox-close,#swipebox-overlay' ).bind( action, function() {
                     $this.closeSlide();
                 } );
             },

@@ -18,6 +18,12 @@
       margin-top: ($icon-size / 2) * -1;
       left: 0;
     }
+    &:hover::before{
+      color:$colourHighlight;
+      .victoria &{
+        color:$victoriaHighlight;
+      }
+    }
     a{
       @include squish-text;
       position: absolute;

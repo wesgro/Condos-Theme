@@ -30,6 +30,17 @@
       height: 55px;
       display: block;
     }
+    @include transition(background-color .3s ease);
+    &:hover{
+      color:#FFF;
+      background-color: light($colourHighlight,15%);
+      .victoria &{
+        background-color: lighten($victoriaHighlight,15%);
+      }
+      a{
+        color:#FFF;
+      }
+    }
     .ico-moon,
     .icon{
       @include transition(border-radius .25s ease-in);
