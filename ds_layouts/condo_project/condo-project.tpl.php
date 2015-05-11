@@ -111,7 +111,7 @@
     <<?php print $floorplans_wrapper; ?> class="ds-region ds-floorplans<?php print $floorplans_classes; ?>">
     <div class="wrap">
       <h2 class="region-title">Floor Plans</h2>
-      <?php echo views_embed_view('floor_plan_table','block', $node->nid);?>
+      <?php //echo views_embed_view('floor_plan_table','block', $node->nid);?>
       <?php print $floorplans; ?>
     </div>
     </<?php print $floorplans_wrapper; ?>>
