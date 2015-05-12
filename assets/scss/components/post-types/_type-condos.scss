@@ -412,19 +412,7 @@
       .field-label{
         @include rem(padding-left, 45px);
         position: relative;
-        width: 45%;
         margin-left: 1%;
-      }
-      .field-item{
-        width: 50%;
-      }
-      @include from(lt){
-        .field-label{
-          width: 60%;
-        }
-        .field-item{
-          width: 35%;
-        }
       }
       // @include from(ld){
       //   .field-label{

@@ -8915,6 +8915,7 @@ $.magnificPopup.registerModule(RETINA_NS, {
                 }
 
                 $( '#swipebox-close,#swipebox-overlay' ).bind( action, function() {
+                    console.log(action);
                     $this.closeSlide();
                 } );
             },

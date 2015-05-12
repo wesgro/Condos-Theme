@@ -4499,18 +4499,7 @@ ul.tabs {
       padding-left: 45px;
       padding-left: 2.5rem;
       position: relative;
-      width: 45%;
       margin-left: 1%; }
-    .node--condo-project--full .ds-project-info .col-1 .field-item,
-    .node--condo-project--full .ds-project-info .col-2 .field-item {
-      width: 50%; }
-    @media (min-width: 1024px) {
-      .node--condo-project--full .ds-project-info .col-1 .field-label,
-      .node--condo-project--full .ds-project-info .col-2 .field-label {
-        width: 60%; }
-      .node--condo-project--full .ds-project-info .col-1 .field-item,
-      .node--condo-project--full .ds-project-info .col-2 .field-item {
-        width: 35%; } }
     .node--condo-project--full .ds-project-info .col-1 .field-container,
     .node--condo-project--full .ds-project-info .col-2 .field-container {
       margin: 0;
