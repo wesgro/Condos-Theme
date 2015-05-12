@@ -4055,11 +4055,14 @@ ul.tabs {
   .node--condo-project--full .ds-project-info .field-item {
     font-weight: 400; }
   .node--condo-project--full .ds-project-info h4.field-label {
-    font-size: 16px;
     margin: 0;
-    margin-bottom: 15px;
+    padding-top: 3px;
+    padding-top: 0.16667rem;
     padding-bottom: 15px;
-    border-bottom: 1px solid #dadada; }
+    padding-bottom: 0.83333rem;
+    border-bottom: 1px solid #e9e9e9;
+    position: relative;
+    font-size: 18px; }
   .node--condo-project--full .ds-project-info img {
     position: absolute;
     display: block;
