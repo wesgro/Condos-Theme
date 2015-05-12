@@ -582,9 +582,10 @@
                     } );
                 }
 
-                $( '#swipebox-close,#swipebox-overlay' ).bind( action, function() {
-                    console.log(action);
-                    $this.closeSlide();
+                $( '#swipebox-close,#swipebox-overlay' ).bind( action, function(e) {
+                    if(e.target.parentNode.className !== 'slide current'){
+                        $this.closeSlide();
+                    }
                 } );
             },
 
