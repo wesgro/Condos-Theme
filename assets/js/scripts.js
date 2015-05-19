@@ -15049,6 +15049,14 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
       $count.velocity("transition.slideUpOut",
           { stagger: 0, duration:950, drag:false, delay: 0 });
     });
+    $('.ds-contact-info form').submit(function() {
+      ga('send', {
+        'hitType': 'event',          // Required.
+        'eventCategory': 'webfrom',   // Required.
+        'eventAction': 'submission',      // Required.
+        'eventLabel': 'condo form submission'
+      });
+    });
   });
 })(jQuery);;
 Drupal.flagLink = {};

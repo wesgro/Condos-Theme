@@ -38,5 +38,13 @@
       $count.velocity("transition.slideUpOut",
           { stagger: 0, duration:950, drag:false, delay: 0 });
     });
+    $('.ds-contact-info form').submit(function() {
+      ga('send', {
+        'hitType': 'event',          // Required.
+        'eventCategory': 'webform',   // Required.
+        'eventAction': 'submission',      // Required.
+        'eventLabel': 'condo form submission'
+      });
+    });
   });
 })(jQuery);
