@@ -11,11 +11,11 @@ if(render($items[0]) === '$0'){
 ?>
 <div class="field-container <?php print $classes; ?>">
   <div class="inner">
-<?php if ($element['#label_display'] == 'inline'): ?>
+<?php if ($element['#label_display'] == 'inline' && render($items[0]) !== '$0'): ?>
   <span class="field-label"<?php print $title_attributes; ?>>
     <?php print $label; ?>
   </span>
-<?php elseif ($element['#label_display'] == 'above'): ?>
+<?php elseif ($element['#label_display'] == 'above' && render($items[0]) !== '$0'): ?>
   <h4 class="field-label"<?php print $title_attributes; ?>>
     <?php print $label; ?>
   </h4>
