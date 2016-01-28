@@ -11,6 +11,7 @@ if($number < 9){
   $leftOver = 9 - $number;
 }
 ?>
+
 <?php if ($element['#label_display'] == 'inline'): ?>
   <span class="field-label"<?php print $title_attributes; ?>>
     <?php print $label; ?>:
@@ -20,7 +21,7 @@ if($number < 9){
     <?php print $label; ?>
   </h3>
 <?php endif; ?>
-
+<?php if($number > 0):?>
 <ul class="<?php print $classes; ?>"<?php print $attributes; ?>>
 
   <?php foreach ($items as $delta => $item): ?>
@@ -35,3 +36,4 @@ if($number < 9){
   <?php endfor;?>
 
 </ul>
+<?php endif;?>
